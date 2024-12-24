@@ -42,9 +42,9 @@ function Header() {
                         <NavLink to='/Contact' onClick={() => { scrollToTop(); setMobileNav(false); }} >contact</NavLink>
                     </h3>
                     <div className="change-mode">
-                        <FaMoon className={`${lightMode ? '' : 'changed-mode-move'}`} />
+                        <FaMoon className={`fa-icon ${lightMode ? '' : 'changed-mode-move'}`} />
                         <span onClick={() => {setLightMode(!lightMode)}}></span>
-                        <FaSun className={`${lightMode ?'changed-mode-move' : ''}`} />
+                        <FaSun className={`fa-icon ${lightMode ?'changed-mode-move' : ''}`} />
                     </div>
                 </nav>
             </div>
