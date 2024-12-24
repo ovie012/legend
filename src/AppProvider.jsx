@@ -17,6 +17,7 @@ export function AppProvider({ children }) {
     });
     const [animationKey, setAnimationKey] = useState(0);
     const [remainingFacts, setRemainingFacts] = useState([]);
+    const [mobileNav, setMobileNav] = useState(false);
   
     const handleFunFacts = () => {
       let updatedFacts = remainingFacts.length > 0 ? remainingFacts : [...funFacts];
@@ -567,6 +568,8 @@ export function AppProvider({ children }) {
         skills, 
         animationKey, 
         handleFunFacts,
+        mobileNav,
+        setMobileNav
     }}>
         {children}
     </AppContext.Provider>

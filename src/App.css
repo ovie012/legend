@@ -117,10 +117,10 @@ header.scrolled {
 
 .logo:hover {
   border: 1.5px solid #90FF00;
-  animation: border-swirl 30s infinite ease-in-out 0.3s;
+  /* animation: border-swirl 30s infinite ease-in-out 0.3s; */
 }
 
-@keyframes border-swirl {
+/* @keyframes border-swirl {
   0%{
       border-top-right-radius: 130px;
       border-bottom-left-radius: 130px;
@@ -269,9 +269,14 @@ header.scrolled {
       border-bottom-right-radius: 130px;
       border-top-left-radius: 130px;
   }
+} */
+
+span.click,
+.mobile-nav-container {
+  display: none;
 }
 
-header nav {
+header nav.desktop-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -327,6 +332,156 @@ header nav h3:hover,
 
   99% {
     rotate: 0deg;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  span.click {
+    display: block;
+    width: 30px;
+    height: 2px;
+    background: #fff;
+    position: relative;
+    transition: 0.3s ease-in-out;
+    z-index: 20;
+  }
+
+  span.click::before,
+  span.click::after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 2px;
+    background: #fff;
+    transition: 0.3s ease-in-out;
+    z-index: 20;
+  }
+
+  .container.light-mode span.click,
+  .container.light-mode span.click::before,
+  .container.light-mode span.click::after {
+    background: #00050F;
+  }
+
+  span.click::before {
+    bottom: 5px;
+  }
+
+  span.click::after {
+    top: 5px;
+  }
+
+  span.click.close,
+  .container.light-mode span.click.close {
+    background: transparent;
+  }
+
+  span.click.close::before {
+    transform: rotate(-135deg);
+    bottom: 0;
+  }
+
+  span.click.close::after {
+    transform: rotate(135deg);
+    top: 0;
+  }
+
+  .mobile-nav-container {
+    display: block;
+    background: hsla(0, 0%, 0%, 0.5);
+    position: fixed;
+    top: -110%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    transition: 0.3s ease-in-out;
+  }
+
+  .mobile-nav-container.open {
+    top: 0;
+  }
+
+  .mobile-nav {
+    background: #f4f7fd;
+    width: 40%;
+    height: 400px;
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 5% 2%;
+    border-radius: 5px;
+    box-shadow: 2px 2px 20px 5px rgba(0, 0, 0, 0.2);
+    color: #00050F;
+  }
+
+  .mobile-nav h3 {
+    color: #00050F;
+    font-size: 1.3rem;
+  }
+
+  /* .container.light-mode .mobile-nav {
+    background: #949494;
+    color: #F4F7FD;
+    transition: 0.3s ease-in-out;
+  }
+
+  .container.light-mode .mobile-nav h3 {
+    color: #F4F7FD;
+  } */
+
+  .change-mode {
+    margin-top: 10%;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .change-mode span {
+    display: block;
+    width: 30px;
+    height: 15px;
+    background: #00050F;
+    border-radius: 20px;
+    position: relative;
+    transition: 0.3s ease-in-out;
+  }
+
+  .change-mode span::before {
+    content: "";
+    background: #f4f7fd;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    top: 2.5px;
+    left: 2.5px;
+    transition: 0.3s ease-in-out;
+  }
+
+  /* .container.light-mode .change-mode span {
+    background: #f4f7fd;
+  } */
+
+  .container.light-mode .change-mode span::before {
+    left: 17.5px;
+    /* background: #949494; */
+  }
+
+  header nav.desktop-nav,
+  .light-dark-mode {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .mobile-nav {
+    width: 70%;
+    margin-top: 20%;
   }
 }
 

@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AppContext } from '../AppProvider';
 import { Link, NavLink, useLocation } from 'react-router-dom';
+import { FaSun, FaMoon } from "react-icons/fa";
 
 function Header() {
-    const { lightMode, setLightMode, scrollToTop } = useContext(AppContext);
+    const { lightMode, setLightMode, scrollToTop, mobileNav, setMobileNav } = useContext(AppContext);
     const [isScrolled, setIsScrolled] = useState(false);
 
 
@@ -25,8 +26,29 @@ function Header() {
             <Link to='/' onClick={scrollToTop} >
                 <img src="/legend-logo.jpg" alt="logo" className="logo" />
             </Link>
-            {/* <span className='click'></span> // use for mobile */}
-            <nav>
+            <span className={`click ${mobileNav ? 'close' : ''}`} onClick={() => { setMobileNav(!mobileNav); }}></span>
+            <div className={`mobile-nav-container ${mobileNav ? 'open' : ''}`}>
+                <nav className='mobile-nav'>
+                    <h3>
+                        <NavLink to='/' onClick={() => { scrollToTop(); setMobileNav(false); }} >home</NavLink>
+                    </h3>
+                    <h3>
+                        <NavLink to='/About' onClick={() => { scrollToTop(); setMobileNav(false); }} >about</NavLink>
+                    </h3>
+                    <h3>
+                        <NavLink to='/Projects' onClick={() => { scrollToTop(); setMobileNav(false); }} >projects</NavLink>
+                    </h3>
+                    <h3>
+                        <NavLink to='/Contact' onClick={() => { scrollToTop(); setMobileNav(false); }} >contact</NavLink>
+                    </h3>
+                    <div className="change-mode" onClick={() => {setLightMode(!lightMode)}}>
+                        <FaMoon />
+                        <span></span>
+                        <FaSun />
+                    </div>
+                </nav>
+            </div>
+            <nav className='desktop-nav'>
                 <h3>
                     <NavLink to='/' onClick={scrollToTop} >home</NavLink>
                 </h3>
