@@ -31,13 +31,13 @@ function BannerIntro() {
                     Let's collaborate to bring your vision to life!
                 </p>
                 </motion.div>
-                </motion.div>
-                <Link to='/Contact'>
-                    <button className='contact-me-button'>contact me</button>
-                </Link>
-                <Link to='/Projects'>
-                    <button className='explore-projects-button'>explore projects</button>
-                </Link>
+            </motion.div>
+            <Link to='/Contact'>
+                <button className='contact-me-button'>contact me</button>
+            </Link>
+            <Link to='/Projects'>
+                <button className='explore-projects-button'>explore projects</button>
+            </Link>
             </section>
             <img src="/icon-swirl-pointer.svg" alt="swirly pointer" className="pointer" />
             <figure className="banner-images">
