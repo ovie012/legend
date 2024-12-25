@@ -1754,6 +1754,21 @@ svg.down-svg {
   background: #4d4d4d;
 }
 
+@media only screen and (max-width: 500px) {
+  .form-group label {
+    font-size: 0.8rem;
+  }
+  
+  .form-group input:focus + label,
+  .form-group textarea:focus + label
+  /* ,
+  .form-group input:not(:placeholder-shown) + label,
+  .form-group textarea:not(:placeholder-shown) + label */
+   {
+    font-size: 0.7rem;
+  }
+}
+
 /* Social Links */
 .social-links {
   flex: 1;
@@ -1809,6 +1824,12 @@ svg.down-svg {
 
 .btn-hire:hover {
   background: #4d4d4d;
+}
+
+@media only screen and (max-width: 500px) {
+  .btn-hire {
+    margin-top: 20px;
+  }
 }
 
 /* Animations */
