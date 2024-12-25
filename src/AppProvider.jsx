@@ -1,7 +1,8 @@
 import React, { createContext, useEffect, useState } from 'react';
 import './App.css';
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaPlay, FaGithub, FaGraduationCap } from "react-icons/fa";
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaPlay, FaGithub, FaGraduationCap,  FaLinkedin, FaTwitter, FaTiktok, FaInstagram } from "react-icons/fa";
 import { SiRedux, SiTailwindcss, SiStyledcomponents } from "react-icons/si";
+import { FaXTwitter } from "react-icons/fa6";
 
 export const AppContext = createContext();
 
@@ -31,6 +32,14 @@ export function AppProvider({ children }) {
       setRemainingFacts(updatedFacts);
       setAnimationKey((prevKey) => prevKey + 1);
     };
+
+    const socials = [
+        {title : FaLinkedin, link : "https://linkedin.com/in/your-profile" },
+        {title : FaGithub, link : "https://github.com/your-profile" },
+        {title : FaXTwitter, link : "https://twitter.com/your-profile" },
+        {title : FaTiktok, link : "https://linkedin.com/in/your-profile" },
+        {title : FaInstagram, link : "https://linkedin.com/in/your-profile" },
+      ];
   
     const skills = [
       { icon: FaHtml5, name: "HTML" },
@@ -569,7 +578,8 @@ export function AppProvider({ children }) {
         animationKey, 
         handleFunFacts,
         mobileNav,
-        setMobileNav
+        setMobileNav,
+        socials
     }}>
         {children}
     </AppContext.Provider>

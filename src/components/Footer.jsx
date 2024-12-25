@@ -1,24 +1,24 @@
 import React, { useContext } from 'react';
-// import { AppContext } from '../AppProvider';
+import { AppContext } from '../AppProvider';
 // import { Link } from 'react-router-dom';
 
 function Footer() {
-    // const { scrollToTop } = useContext(AppContext);
+    const { socials } = useContext(AppContext);
 
-    const icons = [
-        { 
-            src : '/icon-github.svg',
-            alt : 'github',
-        },
-        {
-            src : "/icon-linkedin.svg",
-            alt : 'linkedin',
-        },
-        {
-            src : "/icon-instagram.svg",
-            alt : 'instagram'
-        }
-    ]
+    // const icons = [
+    //     { 
+    //         src : '/icon-github.svg',
+    //         alt : 'github',
+    //     },
+    //     {
+    //         src : "/icon-linkedin.svg",
+    //         alt : 'linkedin',
+    //     },
+    //     {
+    //         src : "/icon-instagram.svg",
+    //         alt : 'instagram'
+    //     }
+    // ]
 
   return (
     <>
@@ -33,11 +33,11 @@ function Footer() {
                     <img src="/legend-logo.jpg" alt="logo" className="logo" />
                 {/* </Link> */}
                 <div>
-                    {icons.map((item, index) => (
-                        <figure key={index}>
-                            <img src={item.src} alt={`${item.alt} logo`} />
-                        </figure>
-                    ))}
+                {socials.map((item, index) => (
+                    <a key={index} href={item.link} target="_blank" rel="noopener noreferrer">
+                        <item.title className="footer-icon" />
+                    </a>
+                ))}
                 </div>
                 <p>© 2024. All rights Reserved</p>
             </section>

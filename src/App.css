@@ -952,7 +952,7 @@ img.pointer {
   
   .about-me-second-section p {
     width: 65%;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
   
   .about-me-second-section svg {
@@ -1168,7 +1168,7 @@ img.pointer {
   }
   
   .single-project article p {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -1313,8 +1313,7 @@ svg.down-svg {
   }
   
   .skills-and-services p {
-    font-size: 0.8rem;
-    font-weight: 600;
+    font-size: 0.85rem;
     margin-bottom: 30px;
     width: 85%;
   }
@@ -1408,7 +1407,7 @@ svg.down-svg {
   margin-left: 10%;
 }
 
-.footer section:nth-of-type(2) div figure {
+.footer section:nth-of-type(2) div .footer-icon {
   border: none;
   border-radius: 50%;
   background: #90FF00;
@@ -1418,7 +1417,7 @@ svg.down-svg {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  /* padding: 10%; */
+  padding: 2%;
 }
 
 .footer section:nth-of-type(2) p {
@@ -1492,7 +1491,7 @@ svg.down-svg {
     margin-left: 10%;
   }
   
-  .footer section:nth-of-type(2) div figure {
+  .footer section:nth-of-type(2) div .footer-icon {
     width: 15px;
     height: 15px;
     padding: 2%;
@@ -1523,6 +1522,36 @@ svg.down-svg {
 
 .blur-div {
   position: relative;
+}
+
+@media only screen and (max-width: 800px) {
+  .project-page-top {
+    margin-bottom: 30px;
+  }
+  
+  .project-page-top h2 {
+    font-size: 2.5rem;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .project-page-top p {
+    font-size: 0.8rem;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .project-page-top {
+    margin-bottom: 20px;
+  }
+  
+  .project-page-top h2 {
+    font-size: 2rem;
+  }
+  
+  .project-page-top p {
+    font-size: 0.8rem;
+  }
 }
 
 /* PROFESSIONAL PROJECTS */
@@ -1576,6 +1605,45 @@ svg.down-svg {
   max-height: 30000px;
   margin: 30px 20px 60px;
   /* transition: 1s ease-in-out; */
+}
+
+@media only screen and (max-width: 800px) {
+  .professional-header {
+    margin-top: 20px;
+  }
+
+  .professional-header h3 {
+    font-size: 1.3rem;
+  }
+
+  .professional-header p {
+    font-size: 0.8rem;
+  }
+
+  .professional-header svg {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .professional-header {
+    margin-top: 15px;
+  }
+  
+  .professional-header h3 {
+    margin-bottom: 5px;
+    font-size: 1rem;
+  }
+
+  .professional-header p {
+    font-size: 0.75rem;
+  }
+
+  .professional-header svg {
+    width: 25px;
+    height: 25px;
+  }
 }
 
 /* CONTACT SECTION */
@@ -1757,7 +1825,7 @@ svg.down-svg {
   padding: 2rem;
   text-align: center;
   color: #333;
-  font-family: "Arial", sans-serif;
+  /* font-family: "Arial", sans-serif; */
 }
 
 .about-title {
@@ -1878,4 +1946,20 @@ svg.down-svg {
 .button-motion {
   width: 110px;
   height: 40px;
+}
+
+@media only screen and (max-width: 500px) {
+
+  .about-title {
+    font-size: 2.5rem;
+  }
+  
+  .personal-info p {
+    font-size: 1rem;
+    text-align: left;
+  }
+  
+  .skills-grid {
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
+  }
 }
