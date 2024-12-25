@@ -9,6 +9,10 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Plus Jakarta Sans", sans-serif;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 #root {
@@ -1766,6 +1770,21 @@ svg.down-svg {
   .form-group textarea:not(:placeholder-shown) + label */
    {
     font-size: 0.7rem;
+  }
+}
+
+@media only screen and (max-width: 330px) {
+  .form-group label {
+    font-size: 0.65rem;
+  }
+  
+  .form-group input:focus + label,
+  .form-group textarea:focus + label
+  /* ,
+  .form-group input:not(:placeholder-shown) + label,
+  .form-group textarea:not(:placeholder-shown) + label */
+   {
+    font-size: 0.55rem;
   }
 }
 
