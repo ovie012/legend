@@ -65,9 +65,9 @@ function Header() {
                 </h3>
             </nav>
             {!lightMode ? 
-                <FaSun className='light-dark-mode' onClick={() => {setLightMode(!lightMode)}} />
+                <FaSun style={{ color : '#FAFAFA' }} className='light-dark-mode' onClick={() => {setLightMode(!lightMode)}} />
             :
-                <FaMoon className='light-dark-mode' onClick={() => {setLightMode(!lightMode)}} />
+                <FaMoon style={{ color : '#00050F' }} className='light-dark-mode' onClick={() => {setLightMode(!lightMode)}} />
             }
         </header>
     </>

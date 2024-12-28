@@ -41,7 +41,7 @@ function BannerIntro() {
             </section>
             <img src="/icon-swirl-pointer.svg" alt="swirly pointer" className="pointer" />
             <figure className="banner-images">
-                <img src={`/Legend-himself${lightMode ? '-lightt' : ''}.png`} alt="ovie picture" className="legend-banner-image" />
+                <img src={`/Legend-himself${lightMode ? '-lightt' : ''}.webp`} alt="ovie picture" className="legend-banner-image" />
                 <img src="/icon-Star.svg" alt="star" className="legend-banner-star" />
             </figure>
         </div>

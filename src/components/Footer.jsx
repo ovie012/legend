@@ -30,7 +30,7 @@ function Footer() {
             <h2>Let’s make something amazing together. Start By <span>Saying Hi</span> </h2>
             <section>
                 {/* <Link to='/' onClick={scrollToTop} > */}
-                    <img src="/legend-logo.jpg" alt="logo" className="logo" />
+                    <img src="/legend-logo.webp" alt="logo" className="logo" />
                 {/* </Link> */}
                 <div>
                 {socials.map((item, index) => (

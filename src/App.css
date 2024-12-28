@@ -310,12 +310,12 @@ header nav h3:hover,
   right: 1%;
   cursor: pointer;
   transition: 0.3s ease-in-out;
-  color: #FAFAFA;
+  /* color: #FAFAFA; */
 }
 
-.container.light-mode .light-dark-mode {
+/* .container.light-mode .light-dark-mode {
   color: #00050F;
-}
+} */
 
 .light-dark-mode:hover,
 .light-dark-mode.clicked {
