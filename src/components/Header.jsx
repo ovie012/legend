@@ -24,7 +24,7 @@ function Header() {
     <>
         <header className={`${isScrolled ? 'scrolled' : ''}`}>
             <Link to='/' onClick={scrollToTop} >
-                <img src="/legend-logo.jpg" alt="logo" className="logo" />
+                <img src="/legend-logo.webp" alt="logo" className="logo" />
             </Link>
             <div className='click' onClick={() => { setMobileNav(!mobileNav); }}>
                 <span className={`click ${mobileNav ? 'close' : ''}`}></span>

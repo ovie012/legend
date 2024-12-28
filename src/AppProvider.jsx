@@ -79,8 +79,8 @@ export function AppProvider({ children }) {
         projects : [
           {
             src : {
-              desktop : "/legend-logo.jpg",
-              mobile : "/legend-logo.jpg"
+              desktop : "/legend-logo.webp",
+              mobile : "/legend-logo.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -88,8 +88,8 @@ export function AppProvider({ children }) {
           },
           {
             src : {
-              desktop : "/legend-logo.jpg",
-              mobile : "/legend-logo.jpg"
+              desktop : "/legend-logo.webp",
+              mobile : "/legend-logo.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -97,8 +97,8 @@ export function AppProvider({ children }) {
           },
           {
             src : {
-              desktop : "/legend-logo.jpg",
-              mobile : "/legend-logo.jpg"
+              desktop : "/legend-logo.webp",
+              mobile : "/legend-logo.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -106,8 +106,8 @@ export function AppProvider({ children }) {
           },
           {
             src : {
-              desktop : "/legend-logo.jpg",
-              mobile : "/legend-logo.jpg"
+              desktop : "/legend-logo.webp",
+              mobile : "/legend-logo.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -115,8 +115,8 @@ export function AppProvider({ children }) {
           },
           {
             src : {
-              desktop : "/legend-logo.jpg",
-              mobile : "/legend-logo.jpg"
+              desktop : "/legend-logo.webp",
+              mobile : "/legend-logo.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -124,8 +124,8 @@ export function AppProvider({ children }) {
           },
           {
             src : {
-              desktop : "/Legend-himself.png",
-              mobile : "/Legend-himself.png"
+              desktop : "/Legend-himself.webp",
+              mobile : "/Legend-himself.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -133,8 +133,8 @@ export function AppProvider({ children }) {
           },
           {
             src : {
-              desktop : "/legend-logo.jpg",
-              mobile : "/legend-logo.jpg"
+              desktop : "/legend-logo.webp",
+              mobile : "/legend-logo.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -142,8 +142,8 @@ export function AppProvider({ children }) {
           },
           {
             src : {
-              desktop : "/Legend-himself.png",
-              mobile : "/Legend-himself.png"
+              desktop : "/Legend-himself.webp",
+              mobile : "/Legend-himself.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -151,8 +151,8 @@ export function AppProvider({ children }) {
           },
           {
             src : {
-              desktop : "/legend-logo.jpg",
-              mobile : "/legend-logo.jpg"
+              desktop : "/legend-logo.webp",
+              mobile : "/legend-logo.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -166,8 +166,8 @@ export function AppProvider({ children }) {
         projects : [
           {
             src : {
-              desktop : "/legend-logo.jpg",
-              mobile : "/legend-logo.jpg"
+              desktop : "/legend-logo.webp",
+              mobile : "/legend-logo.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -175,8 +175,8 @@ export function AppProvider({ children }) {
           },
           {
             src : {
-              desktop : "/legend-logo.jpg",
-              mobile : "/legend-logo.jpg"
+              desktop : "/legend-logo.webp",
+              mobile : "/legend-logo.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -184,8 +184,8 @@ export function AppProvider({ children }) {
           },
           {
             src : {
-              desktop : "/Legend-himself.png",
-              mobile : "/Legend-himself.png"
+              desktop : "/Legend-himself.webp",
+              mobile : "/Legend-himself.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -193,8 +193,8 @@ export function AppProvider({ children }) {
           },
           {
             src : {
-              desktop : "/legend-logo.jpg",
-              mobile : "/legend-logo.jpg"
+              desktop : "/legend-logo.webp",
+              mobile : "/legend-logo.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -202,8 +202,8 @@ export function AppProvider({ children }) {
           },
           {
             src : {
-              desktop : "/Legend-himself.png",
-              mobile : "/Legend-himself.png"
+              desktop : "/Legend-himself.webp",
+              mobile : "/Legend-himself.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -211,8 +211,8 @@ export function AppProvider({ children }) {
           },
           {
             src : {
-              desktop : "/legend-logo.jpg",
-              mobile : "/legend-logo.jpg"
+              desktop : "/legend-logo.webp",
+              mobile : "/legend-logo.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -226,8 +226,8 @@ export function AppProvider({ children }) {
         projects : [
           {
             src : {
-              desktop : "/legend-logo.jpg",
-              mobile : "/legend-logo.jpg"
+              desktop : "/legend-logo.webp",
+              mobile : "/legend-logo.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -235,8 +235,8 @@ export function AppProvider({ children }) {
           },
           {
             src : {
-              desktop : "/legend-logo.jpg",
-              mobile : "/legend-logo.jpg"
+              desktop : "/legend-logo.webp",
+              mobile : "/legend-logo.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -244,8 +244,8 @@ export function AppProvider({ children }) {
           },
           {
             src : {
-              desktop : "/Legend-himself.png",
-              mobile : "/Legend-himself.png"
+              desktop : "/Legend-himself.webp",
+              mobile : "/Legend-himself.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -253,8 +253,8 @@ export function AppProvider({ children }) {
           },
           {
             src : {
-              desktop : "/legend-logo.jpg",
-              mobile : "/legend-logo.jpg"
+              desktop : "/legend-logo.webp",
+              mobile : "/legend-logo.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -262,8 +262,8 @@ export function AppProvider({ children }) {
           },
           {
             src : {
-              desktop : "/Legend-himself.png",
-              mobile : "/Legend-himself.png"
+              desktop : "/Legend-himself.webp",
+              mobile : "/Legend-himself.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -271,8 +271,8 @@ export function AppProvider({ children }) {
           },
           {
             src : {
-              desktop : "/legend-logo.jpg",
-              mobile : "/legend-logo.jpg"
+              desktop : "/legend-logo.webp",
+              mobile : "/legend-logo.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -286,8 +286,8 @@ export function AppProvider({ children }) {
         projects : [
           {
             src : {
-              desktop : "/legend-logo.jpg",
-              mobile : "/legend-logo.jpg"
+              desktop : "/legend-logo.webp",
+              mobile : "/legend-logo.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -295,8 +295,8 @@ export function AppProvider({ children }) {
           },
           {
             src : {
-              desktop : "/legend-logo.jpg",
-              mobile : "/legend-logo.jpg"
+              desktop : "/legend-logo.webp",
+              mobile : "/legend-logo.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -304,8 +304,8 @@ export function AppProvider({ children }) {
           },
           {
             src : {
-              desktop : "/Legend-himself.png",
-              mobile : "/Legend-himself.png"
+              desktop : "/Legend-himself.webp",
+              mobile : "/Legend-himself.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -313,8 +313,8 @@ export function AppProvider({ children }) {
           },
           {
             src : {
-              desktop : "/legend-logo.jpg",
-              mobile : "/legend-logo.jpg"
+              desktop : "/legend-logo.webp",
+              mobile : "/legend-logo.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -322,8 +322,8 @@ export function AppProvider({ children }) {
           },
           {
             src : {
-              desktop : "/Legend-himself.png",
-              mobile : "/Legend-himself.png"
+              desktop : "/Legend-himself.webp",
+              mobile : "/Legend-himself.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -331,8 +331,8 @@ export function AppProvider({ children }) {
           },
           {
             src : {
-              desktop : "/legend-logo.jpg",
-              mobile : "/legend-logo.jpg"
+              desktop : "/legend-logo.webp",
+              mobile : "/legend-logo.webp"
             },
             alt : "project screenshot",
             title : "Anything Website",
@@ -428,8 +428,8 @@ export function AppProvider({ children }) {
     const projects = [
       {
         src : {
-          desktop : "/legend-logo.jpg",
-          mobile : "/legend-logo.jpg"
+          desktop : "/legend-logo.webp",
+          mobile : "/legend-logo.webp"
         },
         alt : "project screenshot",
         title : "Anything Website",
@@ -437,8 +437,8 @@ export function AppProvider({ children }) {
       },
       {
         src : {
-          desktop : "/legend-logo.jpg",
-          mobile : "/legend-logo.jpg"
+          desktop : "/legend-logo.webp",
+          mobile : "/legend-logo.webp"
         },
         alt : "project screenshot",
         title : "Anything Website",
@@ -446,8 +446,8 @@ export function AppProvider({ children }) {
       },
       {
         src : {
-          desktop : "/Legend-himself.png",
-          mobile : "/Legend-himself.png"
+          desktop : "/Legend-himself.webp",
+          mobile : "/Legend-himself.webp"
         },
         alt : "project screenshot",
         title : "Anything Website",
@@ -455,8 +455,8 @@ export function AppProvider({ children }) {
       },
       {
         src : {
-          desktop : "/legend-logo.jpg",
-          mobile : "/legend-logo.jpg"
+          desktop : "/legend-logo.webp",
+          mobile : "/legend-logo.webp"
         },
         alt : "project screenshot",
         title : "Anything Website",
@@ -464,8 +464,8 @@ export function AppProvider({ children }) {
       },
       {
         src : {
-          desktop : "/Legend-himself.png",
-          mobile : "/Legend-himself.png"
+          desktop : "/Legend-himself.webp",
+          mobile : "/Legend-himself.webp"
         },
         alt : "project screenshot",
         title : "Anything Website",
@@ -473,8 +473,8 @@ export function AppProvider({ children }) {
       },
       {
         src : {
-          desktop : "/legend-logo.jpg",
-          mobile : "/legend-logo.jpg"
+          desktop : "/legend-logo.webp",
+          mobile : "/legend-logo.webp"
         },
         alt : "project screenshot",
         title : "Anything Website",
@@ -482,8 +482,8 @@ export function AppProvider({ children }) {
       },
       {
         src : {
-          desktop : "/legend-logo.jpg",
-          mobile : "/legend-logo.jpg"
+          desktop : "/legend-logo.webp",
+          mobile : "/legend-logo.webp"
         },
         alt : "project screenshot",
         title : "Anything Website",
@@ -491,8 +491,8 @@ export function AppProvider({ children }) {
       },
       {
         src : {
-          desktop : "/legend-logo.jpg",
-          mobile : "/legend-logo.jpg"
+          desktop : "/legend-logo.webp",
+          mobile : "/legend-logo.webp"
         },
         alt : "project screenshot",
         title : "Anything Website",
@@ -500,8 +500,8 @@ export function AppProvider({ children }) {
       },
       {
         src : {
-          desktop : "/legend-logo.jpg",
-          mobile : "/legend-logo.jpg"
+          desktop : "/legend-logo.webp",
+          mobile : "/legend-logo.webp"
         },
         alt : "project screenshot",
         title : "Anything Website",
@@ -509,8 +509,8 @@ export function AppProvider({ children }) {
       },
       {
         src : {
-          desktop : "/legend-logo.jpg",
-          mobile : "/legend-logo.jpg"
+          desktop : "/legend-logo.webp",
+          mobile : "/legend-logo.webp"
         },
         alt : "project screenshot",
         title : "Anything Website",
@@ -518,8 +518,8 @@ export function AppProvider({ children }) {
       },
       {
         src : {
-          desktop : "/legend-logo.jpg",
-          mobile : "/legend-logo.jpg"
+          desktop : "/legend-logo.webp",
+          mobile : "/legend-logo.webp"
         },
         alt : "project screenshot",
         title : "Anything Website",
@@ -527,8 +527,8 @@ export function AppProvider({ children }) {
       },
       {
         src : {
-          desktop : "/legend-logo.jpg",
-          mobile : "/legend-logo.jpg"
+          desktop : "/legend-logo.webp",
+          mobile : "/legend-logo.webp"
         },
         alt : "project screenshot",
         title : "Anything Website",
@@ -536,8 +536,8 @@ export function AppProvider({ children }) {
       },
       {
         src : {
-          desktop : "/legend-logo.jpg",
-          mobile : "/legend-logo.jpg"
+          desktop : "/legend-logo.webp",
+          mobile : "/legend-logo.webp"
         },
         alt : "project screenshot",
         title : "Anything Website",
