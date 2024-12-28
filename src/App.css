@@ -1772,7 +1772,8 @@ svg.down-svg {
 }
 
 /* ERROR STYLING */
-p.error-text {
+p.error-text,
+.container.light-mode p.error-text {
   color: rgb(251, 80, 80);
   font-size: 0.6rem;
   font-weight: 600;
@@ -1782,6 +1783,10 @@ p.error-text {
 }
 
 @media only screen and (max-width: 500px) {
+  .form-group {
+    margin-bottom: 2rem;
+  }
+
   .form-group label {
     font-size: 0.8rem;
   }

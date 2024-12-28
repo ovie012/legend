@@ -95,7 +95,7 @@ const ContactForm = () => {
           type="text"
           name="name"
           ref={formRef.name}
-          placeholder=""
+          placeholder=" "
           style={{ borderColor : formData.nameError && "rgb(251, 80, 80)" }}
         />
         <label>Name</label>
@@ -106,7 +106,7 @@ const ContactForm = () => {
           type="text"
           name="language"
           ref={formRef.language}
-          placeholder=""
+          placeholder=" "
           style={{ borderColor : formData.languageError && "rgb(251, 80, 80)" }}
         />
         <label>Favorite Programming Language</label>
@@ -117,7 +117,7 @@ const ContactForm = () => {
           type="text"
           name="techStack"
           ref={formRef.techStack}
-          placeholder=""
+          placeholder=" "
           style={{ borderColor : formData.techStackError && "rgb(251, 80, 80)" }}
         />
         <label>Tech Stack</label>
@@ -128,7 +128,7 @@ const ContactForm = () => {
           type="text"
           name="role"
           ref={formRef.role}
-          placeholder=""
+          placeholder=" "
           style={{ borderColor : formData.roleError && "rgb(251, 80, 80)" }}
         />
         <label>Role</label>
@@ -139,7 +139,7 @@ const ContactForm = () => {
           type="text"
           name="email"
           ref={formRef.email}
-          placeholder=""
+          placeholder=" "
           style={{ borderColor : formData.email && "rgb(251, 80, 80)" }}
         />
         <label>Email</label>
@@ -149,7 +149,7 @@ const ContactForm = () => {
         <textarea
           name="message"
           ref={formRef.message}
-          placeholder=""
+          placeholder=" "
           style={{ borderColor : formData.message && "rgb(251, 80, 80)" }}
         ></textarea>
         <label>Message</label>
