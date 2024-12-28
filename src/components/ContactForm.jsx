@@ -75,10 +75,10 @@ const ContactForm = () => {
     }
     if (emailRef.trim() === '') {
       errors.emailError = true;
-      errors.email = "Enter your email so we can keep you in the loop!";
+      errors.email = "Enter your email so i can keep you in the loop!";
     } else if (!emailRegex.test(emailRef)) {
       errors.emailError = true;
-      errors.email = "Oops! That email looks off—fix it, and we’re good to go!";
+      errors.email = "Oops! That email looks off, Lets fix it!";
     }
     if (messageRef.trim() === '') {
       errors.messageError = true;
@@ -197,7 +197,7 @@ const ContactForm = () => {
             style={{ borderColor : formData.emailError && "rgb(251, 80, 80)" }}
           />
           <label>Email</label>
-          {formData.email && <p className="error-text">{formData.email}</p>}
+          {formData.emailError && <p className="error-text">{formData.email}</p>}
         </div>
         <div className="form-group">
           <textarea
@@ -207,7 +207,7 @@ const ContactForm = () => {
             style={{ borderColor : formData.messageError && "rgb(251, 80, 80)" }}
           ></textarea>
           <label>Message</label>
-          {formData.message && <p className="error-text">{formData.message}</p>}
+          {formData.messageError && <p className="error-text">{formData.message}</p>}
         </div>
         <button 
           type="submit" 
