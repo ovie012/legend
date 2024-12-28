@@ -1,6 +1,11 @@
 import React, { useState, useRef } from "react";
+import emailjs from "emailjs-com";
 
 const ContactForm = () => {
+  const [status, setStatus] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [sentMessage, setSentMessage] = useState("");
   const [formData, setFormData] = useState({
     name : "",
     nameError : false,
@@ -25,15 +30,9 @@ const ContactForm = () => {
     message : useRef(),
   }
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prev) => ({ ...prev, [name]: value }));
-  // };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    // alert("Thanks for your message! I'll get back to you soon.");
-    // setFormData({ name: "", language: "", techStack: "", role: "", email : "", message: "" });
+    setLoading(true);
 
     let errors = {
       name : "",
@@ -56,6 +55,7 @@ const ContactForm = () => {
     const roleRef = formRef.role.current.value;
     const emailRef = formRef.email.current.value;
     const messageRef = formRef.message.current.value;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (nameRef.trim() === '') {
       errors.nameError = true;
@@ -76,6 +76,9 @@ const ContactForm = () => {
     if (emailRef.trim() === '') {
       errors.emailError = true;
       errors.email = "Enter your email so we can keep you in the loop!";
+    } else if (!emailRegex.test(emailRef)) {
+      errors.emailError = true;
+      errors.email = "Oops! That email looks off—fix it, and we’re good to go!";
     }
     if (messageRef.trim() === '') {
       errors.messageError = true;
@@ -86,80 +89,145 @@ const ContactForm = () => {
       ...prevState,
       ...errors,
     }));
+
+    if (Object.values(errors).some((error) => error)) {
+      setLoading(false);
+      return;
+    }
+
+    // Send Email with EmailJS
+    emailjs
+      .send(
+        "service_hniivlv", // EmailJS Service ID
+        "template_nukzfpm", // EmailJS Template ID
+        {
+          name: nameRef,
+          language: languageRef,
+          techStack: techStackRef,
+          role: roleRef,
+          email: emailRef,
+          message: messageRef,
+        },
+        "3qoTfXCjF2_xgMKYz" // EmailJS public key
+      )
+      .then(
+        (result) => {
+          setStatus(true);
+          setEmailError(false);
+          setSentMessage("Thank you! You'll be kept in the loop");
+          setFormData({
+            name: "",
+            nameError: false,
+            language: "",
+            languageError: false,
+            techStack: "",
+            techStackError: false,
+            role: "",
+            roleError: false,
+            email: "",
+            emailError: false,
+            message: "",
+            messageError: false,
+          });
+          Object.values(formRef).forEach((ref) => (ref.current.value = ""));
+          setLoading(false);
+        },
+        (error) => {
+          setStatus(true);
+          setEmailError(true);
+          setSentMessage("It appears there's an error, Try Again");
+          setLoading(false);
+        }
+      );
   };
 
   return (
-    <form className="contact-form" onSubmit={handleSubmit}>
-      <div className="form-group">
-        <input
-          type="text"
-          name="name"
-          ref={formRef.name}
-          placeholder=" "
-          style={{ borderColor : formData.nameError && "rgb(251, 80, 80)" }}
-        />
-        <label>Name</label>
-        {formData.nameError && <p className="error-text">{formData.name}</p>}
-      </div>
-      <div className="form-group">
-        <input
-          type="text"
-          name="language"
-          ref={formRef.language}
-          placeholder=" "
-          style={{ borderColor : formData.languageError && "rgb(251, 80, 80)" }}
-        />
-        <label>Favorite Programming Language</label>
-        {formData.languageError && <p className="error-text">{formData.language}</p>}
-      </div>
-      <div className="form-group">
-        <input
-          type="text"
-          name="techStack"
-          ref={formRef.techStack}
-          placeholder=" "
-          style={{ borderColor : formData.techStackError && "rgb(251, 80, 80)" }}
-        />
-        <label>Tech Stack</label>
-        {formData.techStackError && <p className="error-text">{formData.techStack}</p>}
-      </div>
-      <div className="form-group">
-        <input
-          type="text"
-          name="role"
-          ref={formRef.role}
-          placeholder=" "
-          style={{ borderColor : formData.roleError && "rgb(251, 80, 80)" }}
-        />
-        <label>Role</label>
-        {formData.roleError && <p className="error-text">{formData.role}</p>}
-      </div>
-      <div className="form-group">
-        <input
-          type="text"
-          name="email"
-          ref={formRef.email}
-          placeholder=" "
-          style={{ borderColor : formData.email && "rgb(251, 80, 80)" }}
-        />
-        <label>Email</label>
-        {formData.email && <p className="error-text">{formData.email}</p>}
-      </div>
-      <div className="form-group">
-        <textarea
-          name="message"
-          ref={formRef.message}
-          placeholder=" "
-          style={{ borderColor : formData.message && "rgb(251, 80, 80)" }}
-        ></textarea>
-        <label>Message</label>
-        {formData.message && <p className="error-text">{formData.message}</p>}
-      </div>
-      <button type="submit" className="btn-submit">
-        Send Message
-      </button>
-    </form>
-  );
+    !status ? (
+      <form className="contact-form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <input
+            type="text"
+            name="name"
+            ref={formRef.name}
+            placeholder=" "
+            style={{ borderColor : formData.nameError && "rgb(251, 80, 80)" }}
+          />
+          <label>Name</label>
+          {formData.nameError && <p className="error-text">{formData.name}</p>}
+        </div>
+        <div className="form-group">
+          <input
+            type="text"
+            name="language"
+            ref={formRef.language}
+            placeholder=" "
+            style={{ borderColor : formData.languageError && "rgb(251, 80, 80)" }}
+          />
+          <label>Favorite Programming Language</label>
+          {formData.languageError && <p className="error-text">{formData.language}</p>}
+        </div>
+        <div className="form-group">
+          <input
+            type="text"
+            name="techStack"
+            ref={formRef.techStack}
+            placeholder=" "
+            style={{ borderColor : formData.techStackError && "rgb(251, 80, 80)" }}
+          />
+          <label>Tech Stack</label>
+          {formData.techStackError && <p className="error-text">{formData.techStack}</p>}
+        </div>
+        <div className="form-group">
+          <input
+            type="text"
+            name="role"
+            ref={formRef.role}
+            placeholder=" "
+            style={{ borderColor : formData.roleError && "rgb(251, 80, 80)" }}
+          />
+          <label>Role</label>
+          {formData.roleError && <p className="error-text">{formData.role}</p>}
+        </div>
+        <div className="form-group">
+          <input
+            type="text"
+            name="email"
+            ref={formRef.email}
+            placeholder=" "
+            style={{ borderColor : formData.emailError && "rgb(251, 80, 80)" }}
+          />
+          <label>Email</label>
+          {formData.email && <p className="error-text">{formData.email}</p>}
+        </div>
+        <div className="form-group">
+          <textarea
+            name="message"
+            ref={formRef.message}
+            placeholder=" "
+            style={{ borderColor : formData.messageError && "rgb(251, 80, 80)" }}
+          ></textarea>
+          <label>Message</label>
+          {formData.message && <p className="error-text">{formData.message}</p>}
+        </div>
+        <button 
+          type="submit" 
+          className={`btn-submit ${loading ? 'disabled' : ''}`}
+          disabled={loading}
+        >
+          {loading ? "Sending..." : "Send Message"}
+        </button>
+      </form>
+    )
+      :
+    (
+      <section className="status-message">
+        <p>{sentMessage}</p>
+        <button className="btn-hire" onClick={() => { setEmailError(false); setStatus(false); }}>
+          {emailError ? "Try Again" : "Ok"}
+        </button>
+      </section>
+    ));
+
 };
 
 export default ContactForm;
