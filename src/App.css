@@ -276,6 +276,7 @@ header.scrolled {
 } */
 
 span.click,
+div.click,
 .mobile-nav-container {
   display: none;
 }
@@ -346,10 +347,20 @@ header nav h3:hover,
 }
 
 @media only screen and (max-width: 800px) {
+  div.click {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    width: 40px;
+    z-index: 20;
+    margin-right: 1%;
+  }
+
   span.click {
     display: block;
     width: 30px;
-    height: 2px;
+    height: 2.5px;
     background: #fff;
     position: relative;
     transition: 0.3s ease-in-out;
@@ -361,7 +372,7 @@ header nav h3:hover,
     content: "";
     position: absolute;
     width: 30px;
-    height: 2px;
+    height: 2.5px;
     background: #fff;
     transition: 0.3s ease-in-out;
     z-index: 20;
@@ -374,11 +385,11 @@ header nav h3:hover,
   }
 
   span.click::before {
-    bottom: 5px;
+    bottom: 7px;
   }
 
   span.click::after {
-    top: 5px;
+    top: 7px;
   }
 
   span.click.close,

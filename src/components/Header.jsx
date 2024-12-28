@@ -26,7 +26,9 @@ function Header() {
             <Link to='/' onClick={scrollToTop} >
                 <img src="/legend-logo.jpg" alt="logo" className="logo" />
             </Link>
-            <span className={`click ${mobileNav ? 'close' : ''}`} onClick={() => { setMobileNav(!mobileNav); }}></span>
+            <div className='click' onClick={() => { setMobileNav(!mobileNav); }}>
+                <span className={`click ${mobileNav ? 'close' : ''}`}></span>
+            </div>
             <div className={`mobile-nav-container ${mobileNav ? 'open' : ''}`}>
                 <nav className='mobile-nav'>
                     <h3>
@@ -41,9 +43,9 @@ function Header() {
                     <h3>
                         <NavLink to='/Contact' onClick={() => { scrollToTop(); setMobileNav(false); }} >contact</NavLink>
                     </h3>
-                    <div onClick={() => {setLightMode(!lightMode)}} className="change-mode">
+                    <div className="change-mode">
                         <FaMoon className={`fa-icon ${lightMode ? '' : 'changed-mode-move'}`} />
-                        <span></span>
+                        <span onClick={() => {setLightMode(!lightMode)}}></span>
                         <FaSun className={`fa-icon ${lightMode ?'changed-mode-move' : ''}`} />
                     </div>
                 </nav>
