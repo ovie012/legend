@@ -1793,12 +1793,6 @@ p.error-text {
    {
     font-size: 0.7rem;
   }
-
-  /* ERROR STYLING */
-  p.error-text {
-    font-size: 0.45rem;
-    margin-bottom: 0.5rem;
-  }
 }
 
 @media only screen and (max-width: 330px) {
@@ -1812,10 +1806,6 @@ p.error-text {
   .form-group textarea:not(:placeholder-shown) + label
    {
     font-size: 0.55rem;
-  }
-
-  p.error-text {
-    font-size: 0.4rem;
   }
 }
 

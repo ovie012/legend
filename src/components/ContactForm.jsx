@@ -59,11 +59,11 @@ const ContactForm = () => {
 
     if (nameRef.trim() === '') {
       errors.nameError = true;
-      errors.name = 'No name? No fame! Fill it out so i can know who’s awesome.'
+      errors.name = 'No name? Drop your name and make it official!'
     }
     if (languageRef.trim() === '') {
       errors.languageError = true;
-      errors.language = "Are you a Pythonista, a JavaScript wizard, or ? Let me know!"
+      errors.language = "Are you a JavaScript wizard, or ??? Let me know!"
     }
     if (techStackRef.trim() === '') {
       errors.techStackError = true;
@@ -71,11 +71,11 @@ const ContactForm = () => {
     }
     if (roleRef.trim() === '') {
       errors.roleError = true;
-      errors.role = "What’s your superpower in the team? Share your role with us!";
+      errors.role = "Claim your role, what’s your superpower?";
     }
     if (emailRef.trim() === '') {
       errors.emailError = true;
-      errors.email = "No spam, just vibes, enter your email so we can stay connected!";
+      errors.email = "Enter your email so we can keep you in the loop!";
     }
     if (messageRef.trim() === '') {
       errors.messageError = true;
