@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import emailjs from "emailjs-com";
 
-const ContactForm = () => {
+function ContactForm() {
   const [status, setStatus] = useState(false);
   const [loading, setLoading] = useState(false);
   const [emailError, setEmailError] = useState(false);

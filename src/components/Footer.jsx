@@ -5,33 +5,16 @@ import { AppContext } from '../AppProvider';
 function Footer() {
     const { socials } = useContext(AppContext);
 
-    // const icons = [
-    //     { 
-    //         src : '/icon-github.svg',
-    //         alt : 'github',
-    //     },
-    //     {
-    //         src : "/icon-linkedin.svg",
-    //         alt : 'linkedin',
-    //     },
-    //     {
-    //         src : "/icon-instagram.svg",
-    //         alt : 'instagram'
-    //     }
-    // ]
-
   return (
     <>
         <div className="footer">
             <section>
                 <h5> <span></span> Lets Work Together</h5>
-                <h6>send message</h6>
+                <a href="mailto:ovieemonefe012@gmail.com">send message</a>
             </section>
             <h2>Let’s make something amazing together. Start By <span>Saying Hi</span> </h2>
             <section>
-                {/* <Link to='/' onClick={scrollToTop} > */}
-                    <img src="/legend-logo.webp" alt="logo" className="logo" />
-                {/* </Link> */}
+                <img src="/legend-logo.webp" alt="logo" className="logo" />
                 <div>
                 {socials.map((item, index) => (
                     <a key={index} href={item.link} target="_blank" rel="noopener noreferrer">

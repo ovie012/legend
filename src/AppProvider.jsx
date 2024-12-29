@@ -34,12 +34,12 @@ export function AppProvider({ children }) {
     };
 
     const socials = [
-        {title : FaLinkedin, link : "https://linkedin.com/in/your-profile" },
-        {title : FaGithub, link : "https://github.com/your-profile" },
-        {title : FaXTwitter, link : "https://twitter.com/your-profile" },
-        {title : FaTiktok, link : "https://linkedin.com/in/your-profile" },
-        {title : FaInstagram, link : "https://linkedin.com/in/your-profile" },
-      ];
+        {title : FaLinkedin, link : "https://www.linkedin.com/in/ovie-emonefe-73b886259/" },
+        {title : FaGithub, link : "https://github.com/ovie012" },
+        {title : FaXTwitter, link : "https://x.com/legend_devv" },
+        {title : FaTiktok, link : "https://www.tiktok.com/@legend.devv" },
+        {title : FaInstagram, link : "https://www.instagram.com/legendd.devv" },
+    ];
   
     const skills = [
       { icon: FaHtml5, name: "HTML" },

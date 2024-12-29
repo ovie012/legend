@@ -12,7 +12,6 @@ import About from './pages/About';
 function InnerApp () {
   const { lightMode } = useContext(AppContext);
   
-
   return (
     <>
       <div className={`container ${lightMode ? 'light-mode' : ''}`}>
