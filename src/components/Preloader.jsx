@@ -2,23 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { AppContext } from '../AppProvider';
 
 function Preloader() {
-    const { preloader, animationStart, setPreloader, fadeAway, setFadeAway } = useContext(AppContext);
-
-    const [loadingPercentage, setLoadingPercentage] = useState(0);
-  
-    useEffect(() => {
-      const updateProgress = () => {
-        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const scrolledHeight = window.scrollY;
-        const progress = (scrolledHeight / totalHeight) * 100;
-        setLoadingPercentage(Math.min(Math.max(progress, 0), 100));
-      };
-  
-      window.addEventListener("scroll", updateProgress);
-  
-      return () => window.removeEventListener("scroll", updateProgress); // Cleanup on unmount
-    }, []);
-
+    const { preloader, animationStart, loadingPercentage, fadeAway, setFadeAway } = useContext(AppContext);
 
   return (
     <>

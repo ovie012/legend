@@ -8,6 +8,7 @@ export const AppContext = createContext();
 
 export function AppProvider({ children }) {
     const [preloader, setPreloader] = useState(true);
+    const [loadingPercentage, setLoadingPercentage] = useState(0);
     const [animationStart, setAnimationStart] = useState(true);
     const [fadeAway, setFadeAway] = useState(false);
     const [lightMode, setLightMode] = useState(false);
@@ -588,7 +589,9 @@ export function AppProvider({ children }) {
         fadeAway, 
         setFadeAway,
         animationStart, 
-        setAnimationStart
+        setAnimationStart,
+        loadingPercentage, 
+        setLoadingPercentage
     }}>
         {children}
     </AppContext.Provider>

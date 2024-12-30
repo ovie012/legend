@@ -11,111 +11,40 @@ import About from './pages/About';
 import Preloader from './components/Preloader';
 
 function InnerApp () {
-  const { lightMode, preloader, animationStart, setAnimationStart, setPreloader, fadeAway, setFadeAway } = useContext(AppContext);
-
-  // useEffect(() => {
-  //   const handleLoad = () => {
-  //     setAnimationStart(false);
-  //     setTimeout(() => {
-  //         setAnimationStart(true);
-  //     }, 5300);
-
-  //     setTimeout(() => {
-  //       setFadeAway(true);
-  //     }, 6300);
-
-  //     setTimeout(() => {
-  //       setPreloader(false);
-  //     }, 7000);
-  //   };
-
-  //   window.addEventListener("load", handleLoad);
-
-  //   return () => window.removeEventListener("load", handleLoad);
-  // }, []);
-
-  // useEffect(() => {
-  //   const checkProgress = () => {
-  //     const performanceTiming = window.performance.timing;
-  //     const now = Date.now();
-
-  //     const totalTime = performanceTiming.loadEventEnd - performanceTiming.navigationStart;
-  //     const elapsedTime = now - performanceTiming.navigationStart;
-
-  //     const progress = (elapsedTime / totalTime) * 100;
-
-  //     if (progress >= 90) {
-  //       setAnimationStart(true);
-  //     }
-
-  //     if (progress >= 100) {
-  //       setFadeAway(true);
-  //       setTimeout(() => {
-  //         setPreloader(false);
-  //       }, 500);
-  //       clearInterval(progressInterval);
-  //     }
-  //   };
-
-  //   const progressInterval = setInterval(() => {
-  //     if (window.performance.timing.loadEventEnd > 0) {
-  //       checkProgress();
-  //     }
-  //   }, 100);
-
-  //   return () => clearInterval(progressInterval);
-  // }, []);
+  const { lightMode, preloader, setLoadingPercentage, setAnimationStart, setPreloader, fadeAway, setFadeAway } = useContext(AppContext);
 
   useEffect(() => {
-    let progressInterval;
-    let animationTimeout;
-    let fallbackTimeout;
+    let startTimestamp = null;
 
-    const handleLoad = () => {
-      const performanceTiming = window.performance.timing;
-      const totalLoadTime =
-        performanceTiming.loadEventEnd > 0
-          ? performanceTiming.loadEventEnd - performanceTiming.navigationStart
-          : 7000;
+    const animateProgress = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const elapsed = timestamp - startTimestamp;
 
-      const checkProgress = () => {
-        setAnimationStart(false)
-        const now = Date.now();
-        const elapsedTime = now - performanceTiming.navigationStart;
-        const progress = (elapsedTime / totalLoadTime) * 100;
+      const progress = Math.min((elapsed / 6000) * 100, 100); // Animate from 0 to 100 in 6 seconds
+      setLoadingPercentage(progress);
 
-        if (progress >= 90 && !animationStart) {
+      if (elapsed < 6000) {
+        requestAnimationFrame(animateProgress); // Continue animation
+      }
+    };
+
+    requestAnimationFrame(animateProgress);
+
+        setTimeout(() => {
+          setAnimationStart(false);
+      }, 1000);
+
+      setTimeout(() => {
           setAnimationStart(true);
-        }
+      }, 6300);
 
-        if (elapsedTime >= totalLoadTime - 2000 && !animationStart) {
-          setAnimationStart(true);
-        }
-      };
-
-      progressInterval = setInterval(checkProgress, 100);
-
-     
-      animationTimeout = setTimeout(() => {
+      setTimeout(() => {
         setFadeAway(true);
-        setTimeout(() => setPreloader(false), 1000); 
-        clearInterval(progressInterval);
-      }, 7000);
+      }, 7300);
 
-      fallbackTimeout = setTimeout(() => {
-        if (!animationStart) {
-          setAnimationStart(true);
-        }
-      }, 6000);
-    };
-
-    window.addEventListener("load", handleLoad);
-
-    return () => {
-      clearInterval(progressInterval);
-      clearTimeout(animationTimeout);
-      window.removeEventListener("load", handleLoad);
-    };
+      setTimeout(() => {
+        setPreloader(false);
+      }, 8000);
   }, []);
   
   return (
