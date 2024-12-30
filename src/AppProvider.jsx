@@ -7,6 +7,9 @@ import { FaXTwitter } from "react-icons/fa6";
 export const AppContext = createContext();
 
 export function AppProvider({ children }) {
+    const [preloader, setPreloader] = useState(true);
+    const [animationStart, setAnimationStart] = useState(true);
+    const [fadeAway, setFadeAway] = useState(false);
     const [lightMode, setLightMode] = useState(false);
     const [hover, setHover] = useState(false);
     const [projectOpen, setProjectOpen] = useState(false);
@@ -579,7 +582,13 @@ export function AppProvider({ children }) {
         handleFunFacts,
         mobileNav,
         setMobileNav,
-        socials
+        socials,
+        preloader,
+        setPreloader,
+        fadeAway, 
+        setFadeAway,
+        animationStart, 
+        setAnimationStart
     }}>
         {children}
     </AppContext.Provider>
