@@ -20,11 +20,11 @@ function InnerApp () {
       if (!startTimestamp) startTimestamp = timestamp;
       const elapsed = timestamp - startTimestamp;
 
-      const progress = Math.min((elapsed / 6000) * 100, 100); // Animate from 0 to 100 in 6 seconds
+      const progress = Math.min((elapsed / 6000) * 100, 100);
       setLoadingPercentage(progress);
 
       if (elapsed < 6000) {
-        requestAnimationFrame(animateProgress); // Continue animation
+        requestAnimationFrame(animateProgress);
       }
     };
 
@@ -44,7 +44,7 @@ function InnerApp () {
 
       setTimeout(() => {
         setPreloader(false);
-      }, 8000);
+      }, 9000);
   }, []);
   
   return (

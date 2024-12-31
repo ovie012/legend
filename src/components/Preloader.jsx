@@ -16,7 +16,9 @@ function Preloader() {
             <section className="preloader-display">
                 <div className={`preloader-entry-text ${animationStart ? 'display' : ''}`}>
                     <p>Legend.dev</p>
-                    <img src="/LegenddevRound-light.png" alt="logo" />
+                    <div>
+                        <img src="/LegenddevRound-light.webp" alt="logo" />
+                    </div>
                     <p>Software Developer</p>
                 </div>
                 <p className={`preloader-fun-facts ${animationStart ? '' : 'display'}`}>{Math.round(loadingPercentage)}%</p>
