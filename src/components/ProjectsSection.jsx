@@ -22,12 +22,16 @@ function ProjectsSection() {
           </section>
           <section>
             {generateRandomProject(projects, 6).map((items, index) => (
-              <div key={index} className="single-project">
+              <div key={index} onClick={() => window.open(items.link, '_blank')} className="single-project">
                 <img src={items.src.desktop} alt={items.alt} />
                 <article>
                   <h6>{items.title}</h6>
                   <p>{items.description}</p>
                 </article>
+                <section className="hovered">
+                  <h4>{items.titleLong}</h4>
+                  <p>{items.descriptionLong}</p>
+                </section>
               </div>
             ))}
           </section>

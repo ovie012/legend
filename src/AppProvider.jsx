@@ -83,84 +83,87 @@ export function AppProvider({ children }) {
         projects : [
           {
             src : {
-              desktop : "/legend-logo.webp",
-              mobile : "/legend-logo.webp"
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
             },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
           },
           {
             src : {
-              desktop : "/legend-logo.webp",
-              mobile : "/legend-logo.webp"
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
             },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
           },
           {
             src : {
-              desktop : "/legend-logo.webp",
-              mobile : "/legend-logo.webp"
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
             },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
           },
           {
             src : {
-              desktop : "/legend-logo.webp",
-              mobile : "/legend-logo.webp"
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
             },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
           },
           {
             src : {
-              desktop : "/legend-logo.webp",
-              mobile : "/legend-logo.webp"
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
             },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
           },
           {
             src : {
-              desktop : "/Legend-himself.webp",
-              mobile : "/Legend-himself.webp"
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
             },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
           },
           {
             src : {
-              desktop : "/legend-logo.webp",
-              mobile : "/legend-logo.webp"
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
             },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
-          },
-          {
-            src : {
-              desktop : "/Legend-himself.webp",
-              mobile : "/Legend-himself.webp"
-            },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
-          },
-          {
-            src : {
-              desktop : "/legend-logo.webp",
-              mobile : "/legend-logo.webp"
-            },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
           },
         ]
       },
@@ -170,57 +173,87 @@ export function AppProvider({ children }) {
         projects : [
           {
             src : {
-              desktop : "/legend-logo.webp",
-              mobile : "/legend-logo.webp"
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
             },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
           },
           {
             src : {
-              desktop : "/legend-logo.webp",
-              mobile : "/legend-logo.webp"
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
             },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
           },
           {
             src : {
-              desktop : "/Legend-himself.webp",
-              mobile : "/Legend-himself.webp"
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
             },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
           },
           {
             src : {
-              desktop : "/legend-logo.webp",
-              mobile : "/legend-logo.webp"
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
             },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
           },
           {
             src : {
-              desktop : "/Legend-himself.webp",
-              mobile : "/Legend-himself.webp"
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
             },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
           },
           {
             src : {
-              desktop : "/legend-logo.webp",
-              mobile : "/legend-logo.webp"
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
             },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
+          },
+          {
+            src : {
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
+            },
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
           },
         ]
       },
@@ -230,57 +263,87 @@ export function AppProvider({ children }) {
         projects : [
           {
             src : {
-              desktop : "/legend-logo.webp",
-              mobile : "/legend-logo.webp"
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
             },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
           },
           {
             src : {
-              desktop : "/legend-logo.webp",
-              mobile : "/legend-logo.webp"
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
             },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
           },
           {
             src : {
-              desktop : "/Legend-himself.webp",
-              mobile : "/Legend-himself.webp"
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
             },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
           },
           {
             src : {
-              desktop : "/legend-logo.webp",
-              mobile : "/legend-logo.webp"
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
             },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
           },
           {
             src : {
-              desktop : "/Legend-himself.webp",
-              mobile : "/Legend-himself.webp"
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
             },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
           },
           {
             src : {
-              desktop : "/legend-logo.webp",
-              mobile : "/legend-logo.webp"
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
             },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
+          },
+          {
+            src : {
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
+            },
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
           },
         ]
       },
@@ -290,57 +353,87 @@ export function AppProvider({ children }) {
         projects : [
           {
             src : {
-              desktop : "/legend-logo.webp",
-              mobile : "/legend-logo.webp"
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
             },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
           },
           {
             src : {
-              desktop : "/legend-logo.webp",
-              mobile : "/legend-logo.webp"
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
             },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
           },
           {
             src : {
-              desktop : "/Legend-himself.webp",
-              mobile : "/Legend-himself.webp"
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
             },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
           },
           {
             src : {
-              desktop : "/legend-logo.webp",
-              mobile : "/legend-logo.webp"
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
             },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
           },
           {
             src : {
-              desktop : "/Legend-himself.webp",
-              mobile : "/Legend-himself.webp"
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
             },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
           },
           {
             src : {
-              desktop : "/legend-logo.webp",
-              mobile : "/legend-logo.webp"
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
             },
-            alt : "project screenshot",
-            title : "Anything Website",
-            description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
+          },
+          {
+            src : {
+              desktop : "/swift-dispatch-driver.webp",
+              mobile : "/swift-dispatch-driver.webp"
+            },
+            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+            title : "Swift Dispatch",
+            titleLong : "React-Based Dispatch App Development - Internship Project",
+            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+            link : "https://swiftdispatch.com.ng",
           },
         ]
       },
@@ -432,120 +525,87 @@ export function AppProvider({ children }) {
     const projects = [
       {
         src : {
-          desktop : "/legend-logo.webp",
-          mobile : "/legend-logo.webp"
+          desktop : "/swift-dispatch-driver.webp",
+          mobile : "/swift-dispatch-driver.webp"
         },
-        alt : "project screenshot",
-        title : "Anything Website",
-        description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+        alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+        title : "Swift Dispatch",
+        titleLong : "React-Based Dispatch App Development - Internship Project",
+        description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+        descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+        link : "https://swiftdispatch.com.ng",
       },
       {
         src : {
-          desktop : "/legend-logo.webp",
-          mobile : "/legend-logo.webp"
+          desktop : "/swift-dispatch-driver.webp",
+          mobile : "/swift-dispatch-driver.webp"
         },
-        alt : "project screenshot",
-        title : "Anything Website",
-        description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+        alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+        title : "Swift Dispatch",
+        titleLong : "React-Based Dispatch App Development - Internship Project",
+        description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+        descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+        link : "https://swiftdispatch.com.ng",
       },
       {
         src : {
-          desktop : "/Legend-himself.webp",
-          mobile : "/Legend-himself.webp"
+          desktop : "/swift-dispatch-driver.webp",
+          mobile : "/swift-dispatch-driver.webp"
         },
-        alt : "project screenshot",
-        title : "Anything Website",
-        description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+        alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+        title : "Swift Dispatch",
+        titleLong : "React-Based Dispatch App Development - Internship Project",
+        description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+        descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+        link : "https://swiftdispatch.com.ng",
       },
       {
         src : {
-          desktop : "/legend-logo.webp",
-          mobile : "/legend-logo.webp"
+          desktop : "/swift-dispatch-driver.webp",
+          mobile : "/swift-dispatch-driver.webp"
         },
-        alt : "project screenshot",
-        title : "Anything Website",
-        description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+        alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+        title : "Swift Dispatch",
+        titleLong : "React-Based Dispatch App Development - Internship Project",
+        description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+        descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+        link : "https://swiftdispatch.com.ng",
       },
       {
         src : {
-          desktop : "/Legend-himself.webp",
-          mobile : "/Legend-himself.webp"
+          desktop : "/swift-dispatch-driver.webp",
+          mobile : "/swift-dispatch-driver.webp"
         },
-        alt : "project screenshot",
-        title : "Anything Website",
-        description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+        alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+        title : "Swift Dispatch",
+        titleLong : "React-Based Dispatch App Development - Internship Project",
+        description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+        descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+        link : "https://swiftdispatch.com.ng",
       },
       {
         src : {
-          desktop : "/legend-logo.webp",
-          mobile : "/legend-logo.webp"
+          desktop : "/swift-dispatch-driver.webp",
+          mobile : "/swift-dispatch-driver.webp"
         },
-        alt : "project screenshot",
-        title : "Anything Website",
-        description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+        alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+        title : "Swift Dispatch",
+        titleLong : "React-Based Dispatch App Development - Internship Project",
+        description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+        descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+        link : "https://swiftdispatch.com.ng",
       },
       {
         src : {
-          desktop : "/legend-logo.webp",
-          mobile : "/legend-logo.webp"
+          desktop : "/swift-dispatch-driver.webp",
+          mobile : "/swift-dispatch-driver.webp"
         },
-        alt : "project screenshot",
-        title : "Anything Website",
-        description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
-      },
-      {
-        src : {
-          desktop : "/legend-logo.webp",
-          mobile : "/legend-logo.webp"
-        },
-        alt : "project screenshot",
-        title : "Anything Website",
-        description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
-      },
-      {
-        src : {
-          desktop : "/legend-logo.webp",
-          mobile : "/legend-logo.webp"
-        },
-        alt : "project screenshot",
-        title : "Anything Website",
-        description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
-      },
-      {
-        src : {
-          desktop : "/legend-logo.webp",
-          mobile : "/legend-logo.webp"
-        },
-        alt : "project screenshot",
-        title : "Anything Website",
-        description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
-      },
-      {
-        src : {
-          desktop : "/legend-logo.webp",
-          mobile : "/legend-logo.webp"
-        },
-        alt : "project screenshot",
-        title : "Anything Website",
-        description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
-      },
-      {
-        src : {
-          desktop : "/legend-logo.webp",
-          mobile : "/legend-logo.webp"
-        },
-        alt : "project screenshot",
-        title : "Anything Website",
-        description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
-      },
-      {
-        src : {
-          desktop : "/legend-logo.webp",
-          mobile : "/legend-logo.webp"
-        },
-        alt : "project screenshot",
-        title : "Anything Website",
-        description : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut accusamus ullam a laboriosam. Aut quaerat officiis facilis officia hic deserunt!",
+        alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+        title : "Swift Dispatch",
+        titleLong : "React-Based Dispatch App Development - Internship Project",
+        description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+        descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+        link : "https://swiftdispatch.com.ng",
       },
     ];
 
@@ -553,10 +613,6 @@ export function AppProvider({ children }) {
       const shuffled = [...arr].sort(() => 0.5 - Math.random());
       return shuffled.slice(0, limit);
     };
-
-    // const showProjects = () => {
-    //   setProjectOpen(!projectOpen)
-    // };
 
   return (
     <AppContext.Provider value={{

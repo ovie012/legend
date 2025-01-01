@@ -17,12 +17,16 @@ function LikedProjects() {
             </section>
             <section className={`actual-projects ${likedProjectOpen ? 'projects-opened' : ''}`}>
             {projects.map((items, idx) => (
-                <div key={idx} className="single-project">
+                <div key={idx} className="single-project whole">
                     <img src={items.src.desktop} alt={items.alt} />
                     <article>
                         <h6>{items.title}</h6>
                         <p>{items.description}</p>
                     </article>
+                    <section className="hovered">
+                      <h4>{items.titleLong}</h4>
+                      <p>{items.descriptionLong}</p>
+                    </section>
                 </div>
             ))}
             </section>
