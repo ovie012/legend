@@ -17,7 +17,7 @@ function ProjectPageTop() {
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 1.2, delay: 0.2 }}
             >
-              <p>Check out more portfolios i've worked on</p>
+              <p>I have worked on a variety of projects that have helped me grow as a front-end developer. These projects have sharpened my React skills and deepened my understanding of modern web development.</p>
             </motion.div>
         </div>
         </motion.div>

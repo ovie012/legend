@@ -17,7 +17,7 @@ function ProfessionProjects() {
               </section>
               <section className={`actual-projects ${projectOpen === index ? 'projects-opened' : ''}`}>
                 {item.projects.map((items, idx) => (
-                  <div key={idx} className="single-project whole">
+                  <div key={idx} onClick={() => window.open(items.link, '_blank')} className="single-project whole">
                     <img src={items.src.desktop} alt={items.alt} />
                     <article>
                       <h6>{items.title}</h6>

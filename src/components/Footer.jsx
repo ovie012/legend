@@ -12,7 +12,7 @@ function Footer() {
                 <h5> <span></span> Lets Work Together</h5>
                 <a href="mailto:ovieemonefe012@gmail.com">send message</a>
             </section>
-            <h2>Let’s make something amazing together. Start By <span>Saying Hi</span> </h2>
+            <h2>Let’s collaborate and create something extraordinary. Start by <span>Saying Hi</span> </h2>
             <section>
                 <img src="/legend-logo.webp" alt="logo" className="logo" />
                 <div>

@@ -78,81 +78,9 @@ export function AppProvider({ children }) {
 
     const projectsData = [
       {
-        projectType : 'Professional Projects',
-        projectTypeDescription : 'Below are paid projects that solved one project or the other to improve my clients productivity.',
+        projectType: 'Professional Projects',
+        projectTypeDescription: 'The following are paid projects that have contributed to solving specific challenges, enhancing client productivity, and delivering impactful solutions.',
         projects : [
-          {
-            src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
-            },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
-          },
-          {
-            src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
-            },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
-          },
-          {
-            src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
-            },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
-          },
-          {
-            src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
-            },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
-          },
-          {
-            src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
-            },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
-          },
-          {
-            src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
-            },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
-          },
           {
             src : {
               desktop : "/swift-dispatch-driver.webp",
@@ -168,8 +96,218 @@ export function AppProvider({ children }) {
         ]
       },
       {
-        projectType : 'Personal Projects',
-        projectTypeDescription : 'Below are paid projects that solved one project or the other to improve my clients productivity.',
+        projectType: 'Personal Projects',
+        projectTypeDescription: 'These are self-initiated projects that allowed me to explore new technologies and strengthen my skills in real-world scenarios.',
+        projects : [
+          {
+            src: {
+              desktop: "/intro-section-with-drop-down.webp",
+              mobile: "/intro-section-with-drop-down.webp"
+            },
+            alt: "Intro section with dropdown navigation featuring responsive menus and hover states, built in React.",
+            title: "Dropdown Navigation",
+            titleLong: "Responsive Dropdown Navigation - Frontend Mentor Challenge",
+            description: "Built a React intro section with responsive dropdown navigation and hover states from a Frontend Mentor challenge.",
+            descriptionLong: "Designed and implemented an intro section with dropdown navigation in React, based on a Frontend Mentor challenge. The navigation features responsive dropdown menus that adapt seamlessly across desktop and mobile. Includes hover states for interactivity, highlighting my proficiency in building accessible, responsive navigation systems.",
+            link: "https://intro-11th-challenge-react-version.vercel.app",
+          },
+          {
+            src: {
+              desktop: "/advice-generator.webp",
+              mobile: "/advice-generator.webp"
+            },
+            alt: "React-based advice generator app with API integration and interactive design, built from a Frontend Mentor challenge.",
+            title: "Advice App",
+            titleLong: "React Advice Generator App - Frontend Mentor Challenge",
+            description: "Created a React advice generator app using the Advice Slip API with hover states and a responsive layout.",
+            descriptionLong: "Developed a React advice generator app utilizing the Advice Slip API, based on a Frontend Mentor challenge. Users can click a dice icon to fetch and display random advice. The app includes responsive design and hover states, showcasing skills in integrating APIs and creating engaging user interfaces.",
+            link: "https://advice-12th-challenge-react-version.vercel.app",
+          },
+          {
+            src : {
+              desktop : "/ofure-jewelry-store.webp",
+              mobile : "/ofure-jewelry-store.webp"
+            },
+            alt : "Elegant e-commerce UI for Ofure Jewelry Store showcasing jewelry products with a clean and user-focused design.",
+            title : "Jewelry Store",
+            titleLong : "Ofure Jewelry Store Design - Personal Project",
+            description : "Built an elegant e-commerce UI for Ofure Jewelry Store, focusing on showcasing jewelry products.",
+            descriptionLong : "Ofure Jewelry Store is an incomplete e-commerce platform I designed and built early in my learning journey. This project, developed before I learned React, helped me gain significant insights into web development, focusing on creating a clean and visually appealing UI for showcasing jewelry products.",
+            link : "https://ofure-jewelry.vercel.app",
+          },
+          {
+            src: {
+              desktop: "/time-tracking-board.webp",
+              mobile: "/time-tracking-board.webp"
+            },
+            alt: "React time tracking dashboard with dynamic data loading and responsive design, built from a Frontend Mentor challenge.",
+            title: "Tracking Dashboard",
+            titleLong: "React Time Tracking Dashboard - Frontend Mentor Challenge",
+            description: "Developed a React time tracking dashboard with dynamic JSON data integration and responsive design.",
+            descriptionLong: "Built a time tracking dashboard in React from a Frontend Mentor challenge. Users can toggle between daily, weekly, and monthly stats, with data dynamically loaded from a local JSON file. The app includes responsive design and hover effects, demonstrating strong skills in data visualization and interactivity.",
+            link: "https://time-13th-challenge-react-version.vercel.app",
+          },
+          {
+            src: {
+              desktop: "/tip-calculator.webp",
+              mobile: "/tip-calculator.webp"
+            },
+            alt: "React tip calculator app with responsive design and interactive features, built from a Frontend Mentor challenge.",
+            title: "Tip Calculator",
+            titleLong: "React Tip Calculator App - Frontend Mentor Challenge",
+            description: "Built a React tip calculator app with responsive design and precise tip calculations from a Frontend Mentor challenge.",
+            descriptionLong: "Created a tip calculator app in React from a Frontend Mentor challenge. Users can calculate the correct tip and total bill per person, with responsive design and hover states enhancing usability. This project highlighted my skills in building interactive and user-friendly calculators.",
+            link: "https://tip-14th-challenge-react-version.vercel.app",
+          },
+          {
+            src: {
+              desktop: "/crowd-funding-product-page.webp",
+              mobile: "/crowd-funding-product-page.webp"
+            },
+            alt: "Responsive React crowdfunding product page with dynamic pledges and interactive features, built from a Frontend Mentor challenge.",
+            title: "Crowdfunding Page",
+            titleLong: "React Crowdfunding Product Page - Frontend Mentor Challenge",
+            description: "Built a React crowdfunding product page with dynamic progress updates and interactive features from a Frontend Mentor challenge.",
+            descriptionLong: "Developed a responsive crowdfunding product page in React from a Frontend Mentor challenge. Users can select pledges, see progress updates, and increment backers dynamically. Includes hover states and bookmarking functionality, showcasing advanced interactive features and state management.",
+            link: "https://crowdfunding-product-page-main-delta.vercel.app",
+          },
+          {
+            src: {
+              desktop: "/interactive-pricing-component.webp",
+              mobile: "/interactive-pricing-component.webp"
+            },
+            alt: "Interactive React pricing component with dynamic adjustments and responsive design, built from a Frontend Mentor challenge.",
+            title: "Pricing Component",
+            titleLong: "React Interactive Pricing Component - Frontend Mentor Challenge",
+            description: "Developed a React interactive pricing component with responsive design and dynamic pricing features.",
+            descriptionLong: "Created an interactive pricing component in React from a Frontend Mentor challenge. Users can adjust prices based on page views using a slider and toggle, with hover states and responsive design providing an engaging experience. Demonstrated skills in state management and user interaction.",
+            link: "https://react-version-interactive-pricing-component-main.vercel.app",
+          },
+          {
+            src: {
+              desktop: "/age-calculator.webp",
+              mobile: "/age-calculator.webp"
+            },
+            alt: "Age calculator app built in React to calculate precise age with detailed validations for date inputs.",
+            title: "Age Calculator",
+            titleLong: "React Age Calculator App - Frontend Mentor Challenge",
+            description: "Developed an age calculator app in React to compute years, months, and days from a valid date input.",
+            descriptionLong: "Built an age calculator app in React for a Frontend Mentor challenge. It includes detailed form validations for empty fields, out-of-range inputs, and future dates. The app calculates and displays age accurately in years, months, and days, providing hover states and responsive layouts for optimal user experience.",
+            link: "https://age-6th-challenge-react-version.vercel.app",
+          },
+          {
+            src: {
+              desktop: "/news-home-page.webp",
+              mobile: "/news-home-page.webp"
+            },
+            alt: "Responsive React news homepage showcasing optimal layout and hover states, built from a Frontend Mentor challenge.",
+            title: "News Homepage",
+            titleLong: "React News Homepage - Frontend Mentor Challenge",
+            description: "Designed a responsive React news homepage with dynamic layouts and hover states from a Frontend Mentor challenge.",
+            descriptionLong: "Implemented a news homepage in React for a Frontend Mentor challenge. The design focuses on an optimal layout across devices and includes interactive hover states for elements. This project highlights skills in creating professional and responsive web layouts.",
+            link: "https://news-7th-challenge-react-version.vercel.app",
+          },
+          {
+            src: {
+              desktop: "/notification-project.webp",
+              mobile: "/notification-project.webp"
+            },
+            alt: "React notifications page with read/unread states and a 'Mark all as read' feature.",
+            title: "Notifications Page",
+            titleLong: "React Notifications Page - Frontend Mentor Challenge",
+            description: "Built a React notifications page with a toggle feature for marking all notifications as read.",
+            descriptionLong: "Developed a notifications page in React based on a Frontend Mentor challenge. It includes features to distinguish between read and unread notifications, a 'Mark all as read' button, and hover states. This project demonstrates skills in state management and creating responsive interfaces.",
+            link: "https://notifications-8th-challenge-react-version.vercel.app",
+          },
+          {
+            src: {
+              desktop: "/interactive-card-set-up.webp",
+              mobile: "/interactive-card-set-up.webp"
+            },
+            alt: "Interactive card details form built in React with real-time card updates and error validation.",
+            title: "Card Form",
+            titleLong: "Interactive Card Details Form - Frontend Mentor Challenge",
+            description: "Created an interactive card details form in React with real-time card updates and detailed error handling.",
+            descriptionLong: "Built an interactive card details form in React as part of a Frontend Mentor challenge. Users can fill in card details and see them update live on the card preview. The form includes error validation for empty fields, incorrect formats, and more, showcasing attention to detail and user-focused design.",
+            link: "https://interactive-9th-challenge-react-version.vercel.app",
+          },
+          {
+            src: {
+              desktop: "/expense-chart-component.webp",
+              mobile: "/expense-chart-component.webp"
+            },
+            alt: "Expenses chart component built in React with dynamic bar chart based on JSON data and responsive design.",
+            title: "Expenses Chart",
+            titleLong: "React Expenses Chart Component - Frontend Mentor Challenge",
+            description: "Developed a React expenses chart component with dynamic data and hover effects from a Frontend Mentor challenge.",
+            descriptionLong: "Created an expenses chart component in React based on a Frontend Mentor challenge. It dynamically renders bars from a local JSON file, with hover effects showing detailed amounts. The project features responsive design and a highlighted current-day bar for improved data visualization.",
+            link: "https://expenses-10th-challenge-react-version.vercel.app",
+          },
+          {
+            src: {
+              desktop: "/news-letter-sign-up.webp",
+              mobile: "/news-letter-sign-up.webp"
+            },
+            alt: "Responsive React newsletter sign-up form with success message and validation, built from a Frontend Mentor challenge.",
+            title: "Newsletter Sign-Up Form",
+            titleLong: "Newsletter Sign-Up Form with Success Message - Frontend Mentor Challenge",
+            description: "Built a responsive React newsletter sign-up form with validation and success message from a Frontend Mentor challenge. It helped me sharpen my skills in creating engaging forms with feedback loops and form submission handling.",
+            descriptionLong: "Developed a React newsletter sign-up form from a Frontend Mentor challenge. The app features responsive design, success message display upon submission, and validation for empty fields and incorrect email formats. This project improved my expertise in creating functional forms and delivering interactive user experiences.",
+            link: "https://newsletter-5th-challenge-react-version.vercel.app"
+          },
+          {
+            src: {
+              desktop: "/sign-up.webp",
+              mobile: "/sign-up.webp"
+            },
+            alt: "Responsive React sign-up form component with form validation and hover states, built from a Frontend Mentor challenge.",
+            title: "Intro Sign-Up Form Component",
+            titleLong: "Intro Sign-Up Form Component - Frontend Mentor Challenge",
+            description: "Created a responsive React sign-up form component with form validation from a Frontend Mentor challenge.",
+            descriptionLong: "Developed an introductory React component with a sign-up form from a Frontend Mentor challenge. This project features responsive design, hover states, and form validation for empty fields and incorrect email formats. It improved my skills in building intuitive user interfaces and implementing robust form validation.",
+            link: "https://intro-3rd-challenge-react-version.vercel.app"
+          },
+          {
+            src: {
+              desktop: "/base-apparel.webp",
+              mobile: "/base-apparel.webp"
+            },
+            alt: "Responsive React Coming Soon page for Base Apparel with form validation, built from a Frontend Mentor challenge.",
+            title: "Base Apparel Coming Soon Page",
+            titleLong: "Base Apparel Coming Soon Page - Frontend Mentor Challenge",
+            description: "Created a responsive React Base Apparel Coming Soon page with form validation from a Frontend Mentor challenge.",
+            descriptionLong: "Built the Base Apparel Coming Soon page in React from a Frontend Mentor challenge. This project includes responsive design, hover effects, and robust form validation to handle empty fields and incorrect email formats. It enhanced my ability to create engaging and user-friendly web pages.",
+            link: "https://base-4th-challenge-react-version.vercel.app"
+          },
+          {
+            src: {
+              desktop: "/rating-project.webp",
+              mobile: "/rating-project.webp"
+            },
+            alt: "Interactive React rating component with responsive design, hover states, and thank-you functionality, built from a Frontend Mentor challenge.",
+            title: "Interactive Rating Component",
+            titleLong: "Interactive Rating Component - Frontend Mentor Challenge",
+            description: "Created an interactive React rating component with hover states and thank-you functionality from a Frontend Mentor challenge.",
+            descriptionLong: "Built an interactive rating component in React from a Frontend Mentor challenge. The app features a responsive layout, hover states, and functionality for selecting and submitting a number rating. Upon submission, a thank-you state is displayed, improving my understanding of state management and interactive component design.",
+            link: "https://interactive-2nd-challenge-react-version.vercel.app"
+          },
+          {
+            src: {
+              desktop: "/ping-project.webp",
+              mobile: "/ping-project.webp"
+            },
+            alt: "Responsive React Coming Soon page with email validation and error handling, built from a Frontend Mentor challenge.",
+            title: "Ping Coming Soon Page",
+            titleLong: "Ping Coming Soon Page - Frontend Mentor Challenge",
+            description: "Built a responsive React Ping Coming Soon page with email validation and error handling from a Frontend Mentor challenge.",
+            descriptionLong: "Developed the Ping Coming Soon page in React from a Frontend Mentor challenge. The project included responsive design, email submission functionality, and error handling for invalid or empty inputs. This challenge enhanced my skills in form validation, interactive UI design, and delivering seamless user experiences.",
+            link: "https://ping-1st-challenge-react-version.vercel.app"
+          },    
+        ]
+      },
+      {
+        projectType: 'Bootcamps / Internship Projects',
+        projectTypeDescription: 'These projects were completed during bootcamps and internships, where I applied my knowledge in real-world environments, collaborating with teams and solving practical challenges.',
         projects : [
           {
             src : {
@@ -185,255 +323,57 @@ export function AppProvider({ children }) {
           },
           {
             src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
+              desktop : "/kiddies-auto.webp",
+              mobile : "/kiddies-auto.webp"
             },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
+            alt : "Responsive React mini e-commerce app for Kiddies Auto, developed during the HNG internship using a Figma design.",
+            title : "Kiddies Auto",
+            titleLong : "Kiddies Auto Mini E-commerce - Internship Project",
+            description : "Built Kiddies Auto during HNG, translating a Figma design into a responsive React mini e-commerce app.",
+            descriptionLong : "Kiddies Auto is a React-based mini e-commerce app developed during the highly competitive HNG internship program. The project involved translating a detailed Figma design, created by a seasoned product designer, into a responsive and functional platform. This challenge enhanced my skills in building interactive applications and adhering to professional design standards in real-world scenarios.",
+            link : "https://kiddies-auto.vercel.app",
           },
           {
             src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
+              desktop : "/e-commerce_with_cart.webp",
+              mobile : "/e-commerce_with_cart.webp"
             },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
-          },
-          {
-            src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
-            },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
-          },
-          {
-            src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
-            },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
-          },
-          {
-            src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
-            },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
-          },
-          {
-            src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
-            },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
+            alt : "Responsive React e-commerce app featuring a functional cart page, developed during an MLSA bootcamp challenge from Frontend Mentor.",
+            title : "Cart E-commerce",
+            titleLong : "E-commerce with Cart Page - Boot Camp Project",
+            description : "Built a React e-commerce app with a cart page during the MLSA bootcamp, based on a Frontend Mentor challenge.",
+            descriptionLong : "This React-based mini e-commerce app with a functional cart page was developed during the MLSA bootcamp, based on a Frontend Mentor challenge. The project emphasized building a responsive and dynamic user interface while efficiently managing state to deliver seamless cart functionality. This experience enhanced my understanding of e-commerce development and UI/UX best practices.",
+            link : "https://mlsa-project-assignment-product-list-with-cart-main.vercel.app",
           },
         ]
       },
       {
-        projectType : 'Challenge Projects',
-        projectTypeDescription : 'Below are paid projects that solved one project or the other to improve my clients productivity.',
+        projectType: 'Fun Projects',
+        projectTypeDescription: 'These are projects created purely for fun and creativity. They offer an opportunity to explore exciting concepts, experiment with playful designs, and create engaging experiences that make coding enjoyable. Click to see how these projects bring a bit of fun!',
         projects : [
           {
             src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
+              desktop : "/tip-calculator.webp",
+              mobile : "/tip-calculator.webp"
             },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
+            alt : "React tip calculator app with responsive design and accurate cost calculations, built from a Frontend Mentor challenge.",
+            title : "Tip Calculator",
+            titleLong : "Tip Calculator App - Personal Project",
+            description : "Developed a React tip calculator app from a Frontend Mentor challenge, focusing on responsive design and accurate calculations.",
+            descriptionLong : "This React-based tip calculator app was developed from a Frontend Mentor design challenge. The project involved creating a responsive layout adaptable to different screen sizes, implementing hover states for interactive elements, and ensuring accurate tip and total cost calculations per person. It improved my attention to design precision and functionality.",
+            link : "https://tip-14th-challenge-react-version.vercel.app",
           },
           {
             src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
+              desktop : "/age-calculator.webp",
+              mobile : "/age-calculator.webp"
             },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
-          },
-          {
-            src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
-            },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
-          },
-          {
-            src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
-            },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
-          },
-          {
-            src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
-            },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
-          },
-          {
-            src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
-            },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
-          },
-          {
-            src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
-            },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
-          },
-        ]
-      },
-      {
-        projectType : 'Fun Projects',
-        projectTypeDescription : 'Below are paid projects that solved one project or the other to improve my clients productivity.',
-        projects : [
-          {
-            src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
-            },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
-          },
-          {
-            src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
-            },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
-          },
-          {
-            src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
-            },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
-          },
-          {
-            src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
-            },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
-          },
-          {
-            src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
-            },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
-          },
-          {
-            src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
-            },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
-          },
-          {
-            src : {
-              desktop : "/swift-dispatch-driver.webp",
-              mobile : "/swift-dispatch-driver.webp"
-            },
-            alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-            title : "Swift Dispatch",
-            titleLong : "React-Based Dispatch App Development - Internship Project",
-            description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-            descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
+            alt : "React age calculator app with form validation, responsive layout, and accurate age calculations, built from a Frontend Mentor challenge.",
+            title : "Age Calculator",
+            titleLong : "Age Calculator App - Personal Project",
+            description : "Built a React age calculator app from a Frontend Mentor challenge with form validation and responsive design.",
+            descriptionLong : "This React age calculator app was developed from a Frontend Mentor design challenge. It calculates an individual's age in years, months, and days based on a valid input date. The app includes robust form validation, ensuring accurate and realistic date entries, and features a responsive layout with interactive hover and focus states.",
+            link : "https://age-6th-challenge-react-version.vercel.app",
           },
         ]
       },
@@ -537,75 +477,63 @@ export function AppProvider({ children }) {
       },
       {
         src : {
-          desktop : "/swift-dispatch-driver.webp",
-          mobile : "/swift-dispatch-driver.webp"
+          desktop : "/ofure-jewelry-store.webp",
+          mobile : "/ofure-jewelry-store.webp"
         },
-        alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-        title : "Swift Dispatch",
-        titleLong : "React-Based Dispatch App Development - Internship Project",
-        description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-        descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-        link : "https://swiftdispatch.com.ng",
+        alt : "Elegant e-commerce UI for Ofure Jewelry Store showcasing jewelry products with a clean and user-focused design.",
+        title : "Jewelry Store",
+        titleLong : "Ofure Jewelry Store Design - Personal Project",
+        description : "Built an elegant e-commerce UI for Ofure Jewelry Store, focusing on showcasing jewelry products.",
+        descriptionLong : "Ofure Jewelry Store is an incomplete e-commerce platform I designed and built early in my learning journey. This project, developed before I learned React, helped me gain significant insights into web development, focusing on creating a clean and visually appealing UI for showcasing jewelry products.",
+        link : "https://ofure-jewelry.vercel.app",
       },
       {
         src : {
-          desktop : "/swift-dispatch-driver.webp",
-          mobile : "/swift-dispatch-driver.webp"
+          desktop : "/kiddies-auto.webp",
+          mobile : "/kiddies-auto.webp"
         },
-        alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-        title : "Swift Dispatch",
-        titleLong : "React-Based Dispatch App Development - Internship Project",
-        description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-        descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-        link : "https://swiftdispatch.com.ng",
+        alt : "Responsive React mini e-commerce app for Kiddies Auto, developed during the HNG internship using a Figma design.",
+        title : "Kiddies Auto",
+        titleLong : "Kiddies Auto Mini E-commerce - Internship Project",
+        description : "Built Kiddies Auto during HNG, translating a Figma design into a responsive React mini e-commerce app.",
+        descriptionLong : "Kiddies Auto is a React-based mini e-commerce app developed during the highly competitive HNG internship program. The project involved translating a detailed Figma design, created by a seasoned product designer, into a responsive and functional platform. This challenge enhanced my skills in building interactive applications and adhering to professional design standards in real-world scenarios.",
+        link : "https://kiddies-auto.vercel.app",
       },
       {
         src : {
-          desktop : "/swift-dispatch-driver.webp",
-          mobile : "/swift-dispatch-driver.webp"
+          desktop : "/e-commerce_with_cart.webp",
+          mobile : "/e-commerce_with_cart.webp"
         },
-        alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-        title : "Swift Dispatch",
-        titleLong : "React-Based Dispatch App Development - Internship Project",
-        description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-        descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-        link : "https://swiftdispatch.com.ng",
+        alt : "Responsive React e-commerce app featuring a functional cart page, developed during an MLSA bootcamp challenge from Frontend Mentor.",
+        title : "Cart E-commerce",
+        titleLong : "E-commerce with Cart Page - Boot Camp Project",
+        description : "Built a React e-commerce app with a cart page during the MLSA bootcamp, based on a Frontend Mentor challenge.",
+        descriptionLong : "This React-based mini e-commerce app with a functional cart page was developed during the MLSA bootcamp, based on a Frontend Mentor challenge. The project emphasized building a responsive and dynamic user interface while efficiently managing state to deliver seamless cart functionality. This experience enhanced my understanding of e-commerce development and UI/UX best practices.",
+        link : "https://mlsa-project-assignment-product-list-with-cart-main.vercel.app",
       },
       {
         src : {
-          desktop : "/swift-dispatch-driver.webp",
-          mobile : "/swift-dispatch-driver.webp"
+          desktop : "/tip-calculator.webp",
+          mobile : "/tip-calculator.webp"
         },
-        alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-        title : "Swift Dispatch",
-        titleLong : "React-Based Dispatch App Development - Internship Project",
-        description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-        descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-        link : "https://swiftdispatch.com.ng",
+        alt : "React tip calculator app with responsive design and accurate cost calculations, built from a Frontend Mentor challenge.",
+        title : "Tip Calculator",
+        titleLong : "Tip Calculator App - Personal Project",
+        description : "Developed a React tip calculator app from a Frontend Mentor challenge, focusing on responsive design and accurate calculations.",
+        descriptionLong : "This React-based tip calculator app was developed from a Frontend Mentor design challenge. The project involved creating a responsive layout adaptable to different screen sizes, implementing hover states for interactive elements, and ensuring accurate tip and total cost calculations per person. It improved my attention to design precision and functionality.",
+        link : "https://tip-14th-challenge-react-version.vercel.app",
       },
       {
         src : {
-          desktop : "/swift-dispatch-driver.webp",
-          mobile : "/swift-dispatch-driver.webp"
+          desktop : "/age-calculator.webp",
+          mobile : "/age-calculator.webp"
         },
-        alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-        title : "Swift Dispatch",
-        titleLong : "React-Based Dispatch App Development - Internship Project",
-        description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-        descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-        link : "https://swiftdispatch.com.ng",
-      },
-      {
-        src : {
-          desktop : "/swift-dispatch-driver.webp",
-          mobile : "/swift-dispatch-driver.webp"
-        },
-        alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-        title : "Swift Dispatch",
-        titleLong : "React-Based Dispatch App Development - Internship Project",
-        description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-        descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-        link : "https://swiftdispatch.com.ng",
+        alt : "React age calculator app with form validation, responsive layout, and accurate age calculations, built from a Frontend Mentor challenge.",
+        title : "Age Calculator",
+        titleLong : "Age Calculator App - Personal Project",
+        description : "Built a React age calculator app from a Frontend Mentor challenge with form validation and responsive design.",
+        descriptionLong : "This React age calculator app was developed from a Frontend Mentor design challenge. It calculates an individual's age in years, months, and days based on a valid input date. The app includes robust form validation, ensuring accurate and realistic date entries, and features a responsive layout with interactive hover and focus states.",
+        link : "https://age-6th-challenge-react-version.vercel.app",
       },
     ];
 

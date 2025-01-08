@@ -1,7 +1,10 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useContext, useRef } from "react";
 import emailjs from "emailjs-com";
+import { AppContext } from '../AppProvider';
 
 function ContactForm() {
+  const { scrollToTop } = useContext(AppContext);
+
   const [status, setStatus] = useState(false);
   const [loading, setLoading] = useState(false);
   const [emailError, setEmailError] = useState(false);
@@ -131,12 +134,14 @@ function ContactForm() {
           });
           Object.values(formRef).forEach((ref) => (ref.current.value = ""));
           setLoading(false);
+          scrollToTop();
         },
         (error) => {
           setStatus(true);
           setEmailError(true);
           setSentMessage("It appears there's an error, Try Again");
           setLoading(false);
+          scrollToTop()
         }
       );
   };

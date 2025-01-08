@@ -1,9 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../AppProvider';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 
 function ProjectsSection() {
   const { projects, generateRandomProject } = useContext(AppContext);
+
+  const [year, setYear] = useState(null);
+
+  const currentYear = new Date().getFullYear();
+
+  useEffect(() => {
+    setYear(currentYear);
+  }, [])
 
   return (
     <>
@@ -11,7 +19,7 @@ function ProjectsSection() {
           <section>
             <div className="selected-works">
               <h3>Selected works</h3>
-              <h3>2022 - 2024</h3>
+              <h3>2022 - {year}</h3>
             </div>
             <div className="view-all">
               <p>Check out more projects i've worked on</p>

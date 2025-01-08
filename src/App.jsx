@@ -44,13 +44,13 @@ function InnerApp () {
 
       setTimeout(() => {
         setPreloader(false);
-      }, 9000);
+      }, 7700);
   }, []);
   
   return (
     <>
+      {preloader && <Preloader />}
       <div className={`container ${lightMode ? 'light-mode' : ''}`}>
-        {preloader && <Preloader />}
         <Header />
         <Routes>
           <Route path='/' element={<Home />} />

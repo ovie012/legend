@@ -917,6 +917,7 @@ img.pointer {
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+  gap: 20px;
   overflow: hidden;
   transition: 0.3s ease-in-out;
   opacity: 0.9;
@@ -1140,6 +1141,10 @@ svg.down-svg {
   background: #4d4d4d;
 }
 
+.footer h2 span {
+  color: #90FF00;
+}
+
 .footer section {
   width: 100%;
   display: flex;
@@ -1284,13 +1289,13 @@ svg.down-svg {
   }
   
   .footer section:nth-of-type(2) div .footer-icon {
-    width: 15px;
-    height: 15px;
+    width: 25px;
+    height: 25px;
     padding: 2%;
   }
   
   .footer section:nth-of-type(2) p {
-    font-size: 0.5rem;
+    font-size: 0.35rem;
   }
 }
 
@@ -1309,6 +1314,7 @@ svg.down-svg {
 
 .project-page-top p {
   font-size: 1rem;
+  width: 65%;
   font-weight: 600;
 }
 
@@ -1329,6 +1335,7 @@ svg.down-svg {
   
   .project-page-top p {
     font-size: 0.8rem;
+    width: 75%;
   }
 }
 
@@ -1343,6 +1350,7 @@ svg.down-svg {
   
   .project-page-top p {
     font-size: 0.8rem;
+    width: 100%;
   }
 }
 
@@ -1841,8 +1849,14 @@ p.error-text,
   bottom: 0;
   z-index: 1000;
   background: #00050F;
+  color: #fff;
   opacity: 1;
   transition: 0.5s ease-in-out;
+}
+
+.preloader ~ .container {
+  height: 100vh;
+  scrollbar-width: none;
 }
 
 .preloader-blur {
