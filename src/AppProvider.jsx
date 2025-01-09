@@ -330,7 +330,7 @@ export function AppProvider({ children }) {
             title : "Kiddies Auto",
             titleLong : "Kiddies Auto Mini E-commerce - Internship Project",
             description : "Built Kiddies Auto during HNG, translating a Figma design into a responsive React mini e-commerce app.",
-            descriptionLong : "Kiddies Auto is a React-based mini e-commerce app developed during the highly competitive HNG internship program. The project involved translating a detailed Figma design, created by a seasoned product designer, into a responsive and functional platform. This challenge enhanced my skills in building interactive applications and adhering to professional design standards in real-world scenarios.",
+            descriptionLong : "Kiddies Auto is a React-based mini e-commerce app developed during HNG internship program. The project involved translating a detailed Figma design, created by a seasoned product designer, into a responsive and functional platform. This challenge enhanced my skills in building interactive applications and adhering to professional design standards in real-world scenarios.",
             link : "https://kiddies-auto.vercel.app",
           },
           {
@@ -496,7 +496,7 @@ export function AppProvider({ children }) {
         title : "Kiddies Auto",
         titleLong : "Kiddies Auto Mini E-commerce - Internship Project",
         description : "Built Kiddies Auto during HNG, translating a Figma design into a responsive React mini e-commerce app.",
-        descriptionLong : "Kiddies Auto is a React-based mini e-commerce app developed during the highly competitive HNG internship program. The project involved translating a detailed Figma design, created by a seasoned product designer, into a responsive and functional platform. This challenge enhanced my skills in building interactive applications and adhering to professional design standards in real-world scenarios.",
+        descriptionLong : "Kiddies Auto is a React-based mini e-commerce app developed during HNG internship program. The project involved translating a detailed Figma design, created by a seasoned product designer, into a responsive and functional platform. This challenge enhanced my skills in building interactive applications and adhering to professional design standards in real-world scenarios.",
         link : "https://kiddies-auto.vercel.app",
       },
       {
