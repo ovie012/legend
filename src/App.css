@@ -1308,6 +1308,10 @@ svg.down-svg {
     font-size: 1.2rem;
     gap: 10px;
   }
+
+  .footer section:nth-of-type(1) a{
+    font-size: 1.2rem;
+  }
   
   .footer section h5 span {
     width: 15px;
@@ -1336,6 +1340,10 @@ svg.down-svg {
   .footer section h5 {
     font-size: 0.85rem;
     gap: 5px;
+  }
+
+  .footer section:nth-of-type(1) a{
+    font-size: 0.85rem;
   }
   
   .footer section h5 span {
