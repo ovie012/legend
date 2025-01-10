@@ -24,6 +24,11 @@ a.active {
   font-weight: 800;
   color: #75CC00;
   text-decoration: none;
+  transition: 0.3s ease-in-out;
+}
+
+.container.light-mode a.active {
+  color: #4FC3F7;
 }
 
 .container {
@@ -112,6 +117,10 @@ header.scrolled {
   border: 1.5px solid #90FF00;
 }
 
+.container.light-mode .logo:hover {
+  border-color: #4FC3F7;
+}
+
 span.click,
 div.click,
 .mobile-nav-container {
@@ -135,9 +144,11 @@ header nav h3 {
   transition: 0.3s ease-in-out;
 }
 
-header nav h3:hover,
-.container.light-mode nav h3:hover {
+header nav h3:hover {
   color: #90FF00;
+}
+.container.light-mode nav h3:hover {
+  color: #4FC3F7;
 }
 
 .light-dark-mode {
@@ -482,10 +493,24 @@ img.star:nth-of-type(2) {
   /* color: #fff; */
 }
 
+.container.light-mode .contact-me-button{
+  background: #457B9D;
+  color: #fff;
+}
+
+.container.light-mode .contact-me-button:hover {
+  background: #4FC3F7;
+}
+
 .explore-projects-button {
   border: 1px solid #90FF00;
   color: #90FF00;
   background: transparent;
+}
+
+.container.light-mode .explore-projects-button {
+  border-color: #4FC3F7;
+  color: #4FC3F7;
 }
 
 .explore-projects-button:hover {
@@ -500,6 +525,7 @@ img.star:nth-of-type(2) {
 
 .container.light-mode .explore-projects-button:hover {
   background: #1C2B28;
+  border-color: #457B9D;
 }
 
 .banner-images {
@@ -642,6 +668,10 @@ img.pointer {
   margin-bottom: 20px;
 }
 
+.container.light-mode .about-me-text h4 {
+  color: #457B9D;
+}
+
 .about-me-text h3 {
   font-size: 2.5rem;
   font-weight: 700;
@@ -682,8 +712,8 @@ img.pointer {
 .container.light-mode .about-me-text button:hover,
 .container.light-mode .view-all button:hover,
 .container.light-mode .skills h5:hover {
-  color: #75CC00;
-  border: 1px solid #75CC00;
+  color: #4FC3F7;
+  border: 1px solid #4FC3F7;
 }
 
 .about-me-second-section p {
@@ -762,6 +792,11 @@ img.pointer {
   align-items: center;
   background: #90FF00;
   margin-left: -10%;
+}
+
+.container.light-mode .development-section section,
+.container.light-mode .skills-and-services section {
+  background: #4FC3F7;
 }
 
 .development-section section div,
@@ -1873,14 +1908,14 @@ p.error-text,
   background: linear-gradient(135deg, #e0e7ff, #90FF00);
 }
 
-/* .container.light-mode .fun-fact button {
+.container.light-mode .fun-fact button {
   color: #fff;
-  background: linear-gradient(135deg, #4d90fe, #e0e7ff);
+  background: linear-gradient(135deg, #4FC3F7, #e0e7ff);
 }
 
 .container.light-mode .fun-fact button:hover {
-  background: linear-gradient(135deg, #e0e7ff, #4d90fe);
-} */
+  background: linear-gradient(135deg, #e0e7ff, #4FC3F7);
+}
 
 .button-motion {
   width: 110px;
