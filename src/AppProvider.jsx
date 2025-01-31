@@ -251,7 +251,7 @@ export function AppProvider({ children }) {
             alt: "Responsive React newsletter sign-up form with success message and validation, built from a Frontend Mentor challenge.",
             title: "Newsletter Sign-Up Form",
             titleLong: "Newsletter Sign-Up Form with Success Message - Frontend Mentor Challenge",
-            description: "Built a responsive React newsletter sign-up form with validation and success message from a Frontend Mentor challenge. It helped me sharpen my skills in creating engaging forms with feedback loops and form submission handling.",
+            description: "Built a responsive React newsletter sign-up form with validation and success message from a Frontend Mentor challenge.",
             descriptionLong: "Developed a React newsletter sign-up form from a Frontend Mentor challenge. The app features responsive design, success message display upon submission, and validation for empty fields and incorrect email formats. This project improved my expertise in creating functional forms and delivering interactive user experiences.",
             link: "https://newsletter-5th-challenge-react-version.vercel.app"
           },
