@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
+import { usePersistentState } from './hooks/UsePersistentState';
 import './App.css';
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaPlay, FaGithub, FaGraduationCap,  FaLinkedin, FaTwitter, FaTiktok, FaInstagram } from "react-icons/fa";
 import { SiRedux, SiTailwindcss, SiStyledcomponents } from "react-icons/si";
@@ -11,7 +12,7 @@ export function AppProvider({ children }) {
     const [loadingPercentage, setLoadingPercentage] = useState(0);
     const [animationStart, setAnimationStart] = useState(true);
     const [fadeAway, setFadeAway] = useState(false);
-    const [lightMode, setLightMode] = useState(false);
+    const [lightMode, setLightMode] = usePersistentState('lightMode', false);
     const [hover, setHover] = useState(false);
     const [projectOpen, setProjectOpen] = useState(false);
     const [likedProjectOpen, setLikedProjectOpen] = useState(false);
@@ -81,6 +82,18 @@ export function AppProvider({ children }) {
         projectType: 'Professional Projects',
         projectTypeDescription: 'The following are paid projects that have contributed to solving specific challenges, enhancing client productivity, and delivering impactful solutions.',
         projects : [
+          {
+            src : {
+              desktop : "/scrybe-homepage-image.webp",
+              mobile : "/scrybe-homepage-image.webp"
+            },
+            alt : "Scrybe school management platform interface showcasing modern design, streamlined administration tools, and enhanced learning experience features.",
+            title : "Scrybe Platform",
+            titleLong : "Modern School Management Platform Development - Paid Project",
+            description : "Built Scrybe, a modern school management platform that simplifies administration, empowers teachers, and enhances learning experiences.",
+            descriptionLong : "Developed Scrybe, a comprehensive school management platform designed to streamline administrative tasks, empower educators, and enhance student learning experiences. The project focused on creating an intuitive, scalable, and user-friendly interface to improve school operations and classroom engagement.",
+            link : "https://scrybehub.ng",
+          },
           {
             src : {
               desktop : "/swift-dispatch-driver.webp",
@@ -465,6 +478,18 @@ export function AppProvider({ children }) {
     const projects = [
       {
         src : {
+          desktop : "/scrybe-homepage-image.webp",
+          mobile : "/scrybe-homepage-image.webp"
+        },
+        alt : "Scrybe school management platform interface showcasing modern design, streamlined administration tools, and enhanced learning experience features.",
+        title : "Scrybe Platform",
+        titleLong : "Modern School Management Platform Development - Paid Project",
+        description : "Built Scrybe, a modern school management platform that simplifies administration, empowers teachers, and enhances learning experiences.",
+        descriptionLong : "Developed Scrybe, a comprehensive school management platform designed to streamline administrative tasks, empower educators, and enhance student learning experiences. The project focused on creating an intuitive, scalable, and user-friendly interface to improve school operations and classroom engagement.",
+        link : "https://scrybehub.ng",
+      },
+      {
+        src : {
           desktop : "/swift-dispatch-driver.webp",
           mobile : "/swift-dispatch-driver.webp"
         },
@@ -523,18 +548,18 @@ export function AppProvider({ children }) {
         descriptionLong : "This React-based tip calculator app was developed from a Frontend Mentor design challenge. The project involved creating a responsive layout adaptable to different screen sizes, implementing hover states for interactive elements, and ensuring accurate tip and total cost calculations per person. It improved my attention to design precision and functionality.",
         link : "https://tip-14th-challenge-react-version.vercel.app",
       },
-      {
-        src : {
-          desktop : "/age-calculator.webp",
-          mobile : "/age-calculator.webp"
-        },
-        alt : "React age calculator app with form validation, responsive layout, and accurate age calculations, built from a Frontend Mentor challenge.",
-        title : "Age Calculator",
-        titleLong : "Age Calculator App - Personal Project",
-        description : "Built a React age calculator app from a Frontend Mentor challenge with form validation and responsive design.",
-        descriptionLong : "This React age calculator app was developed from a Frontend Mentor design challenge. It calculates an individual's age in years, months, and days based on a valid input date. The app includes robust form validation, ensuring accurate and realistic date entries, and features a responsive layout with interactive hover and focus states.",
-        link : "https://age-6th-challenge-react-version.vercel.app",
-      },
+      // {
+      //   src : {
+      //     desktop : "/age-calculator.webp",
+      //     mobile : "/age-calculator.webp"
+      //   },
+      //   alt : "React age calculator app with form validation, responsive layout, and accurate age calculations, built from a Frontend Mentor challenge.",
+      //   title : "Age Calculator",
+      //   titleLong : "Age Calculator App - Personal Project",
+      //   description : "Built a React age calculator app from a Frontend Mentor challenge with form validation and responsive design.",
+      //   descriptionLong : "This React age calculator app was developed from a Frontend Mentor design challenge. It calculates an individual's age in years, months, and days based on a valid input date. The app includes robust form validation, ensuring accurate and realistic date entries, and features a responsive layout with interactive hover and focus states.",
+      //   link : "https://age-6th-challenge-react-version.vercel.app",
+      // },
     ];
 
     const generateRandomProject = (arr, limit) => {

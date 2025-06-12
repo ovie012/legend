@@ -1476,14 +1476,20 @@ svg.down-svg {
 
 .actual-projects {
   max-height: 0;
-  transition: 0.5s ease-in-out;
-  margin: 0px;
+  transition: all 0.5s ease-in-out;
+  margin: 0px 20px 0px;
+  /* overflow-y: scroll;
+  scrollbar-width: none; */
 }
 
+/* .actual-projects::-webkit-scrollbar {
+  display: none;
+} */
+
 .actual-projects.projects-opened {
-  max-height: 30000px;
+  max-height: 3000px;
   margin: 30px 20px 60px;
-  /* transition: 0.5s ease-in-out; */
+  transition: all 0.5s ease-in-out;
 }
 
 @media only screen and (max-width: 800px) {

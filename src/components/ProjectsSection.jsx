@@ -29,7 +29,11 @@ function ProjectsSection() {
             </div>
           </section>
           <section>
-            {generateRandomProject(projects, 6).map((items, index) => (
+            {
+            // generateRandomProject(
+              projects
+              // , 6)
+              .map((items, index) => (
               <div key={index} onClick={() => window.open(items.link, '_blank')} className="single-project">
                 <img src={items.src.desktop} alt={items.alt} />
                 <article>

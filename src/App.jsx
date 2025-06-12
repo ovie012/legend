@@ -46,6 +46,48 @@ function InnerApp () {
         setPreloader(false);
       }, 7700);
   }, []);
+
+//   useEffect(() => {
+//   const hasVisited = localStorage.getItem('hasVisited');
+
+//   if (!hasVisited) {
+//     localStorage.setItem('hasVisited', 'true');
+
+//     let startTimestamp = null;
+
+//     const animateProgress = (timestamp) => {
+//       if (!startTimestamp) startTimestamp = timestamp;
+//       const elapsed = timestamp - startTimestamp;
+
+//       const progress = Math.min((elapsed / 6000) * 100, 100);
+//       setLoadingPercentage(progress);
+
+//       if (elapsed < 6000) {
+//         requestAnimationFrame(animateProgress);
+//       }
+//     };
+
+//     requestAnimationFrame(animateProgress);
+
+//     setTimeout(() => {
+//       setAnimationStart(false);
+//     }, 1000);
+
+//     setTimeout(() => {
+//       setAnimationStart(true);
+//     }, 6300);
+
+//     setTimeout(() => {
+//       setFadeAway(true);
+//     }, 7300);
+
+//     setTimeout(() => {
+//       setPreloader(false);
+//     }, 7700);
+//   } else {
+//     setPreloader(false);
+//   }
+// }, []);
   
   return (
     <>
