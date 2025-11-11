@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from 'react';
 import { usePersistentState } from './hooks/UsePersistentState';
 import './App.css';
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaPlay, FaGithub, FaGraduationCap,  FaLinkedin, FaTwitter, FaTiktok, FaInstagram } from "react-icons/fa";
-import { SiRedux, SiTailwindcss, SiStyledcomponents } from "react-icons/si";
+import { SiRedux, SiTailwindcss, SiStyledcomponents, SiTypescript } from "react-icons/si";
 import { FaXTwitter } from "react-icons/fa6";
 
 export const AppContext = createContext();
@@ -55,6 +55,7 @@ export function AppProvider({ children }) {
       { icon: SiStyledcomponents, name: "Styled Components" },
       { icon: SiTailwindcss, name: "Tailwind CSS" },
       { icon: FaPlay, name: "Framer Motion" },
+      { icon: SiTypescript, name: "TypeScript" },
     ];
 
     const development = [
