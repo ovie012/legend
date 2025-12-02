@@ -1868,16 +1868,20 @@ p.error-text,
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.skill-card svg {
+  font-size: 2.5rem;
+  color: #4d90fe;
+  margin-bottom: 0.5rem;
+}
+
 .skill-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
-.skill-icon {
-  font-size: 2.5rem;
-  color: #4d90fe;
-  margin-bottom: 0.5rem;
-}
+/* .skill-icon {
+  
+} */
 
 .skill-card p {
   font-size: 1rem;
