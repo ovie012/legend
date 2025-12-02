@@ -4,6 +4,8 @@ import './App.css';
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaPlay, FaGithub, FaGraduationCap,  FaLinkedin, FaTwitter, FaTiktok, FaInstagram } from "react-icons/fa";
 import { SiRedux, SiTailwindcss, SiStyledcomponents, SiTypescript } from "react-icons/si";
 import { FaXTwitter } from "react-icons/fa6";
+import { TbLetterZ, TbBrandReactNative } from 'react-icons/tb';
+import { GiBearFace } from 'react-icons/gi';
 
 export const AppContext = createContext();
 
@@ -24,6 +26,7 @@ export function AppProvider({ children }) {
     const [animationKey, setAnimationKey] = useState(0);
     const [remainingFacts, setRemainingFacts] = useState([]);
     const [mobileNav, setMobileNav] = useState(false);
+    const [zustandIconChosen, setZustandIconChosen] = useState(<TbLetterZ />)
   
     const handleFunFacts = () => {
       let updatedFacts = remainingFacts.length > 0 ? remainingFacts : [...funFacts];
@@ -38,6 +41,19 @@ export function AppProvider({ children }) {
       setAnimationKey((prevKey) => prevKey + 1);
     };
 
+    const randomThemeSelect = () => {
+      const randomChoice = Math.random();
+      if (randomChoice > 0.5) {
+        setZustandIconChosen(<GiBearFace />);
+      } else {
+        setZustandIconChosen(<TbLetterZ />);
+      }
+    }
+
+    useEffect(() => {
+      randomThemeSelect();
+    }, []);
+
     const socials = [
         {title : FaLinkedin, link : "https://www.linkedin.com/in/ovie-emonefe-73b886259/" },
         {title : FaGithub, link : "https://github.com/ovie012" },
@@ -47,15 +63,17 @@ export function AppProvider({ children }) {
     ];
   
     const skills = [
-      { icon: FaHtml5, name: "HTML" },
-      { icon: FaCss3Alt, name: "CSS" },
-      { icon: FaJs, name: "JavaScript" },
-      { icon: FaReact, name: "React" },
-      { icon: SiRedux, name: "Redux" },
-      { icon: SiStyledcomponents, name: "Styled Components" },
-      { icon: SiTailwindcss, name: "Tailwind CSS" },
-      { icon: FaPlay, name: "Framer Motion" },
-      { icon: SiTypescript, name: "TypeScript" },
+      { icon: <FaHtml5 />, name: "HTML" },
+      { icon: <FaCss3Alt />, name: "CSS" },
+      { icon: <FaJs />, name: "JavaScript" },
+      { icon: <FaReact />, name: "React" },
+      { icon: <SiRedux />, name: "Redux" },
+      { icon: <SiStyledcomponents />, name: "Styled Components" },
+      { icon: <SiTailwindcss />, name: "Tailwind CSS" },
+      { icon: <FaPlay />, name: "Framer Motion" },
+      { icon: <SiTypescript />, name: "TypeScript" },
+      { icon: zustandIconChosen, name: "Zustand" },
+      { icon: <TbBrandReactNative />, name: "React Native" },
     ];
 
     const development = [

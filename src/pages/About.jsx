@@ -52,7 +52,7 @@ function AboutMe() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <skill.icon className="skill-icon" />
+                {skill.icon}
                 <p>{skill.name}</p>
               </motion.div>
             ))}
