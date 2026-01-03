@@ -58,7 +58,7 @@ export function AppProvider({ children }) {
         {title : FaLinkedin, link : "https://www.linkedin.com/in/ovie-emonefe-73b886259/" },
         {title : FaGithub, link : "https://github.com/ovie012" },
         {title : FaXTwitter, link : "https://x.com/legend_devv" },
-        {title : FaTiktok, link : "https://www.tiktok.com/@legend.devv" },
+        {title : FaTiktok, link : "https://www.tiktok.com/@legenddev_softwaredev" },
         {title : FaInstagram, link : "https://www.instagram.com/legendd.devv" },
     ];
   
@@ -588,38 +588,29 @@ export function AppProvider({ children }) {
 
   return (
     <AppContext.Provider value={{
-        lightMode,
-        setLightMode,
-        hover,
-        setHover,
+        lightMode, setLightMode,
+        hover, setHover,
         slowTransition,
         development,
         projects,
         generateRandomProject,
         scrollToTop,
-        projectOpen, 
-        setProjectOpen,
+        projectOpen, setProjectOpen,
         projectsData,
         select,
         selected,
-        likedProjectOpen, 
-        setLikedProjectOpen,
+        likedProjectOpen, setLikedProjectOpen,
         funFacts, 
         funFact, 
         skills, 
         animationKey, 
         handleFunFacts,
-        mobileNav,
-        setMobileNav,
+        mobileNav, setMobileNav,
         socials,
-        preloader,
-        setPreloader,
-        fadeAway, 
-        setFadeAway,
-        animationStart, 
-        setAnimationStart,
-        loadingPercentage, 
-        setLoadingPercentage
+        preloader, setPreloader,
+        fadeAway, setFadeAway,
+        animationStart, setAnimationStart,
+        loadingPercentage, setLoadingPercentage
     }}>
         {children}
     </AppContext.Provider>
