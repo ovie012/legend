@@ -133,6 +133,18 @@ export function AppProvider({ children }) {
         projects : [
           {
             src: {
+              desktop: "/legend-store.webp",
+              mobile: "/legend-store-mobile.webp"
+            },
+            alt: "Legend Swift Cart Store mini e-commerce application built with React, featuring product listings, cart management, authentication UI, and smooth animations.",
+            title: "LEGEND STORE",
+            titleLong: "Legend Swift Cart Store - Mini E-commerce",
+            description: "Built a modern mini e-commerce frontend with React, featuring product listings, cart persistence, authentication UI, route protection, and smooth micro-interactions using Zustand and Framer Motion.",
+            descriptionLong: "Legend Swift Cart Store is a production-grade mini e-commerce frontend built with React and TypeScript to reflect real-world 2026 architecture patterns. The application includes paginated product listings, category filtering, debounced search, dynamic product detail pages, and a fully functional cart system powered by Zustand with localStorage persistence. It also features a structured checkout flow with React Hook Form and Zod validation, mock authentication with protected routes, route-based code splitting, and centralized API configuration using Axios with the DummyJSON API. The UI is styled with Tailwind CSS and enhanced with performance-friendly animations using Framer Motion, emphasizing scalability, clean architecture, and modern user experience best practices.",
+            link: "https://legend-swift-cart-project.vercel.app/"
+          },
+          {
+            src: {
               desktop: "/intro-section-with-drop-down.webp",
               mobile: "/intro-section-with-drop-down.webp"
             },
@@ -533,6 +545,18 @@ export function AppProvider({ children }) {
       },
       {
         src: {
+          desktop: "/legend-store.webp",
+          mobile: "/legend-store.webp"
+        },
+        alt: "Legend Swift Cart Store mini e-commerce application built with React, featuring product listings, cart management, authentication UI, and smooth animations.",
+        title: "LEGEND STORE",
+        titleLong: "Legend Swift Cart Store - Mini E-commerce",
+        description: "Built a modern mini e-commerce frontend with React, featuring product listings, cart persistence, authentication UI, route protection, and smooth micro-interactions using Zustand and Framer Motion.",
+        descriptionLong: "Legend Swift Cart Store is a production-grade mini e-commerce frontend built with React and TypeScript to reflect real-world 2026 architecture patterns. The application includes paginated product listings, category filtering, debounced search, dynamic product detail pages, and a fully functional cart system powered by Zustand with localStorage persistence. It also features a structured checkout flow with React Hook Form and Zod validation, mock authentication with protected routes, route-based code splitting, and centralized API configuration using Axios with the DummyJSON API. The UI is styled with Tailwind CSS and enhanced with performance-friendly animations using Framer Motion, emphasizing scalability, clean architecture, and modern user experience best practices.",
+        link: "https://legend-swift-cart-project.vercel.app/"
+      },
+      {
+        src: {
           desktop: "/valentine-project-image.webp",
           mobile: "/valentine-project-image.webp"
         },
@@ -579,18 +603,18 @@ export function AppProvider({ children }) {
         descriptionLong : "This React-based mini e-commerce app with a functional cart page was developed during the MLSA bootcamp, based on a Frontend Mentor challenge. The project emphasized building a responsive and dynamic user interface while efficiently managing state to deliver seamless cart functionality. This experience enhanced my understanding of e-commerce development and UI/UX best practices.",
         link : "https://mlsa-project-assignment-product-list-with-cart-main.vercel.app",
       },
-      {
-        src : {
-          desktop : "/tip-calculator.webp",
-          mobile : "/tip-calculator.webp"
-        },
-        alt : "React tip calculator app with responsive design and accurate cost calculations, built from a Frontend Mentor challenge.",
-        title : "Tip Calculator",
-        titleLong : "Tip Calculator App - Personal Project",
-        description : "Developed a React tip calculator app from a Frontend Mentor challenge, focusing on responsive design and accurate calculations.",
-        descriptionLong : "This React-based tip calculator app was developed from a Frontend Mentor design challenge. The project involved creating a responsive layout adaptable to different screen sizes, implementing hover states for interactive elements, and ensuring accurate tip and total cost calculations per person. It improved my attention to design precision and functionality.",
-        link : "https://tip-14th-challenge-react-version.vercel.app",
-      },
+      // {
+      //   src : {
+      //     desktop : "/tip-calculator.webp",
+      //     mobile : "/tip-calculator.webp"
+      //   },
+      //   alt : "React tip calculator app with responsive design and accurate cost calculations, built from a Frontend Mentor challenge.",
+      //   title : "Tip Calculator",
+      //   titleLong : "Tip Calculator App - Personal Project",
+      //   description : "Developed a React tip calculator app from a Frontend Mentor challenge, focusing on responsive design and accurate calculations.",
+      //   descriptionLong : "This React-based tip calculator app was developed from a Frontend Mentor design challenge. The project involved creating a responsive layout adaptable to different screen sizes, implementing hover states for interactive elements, and ensuring accurate tip and total cost calculations per person. It improved my attention to design precision and functionality.",
+      //   link : "https://tip-14th-challenge-react-version.vercel.app",
+      // },
       // {
       //   src : {
       //     desktop : "/age-calculator.webp",
