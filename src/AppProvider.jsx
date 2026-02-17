@@ -407,6 +407,18 @@ export function AppProvider({ children }) {
             descriptionLong : "This React age calculator app was developed from a Frontend Mentor design challenge. It calculates an individual's age in years, months, and days based on a valid input date. The app includes robust form validation, ensuring accurate and realistic date entries, and features a responsive layout with interactive hover and focus states.",
             link : "https://age-6th-challenge-react-version.vercel.app",
           },
+          {
+            src: {
+              desktop: "/valentine-project-image.webp",
+              mobile: "/valentine-project-image.webp"
+            },
+            alt: "Valentine themed interactive web app featuring pink romantic UI, animated poems, playful button interactions, and celebratory motion effects.",
+            title: "Valentine Project",
+            titleLong: "Interactive Valentine UI Experience - Creative Fun Project",
+            description: "Built a playful and romantic Valentine web app featuring animated poems, dynamic button interactions, and smooth motion effects.",
+            descriptionLong: "Developed an interactive Valentine-themed web application focused on delightful user experience and animation-driven storytelling. The project features dynamic name personalization, sequential romantic poem reveals, playful micro-interactions (including a moving 'No' button), and celebratory motion effects upon confirmation. Built using React, styled-components, and Framer Motion to explore creative UI design and expressive frontend animation.",
+            link: "https://valentine-project-eight-zeta.vercel.app"
+          }
         ]
       },
     ];
@@ -520,17 +532,29 @@ export function AppProvider({ children }) {
         link : "https://swiftdispatch.com.ng",
       },
       {
-        src : {
-          desktop : "/ofure-jewelry-store.webp",
-          mobile : "/ofure-jewelry-store.webp"
+        src: {
+          desktop: "/valentine-project-image.webp",
+          mobile: "/valentine-project-image.webp"
         },
-        alt : "Elegant e-commerce UI for Ofure Jewelry Store showcasing jewelry products with a clean and user-focused design.",
-        title : "Jewelry Store",
-        titleLong : "Ofure Jewelry Store Design - Personal Project",
-        description : "Built an elegant e-commerce UI for Ofure Jewelry Store, focusing on showcasing jewelry products.",
-        descriptionLong : "Ofure Jewelry Store is an incomplete e-commerce platform I designed and built early in my learning journey. This project, developed before I learned React, helped me gain significant insights into web development, focusing on creating a clean and visually appealing UI for showcasing jewelry products.",
-        link : "https://ofure-jewelry.vercel.app",
+        alt: "Valentine themed interactive web app featuring pink romantic UI, animated poems, playful button interactions, and celebratory motion effects.",
+        title: "Valentine Project",
+        titleLong: "Interactive Valentine UI Experience - Creative Fun Project",
+        description: "Built a playful and romantic Valentine web app featuring animated poems, dynamic button interactions, and smooth motion effects.",
+        descriptionLong: "Developed an interactive Valentine-themed web application focused on delightful user experience and animation-driven storytelling. The project features dynamic name personalization, sequential romantic poem reveals, playful micro-interactions (including a moving 'No' button), and celebratory motion effects upon confirmation. Built using React, styled-components, and Framer Motion to explore creative UI design and expressive frontend animation.",
+        link: "https://valentine-project-eight-zeta.vercel.app"
       },
+      // {
+      //   src : {
+      //     desktop : "/ofure-jewelry-store.webp",
+      //     mobile : "/ofure-jewelry-store.webp"
+      //   },
+      //   alt : "Elegant e-commerce UI for Ofure Jewelry Store showcasing jewelry products with a clean and user-focused design.",
+      //   title : "Jewelry Store",
+      //   titleLong : "Ofure Jewelry Store Design - Personal Project",
+      //   description : "Built an elegant e-commerce UI for Ofure Jewelry Store, focusing on showcasing jewelry products.",
+      //   descriptionLong : "Ofure Jewelry Store is an incomplete e-commerce platform I designed and built early in my learning journey. This project, developed before I learned React, helped me gain significant insights into web development, focusing on creating a clean and visually appealing UI for showcasing jewelry products.",
+      //   link : "https://ofure-jewelry.vercel.app",
+      // },
       {
         src : {
           desktop : "/kiddies-auto.webp",
