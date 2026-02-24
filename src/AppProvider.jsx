@@ -21,7 +21,7 @@ export function AppProvider({ children }) {
     const [selected, setSelected] = useState([]);
     const [funFact, setFunFact] = useState({
       heading : "I am an Arsenal Fan",
-      paragraph : "Being an Arsenal fan is like mastering the art of patience—it’s built into the job description! Waiting for trophies, enduring rebuilds, and surviving last-minute heartbreaks have taught me to stay calm under pressure. It’s also made me a great team player because supporting Arsenal means believing in the process, celebrating every small win, and sticking together no matter what. If I can trust the team through thick and thin, you can trust me to do the same in any situation!",
+      paragraph : "Being an Arsenal fan is like mastering the art of patience, it’s built into the job description! Waiting for trophies, enduring rebuilds, and surviving last-minute heartbreaks have taught me to stay calm under pressure. It’s also made me a great team player because supporting Arsenal means believing in the process, celebrating every small win, and sticking together no matter what. If I can trust the team through thick and thin, you can trust me to do the same in any situation!",
     });
     const [animationKey, setAnimationKey] = useState(0);
     const [remainingFacts, setRemainingFacts] = useState([]);
@@ -478,7 +478,7 @@ export function AppProvider({ children }) {
       },
       {
         heading: "Food Fuels My Innovation",
-        paragraph: "Good food equals great code, and I stand by that! Whether it’s a spicy jollof rice or a plate of suya, a well-fed brain is a productive brain. Cooking also reminds me to test, iterate, and refine—just like in tech, where the best solutions often come from experimentation (and maybe a little taste testing)."
+        paragraph: "Good food equals great code, and I stand by that! Whether it’s a spicy jollof rice or a plate of suya, a well-fed brain is a productive brain. Cooking also reminds me to test, iterate, and refine just like in tech, where the best solutions often come from experimentation (and maybe a little taste testing)."
       },
       {
         heading: "Exercise Keeps My Code Clean",
@@ -486,14 +486,14 @@ export function AppProvider({ children }) {
       },
       {
         heading: "Math is My Secret Weapon",
-        paragraph: "As a mathematician, I’ve already defeated my greatest enemy: calculus. That means no algorithm or problem-solving challenge in tech can scare me! Math has trained me to spot patterns, think logically, and stay persistent even when the numbers stop making sense—just like a true techie."
+        paragraph: "As a mathematician, I’ve already defeated my greatest enemy: calculus. That means no algorithm or problem-solving challenge in tech can scare me! Math has trained me to spot patterns, think logically, and stay persistent even when the numbers stop making sense just like a true techie."
       },
       {
         heading: "I’m Tall, So I See Big Picture",
-        paragraph: "Being tall doesn’t just help me grab snacks from high shelves—it’s a constant reminder to look at the big picture. Whether I’m designing a system architecture or debugging an app, I’m always thinking ahead and ensuring every small detail contributes to the grand vision."
+        paragraph: "Being tall doesn’t just help me grab snacks from high shelves, it’s a constant reminder to look at the big picture. Whether I’m designing a system architecture or debugging an app, I’m always thinking ahead and ensuring every small detail contributes to the grand vision."
       },
       {
-        heading: "I’m a Late-Night Thinker",
+        heading: "I’m a Late Night Thinker",
         paragraph: "The quiet of the night is my productivity sweet spot. While the world sleeps, I’m out here conquering code bugs like a superhero in pajamas. Late-night sessions often lead to my best ideas, though I sometimes wonder if I should add ‘caffeine optimizer’ to my skill set."
       },
       {
@@ -502,15 +502,15 @@ export function AppProvider({ children }) {
       },
       {
         heading: "Puzzles Train My Debugging Skills",
-        paragraph: "Solving puzzles is like debugging: frustrating, rewarding, and occasionally involves yelling, ‘Why won’t you work?!’ But every solved puzzle reminds me that there’s always a solution waiting to be found—and that perseverance is the key to untangling even the messiest lines of code."
+        paragraph: "Solving puzzles is like debugging: frustrating, rewarding, and occasionally involves yelling, ‘Why won’t you work?!’ But every solved puzzle reminds me that there’s always a solution waiting to be found and that perseverance is the key to untangling even the messiest lines of code."
       },
       {
         heading: "Books Boost My Problem-Solving",
-        paragraph: "Reading expands my imagination, which is essential for solving complex tech problems. Whether it’s a sci-fi novel or a self-help book, I’m always picking up new ideas and approaches. Plus, I’ve learned to handle cliffhangers gracefully—useful for dealing with suspenseful debugging moments."
+        paragraph: "Reading expands my imagination, which is essential for solving complex tech problems. Whether it’s a sci-fi novel or a self-help book, I’m always picking up new ideas and approaches. Plus, I’ve learned to handle cliffhangers gracefully useful for dealing with suspenseful debugging moments."
       },
       {
         heading: "Cooking Enhances My Creativity",
-        paragraph: "Coding and cooking have one thing in common: they’re both creative processes where the end result should be satisfying (and functional). Experimenting with flavors in the kitchen mirrors how I test new libraries and frameworks—sometimes it’s a masterpiece, and other times, it’s a lesson learned."
+        paragraph: "Coding and cooking have one thing in common: they’re both creative processes where the end result should be satisfying (and functional). Experimenting with flavors in the kitchen mirrors how I test new libraries and frameworks sometimes it’s a masterpiece, and other times, it’s a lesson learned."
       },
       {
         heading: "Storytelling Inspires Better UX",
@@ -518,7 +518,7 @@ export function AppProvider({ children }) {
       },
       {
         heading: "Nature Teaches Me Balance",
-        paragraph: "Spending time in nature reminds me that even techies need a break. Just as every plant needs sunlight, my mind needs downtime to stay sharp. Stepping away from the screen helps me come back recharged and ready to tackle any challenge—like a tech phoenix rising from the ashes of burnout."
+        paragraph: "Spending time in nature reminds me that even techies need a break. Just as every plant needs sunlight, my mind needs downtime to stay sharp. Stepping away from the screen helps me come back recharged and ready to tackle any challenge like a tech phoenix rising from the ashes of burnout."
       },
       {
         heading: "Music Keeps Me in the Zone",
@@ -526,11 +526,11 @@ export function AppProvider({ children }) {
       },
       {
         heading: "Sunrises Mark My Milestones",
-        paragraph: "There’s nothing like watching the sunrise after an all-night coding session. It’s a beautiful reminder that every bug fixed and every feature completed brings new opportunities. Plus, if I’m awake to see it, you know I’ve been productive—and probably deserve a nap soon."
+        paragraph: "There’s nothing like watching the sunrise after an all night coding session. It’s a beautiful reminder that every bug fixed and every feature completed brings new opportunities. Plus, if I’m awake to see it, you know I’ve been productive and probably deserve a nap soon."
       },
       {
         heading: "Listening is My Debugging Tool",
-        paragraph: "Being a good listener makes me great at understanding user needs and team feedback. Debugging isn’t just about fixing errors—it’s about truly hearing what the problem is. Whether it’s a colleague explaining an issue or a user leaving a review, I listen closely to find the best solutions."
+        paragraph: "Being a good listener makes me great at understanding user needs and team feedback. Debugging isn’t just about fixing errors it’s about truly hearing what the problem is. Whether it’s a colleague explaining an issue or a user leaving a review, I listen closely to find the best solutions."
       },
       {
         heading: "Art Refines My Aesthetics",
@@ -538,11 +538,11 @@ export function AppProvider({ children }) {
       },
       {
         heading: "Desserts Reward My Hard Work",
-        paragraph: "Nothing says ‘job well done’ like treating myself to a slice of cake after a productive coding session. Desserts are my way of celebrating small wins, because let’s face it—sometimes getting a tricky API to work deserves a standing ovation and a scoop of ice cream."
+        paragraph: "Nothing says ‘job well done’ like treating myself to a slice of cake after a productive coding session. Desserts are my way of celebrating small wins, because let’s face it sometimes getting a tricky API to work deserves a standing ovation and a scoop of ice cream."
       },
       {
         heading: "Challenges Are My Playground",
-        paragraph: "I thrive on challenges—whether it’s solving a complex algorithm or learning a new tech stack. To me, every obstacle is an opportunity to grow, adapt, and innovate. If it’s tough, I’m excited, because there’s nothing more satisfying than proving to myself that I can handle anything."
+        paragraph: "I thrive on challenges whether it’s solving a complex algorithm or learning a new tech stack. To me, every obstacle is an opportunity to grow, adapt, and innovate. If it’s tough, I’m excited, because there’s nothing more satisfying than proving to myself that I can handle anything."
       },
       {
         heading: "Kindness Makes Collaboration Easy",
@@ -550,7 +550,7 @@ export function AppProvider({ children }) {
       },
       {
         heading: "Culture Fuels My Ideas",
-        paragraph: "As a Nigerian, I draw endless inspiration from my vibrant culture. From problem-solving skills honed by navigating Lagos traffic to creativity inspired by our music and art, my roots keep me grounded and innovative. Every project I work on carries a piece of that energy."
+        paragraph: "As a Nigerian, I draw endless inspiration from my vibrant culture. From problem solving skills honed by navigating Lagos traffic to creativity inspired by our music and art, my roots keep me grounded and innovative. Every project I work on carries a piece of that energy."
       }
     ];
 
