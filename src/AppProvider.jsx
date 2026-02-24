@@ -134,13 +134,13 @@ export function AppProvider({ children }) {
           {
             src: {
               desktop: "/legend-store.webp",
-              mobile: "/legend-store-mobile.webp"
+              mobile: "/legend-store.webp"
             },
             alt: "Legend Swift Cart Store mini e-commerce application built with React, featuring product listings, cart management, authentication UI, and smooth animations.",
             title: "LEGEND STORE",
             titleLong: "Legend Swift Cart Store - Mini E-commerce",
             description: "Built a modern mini e-commerce frontend with React, featuring product listings, cart persistence, authentication UI, route protection, and smooth micro-interactions using Zustand and Framer Motion.",
-            descriptionLong: "Legend Swift Cart Store is a production-grade mini e-commerce frontend built with React and TypeScript to reflect real-world 2026 architecture patterns. The application includes paginated product listings, category filtering, debounced search, dynamic product detail pages, and a fully functional cart system powered by Zustand with localStorage persistence. It also features a structured checkout flow with React Hook Form and Zod validation, mock authentication with protected routes, route-based code splitting, and centralized API configuration using Axios with the DummyJSON API. The UI is styled with Tailwind CSS and enhanced with performance-friendly animations using Framer Motion, emphasizing scalability, clean architecture, and modern user experience best practices.",
+            descriptionLong: "Legend Swift Cart Store is a production-ready mini e-commerce frontend built with React, designed with modern 2026 architecture patterns. It features paginated product listings, category filtering, debounced search, dynamic product pages, and a cart system with Zustand and localStorage persistence. The app includes a checkout flow with React Hook Form + Zod, mock authentication, protected routes, Tailwind CSS styling, and Framer Motion animations, emphasizing scalability, clean architecture, and smooth UX.",
             link: "https://legend-swift-cart-project.vercel.app/"
           },
           {
@@ -166,6 +166,18 @@ export function AppProvider({ children }) {
             description : "Built Brew Board, a production-grade real-time collaborative Kanban application with optimistic updates, offline support, and role-based permissions.",
             descriptionLong : "Developed Brew Board, a real-time collaborative Kanban platform engineered with distributed systems principles at the frontend layer. The application features live multi-user synchronization via WebSockets, optimistic UI updates with rollback handling, conflict resolution through versioning, offline-first architecture with queued mutations, and role-based access control. The project emphasizes scalable architecture, state separation between server and client, and resilient real-time collaboration.",
             link : "https://brew-board.vercel.app/"
+          },
+          {
+            src: {
+              desktop: "/micro-hub-homepage-image.webp",
+              mobile: "/micro-hub-homepage-image.webp"
+            },
+            alt: "Micro Hub micro-frontend dashboard interface showcasing modular architecture with Auth, Analytics, and Settings modules dynamically loaded through Module Federation in a clean green and white layout.",
+            title: "Micro Hub",
+            titleLong: "Production-Grade Micro-Frontend Dashboard Architecture",
+            description: "Built Micro Hub, a scalable micro-frontend dashboard platform composed of independently deployed applications integrated via Module Federation.",
+            descriptionLong: "Developed Micro Hub, a micro-frontend dashboard built using distributed frontend architecture principles. The system is composed of independently deployed Auth, Analytics, and Settings applications dynamically integrated through Webpack Module Federation. It features shared singleton dependency management, runtime remote loading, route-level protection, and environment-based configuration. The architecture emphasizes scalability, performance optimization, and clear separation of domain boundaries for maintainability.",
+            link: "https://micro-hub-seven.vercel.app"
           },
           {
             src: {
@@ -581,16 +593,28 @@ export function AppProvider({ children }) {
       },
       {
         src: {
-          desktop: "/valentine-project-image.webp",
-          mobile: "/valentine-project-image.webp"
+          desktop: "/micro-hub-homepage-image.webp",
+          mobile: "/micro-hub-homepage-image.webp"
         },
-        alt: "Valentine themed interactive web app featuring pink romantic UI, animated poems, playful button interactions, and celebratory motion effects.",
-        title: "Valentine Project",
-        titleLong: "Interactive Valentine UI Experience - Creative Fun Project",
-        description: "Built a playful and romantic Valentine web app featuring animated poems, dynamic button interactions, and smooth motion effects.",
-        descriptionLong: "Developed an interactive Valentine-themed web application focused on delightful user experience and animation-driven storytelling. The project features dynamic name personalization, sequential romantic poem reveals, playful micro-interactions (including a moving 'No' button), and celebratory motion effects upon confirmation. Built using React, styled-components, and Framer Motion to explore creative UI design and expressive frontend animation.",
-        link: "https://valentine-project-eight-zeta.vercel.app"
+        alt: "Micro Hub micro-frontend dashboard interface showcasing modular architecture with Auth, Analytics, and Settings modules dynamically loaded through Module Federation in a clean green and white layout.",
+        title: "Micro Hub",
+        titleLong: "Production-Grade Micro-Frontend Dashboard Architecture",
+        description: "Built Micro Hub, a scalable micro-frontend dashboard platform composed of independently deployed applications integrated via Module Federation.",
+        descriptionLong: "Developed Micro Hub, a production-ready micro-frontend dashboard built using distributed frontend architecture principles. The system consists of independently deployed Auth, Analytics, and Settings applications dynamically integrated through Webpack Module Federation. It includes shared singleton dependency management, runtime remote loading, route-level protection, and environment-based configuration. The architecture emphasizes scalability, performance through lazy loading of entire micro apps, and clear separation of domain boundaries for maintainability.",
+        link: "https://micro-hub-seven.vercel.app"
       },
+      // {
+      //   src: {
+      //     desktop: "/valentine-project-image.webp",
+      //     mobile: "/valentine-project-image.webp"
+      //   },
+      //   alt: "Valentine themed interactive web app featuring pink romantic UI, animated poems, playful button interactions, and celebratory motion effects.",
+      //   title: "Valentine Project",
+      //   titleLong: "Interactive Valentine UI Experience - Creative Fun Project",
+      //   description: "Built a playful and romantic Valentine web app featuring animated poems, dynamic button interactions, and smooth motion effects.",
+      //   descriptionLong: "Developed an interactive Valentine-themed web application focused on delightful user experience and animation-driven storytelling. The project features dynamic name personalization, sequential romantic poem reveals, playful micro-interactions (including a moving 'No' button), and celebratory motion effects upon confirmation. Built using React, styled-components, and Framer Motion to explore creative UI design and expressive frontend animation.",
+      //   link: "https://valentine-project-eight-zeta.vercel.app"
+      // },
       // {
       //   src : {
       //     desktop : "/ofure-jewelry-store.webp",
