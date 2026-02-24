@@ -156,6 +156,18 @@ export function AppProvider({ children }) {
             link: "https://intro-11th-challenge-react-version.vercel.app",
           },
           {
+            src : {
+              desktop : "/brew-board-homepage-image.webp",
+              mobile : "/brew-board-homepage-image.webp"
+            },
+            alt : "Brew Board real-time collaborative Kanban interface showcasing coffee-themed task management, live updates, drag-and-drop functionality, and multi-user synchronization.",
+            title : "Brew Board",
+            titleLong : "Real-Time Collaborative Kanban Board - Distributed Frontend System",
+            description : "Built Brew Board, a production-grade real-time collaborative Kanban application with optimistic updates, offline support, and role-based permissions.",
+            descriptionLong : "Developed Brew Board, a real-time collaborative Kanban platform engineered with distributed systems principles at the frontend layer. The application features live multi-user synchronization via WebSockets, optimistic UI updates with rollback handling, conflict resolution through versioning, offline-first architecture with queued mutations, and role-based access control. The project emphasizes scalable architecture, state separation between server and client, and resilient real-time collaboration.",
+            link : "https://brew-board.vercel.app/"
+          },
+          {
             src: {
               desktop: "/advice-generator.webp",
               mobile: "/advice-generator.webp"
@@ -346,7 +358,19 @@ export function AppProvider({ children }) {
             description: "Built a responsive React Ping Coming Soon page with email validation and error handling from a Frontend Mentor challenge.",
             descriptionLong: "Developed the Ping Coming Soon page in React from a Frontend Mentor challenge. The project included responsive design, email submission functionality, and error handling for invalid or empty inputs. This challenge enhanced my skills in form validation, interactive UI design, and delivering seamless user experiences.",
             link: "https://ping-1st-challenge-react-version.vercel.app"
-          },    
+          },   
+          {
+            src: {
+              desktop: "/valentine-project-image.webp",
+              mobile: "/valentine-project-image.webp"
+            },
+            alt: "Valentine themed interactive web app featuring pink romantic UI, animated poems, playful button interactions, and celebratory motion effects.",
+            title: "Valentine Project",
+            titleLong: "Interactive Valentine UI Experience - Creative Fun Project",
+            description: "Built a playful and romantic Valentine web app featuring animated poems, dynamic button interactions, and smooth motion effects.",
+            descriptionLong: "Developed an interactive Valentine-themed web application focused on delightful user experience and animation-driven storytelling. The project features dynamic name personalization, sequential romantic poem reveals, playful micro-interactions (including a moving 'No' button), and celebratory motion effects upon confirmation. Built using React, styled-components, and Framer Motion to explore creative UI design and expressive frontend animation.",
+            link: "https://valentine-project-eight-zeta.vercel.app"
+          }, 
         ]
       },
       {
@@ -591,18 +615,30 @@ export function AppProvider({ children }) {
         descriptionLong : "Kiddies Auto is a React-based mini e-commerce app developed during HNG internship program. The project involved translating a detailed Figma design, created by a seasoned product designer, into a responsive and functional platform. This challenge enhanced my skills in building interactive applications and adhering to professional design standards in real-world scenarios.",
         link : "https://kiddies-auto.vercel.app",
       },
-      {
-        src : {
-          desktop : "/e-commerce_with_cart.webp",
-          mobile : "/e-commerce_with_cart.webp"
+        {
+          src : {
+            desktop : "/brew-board-homepage-image.webp",
+            mobile : "/brew-board-homepage-image.webp"
+          },
+          alt : "Brew Board real-time collaborative Kanban interface showcasing coffee-themed task management, live updates, drag-and-drop functionality, and multi-user synchronization.",
+          title : "Brew Board",
+          titleLong : "Real-Time Collaborative Kanban Board - Distributed Frontend System",
+          description : "Built Brew Board, a production-grade real-time collaborative Kanban application with optimistic updates, offline support, and role-based permissions.",
+          descriptionLong : "Developed Brew Board, a real-time collaborative Kanban platform engineered with distributed systems principles at the frontend layer. The application features live multi-user synchronization via WebSockets, optimistic UI updates with rollback handling, conflict resolution through versioning, offline-first architecture with queued mutations, and role-based access control. The project emphasizes scalable architecture, state separation between server and client, and resilient real-time collaboration.",
+          link : "https://brew-board.vercel.app/"
         },
-        alt : "Responsive React e-commerce app featuring a functional cart page, developed during an MLSA bootcamp challenge from Frontend Mentor.",
-        title : "Cart E-commerce",
-        titleLong : "E-commerce with Cart Page - Boot Camp Project",
-        description : "Built a React e-commerce app with a cart page during the MLSA bootcamp, based on a Frontend Mentor challenge.",
-        descriptionLong : "This React-based mini e-commerce app with a functional cart page was developed during the MLSA bootcamp, based on a Frontend Mentor challenge. The project emphasized building a responsive and dynamic user interface while efficiently managing state to deliver seamless cart functionality. This experience enhanced my understanding of e-commerce development and UI/UX best practices.",
-        link : "https://mlsa-project-assignment-product-list-with-cart-main.vercel.app",
-      },
+      // {
+      //   src : {
+      //     desktop : "/e-commerce_with_cart.webp",
+      //     mobile : "/e-commerce_with_cart.webp"
+      //   },
+      //   alt : "Responsive React e-commerce app featuring a functional cart page, developed during an MLSA bootcamp challenge from Frontend Mentor.",
+      //   title : "Cart E-commerce",
+      //   titleLong : "E-commerce with Cart Page - Boot Camp Project",
+      //   description : "Built a React e-commerce app with a cart page during the MLSA bootcamp, based on a Frontend Mentor challenge.",
+      //   descriptionLong : "This React-based mini e-commerce app with a functional cart page was developed during the MLSA bootcamp, based on a Frontend Mentor challenge. The project emphasized building a responsive and dynamic user interface while efficiently managing state to deliver seamless cart functionality. This experience enhanced my understanding of e-commerce development and UI/UX best practices.",
+      //   link : "https://mlsa-project-assignment-product-list-with-cart-main.vercel.app",
+      // },
       // {
       //   src : {
       //     desktop : "/tip-calculator.webp",
