@@ -192,6 +192,18 @@ export function AppProvider({ children }) {
             link: "https://advice-12th-challenge-react-version.vercel.app",
           },
           {
+            src: {
+              desktop: "/form-canvas-desktop.webp",
+              mobile: "/form-canvas-desktop.webp"
+            },
+            alt: "Form Canvas enterprise form engine builder interface showcasing drag and drop form creation, schema configuration, and dynamic preview mode.",
+            title: "Form Canvas",
+            titleLong: "Enterprise Form Engine Builder - Production Grade Project",
+            description: "Built Form Canvas, a schema-driven enterprise form engine that enables drag and drop form creation, dynamic validation, and conditional logic rendering.",
+            descriptionLong: "Developed Form Canvas, a production-grade form engine that allows users to build dynamic forms using drag and drop, define validation rules with Zod, apply conditional logic, persist schemas, and render forms programmatically through a clean, scalable React architecture.",
+            link: "https://form-canvas-virid.vercel.app/"
+          },
+          {
             src : {
               desktop : "/ofure-jewelry-store.webp",
               mobile : "/ofure-jewelry-store.webp"
@@ -568,18 +580,6 @@ export function AppProvider({ children }) {
         link : "https://scrybehub.ng",
       },
       {
-        src : {
-          desktop : "/swift-dispatch-driver.webp",
-          mobile : "/swift-dispatch-driver.webp"
-        },
-        alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-        title : "Swift Dispatch",
-        titleLong : "React-Based Dispatch App Development - Internship Project",
-        description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-        descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-        link : "https://swiftdispatch.com.ng",
-      },
-      {
         src: {
           desktop: "/legend-store.webp",
           mobile: "/legend-store.webp"
@@ -604,53 +604,65 @@ export function AppProvider({ children }) {
         link: "https://micro-hub-seven.vercel.app"
       },
       // {
-      //   src: {
-      //     desktop: "/valentine-project-image.webp",
-      //     mobile: "/valentine-project-image.webp"
-      //   },
-      //   alt: "Valentine themed interactive web app featuring pink romantic UI, animated poems, playful button interactions, and celebratory motion effects.",
-      //   title: "Valentine Project",
-      //   titleLong: "Interactive Valentine UI Experience - Creative Fun Project",
-      //   description: "Built a playful and romantic Valentine web app featuring animated poems, dynamic button interactions, and smooth motion effects.",
-      //   descriptionLong: "Developed an interactive Valentine-themed web application focused on delightful user experience and animation-driven storytelling. The project features dynamic name personalization, sequential romantic poem reveals, playful micro-interactions (including a moving 'No' button), and celebratory motion effects upon confirmation. Built using React, styled-components, and Framer Motion to explore creative UI design and expressive frontend animation.",
-      //   link: "https://valentine-project-eight-zeta.vercel.app"
-      // },
-      // {
-      //   src : {
-      //     desktop : "/ofure-jewelry-store.webp",
-      //     mobile : "/ofure-jewelry-store.webp"
-      //   },
-      //   alt : "Elegant e-commerce UI for Ofure Jewelry Store showcasing jewelry products with a clean and user-focused design.",
-      //   title : "Jewelry Store",
-      //   titleLong : "Ofure Jewelry Store Design - Personal Project",
-      //   description : "Built an elegant e-commerce UI for Ofure Jewelry Store, focusing on showcasing jewelry products.",
-      //   descriptionLong : "Ofure Jewelry Store is an incomplete e-commerce platform I designed and built early in my learning journey. This project, developed before I learned React, helped me gain significant insights into web development, focusing on creating a clean and visually appealing UI for showcasing jewelry products.",
-      //   link : "https://ofure-jewelry.vercel.app",
-      // },
-      {
-        src : {
-          desktop : "/kiddies-auto.webp",
-          mobile : "/kiddies-auto.webp"
-        },
-        alt : "Responsive React mini e-commerce app for Kiddies Auto, developed during the HNG internship using a Figma design.",
-        title : "Kiddies Auto",
-        titleLong : "Kiddies Auto Mini E-commerce - Internship Project",
-        description : "Built Kiddies Auto during HNG, translating a Figma design into a responsive React mini e-commerce app.",
-        descriptionLong : "Kiddies Auto is a React-based mini e-commerce app developed during HNG internship program. The project involved translating a detailed Figma design, created by a seasoned product designer, into a responsive and functional platform. This challenge enhanced my skills in building interactive applications and adhering to professional design standards in real-world scenarios.",
-        link : "https://kiddies-auto.vercel.app",
-      },
-        {
-          src : {
-            desktop : "/brew-board-homepage-image.webp",
-            mobile : "/brew-board-homepage-image.webp"
-          },
-          alt : "Brew Board real-time collaborative Kanban interface showcasing coffee-themed task management, live updates, drag-and-drop functionality, and multi-user synchronization.",
-          title : "Brew Board",
-          titleLong : "Real-Time Collaborative Kanban Board - Distributed Frontend System",
-          description : "Built Brew Board, a production-grade real-time collaborative Kanban application with optimistic updates, offline support, and role-based permissions.",
-          descriptionLong : "Developed Brew Board, a real-time collaborative Kanban platform engineered with distributed systems principles at the frontend layer. The application features live multi-user synchronization via WebSockets, optimistic UI updates with rollback handling, conflict resolution through versioning, offline-first architecture with queued mutations, and role-based access control. The project emphasizes scalable architecture, state separation between server and client, and resilient real-time collaboration.",
-          link : "https://brew-board.vercel.app/"
-        },
+        //   src: {
+          //     desktop: "/valentine-project-image.webp",
+          //     mobile: "/valentine-project-image.webp"
+          //   },
+          //   alt: "Valentine themed interactive web app featuring pink romantic UI, animated poems, playful button interactions, and celebratory motion effects.",
+          //   title: "Valentine Project",
+          //   titleLong: "Interactive Valentine UI Experience - Creative Fun Project",
+          //   description: "Built a playful and romantic Valentine web app featuring animated poems, dynamic button interactions, and smooth motion effects.",
+          //   descriptionLong: "Developed an interactive Valentine-themed web application focused on delightful user experience and animation-driven storytelling. The project features dynamic name personalization, sequential romantic poem reveals, playful micro-interactions (including a moving 'No' button), and celebratory motion effects upon confirmation. Built using React, styled-components, and Framer Motion to explore creative UI design and expressive frontend animation.",
+          //   link: "https://valentine-project-eight-zeta.vercel.app"
+          // },
+          // {
+            //   src : {
+              //     desktop : "/ofure-jewelry-store.webp",
+              //     mobile : "/ofure-jewelry-store.webp"
+              //   },
+              //   alt : "Elegant e-commerce UI for Ofure Jewelry Store showcasing jewelry products with a clean and user-focused design.",
+              //   title : "Jewelry Store",
+              //   titleLong : "Ofure Jewelry Store Design - Personal Project",
+              //   description : "Built an elegant e-commerce UI for Ofure Jewelry Store, focusing on showcasing jewelry products.",
+              //   descriptionLong : "Ofure Jewelry Store is an incomplete e-commerce platform I designed and built early in my learning journey. This project, developed before I learned React, helped me gain significant insights into web development, focusing on creating a clean and visually appealing UI for showcasing jewelry products.",
+              //   link : "https://ofure-jewelry.vercel.app",
+              // },
+              {
+                src : {
+                  desktop : "/kiddies-auto.webp",
+                  mobile : "/kiddies-auto.webp"
+                },
+                alt : "Responsive React mini e-commerce app for Kiddies Auto, developed during the HNG internship using a Figma design.",
+                title : "Kiddies Auto",
+                titleLong : "Kiddies Auto Mini E-commerce - Internship Project",
+                description : "Built Kiddies Auto during HNG, translating a Figma design into a responsive React mini e-commerce app.",
+                descriptionLong : "Kiddies Auto is a React-based mini e-commerce app developed during HNG internship program. The project involved translating a detailed Figma design, created by a seasoned product designer, into a responsive and functional platform. This challenge enhanced my skills in building interactive applications and adhering to professional design standards in real-world scenarios.",
+                link : "https://kiddies-auto.vercel.app",
+              },
+              {
+                src : {
+                  desktop : "/brew-board-homepage-image.webp",
+                  mobile : "/brew-board-homepage-image.webp"
+                },
+                alt : "Brew Board real-time collaborative Kanban interface showcasing coffee-themed task management, live updates, drag-and-drop functionality, and multi-user synchronization.",
+                title : "Brew Board",
+                titleLong : "Real-Time Collaborative Kanban Board - Distributed Frontend System",
+                description : "Built Brew Board, a production-grade real-time collaborative Kanban application with optimistic updates, offline support, and role-based permissions.",
+                descriptionLong : "Developed Brew Board, a real-time collaborative Kanban platform engineered with distributed systems principles at the frontend layer. The application features live multi-user synchronization via WebSockets, optimistic UI updates with rollback handling, conflict resolution through versioning, offline-first architecture with queued mutations, and role-based access control. The project emphasizes scalable architecture, state separation between server and client, and resilient real-time collaboration.",
+                link : "https://brew-board.vercel.app/"
+              },
+              {
+                src : {
+                  desktop : "/swift-dispatch-driver.webp",
+                  mobile : "/swift-dispatch-driver.webp"
+                },
+                alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+                title : "Swift Dispatch",
+                titleLong : "React-Based Dispatch App Development - Internship Project",
+                description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+                descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+                link : "https://swiftdispatch.com.ng",
+              },
       // {
       //   src : {
       //     desktop : "/e-commerce_with_cart.webp",
