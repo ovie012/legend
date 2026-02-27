@@ -1,5 +1,9 @@
 # Personal Developer Portfolio
 
+<div align="center">
+  <img width="250" height="250" alt="Logo for Form Canvas" src="./public/LegenddevRound-light.webp" />
+</div>
+
 ## Overview
 
 This project is a modern, responsive developer portfolio built to showcase my skills, projects, and professional identity through clean design and thoughtful interaction. It focuses on performance, simplicity, and user experience while maintaining a strong visual personality.
@@ -9,6 +13,8 @@ The application highlights my technical strengths, design sensitivity, and atten
 ## Live Demo
 
 Live link: https://legenddev-phi.vercel.app/
+
+![Design preview for My Portfolio](./public/my-portfolio-home-page.webp)
 
 ## Tech Stack
 
