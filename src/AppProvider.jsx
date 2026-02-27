@@ -156,6 +156,18 @@ export function AppProvider({ children }) {
             link: "https://intro-11th-challenge-react-version.vercel.app",
           },
           {
+            src: {
+              desktop: "/tenant-hub-homepage-image.webp",
+              mobile: "/tenant-hub-homepage-image.webp"
+            },
+            alt: "Tenant Hub multi-tenant SaaS admin dashboard showcasing organization switching, role-based access control, subscription plans, feature gating, and responsive sidebar navigation.",
+            title: "Tenant Hub",
+            titleLong: "Multi-Tenant SaaS Admin Panel - Role-Based and Subscription-Gated Architecture",
+            description: "Built Tenant Hub, a production-grade multi-tenant SaaS admin panel featuring organization switching, role-based access control, and subscription-based feature gating.",
+            descriptionLong: "Developed Tenant Hub, a scalable multi-tenant SaaS admin dashboard engineered with centralized permission middleware, route guards, and plan-based feature gating. The application simulates tenant isolation, organization switching, and role-aware UI rendering using a clean React and Zustand architecture designed for real-world SaaS systems.",
+            link: "https://tenant-hub-topaz.vercel.app/"
+          },
+          {
             src : {
               desktop : "/brew-board-homepage-image.webp",
               mobile : "/brew-board-homepage-image.webp"
@@ -628,16 +640,16 @@ export function AppProvider({ children }) {
               //   link : "https://ofure-jewelry.vercel.app",
               // },
               {
-                src : {
-                  desktop : "/kiddies-auto.webp",
-                  mobile : "/kiddies-auto.webp"
+                src: {
+                  desktop: "/tenant-hub-homepage-image.webp",
+                  mobile: "/tenant-hub-homepage-image.webp"
                 },
-                alt : "Responsive React mini e-commerce app for Kiddies Auto, developed during the HNG internship using a Figma design.",
-                title : "Kiddies Auto",
-                titleLong : "Kiddies Auto Mini E-commerce - Internship Project",
-                description : "Built Kiddies Auto during HNG, translating a Figma design into a responsive React mini e-commerce app.",
-                descriptionLong : "Kiddies Auto is a React-based mini e-commerce app developed during HNG internship program. The project involved translating a detailed Figma design, created by a seasoned product designer, into a responsive and functional platform. This challenge enhanced my skills in building interactive applications and adhering to professional design standards in real-world scenarios.",
-                link : "https://kiddies-auto.vercel.app",
+                alt: "Tenant Hub multi-tenant SaaS admin dashboard showcasing organization switching, role-based access control, subscription plans, feature gating, and responsive sidebar navigation.",
+                title: "Tenant Hub",
+                titleLong: "Multi-Tenant SaaS Admin Panel - Role-Based and Subscription-Gated Architecture",
+                description: "Built Tenant Hub, a production-grade multi-tenant SaaS admin panel featuring organization switching, role-based access control, and subscription-based feature gating.",
+                descriptionLong: "Developed Tenant Hub, a scalable multi-tenant SaaS admin dashboard engineered with centralized permission middleware, route guards, and plan-based feature gating. The application simulates tenant isolation, organization switching, and role-aware UI rendering using a clean React and Zustand architecture designed for real-world SaaS systems.",
+                link: "https://tenant-hub-topaz.vercel.app/"
               },
               {
                 src : {
