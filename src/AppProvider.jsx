@@ -193,6 +193,18 @@ export function AppProvider({ children }) {
           },
           {
             src: {
+              desktop: "/swiftTableHomepage.webp",
+              mobile: "/swiftTableHomepage.webp"
+            },
+            alt: "Swift Table high-performance data table interface showcasing virtualized rows, column resizing, server-side pagination, sticky headers, and CSV export in a responsive yellow-themed dashboard.",
+            title: "Swift Table",
+            titleLong: "High-Performance Virtualized Data Table Engine",
+            description: "Built Swift Table, a production-grade, high-performance data table system with virtualization, server-side pagination, sorting, column resizing, and CSV export.",
+            descriptionLong: "Developed Swift Table, a scalable data table engine built with React and TypeScript, featuring virtualized rendering for large datasets, server-side pagination, controlled and uncontrolled state patterns, column resizing, CSV export, and a clean API abstraction layer optimized for performance and responsive SaaS dashboards.",
+            link: "https://swift-table.vercel.app/"
+          },
+          {
+            src: {
               desktop: "/advice-generator.webp",
               mobile: "/advice-generator.webp"
             },
