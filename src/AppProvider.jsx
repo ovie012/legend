@@ -241,6 +241,18 @@ export function AppProvider({ children }) {
           },
           {
             src: {
+              desktop: "/ovie-design-system-homepage-image.webp",
+              mobile: "/ovie-design-system-homepage-image.webp"
+            },
+            alt: "Ovie Design System component library interface showcasing accessible buttons, modals, dropdowns, theming controls, and responsive layouts in light and dark mode.",
+            title: "Ovie Design System",
+            titleLong: "Scalable React Component Library and Design System",
+            description: "Built Ovie Design System, a scalable and accessible React component library focused on clean architecture, theming, and reusable UI primitives.",
+            descriptionLong: "Developed Ovie Design System, a production-ready React and TypeScript component library built with Tailwind CSS, styled-components, and Zustand. It features accessible compound components, controlled and uncontrolled patterns, dark and light theming, Storybook documentation, and test coverage. The architecture emphasizes simplicity, scalability, responsiveness, and long-term maintainability without over-engineering.",
+            link: "https://ovie-design-system.vercel.app/"
+          },
+          {
+            src: {
               desktop: "/time-tracking-board.webp",
               mobile: "/time-tracking-board.webp"
             },
@@ -250,6 +262,18 @@ export function AppProvider({ children }) {
             description: "Developed a React time tracking dashboard with dynamic JSON data integration and responsive design.",
             descriptionLong: "Built a time tracking dashboard in React from a Frontend Mentor challenge. Users can toggle between daily, weekly, and monthly stats, with data dynamically loaded from a local JSON file. The app includes responsive design and hover effects, demonstrating strong skills in data visualization and interactivity.",
             link: "https://time-13th-challenge-react-version.vercel.app",
+          },
+          {
+            src: {
+              desktop: "/prompt-architect-homepage-image.webp",
+              mobile: "/prompt-architect-homepage-image.webp"
+            },
+            alt: "Prompt Architect AI content studio interface showcasing streaming responses, prompt history sidebar, markdown rendering, token tracking, and variant switching.",
+            title: "Prompt Architect",
+            titleLong: "AI-Powered Content Studio - Streaming Frontend Architecture",
+            description: "Built Prompt Architect, a production-grade AI content studio featuring real-time streaming responses, token usage tracking, markdown rendering, prompt history persistence, and response variants.",
+            descriptionLong: "Developed Prompt Architect, a scalable AI content studio engineered with modern React architecture. The application implements streaming UI updates with progressive rendering, resilient error boundaries, retry logic, Zustand-based state management with persistence, markdown support, variant generation, and file preview handling. The project emphasizes clean separation of concerns, responsive design, and production-ready frontend patterns.",
+            link: "https://prompt-architect-kappa.vercel.app/"
           },
           {
             src: {
