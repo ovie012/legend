@@ -252,6 +252,18 @@ export function AppProvider({ children }) {
             link: "https://ovie-design-system.vercel.app/"
           },
           {
+            src : {
+              desktop : "/insight-dashboard-homepage-image.webp",
+              mobile : "/insight-dashboard-homepage-image.webp"
+            },
+            alt : "Insight Dashboard frontend monitoring interface showing real-time metrics, error logs, performance charts, and simulated session replay for observability analysis.",
+            title : "Insight Dashboard",
+            titleLong : "Frontend Monitoring and Observability Dashboard",
+            description : "Built Insight Dashboard, a frontend observability platform that simulates error tracking, performance monitoring, and real-time analytics through an interactive dashboard.",
+            descriptionLong : "Developed Insight Dashboard, a production-grade frontend monitoring interface that simulates observability workflows including real-time performance metrics, error logging, Web Vitals tracking, and session replay visualization. The application focuses on scalable dashboard architecture, efficient chart rendering, controlled data polling, and optimized React state management for responsive monitoring experiences.",
+            link : "https://insight-dashboard-tan.vercel.app/"
+          },
+          {
             src: {
               desktop: "/time-tracking-board.webp",
               mobile: "/time-tracking-board.webp"
@@ -701,16 +713,28 @@ export function AppProvider({ children }) {
               },
               {
                 src : {
-                  desktop : "/swift-dispatch-driver.webp",
-                  mobile : "/swift-dispatch-driver.webp"
+                  desktop : "/insight-dashboard-homepage-image.webp",
+                  mobile : "/insight-dashboard-homepage-image.webp"
                 },
-                alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
-                title : "Swift Dispatch",
-                titleLong : "React-Based Dispatch App Development - Internship Project",
-                description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
-                descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-                link : "https://swiftdispatch.com.ng",
+                alt : "Insight Dashboard frontend monitoring interface showing real-time metrics, error logs, performance charts, and simulated session replay for observability analysis.",
+                title : "Insight Dashboard",
+                titleLong : "Frontend Monitoring and Observability Dashboard",
+                description : "Built Insight Dashboard, a frontend observability platform that simulates error tracking, performance monitoring, and real-time analytics through an interactive dashboard.",
+                descriptionLong : "Developed Insight Dashboard, a production-grade frontend monitoring interface that simulates observability workflows including real-time performance metrics, error logging, Web Vitals tracking, and session replay visualization. The application focuses on scalable dashboard architecture, efficient chart rendering, controlled data polling, and optimized React state management for responsive monitoring experiences.",
+                link : "https://insight-dashboard-tan.vercel.app/"
               },
+              // {
+              //   src : {
+              //     desktop : "/swift-dispatch-driver.webp",
+              //     mobile : "/swift-dispatch-driver.webp"
+              //   },
+              //   alt : "Dispatch app interface showcasing a responsive and user-friendly design developed with React during an internship with Enovers Lab Team 51.",
+              //   title : "Swift Dispatch",
+              //   titleLong : "React-Based Dispatch App Development - Internship Project",
+              //   description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
+              //   descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
+              //   link : "https://swiftdispatch.com.ng",
+              // },
       // {
       //   src : {
       //     desktop : "/e-commerce_with_cart.webp",

@@ -1,7 +1,7 @@
 # Personal Developer Portfolio
 
 <div align="center">
-  <img width="250" height="250" alt="Logo for Form Canvas" src="./public/LegenddevRound-light.webp" />
+  <img width="250" height="250" alt="Logo for my portfolio" src="./public/LegenddevRound-light.webp" />
 </div>
 
 ## Overview
