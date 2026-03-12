@@ -145,6 +145,18 @@ export function AppProvider({ children }) {
           },
           {
             src: {
+              desktop: "/AgriCommand-Landing-Page.webp",
+              mobile: "/AgriCommand-Landing-Page.webp"
+            },
+            alt: "Agri Command agricultural management dashboard showing farm operations, field mapping, weather monitoring, digital twin simulation, drone monitoring, and business analytics.",
+            title: "Agri Command",
+            titleLong: "Smart Agriculture Operations and Intelligence Platform",
+            description: "Built Agri Command, a production-grade agriculture operations platform featuring farm management, environmental monitoring, digital twin simulation, and business analytics.",
+            descriptionLong: "Developed Agri Command, a smart agriculture management platform designed as a farm operations command center. The system integrates field mapping with Leaflet, real-time weather intelligence, crop and livestock management, drone monitoring with NDVI visualization, and a digital twin simulation. The architecture emphasizes scalable state management, responsive dashboards, and operational analytics for modern farm management.",
+            link: "https://agri-command.vercel.app/"
+          },
+          {
+            src: {
               desktop: "/intro-section-with-drop-down.webp",
               mobile: "/intro-section-with-drop-down.webp"
             },
@@ -253,8 +265,8 @@ export function AppProvider({ children }) {
           },
           {
             src : {
-              desktop : "/insight-dashboard-homepage-image.webp",
-              mobile : "/insight-dashboard-homepage-image.webp"
+              desktop : "/insight-dashboard-landing-page.webp",
+              mobile : "/insight-dashboard-landing-page.webp"
             },
             alt : "Insight Dashboard frontend monitoring interface showing real-time metrics, error logs, performance charts, and simulated session replay for observability analysis.",
             title : "Insight Dashboard",
@@ -653,6 +665,18 @@ export function AppProvider({ children }) {
       },
       {
         src: {
+          desktop: "/AgriCommand-Landing-Page.webp",
+          mobile: "/AgriCommand-Landing-Page.webp"
+        },
+        alt: "Agri Command agricultural management dashboard showing farm operations, field mapping, weather monitoring, digital twin simulation, drone monitoring, and business analytics.",
+        title: "Agri Command",
+        titleLong: "Smart Agriculture Operations and Intelligence Platform",
+        description: "Built Agri Command, a production-grade agriculture operations platform featuring farm management, environmental monitoring, digital twin simulation, and business analytics.",
+        descriptionLong: "Developed Agri Command, a smart agriculture management platform designed as a farm operations command center. The system integrates field mapping with Leaflet, real-time weather intelligence, crop and livestock management, drone monitoring with NDVI visualization, and a digital twin simulation. The architecture emphasizes scalable state management, responsive dashboards, and operational analytics for modern farm management.",
+        link: "https://agri-command.vercel.app/"
+      },
+      {
+        src: {
           desktop: "/micro-hub-homepage-image.webp",
           mobile: "/micro-hub-homepage-image.webp"
         },
@@ -711,18 +735,18 @@ export function AppProvider({ children }) {
                 descriptionLong : "Developed Brew Board, a real-time collaborative Kanban platform engineered with distributed systems principles at the frontend layer. The application features live multi-user synchronization via WebSockets, optimistic UI updates with rollback handling, conflict resolution through versioning, offline-first architecture with queued mutations, and role-based access control. The project emphasizes scalable architecture, state separation between server and client, and resilient real-time collaboration.",
                 link : "https://brew-board.vercel.app/"
               },
-              {
-                src : {
-                  desktop : "/insight-dashboard-homepage-image.webp",
-                  mobile : "/insight-dashboard-homepage-image.webp"
-                },
-                alt : "Insight Dashboard frontend monitoring interface showing real-time metrics, error logs, performance charts, and simulated session replay for observability analysis.",
-                title : "Insight Dashboard",
-                titleLong : "Frontend Monitoring and Observability Dashboard",
-                description : "Built Insight Dashboard, a frontend observability platform that simulates error tracking, performance monitoring, and real-time analytics through an interactive dashboard.",
-                descriptionLong : "Developed Insight Dashboard, a production-grade frontend monitoring interface that simulates observability workflows including real-time performance metrics, error logging, Web Vitals tracking, and session replay visualization. The application focuses on scalable dashboard architecture, efficient chart rendering, controlled data polling, and optimized React state management for responsive monitoring experiences.",
-                link : "https://insight-dashboard-tan.vercel.app/"
-              },
+              // {
+              //   src : {
+              //     desktop : "/insight-dashboard-landing-page.webp",
+              //     mobile : "/insight-dashboard-landing-page.webp"
+              //   },
+              //   alt : "Insight Dashboard frontend monitoring interface showing real-time metrics, error logs, performance charts, and simulated session replay for observability analysis.",
+              //   title : "Insight Dashboard",
+              //   titleLong : "Frontend Monitoring and Observability Dashboard",
+              //   description : "Built Insight Dashboard, a frontend observability platform that simulates error tracking, performance monitoring, and real-time analytics through an interactive dashboard.",
+              //   descriptionLong : "Developed Insight Dashboard, a production-grade frontend monitoring interface that simulates observability workflows including real-time performance metrics, error logging, Web Vitals tracking, and session replay visualization. The application focuses on scalable dashboard architecture, efficient chart rendering, controlled data polling, and optimized React state management for responsive monitoring experiences.",
+              //   link : "https://insight-dashboard-tan.vercel.app/"
+              // },
               // {
               //   src : {
               //     desktop : "/swift-dispatch-driver.webp",
