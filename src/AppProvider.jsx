@@ -169,6 +169,18 @@ export function AppProvider({ children }) {
           },
           {
             src: {
+              desktop: "/estateIQ-landingPage.webp",
+              mobile: "/estateIQ-landingPage.webp"
+            },
+            alt: "Estate IQ real estate intelligence dashboard showcasing property search, map discovery, analytics panels, marketplace activity, and management tools in a data-driven interface.",
+            title: "Estate IQ",
+            titleLong: "Real Estate Intelligence Platform - Property Discovery and Operations System",
+            description: "Built Estate IQ, a production-grade real estate intelligence platform featuring advanced search, map discovery, analytics dashboards, marketplace workflows, and property management tools.",
+            descriptionLong: "Developed Estate IQ, a comprehensive real estate intelligence platform combining advanced property search, interactive map discovery, agent communication, marketplace transactions, mortgage tools, analytics, and asset management. The system emphasizes scalable architecture, data-driven insights, responsive design, and a unified dashboard for end-to-end property exploration, evaluation, and operational oversight.",
+            link: "https://estate-iq-ten.vercel.app/"
+          },
+          {
+            src: {
               desktop: "/tenant-hub-homepage-image.webp",
               mobile: "/tenant-hub-homepage-image.webp"
             },
@@ -253,8 +265,8 @@ export function AppProvider({ children }) {
           },
           {
             src: {
-              desktop: "/ovie-design-system-homepage-image.webp",
-              mobile: "/ovie-design-system-homepage-image.webp"
+              desktop: "/ovie-design-landing-page.webp",
+              mobile: "/ovie-design-landing-page.webp"
             },
             alt: "Ovie Design System component library interface showcasing accessible buttons, modals, dropdowns, theming controls, and responsive layouts in light and dark mode.",
             title: "Ovie Design System",
@@ -289,8 +301,8 @@ export function AppProvider({ children }) {
           },
           {
             src: {
-              desktop: "/prompt-architect-homepage-image.webp",
-              mobile: "/prompt-architect-homepage-image.webp"
+              desktop: "/Prompt-architect-homePage.webp",
+              mobile: "/Prompt-architect-homePage.webp"
             },
             alt: "Prompt Architect AI content studio interface showcasing streaming responses, prompt history sidebar, markdown rendering, token tracking, and variant switching.",
             title: "Prompt Architect",
@@ -677,16 +689,28 @@ export function AppProvider({ children }) {
       },
       {
         src: {
-          desktop: "/micro-hub-homepage-image.webp",
-          mobile: "/micro-hub-homepage-image.webp"
+          desktop: "/estateIQ-landingPage.webp",
+          mobile: "/estateIQ-landingPage.webp"
         },
-        alt: "Micro Hub micro-frontend dashboard interface showcasing modular architecture with Auth, Analytics, and Settings modules dynamically loaded through Module Federation in a clean green and white layout.",
-        title: "Micro Hub",
-        titleLong: "Production-Grade Micro-Frontend Dashboard Architecture",
-        description: "Built Micro Hub, a scalable micro-frontend dashboard platform composed of independently deployed applications integrated via Module Federation.",
-        descriptionLong: "Developed Micro Hub, a production-ready micro-frontend dashboard built using distributed frontend architecture principles. The system consists of independently deployed Auth, Analytics, and Settings applications dynamically integrated through Webpack Module Federation. It includes shared singleton dependency management, runtime remote loading, route-level protection, and environment-based configuration. The architecture emphasizes scalability, performance through lazy loading of entire micro apps, and clear separation of domain boundaries for maintainability.",
-        link: "https://micro-hub-seven.vercel.app"
+        alt: "Estate IQ real estate intelligence dashboard showcasing property search, map discovery, analytics panels, marketplace activity, and management tools in a data-driven interface.",
+        title: "Estate IQ",
+        titleLong: "Real Estate Intelligence Platform - Property Discovery and Operations System",
+        description: "Built Estate IQ, a production-grade real estate intelligence platform featuring advanced search, map discovery, analytics dashboards, marketplace workflows, and property management tools.",
+        descriptionLong: "Developed Estate IQ, a comprehensive real estate intelligence platform combining advanced property search, interactive map discovery, agent communication, marketplace transactions, mortgage tools, analytics, and asset management. The system emphasizes scalable architecture, data-driven insights, responsive design, and a unified dashboard for end-to-end property exploration, evaluation, and operational oversight.",
+        link: "https://estate-iq-ten.vercel.app/"
       },
+      // {
+      //   src: {
+      //     desktop: "/micro-hub-homepage-image.webp",
+      //     mobile: "/micro-hub-homepage-image.webp"
+      //   },
+      //   alt: "Micro Hub micro-frontend dashboard interface showcasing modular architecture with Auth, Analytics, and Settings modules dynamically loaded through Module Federation in a clean green and white layout.",
+      //   title: "Micro Hub",
+      //   titleLong: "Production-Grade Micro-Frontend Dashboard Architecture",
+      //   description: "Built Micro Hub, a scalable micro-frontend dashboard platform composed of independently deployed applications integrated via Module Federation.",
+      //   descriptionLong: "Developed Micro Hub, a production-ready micro-frontend dashboard built using distributed frontend architecture principles. The system consists of independently deployed Auth, Analytics, and Settings applications dynamically integrated through Webpack Module Federation. It includes shared singleton dependency management, runtime remote loading, route-level protection, and environment-based configuration. The architecture emphasizes scalability, performance through lazy loading of entire micro apps, and clear separation of domain boundaries for maintainability.",
+      //   link: "https://micro-hub-seven.vercel.app"
+      // },
       // {
         //   src: {
           //     desktop: "/valentine-project-image.webp",

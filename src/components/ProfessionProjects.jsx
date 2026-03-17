@@ -1,8 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../AppProvider';
 
 function ProfessionProjects() {
   const { lightMode, projectOpen, setProjectOpen, slowTransition, projects, select, selected, projectsData } = useContext(AppContext);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+
+    const handleChange = (e) => {
+      setIsMobile(e.matches);
+    };
+
+    setIsMobile(media.matches);
+
+    media.addEventListener("change", handleChange);
+
+    return () => media.removeEventListener("change", handleChange);
+  }, []);
 
   return (
     <>
@@ -11,7 +26,7 @@ function ProfessionProjects() {
               <section onClick={() => { setProjectOpen(projectOpen === index ? null : index); }} className="professional-header">
                 <div>
                   <h3>{item.projectType}</h3>
-                  <p>{item.projectTypeDescription}</p>
+                  {!isMobile && <p>{item.projectTypeDescription}</p>}
                 </div>
                 <svg style={slowTransition} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill={lightMode ? '#00050F' : '#fff'}><path d={projectOpen === index ? 'M480-360 280-560h400L480-360Z' : 'm280-400 200-200 200 200H280Z'}/></svg>
               </section>
