@@ -1487,7 +1487,7 @@ svg.down-svg {
 } */
 
 .actual-projects.projects-opened {
-  max-height: 3000px;
+  max-height: 999999px;
   margin: 30px 20px 60px;
   transition: all 0.5s ease-in-out;
 }
