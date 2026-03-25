@@ -3,7 +3,7 @@ import { AppContext } from '../AppProvider';
 import { Link } from 'react-router-dom';
 
 function AboutMe() {
-    const { lightMode, hover, setHover, slowTransition } = useContext(AppContext);
+    const { lightMode, hover, setHover, slowTransition, downloadResume } = useContext(AppContext);
 
   return (
     <>
@@ -33,6 +33,14 @@ function AboutMe() {
                 </svg>
                 <p>Hi, I'm Emonefe Ovie, a passionate Software Developer with a knack for turning ideas into stunning, responsive websites and web applications. With a strong focus on clean code, user-centric design, and performance optimization, I bring creative solutions to life through modern web technologies. Let’s build something amazing together.</p>
             </section>
+            <div className="about-resume-container">
+                <button className="resume contact-me-button">
+                    <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+                    View CV
+                    </a>
+                </button>
+                <button onClick={downloadResume} className="resume explore-projects-button">Download CV</button>
+            </div>
         </div>
     </>
   )
