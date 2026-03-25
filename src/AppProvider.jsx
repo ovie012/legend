@@ -123,7 +123,7 @@ export function AppProvider({ children }) {
             titleLong : "React-Based Dispatch App Development - Internship Project",
             description : "Developed a React-based dispatch app with Enovers Lab Team 51, focusing on responsive UI and seamless user experience.",
             descriptionLong : "Collaborated with Enovers Lab Team 51 during an internship to develop a dispatch application using React. The project focused on building an efficient and user-friendly front-end solution without integrating a backend. My contributions included implementing responsive UI components, optimizing performance, and ensuring seamless user interaction.",
-            link : "https://swiftdispatch.com.ng",
+            link : "https://swift-dispatch-two.vercel.app/",
           },
         ]
       },
@@ -826,6 +826,15 @@ export function AppProvider({ children }) {
       return shuffled.slice(0, limit);
     };
 
+    const downloadResume = () => {
+      const link = document.createElement("a");
+      link.href = "/resume.pdf";
+      link.download = "Ovie_Emonefe_Resume.pdf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    };
+
   return (
     <AppContext.Provider value={{
         lightMode, setLightMode,
@@ -850,7 +859,8 @@ export function AppProvider({ children }) {
         preloader, setPreloader,
         fadeAway, setFadeAway,
         animationStart, setAnimationStart,
-        loadingPercentage, setLoadingPercentage
+        loadingPercentage, setLoadingPercentage,
+        downloadResume
     }}>
         {children}
     </AppContext.Provider>

@@ -25,7 +25,6 @@ function LikedProjects() {
             <section onClick={() => { setLikedProjectOpen(!likedProjectOpen); }} className="professional-header">
                 <div>
                     <h3>Favorite Projects</h3>
-                    {/* <p>Please drag and drop projects you like into any square of your choice to indicate you like that project.</p> */}
                     {!isMobile && <p>These are the projects that hold a special place for me, whether due to the personal insights they provided or the challenges they presented. Each one played a key role in my growth as a developer and pushed me to expand my skills and knowledge.</p>}
                 </div>
                 <svg style={slowTransition} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill={lightMode ? '#00050F' : '#fff'}><path d={likedProjectOpen ? 'M480-360 280-560h400L480-360Z' : 'm280-400 200-200 200 200H280Z'}/></svg>

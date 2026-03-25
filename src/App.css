@@ -2110,3 +2110,27 @@ p.error-text,
     right: 10px;
   }
 }
+
+/* RESUME STYLING */
+.resume-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0;
+  gap: 20px;
+
+  @media only screen and (max-width: 400px) {
+    flex-direction: column;
+  }
+}
+
+.resume {
+  max-width: 300px;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 15px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+}

@@ -5,7 +5,7 @@ import { MdEmojiEmotions } from "react-icons/md";
 import { FaGraduationCap } from "react-icons/fa";
 
 function AboutMe() {
-  const { funFact, skills, animationKey, handleFunFacts } = useContext(AppContext);
+  const { funFact, skills, animationKey, handleFunFacts, downloadResume } = useContext(AppContext);
 
   return (
     <motion.div
@@ -24,17 +24,26 @@ function AboutMe() {
       >
         <div className="personal-info">
           <p>
-            Hi, I’m <strong>Emonefe Ovie Ezekiel</strong>, a passionate <strong>Software Developer</strong> from Delta State, Nigeria but based in Lagos, Nigeria. 
+            Hi, I’m Emonefe Ovie Ezekiel, a passionate Software Developer from Delta State, Nigeria but based in Lagos, Nigeria. 
             My current stack includes {skills.map((item,index) => (<strong key={index}>{item.name}, </strong>))} and more.
           </p>
           <p>
-            I am a proud graduate of <strong>Mathematics and Education</strong> <FaGraduationCap /> from the University of Lagos, Nigeria. 
-            During my studies, I conducted impactful research on the role of <strong>OpenAI technologies</strong> in improving 
-            <strong> mathematics learning outcomes</strong> for secondary school students.
+            I am a proud graduate of Mathematics and Education from the University of Lagos, Nigeria. 
+            During my studies, I conducted impactful research on the role of OpenAI technologies in improving 
+             mathematics learning outcomes for secondary school students.
           </p>
           <p>
             Beyond coding, I value innovation and creating solutions that make life easier. Let’s build something amazing together!
           </p>
+        </div>
+        
+        <div className="resume-container">
+          <button className="resume">
+            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+              View CV
+            </a>
+          </button>
+          <button onClick={downloadResume} className="resume">Download CV</button>
         </div>
 
         <motion.div
@@ -65,7 +74,7 @@ function AboutMe() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <h2>{funFact.heading} <MdEmojiEmotions /></h2>
+          <h2>{funFact.heading}</h2>
           <motion.div
             key={animationKey}
             initial={{ x: -100, opacity: 0 }}
