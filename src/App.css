@@ -2134,3 +2134,13 @@ p.error-text,
   font-size: 16px;
   font-weight: 600;
 }
+
+.about-resume-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0;
+  gap: 10px;
+  max-width: 300px;
+  margin-left: auto;
+}
