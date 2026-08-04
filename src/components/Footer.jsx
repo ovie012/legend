@@ -22,7 +22,7 @@ function Footer() {
                     </a>
                 ))}
                 </div>
-                <p>© 2024. All rights Reserved</p>
+                <p>© 2026. All rights Reserved</p>
             </section>
         </div>
     </>
