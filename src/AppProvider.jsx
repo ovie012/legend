@@ -114,6 +114,46 @@ export function AppProvider({ children }) {
             link : "https://scrybehub.ng",
           },
           {
+            src: {
+              desktop: "/silvermanns.webp",
+              mobile: "/silvermanns.webp",
+            },
+            alt: "Silvermanns luxury menswear e-commerce website showcasing a premium shopping experience built with React, Shopify Storefront API, and a headless architecture.",
+            title: "Silvermanns",
+            titleLong: "Headless Shopify Luxury Menswear E-commerce Platform",
+            description: "Designed and developed a premium headless e-commerce platform for Silvermanns, delivering a fast, responsive, and modern online shopping experience.",
+            descriptionLong:
+              "Built Silvermanns.com, a production-ready headless Shopify e-commerce platform for a luxury menswear boutique in Nigeria. Developed the entire front end using React and Vite while integrating the Shopify Storefront API for products, cart, authentication, customer accounts, and checkout. Implemented features including customer profiles, purchase history, secure authentication, dynamic product pages, pagination, responsive design, SEO optimization, performance enhancements, store locator, and a premium shopping experience optimized across desktop, tablet, and mobile devices.",
+            link: "https://silvermanns.com/",
+          },
+          {
+            src: {
+              desktop: "/omobafashion.webp",
+              mobile: "/omobafashion.webp",
+            },
+            alt: "OMÖBA Fashion website showcasing a premium luxury Nigerian fashion brand with immersive storytelling, cinematic animations, and a responsive modern design.",
+            title: "OMÖBA Fashion",
+            titleLong: "Luxury Nigerian Fashion Brand Website - Cinematic Experience",
+            description:
+              "Designed and developed a premium fashion website for OMÖBA, combining Nigerian heritage with modern luxury through immersive storytelling and responsive web design.",
+            descriptionLong:
+              "Designed and developed the official OMÖBA Fashion website, a luxury fashion platform inspired by Nigerian heritage, craftsmanship, and contemporary elegance. Built with React, TypeScript, Tailwind CSS, Styled Components, GSAP, and Zustand, the website delivers a cinematic storytelling experience featuring smooth scroll animations, custom interactions, theme support, responsive layouts, optimized performance, interactive galleries, collection showcases, and a refined user experience across desktop, tablet, and mobile devices.",
+            link: "https://omobafashion.com",
+          },
+          {
+            src: {
+              desktop: "/trybevybe.webp",
+              mobile: "/trybevybe.webp",
+            },
+            alt: "TRYBE Vybe landing page showcasing a premium lifestyle and events platform with immersive animations, responsive design, and a community-driven experience.",
+            title: "TRYBE Vybe",
+            titleLong: "Premium Community & Events Platform",
+            description: "Designed and developed a premium React landing page for TRYBE Vybe, focused on building an exclusive community around entertainment, culture, fashion, and unforgettable experiences.",
+            descriptionLong:
+              "Designed and developed a production-ready landing page for TRYBE Vybe using React, TypeScript, Tailwind CSS, GSAP, Framer Motion, and Zustand. The project features a cinematic hero video, immersive scroll-triggered animations, responsive layouts, light and dark themes, interactive gallery experiences, custom UI components, lead generation, and performance-first architecture optimized for production deployment across all devices.",
+            link: "https://trybevybe.org",
+          },
+          {
             src : {
               desktop : "/swift-dispatch-driver.webp",
               mobile : "/swift-dispatch-driver.webp"
@@ -652,6 +692,19 @@ export function AppProvider({ children }) {
 
     const projects = [
       {
+        src: {
+          desktop: "/silvermanns.webp",
+          mobile: "/silvermanns.webp",
+        },
+        alt: "Silvermanns luxury menswear e-commerce website showcasing a premium shopping experience built with React, Shopify Storefront API, and a headless architecture.",
+        title: "Silvermanns",
+        titleLong: "Headless Shopify Luxury Menswear E-commerce Platform",
+        description: "Designed and developed a premium headless e-commerce platform for Silvermanns, delivering a fast, responsive, and modern online shopping experience.",
+        descriptionLong:
+          "Built Silvermanns.com, a production-ready headless Shopify e-commerce platform for a luxury menswear boutique in Nigeria. Developed the entire front end using React and Vite while integrating the Shopify Storefront API for products, cart, authentication, customer accounts, and checkout. Implemented features including customer profiles, purchase history, secure authentication, dynamic product pages, pagination, responsive design, SEO optimization, performance enhancements, store locator, and a premium shopping experience optimized across desktop, tablet, and mobile devices.",
+        link: "https://silvermanns.com/",
+      },
+      {
         src : {
           desktop : "/scrybe-homepage-image.webp",
           mobile : "/scrybe-homepage-image.webp"
@@ -665,15 +718,17 @@ export function AppProvider({ children }) {
       },
       {
         src: {
-          desktop: "/legend-store.webp",
-          mobile: "/legend-store.webp"
+          desktop: "/omobafashion.webp",
+          mobile: "/omobafashion.webp",
         },
-        alt: "Legend Swift Cart Store mini e-commerce application built with React, featuring product listings, cart management, authentication UI, and smooth animations.",
-        title: "LEGEND STORE",
-        titleLong: "Legend Swift Cart Store - Mini E-commerce",
-        description: "Built a modern mini e-commerce frontend with React, featuring product listings, cart persistence, authentication UI, route protection, and smooth micro-interactions using Zustand and Framer Motion.",
-        descriptionLong: "Legend Swift Cart Store is a production-ready mini e-commerce frontend built with React, designed with modern 2026 architecture patterns. It features paginated product listings, category filtering, debounced search, dynamic product pages, and a cart system with Zustand and localStorage persistence. The app includes a checkout flow with React Hook Form + Zod, mock authentication, protected routes, Tailwind CSS styling, and Framer Motion animations, emphasizing scalability, clean architecture, and smooth UX.",
-        link: "https://legend-swift-cart-project.vercel.app/"
+        alt: "OMÖBA Fashion website showcasing a premium luxury Nigerian fashion brand with immersive storytelling, cinematic animations, and a responsive modern design.",
+        title: "OMÖBA Fashion",
+        titleLong: "Luxury Nigerian Fashion Brand Website - Cinematic Experience",
+        description:
+          "Designed and developed a premium fashion website for OMÖBA, combining Nigerian heritage with modern luxury through immersive storytelling and responsive web design.",
+        descriptionLong:
+          "Designed and developed the official OMÖBA Fashion website, a luxury fashion platform inspired by Nigerian heritage, craftsmanship, and contemporary elegance. Built with React, TypeScript, Tailwind CSS, Styled Components, GSAP, and Zustand, the website delivers a cinematic storytelling experience featuring smooth scroll animations, custom interactions, theme support, responsive layouts, optimized performance, interactive galleries, collection showcases, and a refined user experience across desktop, tablet, and mobile devices.",
+        link: "https://omobafashion.com",
       },
       {
         src: {
@@ -689,16 +744,41 @@ export function AppProvider({ children }) {
       },
       {
         src: {
-          desktop: "/estateIQ-landingPage.webp",
-          mobile: "/estateIQ-landingPage.webp"
+          desktop: "/trybevybe.webp",
+          mobile: "/trybevybe.webp",
         },
-        alt: "Estate IQ real estate intelligence dashboard showcasing property search, map discovery, analytics panels, marketplace activity, and management tools in a data-driven interface.",
-        title: "Estate IQ",
-        titleLong: "Real Estate Intelligence Platform - Property Discovery and Operations System",
-        description: "Built Estate IQ, a production-grade real estate intelligence platform featuring advanced search, map discovery, analytics dashboards, marketplace workflows, and property management tools.",
-        descriptionLong: "Developed Estate IQ, a comprehensive real estate intelligence platform combining advanced property search, interactive map discovery, agent communication, marketplace transactions, mortgage tools, analytics, and asset management. The system emphasizes scalable architecture, data-driven insights, responsive design, and a unified dashboard for end-to-end property exploration, evaluation, and operational oversight.",
-        link: "https://estate-iq-ten.vercel.app/"
+        alt: "TRYBE Vybe landing page showcasing a premium lifestyle and events platform with immersive animations, responsive design, and a community-driven experience.",
+        title: "TRYBE Vybe",
+        titleLong: "Premium Community & Events Platform",
+        description: "Designed and developed a premium React landing page for TRYBE Vybe, focused on building an exclusive community around entertainment, culture, fashion, and unforgettable experiences.",
+        descriptionLong:
+          "Designed and developed a production-ready landing page for TRYBE Vybe using React, TypeScript, Tailwind CSS, GSAP, Framer Motion, and Zustand. The project features a cinematic hero video, immersive scroll-triggered animations, responsive layouts, light and dark themes, interactive gallery experiences, custom UI components, lead generation, and performance-first architecture optimized for production deployment across all devices.",
+        link: "https://trybevybe.org",
       },
+      {
+        src: {
+          desktop: "/tenant-hub-homepage-image.webp",
+          mobile: "/tenant-hub-homepage-image.webp"
+        },
+        alt: "Tenant Hub multi-tenant SaaS admin dashboard showcasing organization switching, role-based access control, subscription plans, feature gating, and responsive sidebar navigation.",
+        title: "Tenant Hub",
+        titleLong: "Multi-Tenant SaaS Admin Panel - Role-Based and Subscription-Gated Architecture",
+        description: "Built Tenant Hub, a production-grade multi-tenant SaaS admin panel featuring organization switching, role-based access control, and subscription-based feature gating.",
+        descriptionLong: "Developed Tenant Hub, a scalable multi-tenant SaaS admin dashboard engineered with centralized permission middleware, route guards, and plan-based feature gating. The application simulates tenant isolation, organization switching, and role-aware UI rendering using a clean React and Zustand architecture designed for real-world SaaS systems.",
+        link: "https://tenant-hub-topaz.vercel.app/"
+      },
+      // {
+      //   src: {
+      //     desktop: "/estateIQ-landingPage.webp",
+      //     mobile: "/estateIQ-landingPage.webp"
+      //   },
+      //   alt: "Estate IQ real estate intelligence dashboard showcasing property search, map discovery, analytics panels, marketplace activity, and management tools in a data-driven interface.",
+      //   title: "Estate IQ",
+      //   titleLong: "Real Estate Intelligence Platform - Property Discovery and Operations System",
+      //   description: "Built Estate IQ, a production-grade real estate intelligence platform featuring advanced search, map discovery, analytics dashboards, marketplace workflows, and property management tools.",
+      //   descriptionLong: "Developed Estate IQ, a comprehensive real estate intelligence platform combining advanced property search, interactive map discovery, agent communication, marketplace transactions, mortgage tools, analytics, and asset management. The system emphasizes scalable architecture, data-driven insights, responsive design, and a unified dashboard for end-to-end property exploration, evaluation, and operational oversight.",
+      //   link: "https://estate-iq-ten.vercel.app/"
+      // },
       // {
       //   src: {
       //     desktop: "/micro-hub-homepage-image.webp",
@@ -735,30 +815,18 @@ export function AppProvider({ children }) {
               //   descriptionLong : "Ofure Jewelry Store is an incomplete e-commerce platform I designed and built early in my learning journey. This project, developed before I learned React, helped me gain significant insights into web development, focusing on creating a clean and visually appealing UI for showcasing jewelry products.",
               //   link : "https://ofure-jewelry.vercel.app",
               // },
-              {
-                src: {
-                  desktop: "/tenant-hub-homepage-image.webp",
-                  mobile: "/tenant-hub-homepage-image.webp"
-                },
-                alt: "Tenant Hub multi-tenant SaaS admin dashboard showcasing organization switching, role-based access control, subscription plans, feature gating, and responsive sidebar navigation.",
-                title: "Tenant Hub",
-                titleLong: "Multi-Tenant SaaS Admin Panel - Role-Based and Subscription-Gated Architecture",
-                description: "Built Tenant Hub, a production-grade multi-tenant SaaS admin panel featuring organization switching, role-based access control, and subscription-based feature gating.",
-                descriptionLong: "Developed Tenant Hub, a scalable multi-tenant SaaS admin dashboard engineered with centralized permission middleware, route guards, and plan-based feature gating. The application simulates tenant isolation, organization switching, and role-aware UI rendering using a clean React and Zustand architecture designed for real-world SaaS systems.",
-                link: "https://tenant-hub-topaz.vercel.app/"
-              },
-              {
-                src : {
-                  desktop : "/brew-board-homepage-image.webp",
-                  mobile : "/brew-board-homepage-image.webp"
-                },
-                alt : "Brew Board real-time collaborative Kanban interface showcasing coffee-themed task management, live updates, drag-and-drop functionality, and multi-user synchronization.",
-                title : "Brew Board",
-                titleLong : "Real-Time Collaborative Kanban Board - Distributed Frontend System",
-                description : "Built Brew Board, a production-grade real-time collaborative Kanban application with optimistic updates, offline support, and role-based permissions.",
-                descriptionLong : "Developed Brew Board, a real-time collaborative Kanban platform engineered with distributed systems principles at the frontend layer. The application features live multi-user synchronization via WebSockets, optimistic UI updates with rollback handling, conflict resolution through versioning, offline-first architecture with queued mutations, and role-based access control. The project emphasizes scalable architecture, state separation between server and client, and resilient real-time collaboration.",
-                link : "https://brew-board.vercel.app/"
-              },
+              // {
+              //   src : {
+              //     desktop : "/brew-board-homepage-image.webp",
+              //     mobile : "/brew-board-homepage-image.webp"
+              //   },
+              //   alt : "Brew Board real-time collaborative Kanban interface showcasing coffee-themed task management, live updates, drag-and-drop functionality, and multi-user synchronization.",
+              //   title : "Brew Board",
+              //   titleLong : "Real-Time Collaborative Kanban Board - Distributed Frontend System",
+              //   description : "Built Brew Board, a production-grade real-time collaborative Kanban application with optimistic updates, offline support, and role-based permissions.",
+              //   descriptionLong : "Developed Brew Board, a real-time collaborative Kanban platform engineered with distributed systems principles at the frontend layer. The application features live multi-user synchronization via WebSockets, optimistic UI updates with rollback handling, conflict resolution through versioning, offline-first architecture with queued mutations, and role-based access control. The project emphasizes scalable architecture, state separation between server and client, and resilient real-time collaboration.",
+              //   link : "https://brew-board.vercel.app/"
+              // },
               // {
               //   src : {
               //     desktop : "/insight-dashboard-landing-page.webp",
