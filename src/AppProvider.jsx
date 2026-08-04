@@ -123,7 +123,7 @@ export function AppProvider({ children }) {
             titleLong: "Headless Shopify Luxury Menswear E-commerce Platform",
             description: "Designed and developed a premium headless e-commerce platform for Silvermanns, delivering a fast, responsive, and modern online shopping experience.",
             descriptionLong:
-              "Built Silvermanns.com, a production-ready headless Shopify e-commerce platform for a luxury menswear boutique in Nigeria. Developed the entire front end using React and Vite while integrating the Shopify Storefront API for products, cart, authentication, customer accounts, and checkout. Implemented features including customer profiles, purchase history, secure authentication, dynamic product pages, pagination, responsive design, SEO optimization, performance enhancements, store locator, and a premium shopping experience optimized across desktop, tablet, and mobile devices.",
+              "Built Silvermanns.com, a production-ready headless Shopify e-commerce platform for a luxury menswear boutique in Nigeria. Developed the entire front end using React and Vite while integrating the Shopify Storefront API for products, cart, authentication, customer accounts, and checkout. Implemented features including customer profiles, purchase history, secure authentication, dynamic product pages, and a premium shopping experience optimized across desktop, tablet, and mobile devices.",
             link: "https://silvermanns.com/",
           },
           {
