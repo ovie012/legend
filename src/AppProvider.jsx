@@ -55,7 +55,7 @@ export function AppProvider({ children }) {
     }, []);
 
     const socials = [
-        {title : FaLinkedin, link : "https://www.linkedin.com/in/ovie-emonefe-73b886259/" },
+        {title : FaLinkedin, link : "https://www.linkedin.com/in/ovieemonefe/" },
         {title : FaGithub, link : "https://github.com/ovie012" },
         {title : FaXTwitter, link : "https://x.com/legend_devv" },
         {title : FaTiktok, link : "https://www.tiktok.com/@legenddev_softwaredev" },
