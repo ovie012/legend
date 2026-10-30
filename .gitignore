@@ -22,3 +22,23 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Personal reference photos/videos for the 3D character (never commit)
+designs/
+
+# Private portfolio audit (kept locally, never pushed)
+docs/Legend-dev-Portfolio-Audit.pdf
+
+# Private handoff notes for Claude sessions (local only)
+HANDOFF.md
+
+# Private 3D avatar audit (PDF for the owner, working notes for Claude; local only)
+docs/Avatar-Audit.pdf
+docs/AVATAR_AUDIT.md
+
+/*/.continue/
+/*/.continue/**
+
+
+# Old photo-projected avatar (replaced by the rigged character; kept locally, never pushed)
+public/3d/legend-avatar.glb

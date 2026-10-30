@@ -1,31 +1,132 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { FiArrowUpRight, FiArrowUp, FiCopy, FiCheck } from 'react-icons/fi';
 import { AppContext } from '../AppProvider';
-// import { Link } from 'react-router-dom';
+import Logo3D from './Logo3D';
+
+const EMAIL = 'ovieemonefe012@gmail.com';
+
+const navLinks = [
+    { label: 'Home', to: '/' },
+    { label: 'About', to: '/About' },
+    { label: 'Projects', to: '/Projects' },
+    { label: 'Contact', to: '/Contact' },
+];
+
+const reveal = {
+    hidden: { opacity: 0, y: 40 },
+    visible: (i = 0) => ({
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.7, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] },
+    }),
+};
 
 function Footer() {
-    const { socials } = useContext(AppContext);
+    const { socials, scrollToTop } = useContext(AppContext);
+    const [copied, setCopied] = useState(false);
+
+    const copyEmail = async () => {
+        try {
+            await navigator.clipboard.writeText(EMAIL);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        } catch {
+            window.location.href = `mailto:${EMAIL}`;
+        }
+    };
 
   return (
-    <>
-        <div className="footer">
-            <section>
-                <h5> <span></span> Lets Work Together</h5>
-                <a href="mailto:ovieemonefe012@gmail.com">send a message</a>
-            </section>
-            <h2>Let’s collaborate and create something extraordinary. Start by <a href="mailto:ovieemonefe012@gmail.com">Saying Hi</a> </h2>
-            <section>
-                <img src="/legend-logo.webp" alt="logo" className="logo" />
-                <div>
-                {socials.map((item, index) => (
-                    <a key={index} href={item.link} target="_blank" rel="noopener noreferrer">
-                        <item.title className="footer-icon" />
-                    </a>
-                ))}
+    <footer className="footer">
+        <div className="footer-glow" aria-hidden="true"></div>
+
+        <motion.section
+            className="footer-cta"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+        >
+            <motion.span className="footer-status" variants={reveal} custom={0}>
+                <span className="footer-status-dot"></span>
+                Available for new projects
+            </motion.span>
+            <motion.h2 variants={reveal} custom={1}>
+                Let’s create something <span className="footer-highlight">extraordinary</span> together.
+            </motion.h2>
+            <motion.div className="footer-cta-actions" variants={reveal} custom={2}>
+                <a href={`mailto:${EMAIL}`} className="footer-btn footer-btn-primary">
+                    Say Hi <FiArrowUpRight />
+                </a>
+                <button type="button" className="footer-btn footer-btn-ghost" onClick={copyEmail}>
+                    {copied ? <><FiCheck /> Copied!</> : <><FiCopy /> {EMAIL}</>}
+                </button>
+            </motion.div>
+        </motion.section>
+
+        <div className="footer-divider"></div>
+
+        <motion.section
+            className="footer-grid"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+        >
+            <motion.div className="footer-brand" variants={reveal} custom={0}>
+                <Link to="/" onClick={scrollToTop} aria-label="Back to home">
+                    <Logo3D className="logo" />
+                </Link>
+                <p>AI Engineer &amp; Software Developer building fast, intelligent web and mobile apps.</p>
+            </motion.div>
+
+            <motion.div className="footer-col" variants={reveal} custom={1}>
+                <h6>Navigation</h6>
+                <ul>
+                    {navLinks.map((item) => (
+                        <li key={item.to}>
+                            <Link to={item.to} onClick={scrollToTop} className="footer-link">
+                                {item.label}
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </motion.div>
+
+            <motion.div className="footer-col" variants={reveal} custom={2}>
+                <h6>Connect</h6>
+                <div className="footer-socials">
+                    {socials.map((item, index) => (
+                        <a
+                            key={index}
+                            href={item.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="footer-social"
+                            aria-label={new URL(item.link).hostname.replace('www.', '')}
+                        >
+                            <item.title />
+                        </a>
+                    ))}
                 </div>
-                <p>© 2026. All rights Reserved</p>
-            </section>
-        </div>
-    </>
+            </motion.div>
+
+            <motion.div className="footer-col" variants={reveal} custom={3}>
+                <h6>Get in touch</h6>
+                <a href={`mailto:${EMAIL}`} className="footer-link footer-email">
+                    {EMAIL} <FiArrowUpRight />
+                </a>
+            </motion.div>
+        </motion.section>
+
+        <div className="footer-wordmark" aria-hidden="true">LEGEND.DEV</div>
+
+        <section className="footer-bottom">
+            <p>© {new Date().getFullYear()} Legend.dev. All rights reserved.</p>
+            <button type="button" className="footer-top-btn" onClick={scrollToTop} aria-label="Back to top">
+                Back to top <span><FiArrowUp /></span>
+            </button>
+        </section>
+    </footer>
   )
 }
 

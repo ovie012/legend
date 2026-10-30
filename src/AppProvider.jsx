@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { usePersistentState } from './hooks/UsePersistentState';
+import { useThemePreference } from './hooks/useThemePreference';
 import './App.css';
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaPlay, FaGithub, FaGraduationCap,  FaLinkedin, FaTwitter, FaTiktok, FaInstagram } from "react-icons/fa";
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaPlay, FaGithub, FaGraduationCap,  FaLinkedin, FaTwitter, FaTiktok, FaInstagram, FaPython } from "react-icons/fa";
 import { SiRedux, SiTailwindcss, SiStyledcomponents, SiTypescript } from "react-icons/si";
 import { FaXTwitter } from "react-icons/fa6";
 import { TbLetterZ, TbBrandReactNative } from 'react-icons/tb';
@@ -14,7 +14,7 @@ export function AppProvider({ children }) {
     const [loadingPercentage, setLoadingPercentage] = useState(0);
     const [animationStart, setAnimationStart] = useState(true);
     const [fadeAway, setFadeAway] = useState(false);
-    const [lightMode, setLightMode] = usePersistentState('lightMode', false);
+    const [lightMode, setLightMode] = useThemePreference();
     const [hover, setHover] = useState(false);
     const [projectOpen, setProjectOpen] = useState(false);
     const [likedProjectOpen, setLikedProjectOpen] = useState(false);
@@ -62,6 +62,23 @@ export function AppProvider({ children }) {
         {title : FaInstagram, link : "https://www.instagram.com/legendd.devv" },
     ];
   
+    // ===== AI ENGINEERING PROJECTS =====
+    // Same shape as the projects in projectsData. While this list is empty nothing AI-specific shows.
+    // Add your first project and two things appear automatically:
+    //   1. an "AI Engineering" track on the Projects page (/Projects?track=ai)
+    //   2. a "Built with AI" section on the homepage
+    const aiProjects = [
+      // {
+      //   src : { desktop : "/your-ai-project.webp", mobile : "/your-ai-project.webp" },
+      //   alt : "Short description of the screenshot",
+      //   title : "Project name",
+      //   titleLong : "Longer title shown on hover",
+      //   description : "One or two sentences about what it does.",
+      //   descriptionLong : "The full story: problem, approach, stack, results.",
+      //   link : "https://..."
+      // },
+    ];
+
     const skills = [
       { icon: <FaHtml5 />, name: "HTML" },
       { icon: <FaCss3Alt />, name: "CSS" },
@@ -74,6 +91,7 @@ export function AppProvider({ children }) {
       { icon: <SiTypescript />, name: "TypeScript" },
       { icon: zustandIconChosen, name: "Zustand" },
       { icon: <TbBrandReactNative />, name: "React Native" },
+      { icon: <FaPython />, name: "Python" },
     ];
 
     const development = [
@@ -906,6 +924,7 @@ export function AppProvider({ children }) {
   return (
     <AppContext.Provider value={{
         lightMode, setLightMode,
+        aiProjects,
         hover, setHover,
         slowTransition,
         development,
