@@ -29,6 +29,11 @@ const TEXT = 'h1, h2, h3, h4, h5, h6, p';
 const READ_IN = '.hm-hero, .hm-about';
 const readable = (el) => !!(el?.closest?.(TEXT) && el.closest(READ_IN));
 const READ_OFF = 0.6;
+// Quick clicks on his space (not buttons/links): 3 in a row = a random dance, 4 in a row = glasses on and kept on
+// (the next 4 take them off). Clicks count as one group while each comes within MULTI_GAP of the last; after the
+// 3rd we wait MULTI_WAIT for a 4th before dancing. The 1st click still reacts at once as before.
+const MULTI_GAP = 0.45;
+const MULTI_WAIT = 0.4;
 const now = () => performance.now() / 1000;
 // a reaction with an animation clip lasts as long as the clip; the clip moves the body, so its keyframes keep the face only
 const durationOf = (name) => CLIPS[name]?.duration ?? ACTIONS[name].duration;
@@ -42,8 +47,10 @@ export function useAvatarDirector({ meshRef, lightMode, scroll }) {
   const pose = useRef(emptyPose());
   // the reaction now playing, for the avatar's animation mixer (id changes on every new reaction)
   const playing = useRef({ id: 0, name: null, start: 0, duration: 0 });
-  // reading: is the pointer on text; worn: are the glasses on his face (the avatar sets it as his hand puts them on/off)
-  const glasses = useRef({ reading: false, worn: false });
+  // reading: is the pointer on text; pinned: kept on by 4 clicks; worn: are the glasses on his face (the avatar sets
+  // it as his hand puts them on/off)
+  const glasses = useRef({ reading: false, pinned: false, worn: false });
+  const clicks = useRef({ count: 0, last: 0, timer: 0 });
   // angle is added to the avatar's yaw by the scene
   const spin = useRef({ angle: 0, vel: 0, dragging: false, lastX: 0, lastT: 0, speed: 0, moved: 0, pendingFace: false, noClickUntil: 0, last: now() });
   const s = useRef({
@@ -148,6 +155,24 @@ export function useAvatarDirector({ meshRef, lightMode, scroll }) {
       (mesh.userData.anchor ?? mesh).getWorldPosition(centre).project(camera);
       if (Math.abs(centre.x) > 1.1 || Math.abs(centre.y) > 1.1) return;
 
+      // multi-click: 2nd click of a group does nothing new, 3rd = a dance (unless a 4th follows), 4th = glasses toggle
+      const c = clicks.current; const t = now();
+      c.count = t - c.last < MULTI_GAP ? c.count + 1 : 1; c.last = t;
+      if (c.count === 2) return;
+      if (c.count === 3) {
+        clearTimeout(c.timer);
+        c.timer = setTimeout(() => { if (clicks.current.count === 3) play(pick('dance'), 'click'); }, MULTI_WAIT * 1000);
+        return;
+      }
+      if (c.count >= 4) {
+        clearTimeout(c.timer); c.count = 0; c.last = 0;
+        const g = glasses.current; g.pinned = !g.pinned;
+        // at once (interrupts the gesture the 1st click started); the update loop retries if anything gets in the way
+        if (g.pinned && !g.worn) play('glassesOn', 'click');
+        else if (!g.pinned && g.worn && !g.reading) play('glassesOff', 'click');
+        return;
+      }
+
       ndc.set((e.clientX / window.innerWidth) * 2 - 1, -(e.clientY / window.innerHeight) * 2 + 1);
       raycaster.setFromCamera(ndc, camera);
       const hit = raycaster.intersectObject(mesh, true)[0];
@@ -171,8 +196,14 @@ export function useAvatarDirector({ meshRef, lightMode, scroll }) {
       if (!readable(e.target) || readable(e.relatedTarget)) return;
       offTimer = setTimeout(() => { glasses.current.reading = false; }, READ_OFF * 1000);
     };
+    const multi = clicks.current;
+    // rapid clicks on his space would otherwise select page text (double/triple click); form fields keep it
+    const onMouseDown = (e) => {
+      if (e.detail > 1 && !e.target.closest?.(IGNORE) && !e.target.closest?.('[contenteditable]')) e.preventDefault();
+    };
     document.addEventListener('pointerover', onTextOver);
     document.addEventListener('pointerout', onTextOut);
+    window.addEventListener('mousedown', onMouseDown);
     window.addEventListener('click', onClick);
     window.addEventListener('pointerdown', onDown);
     window.addEventListener('pointermove', onDrag, { passive: true });
@@ -183,6 +214,8 @@ export function useAvatarDirector({ meshRef, lightMode, scroll }) {
     window.addEventListener('keydown', touch);
     document.addEventListener('pointerover', onOver);
     return () => {
+      window.removeEventListener('mousedown', onMouseDown);
+      clearTimeout(multi.timer);
       window.removeEventListener('click', onClick);
       window.removeEventListener('pointerdown', onDown);
       window.removeEventListener('pointermove', onDrag);
@@ -274,11 +307,13 @@ export function useAvatarDirector({ meshRef, lightMode, scroll }) {
         if (stageName === 'hero') st.greeted = true;
       }
 
-      // glasses follow the reading state; retried each frame, so a click that interrupts the move just delays it
+      // glasses follow the reading state (or stay on while pinned by 4 clicks); retried each frame, so a click that
+      // interrupts the move just delays it
       const g = glasses.current;
+      const want = g.reading || g.pinned;
       const doing = st.current && t < st.current.start + st.current.duration ? st.current.name : null;
-      if (g.reading && !g.worn && doing !== 'glassesOn') play('glassesOn', 'read');
-      else if (!g.reading && g.worn && doing !== 'glassesOff') play('glassesOff', 'read');
+      if (want && !g.worn && doing !== 'glassesOn') play('glassesOn', 'read');
+      else if (!want && g.worn && doing !== 'glassesOff') play('glassesOff', 'read');
 
       const busy = st.current && t < st.current.start + st.current.duration;
       if (!busy && t - st.lastInput > IDLE_AFTER && t > st.nextIdle) {
