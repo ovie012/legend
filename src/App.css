@@ -6457,7 +6457,15 @@ svg.down-svg {
   font-size: 0.93rem;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  /* background too: on a theme switch it changed at once while the text faded (white-on-white for a moment) */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease-in-out, color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* everything with a theme colour fades with the page (0.3s ease-in-out, as the .container background) */
+.nf-eyebrow,
+.nf-eyebrow-dot,
+.nf-path code {
+  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .nf-btn-primary {

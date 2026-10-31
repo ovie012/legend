@@ -252,5 +252,9 @@ export class Motion {
     dst.lower.time = src.lower.time; dst.upper.time = src.upper.time; dst.w = 1;
     this.pairs.filter((p) => p !== dst).forEach((p) => { p.lower.stop(); p.upper.stop(); });
     this.pairs = [dst];
+    // full strength now and posed at once: start() leaves new clips at weight 0 (to fade in), which on this outfit's
+    // first visible frame showed its rest pose (arms out) for one frame
+    dst.lower.setEffectiveWeight(1); dst.upper.setEffectiveWeight(1);
+    this.mixer.update(0);
   }
 }

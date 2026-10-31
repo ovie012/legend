@@ -27,7 +27,7 @@ export const faceOf = (step) => (typeof step?.face === 'string' ? FACE[step.face
 const HAND = {
   tiltWave: 'open', winkBye: 'open', clap: 'open', shrug: 'open', stretch: 'open', doubleTake: 'open',
   cheer: 'fist', hop: 'fist', sittingClap: 'open', sittingThumbsUp: 'thumb', cheeringWhileSitting: 'fist',
-  sittingDisbelief: 'open', climbingToTop: 'grip', jumpingDown: 'open',
+  sittingDisbelief: 'open', climbingToTop: 'press', jumpingDown: 'open',
 };
 
 const DANCES_404 = ['bounceGroove', 'sideSway', 'shoulderShimmy', 'twirl', 'robot', 'disco', 'moonwalk', 'shuffling', 'waveHipHopDance'];
@@ -96,7 +96,7 @@ const sitDownTop = () => [
 const climbFront = () => [
   walk(0, SPOTS.climbFrontZ + 0.3),
   { turn: Math.PI },
-  { clip: 'climbingToTop', align: { x: 0, z: SPOTS.climbFrontZ, yaw: Math.PI }, alignTime: 0.45, fade: 0.35, look: 0, face: 'effort', hands: 'grip' },
+  { clip: 'climbingToTop', align: { x: 0, z: SPOTS.climbFrontZ, yaw: Math.PI }, alignTime: 0.45, fade: 0.35, look: 0, face: 'effort', hands: 'press' },
   ...sitDownTop(),
 ];
 
@@ -106,7 +106,7 @@ const climbBack = (side) => [
   walk(side * SPOTS.sideX, SPOTS.behindZ),
   walk(0, SPOTS.behindZ),
   { turn: 0 },
-  { clip: 'climbingToTop', align: { x: 0, z: SPOTS.climbBackZ, yaw: 0 }, alignTime: 0.5, fade: 0.35, look: 0, face: 'effort', hands: 'grip' },
+  { clip: 'climbingToTop', align: { x: 0, z: SPOTS.climbBackZ, yaw: 0 }, alignTime: 0.5, fade: 0.35, look: 0, face: 'effort', hands: 'press' },
   ...sitDownTop(),
 ];
 

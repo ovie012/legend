@@ -28,6 +28,7 @@ const GLASSES_OFF_GRAB = 0.55;
 const HAND_POSES = {
   relaxed: [0, 0, 0, 0, 0], open: [-0.1, -0.15, -0.15, -0.12, -0.1], fist: [0.55, 1.25, 1.3, 1.35, 1.35],
   grip: [0.3, 0.55, 0.65, 0.75, 0.8], thumb: [-0.35, 1.25, 1.3, 1.35, 1.35],
+  press: [0.1, 0.12, 0.15, 0.2, 0.25],     // climbing: hands flat on the block / thigh, fingers relaxed
 };
 const X = new THREE.Vector3(1, 0, 0);
 // clicks on these belong to the page, not to him
@@ -37,6 +38,41 @@ const READABLE = '.nf-copy h1, .nf-copy p:not(.nf-path)';
 const READ_OFF = 0.6;
 const MULTI_GAP = 0.45;      // quick clicks: 3 = dance, 4 = glasses (as on the homepage)
 const MULTI_WAIT = 0.4;
+
+/* ---------- theme colours: the 3D stage fades with the page (0.3 s ease-in-out, as the CSS), never jumps ---------- */
+
+const THEME_FADE = 0.32;
+// everything on the stage that depends on the theme, from the page's CSS tokens
+function lookOf(c) {
+  const col = (v) => new THREE.Color(v);
+  return {
+    front: col(c.front), side: col(c.side),
+    frontEm: col(c.front).multiplyScalar(c.light ? 0.2 : 0.14), sideEm: col(c.side).multiplyScalar(c.light ? 0.1 : 0.08),
+    ground: col(c.ground), accent: col(c.accent), rim: col(c.rim), fill: col(c.fill),
+    hemiGround: col(c.light ? '#e3d3c3' : '#141a26'),
+    floorOp: c.light ? 0.9 : 0.85, rowBlob: c.light ? 0.12 : 0.42, digitBlob: c.light ? 0.26 : 0.6,
+    ringOp: c.light ? 0.5 : 0.42, dustOp: c.light ? 0.45 : 0.6, shadowOp: c.light ? 0.3 : 0.6,
+    hemiI: c.light ? 1.5 : 1.15, keyI: c.light ? 1.5 : 1.7, fillI: c.light ? 1.8 : 1.3, light: c.light ? 1 : 0,
+  };
+}
+const cloneLook = (l) => Object.fromEntries(Object.entries(l).map(([k, v]) => [k, v?.isColor ? v.clone() : v]));
+function mixLook(out, a, b, k) {
+  for (const key of Object.keys(a)) {
+    if (a[key].isColor) out[key].copy(a[key]).lerp(b[key], k);
+    else out[key] = a[key] + (b[key] - a[key]) * k;
+  }
+}
+
+// eases look.cur from the old palette to the new one whenever the theme changes
+function LookFader({ look }) {
+  useFrame((state, dt) => {
+    if (look.t >= 1) return;
+    look.t = Math.min(1, look.t + Math.min(dt, 0.05) / THEME_FADE);
+    const k = look.t * look.t * (3 - 2 * look.t);
+    mixLook(look.cur, look.from, look.to, k);
+  });
+  return null;
+}
 
 /* ---------- the "404": rounded polygons extruded with a soft bevel ---------- */
 
@@ -92,17 +128,17 @@ function digitGeometry(kind) {
   return g;
 }
 
-function Digits({ colors }) {
+function Digits({ look }) {
   const geos = useMemo(() => ({ 4: digitGeometry('4'), 0: digitGeometry('0') }), []);
   const mats = useMemo(() => [
     new THREE.MeshStandardMaterial({ roughness: 0.42, metalness: 0.15 }),     // front + back faces
     new THREE.MeshStandardMaterial({ roughness: 0.55, metalness: 0.1 }),      // sides + bevel
   ], []);
-  useEffect(() => {
-    mats[0].color.set(colors.front); mats[1].color.set(colors.side);
-    mats[0].emissive.set(colors.front).multiplyScalar(colors.light ? 0.2 : 0.14);
-    mats[1].emissive.set(colors.side).multiplyScalar(colors.light ? 0.1 : 0.08);
-  }, [colors, mats]);
+  useFrame(() => {
+    const l = look.cur;
+    mats[0].color.copy(l.front); mats[1].color.copy(l.side);
+    mats[0].emissive.copy(l.frontEm); mats[1].emissive.copy(l.sideEm);
+  });
   useEffect(() => () => { Object.values(geos).forEach((g) => g.dispose()); mats.forEach((m) => m.dispose()); }, [geos, mats]);
   const step = BLOCK.width + BLOCK.gap;
   return (
@@ -131,27 +167,34 @@ const radial = (stops) => canvasTexture(256, (g, n) => {
   g.fillStyle = grad; g.fillRect(0, 0, n, n);
 });
 
-function Ground({ colors }) {
+function Ground({ look }) {
   const floor = useMemo(() => radial([[0, 'rgba(255,255,255,1)'], [0.45, 'rgba(255,255,255,0.75)'], [1, 'rgba(255,255,255,0)']]), []);
   const blob = useMemo(() => radial([[0, 'rgba(0,0,0,0.85)'], [0.5, 'rgba(0,0,0,0.38)'], [1, 'rgba(0,0,0,0)']]), []);
+  const floorMat = useRef(); const rowMat = useRef(); const digitMats = useRef([]);
   useEffect(() => () => { floor.dispose(); blob.dispose(); }, [floor, blob]);
+  useFrame(() => {
+    const l = look.cur;
+    floorMat.current.color.copy(l.ground); floorMat.current.opacity = l.floorOp;
+    rowMat.current.opacity = l.rowBlob;
+    digitMats.current.forEach((m) => { if (m) m.opacity = l.digitBlob; });
+  });
   const step = BLOCK.width + BLOCK.gap;
   const zMid = BLOCK.front - BLOCK.depth / 2;
   return (
     <group>
       <mesh rotation-x={-Math.PI / 2} position={[0, -0.002, 0.8]} renderOrder={-2}>
         <circleGeometry args={[7.5, 64]} />
-        <meshBasicMaterial map={floor} color={colors.ground} transparent opacity={colors.light ? 0.9 : 0.85} depthWrite={false} toneMapped={false} />
+        <meshBasicMaterial ref={floorMat} map={floor} transparent depthWrite={false} toneMapped={false} />
       </mesh>
       {/* contact shadows: one soft blob per digit, a wider one for the whole row */}
       <mesh rotation-x={-Math.PI / 2} position={[0, 0.001, zMid + 0.05]} scale={[3 * step + 1.2, BLOCK.depth + 1.3, 1]} renderOrder={-1}>
         <planeGeometry />
-        <meshBasicMaterial map={blob} transparent opacity={colors.light ? 0.12 : 0.42} depthWrite={false} toneMapped={false} />
+        <meshBasicMaterial ref={rowMat} map={blob} transparent depthWrite={false} toneMapped={false} />
       </mesh>
       {[-1, 0, 1].map((i) => (
         <mesh key={i} rotation-x={-Math.PI / 2} position={[i * step, 0.002, zMid + 0.04]} scale={[BLOCK.width + 0.4, BLOCK.depth + 0.4, 1]} renderOrder={-1}>
           <planeGeometry />
-          <meshBasicMaterial map={blob} transparent opacity={colors.light ? 0.26 : 0.6} depthWrite={false} toneMapped={false} />
+          <meshBasicMaterial ref={(m) => { digitMats.current[i + 1] = m; }} map={blob} transparent depthWrite={false} toneMapped={false} />
         </mesh>
       ))}
     </group>
@@ -159,9 +202,9 @@ function Ground({ colors }) {
 }
 
 // the site's orbit motif lying on the ground round the 404, with the four-point star travelling along it
-function OrbitRing({ colors }) {
+function OrbitRing({ look }) {
   const star = useLoader(THREE.TextureLoader, '/icon-Star.svg');
-  const starRef = useRef();
+  const starRef = useRef(); const lineMat = useRef();
   const curve = useMemo(() => new THREE.EllipseCurve(0, 0, 3.0, 1.75), []);
   const line = useMemo(() => new THREE.BufferGeometry().setFromPoints(curve.getPoints(200).map((p) => new THREE.Vector3(p.x, 0, p.y))), [curve]);
   useEffect(() => () => line.dispose(), [line]);
@@ -170,20 +213,22 @@ function OrbitRing({ colors }) {
     const p = curve.getPoint((t * 0.035) % 1);
     starRef.current.position.set(p.x, 0.05, p.y);
     starRef.current.material.rotation = t * 0.8;
+    starRef.current.material.color.copy(look.cur.accent);
+    lineMat.current.color.copy(look.cur.accent); lineMat.current.opacity = look.cur.ringOp;
   });
   return (
     <group position={[0, 0.004, BLOCK.front - BLOCK.depth / 2 + 0.3]}>
       <line geometry={line}>
-        <lineBasicMaterial color={colors.accent} transparent opacity={colors.light ? 0.5 : 0.42} depthWrite={false} toneMapped={false} />
+        <lineBasicMaterial ref={lineMat} transparent depthWrite={false} toneMapped={false} />
       </line>
       <sprite ref={starRef} scale={0.26}>
-        <spriteMaterial alphaMap={star} color={colors.accent} transparent depthWrite={false} toneMapped={false} />
+        <spriteMaterial alphaMap={star} transparent depthWrite={false} toneMapped={false} />
       </sprite>
     </group>
   );
 }
 
-function Dust({ colors }) {
+function Dust({ look }) {
   const ref = useRef();
   const count = 320;
   const { positions, sprite } = useMemo(() => {
@@ -195,18 +240,22 @@ function Dust({ colors }) {
     }
     return { positions: p, sprite: radial([[0, 'rgba(255,255,255,1)'], [0.35, 'rgba(255,255,255,0.5)'], [1, 'rgba(255,255,255,0)']]) };
   }, []);
+  const mat = useRef();
   useEffect(() => () => sprite.dispose(), [sprite]);
   useFrame((state, dt) => {
     ref.current.rotation.y += dt * 0.01;
     ref.current.position.y = (ref.current.position.y + dt * 0.05) % 1.5;
+    const l = look.cur; const m = mat.current;
+    m.color.copy(l.accent); m.opacity = l.dustOp;
+    const blending = l.light > 0.5 ? THREE.NormalBlending : THREE.AdditiveBlending;   // glowing on dark, soft on light
+    if (m.blending !== blending) { m.blending = blending; m.needsUpdate = true; }
   });
   return (
     <points ref={ref}>
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" count={count} array={positions} itemSize={3} />
       </bufferGeometry>
-      <pointsMaterial map={sprite} color={colors.accent} size={0.06} sizeAttenuation transparent opacity={colors.light ? 0.45 : 0.6}
-        depthWrite={false} blending={colors.light ? THREE.NormalBlending : THREE.AdditiveBlending} />
+      <pointsMaterial ref={mat} map={sprite} size={0.06} sizeAttenuation transparent depthWrite={false} />
     </points>
   );
 }
@@ -220,12 +269,13 @@ function Dust({ colors }) {
 // out. Times are seconds into the clip.
 const CLIMB = {
   edgeAhead: 0.55,           // wall distance in front of his hips at the start (SPOTS.climbFrontZ / climbBackZ)
-  onTop: 0.08,               // hands this far in from the edge
+  onTop: 0.04,               // wrists this far in from the edge (palm and fingers flat on the top)
   spread: 0.24,              // each hand this far from his centre line
-  wrist: 0.05,               // wrist joint above the surface (palm thickness)
+  wrist: 0.04,               // wrist joint above the surface (palm thickness)
+  palm: 0.85,                // how fully the hands turn palm-down (a little less keeps the wrist from bending hard)
   hands: [0.3, 0.55, 2.35, 2.85],  // hands placed: ease in, held, ease back to the clip
   toKnee: [1.4, 1.85],       // from the edge to the knee
-  knee: { up: 0.09, spread: 0.07, ahead: 0.02 },   // hands on top of the left knee
+  knee: { up: 0.12, back: 0.07, spread: 0.07 },   // hands on top of the left thigh, just behind the kneecap
   lean: [0.3, 0.65, 1.6, 2.2],     // chest lean toward the wall: ease in, full, ease out
   leanMax: 0.6,              // radians at full (spread Spine 40 % / Spine1 35 % / Spine2 25 %)
 };
@@ -257,20 +307,38 @@ function reach(upper, lower, end, target, w, pole) {
   rotateWorld(lower, _ik.q.setFromUnitVectors(C2.sub(B2).normalize(), T2.sub(B2).normalize()));
 }
 
-// the hand palm-down, fingers pointing `fwd`, thumb side toward his centre (`inward`), by weight w
-function palmDown(c, side, fwd, inward, w) {
+// the hand palm-down, fingers pointing `fwd`, thumb side toward his centre (`inward`), by weight w. The roll about the
+// forearm is shared with the forearm (`twistShare`), like a real forearm turning: the rig has no twist bone, so all of
+// it at the wrist wrung the skin there.
+const _pd = { a: new THREE.Vector3(), b: new THREE.Vector3(), c: new THREE.Vector3(), d: new THREE.Vector3(), f2: new THREE.Vector3(),
+  s2: new THREE.Vector3(), z: new THREE.Vector3(), m1: new THREE.Matrix4(), m2: new THREE.Matrix4(), q: new THREE.Quaternion(),
+  t: new THREE.Quaternion(), d1: new THREE.Quaternion(), id: new THREE.Quaternion() };
+function handDelta(c, side, fwd, inward, out) {
   const hand = c.bone(`${side}Hand`); const mid = c.bone(`${side}HandMiddle1`); const idx = c.bone(`${side}HandIndex1`); const pky = c.bone(`${side}HandPinky1`);
-  if (!mid || !idx || !pky) return;
-  const H = hand.getWorldPosition(_ik.a);
-  const f = mid.getWorldPosition(_ik.b).sub(H).normalize();
-  const s = idx.getWorldPosition(_ik.c).sub(pky.getWorldPosition(_ik.d)); s.addScaledVector(f, -s.dot(f)).normalize();
-  const f2 = _ik.e.copy(fwd).normalize(); const s2 = _ik.f.copy(inward); s2.addScaledVector(f2, -s2.dot(f2)).normalize();
-  _ik.m1.makeBasis(f, s, _ik.g.crossVectors(f, s));
-  const z2 = new THREE.Vector3().crossVectors(f2, s2);
-  _ik.m2.makeBasis(f2, s2, z2);
-  _ik.m2.multiply(_ik.m1.transpose());                          // current basis -> wanted basis
-  _ik.q.setFromRotationMatrix(_ik.m2);
-  rotateWorld(hand, _ik.qw.identity().slerp(_ik.q, w));
+  const H = hand.getWorldPosition(_pd.a);
+  const f = mid.getWorldPosition(_pd.b).sub(H).normalize();
+  const s = idx.getWorldPosition(_pd.c).sub(pky.getWorldPosition(_pd.d)); s.addScaledVector(f, -s.dot(f)).normalize();
+  const f2 = _pd.f2.copy(fwd).normalize(); const s2 = _pd.s2.copy(inward); s2.addScaledVector(f2, -s2.dot(f2)).normalize();
+  _pd.m1.makeBasis(f, s, _pd.z.crossVectors(f, s));
+  _pd.m2.makeBasis(f2, s2, _pd.z.crossVectors(f2, s2).clone());
+  _pd.m2.multiply(_pd.m1.transpose());                          // current basis -> wanted basis
+  return out.setFromRotationMatrix(_pd.m2);
+}
+function palmDown(c, side, fwd, inward, w, twistShare = 0.5) {
+  const fore = c.bone(`${side}ForeArm`); const hand = c.bone(`${side}Hand`);
+  if (!c.bone(`${side}HandMiddle1`) || !c.bone(`${side}HandIndex1`) || !c.bone(`${side}HandPinky1`)) return;
+  // twist part of the wanted turn, about the forearm's own axis -> a share of it goes to the forearm
+  handDelta(c, side, fwd, inward, _pd.q);
+  const axis = hand.getWorldPosition(_pd.a).sub(fore.getWorldPosition(_pd.b)).normalize();
+  const p = axis.multiplyScalar(_pd.q.x * axis.x + _pd.q.y * axis.y + _pd.q.z * axis.z);
+  _pd.t.set(p.x, p.y, p.z, _pd.q.w);
+  if (_pd.t.lengthSq() > 1e-8) {
+    _pd.t.normalize();
+    rotateWorld(fore, _pd.d1.copy(_pd.id).slerp(_pd.t, twistShare * w));
+  }
+  // the rest at the wrist (recomputed after the forearm turned)
+  handDelta(c, side, fwd, inward, _pd.q);
+  rotateWorld(hand, _pd.d1.copy(_pd.id).slerp(_pd.q, w));
 }
 
 function climbContact(c, motion) {
@@ -294,14 +362,20 @@ function climbContact(c, motion) {
   if (w < 1e-3) return;
   const edge = new THREE.Vector3(st.align.x ?? 0, BLOCK.height + CLIMB.wrist, st.align.z ?? 0).addScaledVector(fwd, CLIMB.edgeAhead + CLIMB.onTop);
   const toKnee = THREE.MathUtils.smoothstep(t, ...CLIMB.toKnee);
-  const knee = c.bone('LeftLeg').getWorldPosition(new THREE.Vector3()).addScaledVector(up, CLIMB.knee.up).addScaledVector(fwd, CLIMB.knee.ahead);
+  // on the knee: on top of the thigh just behind the kneecap (offset across the thigh, not straight up: when the thigh
+  // is angled, "up" from the knee joint was inside the leg), fingers along the thigh toward the knee
+  const kneeP = c.bone('LeftLeg').getWorldPosition(new THREE.Vector3());
+  const thigh = kneeP.clone().sub(c.bone('LeftUpLeg').getWorldPosition(new THREE.Vector3())).normalize();
+  const across = up.clone().addScaledVector(thigh, -up.dot(thigh)).normalize();
+  const knee = kneeP.clone().addScaledVector(across, CLIMB.knee.up).addScaledVector(thigh, -CLIMB.knee.back);
+  const fingers = fwd.clone().lerp(thigh, toKnee).normalize();
   for (const [side, s] of [['Left', -1], ['Right', 1]]) {
     const onEdge = edge.clone().addScaledVector(right, s * CLIMB.spread);
     const onKnee = knee.clone().addScaledVector(right, s * CLIMB.knee.spread);
     const target = onEdge.lerp(onKnee, toKnee);
     const pole = new THREE.Vector3().addScaledVector(right, s * 0.6).addScaledVector(fwd, -0.5).addScaledVector(up, -0.4);
     reach(c.bone(`${side}Arm`), c.bone(`${side}ForeArm`), c.bone(`${side}Hand`), target, w, pole);
-    palmDown(c, side, fwd, right.clone().multiplyScalar(-s), w);
+    palmDown(c, side, fingers, right.clone().multiplyScalar(-s), w * CLIMB.palm);
   }
 }
 
@@ -487,6 +561,10 @@ function Avatar({ url, visible, pointer, brain, onReady }) {
     c.bone('Head').getWorldPosition(tmp.v2); c.bone('Neck').getWorldPosition(tmp.v);
     c.uniforms.uNeck.value.set(tmp.v2.y - (tmp.v2.y - tmp.v.y) * 0.2, Math.abs(tmp.v2.y - tmp.v.y) * 0.35);
     c.uniforms.uGlow.value.set(GLOW.body, GLOW.head);
+    // outfit change: a warm band of light runs up his body (world height), strongest mid-way, where the outfit swaps
+    const sk = (t - brain.shimmerAt) / SHIMMER.duration;
+    const on = sk >= 0 && sk < 1;
+    c.uniforms.uShimmer.value.set(G.y + SHIMMER.from + (on ? sk : 0) * (SHIMMER.to - SHIMMER.from), SHIMMER.width, on ? 0.9 * Math.sin(Math.PI * sk) : 0);
   });
 
   return (
@@ -496,14 +574,28 @@ function Avatar({ url, visible, pointer, brain, onReady }) {
   );
 }
 
-// both outfits, like the homepage: the theme's loads first, a toggle swaps once the other is ready
+// The theme's outfit loads first and the other one quietly 2.5 s after he appears, so it is ready before any click.
+// A theme switch runs a warm shimmer up his body and changes the outfit halfway through it (as the homepage does,
+// without the twirl: here he is often sitting or climbing). Clicked before the other outfit is ready: the shimmer waits.
+const SHIMMER = { duration: 0.8, swapAt: 0.38, from: -0.15, to: 2.1, width: 0.28 };
+
 function Avatars({ lightMode, pointer, brain, onReady }) {
   const want = lightMode ? 'light' : 'dark';
   const [mounted, setMounted] = useState({ [want]: true });
   const [ready, setReady] = useState({});
   const [shown, setShown] = useState(want);
   useEffect(() => { setMounted((m) => ({ ...m, [want]: true })); }, [want]);
-  useEffect(() => { if (ready[want]) setShown(want); }, [ready, want]);
+  useEffect(() => {
+    if (!ready[shown]) return undefined;
+    const id = setTimeout(() => setMounted({ light: true, dark: true }), 2500);
+    return () => clearTimeout(id);
+  }, [ready, shown]);
+  useEffect(() => {
+    if (shown === want || !ready[want]) return undefined;
+    brain.shimmerAt = now();
+    const id = setTimeout(() => setShown(want), SHIMMER.swapAt * 1000);
+    return () => clearTimeout(id);
+  }, [want, ready, shown, brain]);
   return ['light', 'dark'].map((k) => mounted[k] && (
     <Suspense key={k} fallback={null}>
       <Avatar url={MODELS[k]} visible={shown === k} pointer={pointer} brain={brain}
@@ -513,7 +605,7 @@ function Avatars({ lightMode, pointer, brain, onReady }) {
 }
 
 // a soft blob under him, on the ground or on the top of the "0"; smaller and lighter while he is in the air
-function AvatarShadow({ colors, brain }) {
+function AvatarShadow({ look, brain }) {
   const blob = useMemo(() => radial([[0, 'rgba(0,0,0,0.9)'], [0.55, 'rgba(0,0,0,0.35)'], [1, 'rgba(0,0,0,0)']]), []);
   const ref = useRef();
   useEffect(() => () => blob.dispose(), [blob]);
@@ -521,7 +613,7 @@ function AvatarShadow({ colors, brain }) {
     const s = brain.shadow; const k = 1 / (1 + s.lift * 1.6);
     ref.current.position.set(s.x, s.y + 0.004, s.z);
     ref.current.scale.set(1.0 * k, 0.7 * k, 1);
-    ref.current.material.opacity = (colors.light ? 0.3 : 0.6) * k;
+    ref.current.material.opacity = look.cur.shadowOp * k;
   });
   return (
     <mesh ref={ref} rotation-x={-Math.PI / 2} renderOrder={-1}>
@@ -641,22 +733,46 @@ function CameraRig({ pointer, layout }) {
   return null;
 }
 
-function Stage({ colors, lightMode, pointer, layout, onReady }) {
-  const brain = useMemo(() => ({ director: new Director(), motions: new Set(), active: null, hit: null, shadow: { x: SPOTS.seat.x, y: BLOCK.height, z: SPOTS.seat.z, lift: 0 } }), []);
+// lights follow the fading palette too
+function Lights({ look }) {
+  const hemi = useRef(); const key = useRef(); const rim = useRef(); const fill = useRef();
+  useFrame(() => {
+    const l = look.cur;
+    hemi.current.groundColor.copy(l.hemiGround); hemi.current.intensity = l.hemiI;
+    key.current.intensity = l.keyI;
+    rim.current.color.copy(l.rim);
+    fill.current.color.copy(l.fill); fill.current.intensity = l.fillI;
+  });
   return (
     <>
-      <hemisphereLight args={['#ffffff', lightMode ? '#e3d3c3' : '#141a26', lightMode ? 1.5 : 1.15]} />
-      <directionalLight position={[-3, 5, 6]} intensity={lightMode ? 1.5 : 1.7} color="#fff6ec" />
-      <directionalLight position={[4, 3, -4]} intensity={2.4} color={colors.rim} />
-      <directionalLight position={[-4, 1.5, -3]} intensity={lightMode ? 1.8 : 1.3} color={colors.fill} />
+      <hemisphereLight ref={hemi} args={['#ffffff', '#141a26', 1.15]} />
+      <directionalLight ref={key} position={[-3, 5, 6]} color="#fff6ec" />
+      <directionalLight ref={rim} position={[4, 3, -4]} intensity={2.4} />
+      <directionalLight ref={fill} position={[-4, 1.5, -3]} />
+    </>
+  );
+}
+
+function Stage({ colors, lightMode, pointer, layout, onReady }) {
+  const brain = useMemo(() => ({ director: new Director(), motions: new Set(), active: null, hit: null, shimmerAt: -10,
+    shadow: { x: SPOTS.seat.x, y: BLOCK.height, z: SPOTS.seat.z, lift: 0 } }), []);
+  // the theme's palette, faded from the old one whenever the theme changes (starts already on the current one)
+  const look = useMemo(() => { const l = lookOf(colors); return { cur: l, from: cloneLook(l), to: cloneLook(l), t: 1 }; }, []);
+  useEffect(() => {
+    look.from = cloneLook(look.cur); look.to = lookOf(colors); look.t = 0;
+  }, [colors, look]);
+  return (
+    <>
+      <LookFader look={look} />
+      <Lights look={look} />
       <CameraRig pointer={pointer} layout={layout} />
       <Interactions brain={brain} />
-      <Ground colors={colors} />
-      <Suspense fallback={null}><OrbitRing colors={colors} /></Suspense>
-      <Digits colors={colors} />
-      <AvatarShadow colors={colors} brain={brain} />
+      <Ground look={look} />
+      <Suspense fallback={null}><OrbitRing look={look} /></Suspense>
+      <Digits look={look} />
+      <AvatarShadow look={look} brain={brain} />
       <Avatars lightMode={lightMode} pointer={pointer} brain={brain} onReady={onReady} />
-      <Dust colors={colors} />
+      <Dust look={look} />
     </>
   );
 }
