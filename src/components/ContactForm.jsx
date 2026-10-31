@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import emailjs from "emailjs-com";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiSend, FiCheck, FiRotateCcw } from "react-icons/fi";
@@ -10,16 +11,18 @@ const projectTypes = ["Website", "Web app", "E-commerce", "Dashboard", "Mobile a
 const fields = [
   { key: "name", label: "Your name", placeholder: "Mr Lágbájá ", hint: "who’s this?" },
   { key: "email", label: "Email", placeholder: "Lágbájá@company.com", hint: "where do I reply?", type: "email" },
-  { key: "role", label: "Your role", placeholder: "Founder, PM, Developer…", hint: "your superpower" },
-  { key: "language", label: "Favorite programming language", placeholder: "JavaScript, obviously", hint: "choose wisely" },
-  { key: "techStack", label: "Tech stack", placeholder: "React, Node, Postgres", hint: "comma separated" },
+  // optional: only collect what's needed to reply (data minimisation, see the Privacy page)
+  { key: "role", label: "Your role", placeholder: "Founder, PM, Developer…", hint: "your superpower", optional: true },
+  { key: "language", label: "Favorite programming language", placeholder: "JavaScript, obviously", hint: "choose wisely", optional: true },
+  { key: "techStack", label: "Tech stack", placeholder: "React, Node, Postgres", hint: "comma separated", optional: true },
 ];
 
 const errorCopy = {
   name: "No name? Drop your name and make it official!",
-  language: "Are you a JavaScript wizard, or ??? Let me know!",
-  techStack: "Share your tech stack and flex your dev muscles!",
-  role: "Claim your role, what’s your superpower?",
+  // role, language and techStack are optional now; their messages are kept in case they become required again
+  // language: "Are you a JavaScript wizard, or ??? Let me know!",
+  // techStack: "Share your tech stack and flex your dev muscles!",
+  // role: "Claim your role, what’s your superpower?",
   emailEmpty: "Enter your email so i can keep you in the loop!",
   emailInvalid: "Oops! That email looks off, Lets fix it!",
   message: "Not so pro tip: Take breaks often, send a message.",
@@ -29,7 +32,7 @@ const emptyForm = { name: "", email: "", role: "", language: "", techStack: "", 
 
 function validate(form) {
   const errors = {};
-  ["name", "language", "techStack", "role", "message"].forEach((key) => {
+  ["name", "message"].forEach((key) => {
     if (!form[key].trim()) errors[key] = errorCopy[key];
   });
   if (!form.email.trim()) errors.email = errorCopy.emailEmpty;
@@ -153,6 +156,7 @@ function ContactForm() {
   const [focused, setFocused] = useState(null);
   const [phase, setPhase] = useState("idle"); // idle | invalid | sending | sent | error
   const [sentName, setSentName] = useState("");
+  const [trap, setTrap] = useState(""); // honeypot: hidden from people, bots fill it in
   const editorRef = useRef(null);
 
   const update = (key) => (e) => {
@@ -190,23 +194,26 @@ function ContactForm() {
 
     const message = type ? `Project type: ${type}\n\n${form.message}` : form.message;
     const minDelay = new Promise((r) => setTimeout(r, 1200)); // let the terminal animation breathe
+    const orDash = (value) => value.trim() || "—"; // optional fields left empty
 
-    Promise.all([
-      emailjs.send(
-        "service_hniivlv", // EmailJS Service ID
-        "template_nukzfpm", // EmailJS Template ID
-        {
-          name: form.name,
-          language: form.language,
-          techStack: form.techStack,
-          role: form.role,
-          email: form.email,
-          message,
-        },
-        "3qoTfXCjF2_xgMKYz" // EmailJS public key
-      ),
-      minDelay,
-    ])
+    // a filled honeypot means a bot: show the normal success state but send nothing
+    const delivery = trap
+      ? Promise.resolve()
+      : emailjs.send(
+          "service_hniivlv", // EmailJS Service ID
+          "template_nukzfpm", // EmailJS Template ID
+          {
+            name: form.name,
+            language: orDash(form.language),
+            techStack: orDash(form.techStack),
+            role: orDash(form.role),
+            email: form.email,
+            message,
+          },
+          "3qoTfXCjF2_xgMKYz" // EmailJS public key
+        );
+
+    Promise.all([delivery, minDelay])
       .then(() => {
         setSentName(form.name.trim().split(" ")[0]);
         setPhase("sent");
@@ -246,7 +253,10 @@ function ContactForm() {
         <div className="ct-fields">
           {fields.map((f) => (
             <div key={f.key} className={`ct-field ${errors[f.key] ? "has-error" : ""}`}>
-              <label htmlFor={`ct-${f.key}`}>{f.label}</label>
+              <label htmlFor={`ct-${f.key}`}>
+                {f.label}
+                {f.optional && <span className="ct-optional">optional</span>}
+              </label>
               <input
                 id={`ct-${f.key}`}
                 type={f.type ?? "text"}
@@ -288,6 +298,11 @@ function ContactForm() {
               )}
             </AnimatePresence>
           </div>
+
+          <div className="ct-trap" aria-hidden="true">
+            <label htmlFor="ct-website">Leave this field empty</label>
+            <input id="ct-website" name="website" type="text" tabIndex={-1} autoComplete="off" value={trap} onChange={(e) => setTrap(e.target.value)} />
+          </div>
         </div>
 
         <div className="ct-submit-row">
@@ -302,6 +317,11 @@ function ContactForm() {
           )}
           <p className="ct-kbd-hint">Watch the editor write your message as code →</p>
         </div>
+
+        <p className="ct-privacy-note">
+          By sending this, you agree I’ll use your details only to reply to you. See the{" "}
+          <Link to="/Privacy">Privacy Policy</Link>.
+        </p>
       </form>
 
       <div className="ct-editor" ref={editorRef}>

@@ -36,7 +36,7 @@ const supports3D = typeof window !== 'undefined'
 if (supports3D && window.location.pathname === '/') expectTask('3d');
 
 const useIsDesktop = () => {
-  const [desktop, setDesktop] = useState(() => window.matchMedia('(min-width: 801px)').matches);
+  const [desktop, setDesktop] = useState(() => typeof window !== 'undefined' && window.matchMedia('(min-width: 801px)').matches);
   useLayoutEffect(() => {
     const mq = window.matchMedia('(min-width: 801px)');
     const onChange = () => setDesktop(mq.matches);

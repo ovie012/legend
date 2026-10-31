@@ -1,8 +1,10 @@
 {
-    "rewrites": [
-      {
-        "source": "/(.*)",
-        "destination": "/index.html"
-      }
-    ]
-  }
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    { "source": "/about", "destination": "/About/index.html" },
+    { "source": "/projects", "destination": "/Projects/index.html" },
+    { "source": "/contact", "destination": "/Contact/index.html" },
+    { "source": "/privacy", "destination": "/Privacy/index.html" }
+  ]
+}

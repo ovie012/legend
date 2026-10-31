@@ -1,10 +1,11 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { AppContext } from "../AppProvider";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { FaGraduationCap, FaMapMarkerAlt, FaCode } from "react-icons/fa";
-import { FiDownload, FiEye, FiArrowUpRight, FiShuffle, FiCpu, FiUsers, FiTrendingUp } from "react-icons/fi";
+import { FiDownload, FiEye, FiArrowUpRight, FiShuffle, FiCpu, FiUsers, FiTrendingUp, FiPlus, FiMail, FiMessageCircle, FiHelpCircle } from "react-icons/fi";
 import { HiSparkles } from "react-icons/hi2";
+import { FAQ } from "../seo";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -97,6 +98,63 @@ function StoryTimeline() {
         ))}
       </ol>
     </div>
+  );
+}
+
+// Questions people ask (src/seo.js FAQ, also given to search engines and AI answers). One answer open at a time; the
+// answers stay in the page even when closed, so crawlers read them.
+function Faq({ scrollToTop }) {
+  const [open, setOpen] = useState(0);
+  return (
+    <section className="ab-section ab-faq" aria-labelledby="ab-faq-title">
+      <motion.div className="ab-faq-intro" {...inView}>
+        <motion.span className="ab-eyebrow" variants={fadeUp}><FiHelpCircle /> FAQ</motion.span>
+        <motion.h2 id="ab-faq-title" variants={fadeUp} custom={1}>
+          Questions people <span className="ab-accent">ask me</span>
+        </motion.h2>
+        <motion.p variants={fadeUp} custom={2}>
+          Short answers about who I am, what I build and how we can work together.
+        </motion.p>
+        <motion.div className="ab-faq-card" variants={fadeUp} custom={3}>
+          <span className="ab-faq-card-icon"><FiMessageCircle /></span>
+          <div>
+            <strong>Still curious?</strong>
+            <p>Ask me anything. I’m happy to help.</p>
+          </div>
+          <a href="mailto:ovieemonefe012@gmail.com" className="ab-btn ab-btn-primary">
+            <FiMail /> Email me
+          </a>
+        </motion.div>
+      </motion.div>
+
+      <motion.ol className="ab-faq-list" {...inView}>
+        {FAQ.map((item, i) => {
+          const isOpen = open === i;
+          const id = `ab-faq-${i}`;
+          return (
+            <motion.li key={item.q} className={`ab-faq-item ${isOpen ? "is-open" : ""}`} variants={fadeUp} custom={i * 0.6}>
+              <h3 className="ab-faq-q">
+                <button type="button" id={`${id}-q`} aria-expanded={isOpen} aria-controls={`${id}-a`} onClick={() => setOpen(isOpen ? -1 : i)}>
+                  <span className="ab-faq-num">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="ab-faq-text">{item.q}</span>
+                  <span className="ab-faq-icon" aria-hidden="true"><FiPlus /></span>
+                </button>
+              </h3>
+              <div className="ab-faq-a" id={`${id}-a`} role="region" aria-labelledby={`${id}-q`} aria-hidden={!isOpen}>
+                <div className="ab-faq-a-inner">
+                  <p>{item.a}</p>
+                  {item.link && (
+                    <Link to={item.link.to} onClick={scrollToTop} className="ab-faq-link" tabIndex={isOpen ? 0 : -1}>
+                      {item.link.label} <FiArrowUpRight />
+                    </Link>
+                  )}
+                </div>
+              </div>
+            </motion.li>
+          );
+        })}
+      </motion.ol>
+    </section>
   );
 }
 
@@ -235,6 +293,9 @@ function AboutMe() {
           </AnimatePresence>
         </motion.div>
       </section>
+
+      {/* FAQ */}
+      <Faq scrollToTop={scrollToTop} />
 
       {/* CTA */}
       <motion.section className="ab-cta" {...inView}>

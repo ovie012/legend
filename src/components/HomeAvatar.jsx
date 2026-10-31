@@ -126,7 +126,8 @@ function addHitProxies(root, bone) {
   return target;
 }
 
-function useCharacter(url) {
+// also used by the 404 scene (NotFoundScene.jsx): same cached model, mixer and face rig
+export function useCharacter(url) {
   const gltf = useLoader(GLTFLoader, url, withMeshopt);
   const anims = useLoader(GLTFLoader, ANIMS, withMeshopt);
   return useMemo(() => {

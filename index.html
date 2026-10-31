@@ -3,38 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Emonefe Ovie (Legend.dev) is an AI Engineer and Software Developer in Lagos building fast, intelligent web and mobile apps with React, React Native, TypeScript, Python and modern AI tooling." />
-    <meta name="author" content="Emonefe Ovie" />
+    <meta name="author" content="Emonefe Ovie Ezekiel" />
+    <!-- Google Search Console ownership (keep: removing it un-verifies the site) -->
+    <meta name="google-site-verification" content="BCxFrO-gzyaqOy7rZvXuC85fvbVjFOrtFM3phxh54FM" />
     <meta name="theme-color" content="#00050F" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#F6EFE6" media="(prefers-color-scheme: light)" />
-    <link rel="canonical" href="https://legenddev-phi.vercel.app/" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <!-- the same person on other sites (identity links) -->
+    <link rel="me" href="https://www.linkedin.com/in/ovieemonefe/" />
+    <link rel="me" href="https://github.com/ovie012" />
+    <link rel="me" href="https://x.com/legend_devv" />
 
     <!-- link previews (WhatsApp, LinkedIn, X, Slack...) -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Legend.dev" />
-    <meta property="og:title" content="Emonefe Ovie · AI Engineer & Software Developer" />
-    <meta property="og:description" content="Emonefe Ovie (Legend.dev) is an AI Engineer and Software Developer in Lagos building fast, intelligent web and mobile apps with React, React Native, TypeScript, Python and modern AI tooling." />
-    <meta property="og:url" content="https://legenddev-phi.vercel.app/" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:image" content="https://legenddev-phi.vercel.app/og-image.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Emonefe Ovie, AI Engineer and Software Developer, Legend.dev" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@legend_devv" />
-    <meta name="twitter:title" content="Emonefe Ovie · AI Engineer & Software Developer" />
-    <meta name="twitter:description" content="Emonefe Ovie (Legend.dev) is an AI Engineer and Software Developer in Lagos building fast, intelligent web and mobile apps with React, React Native, TypeScript, Python and modern AI tooling." />
+    <meta name="twitter:creator" content="@legend_devv" />
     <meta name="twitter:image" content="https://legenddev-phi.vercel.app/og-image.jpg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <!-- per page (scripts/prerender.mjs replaces this block for each page with src/seo.js; App.jsx keeps it in sync) -->
+    <!--seo:start-->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
     <title>Emonefe Ovie · AI Engineer & Software Developer | Legend.dev</title>
+    <meta name="description" content="Emonefe Ovie (Legend.dev) is an AI Engineer and Software Developer in Lagos, Nigeria, building fast, intelligent web and mobile apps with React, React Native, Next.js, TypeScript, Python and modern AI tooling." />
+    <link rel="canonical" href="https://legenddev-phi.vercel.app/" />
+    <meta property="og:title" content="Emonefe Ovie · AI Engineer & Software Developer | Legend.dev" />
+    <meta property="og:description" content="Emonefe Ovie (Legend.dev) is an AI Engineer and Software Developer in Lagos, Nigeria, building fast, intelligent web and mobile apps with React, React Native, Next.js, TypeScript, Python and modern AI tooling." />
+    <meta property="og:url" content="https://legenddev-phi.vercel.app/" />
+    <meta name="twitter:title" content="Emonefe Ovie · AI Engineer & Software Developer | Legend.dev" />
+    <meta name="twitter:description" content="Emonefe Ovie (Legend.dev) is an AI Engineer and Software Developer in Lagos, Nigeria, building fast, intelligent web and mobile apps with React, React Native, Next.js, TypeScript, Python and modern AI tooling." />
+    <!--seo:end-->
+    <!-- pages ship pre-rendered HTML for crawlers; with JavaScript it stays hidden until the app takes over (no flash) -->
+    <script>document.documentElement.classList.add('app-pending')</script>
+    <style>html.app-pending #root { visibility: hidden; }</style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"><!--app-html--></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

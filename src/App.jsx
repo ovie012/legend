@@ -9,27 +9,37 @@ import Home from './pages/Home';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import About from './pages/About';
+import Privacy from './pages/Privacy';
+import NotFound from './pages/NotFound';
 import Preloader from './components/Preloader';
 import { onProgress } from './loadProgress';
+import { NOT_FOUND, PAGES, pageKey, urlOf } from './seo';
 
 // ⏱ How often the preloader plays again for a returning visitor, in minutes.
 // 0 = on every page load; 30 = at most once every 30 minutes.
 const PRELOADER_EVERY_MINUTES = 30;
 
-const TITLES = {
-  '/': 'Emonefe Ovie · AI Engineer & Software Developer | Legend.dev',
-  '/about': 'About · Emonefe Ovie | Legend.dev',
-  '/projects': 'Projects · Emonefe Ovie | Legend.dev',
-  '/contact': 'Contact · Emonefe Ovie | Legend.dev',
-};
+// title, description, canonical and link-preview tags for the page (src/seo.js; the build writes them into each
+// page's HTML, this keeps them right while moving between pages)
+function syncHead(pathname) {
+  const key = pageKey(pathname);
+  const page = PAGES[key] ?? NOT_FOUND;
+  document.title = page.title;
+  const set = (selector, attr, value) => { const el = document.head.querySelector(selector); if (el) el.setAttribute(attr, value); };
+  set('meta[name="description"]', 'content', page.description);
+  set('meta[property="og:title"]', 'content', page.title);
+  set('meta[property="og:description"]', 'content', page.description);
+  set('meta[name="twitter:title"]', 'content', page.title);
+  set('meta[name="twitter:description"]', 'content', page.description);
+  set('meta[name="robots"]', 'content', key ? 'index, follow, max-image-preview:large, max-snippet:-1' : 'noindex, follow');
+  if (key) { set('link[rel="canonical"]', 'href', urlOf(key)); set('meta[property="og:url"]', 'content', urlOf(key)); }
+}
 
 function InnerApp () {
   const { lightMode, preloader, setLoadingPercentage, setPreloader, setFadeAway } = useContext(AppContext);
   const { pathname } = useLocation();
 
-  useEffect(() => {
-    document.title = TITLES[pathname.toLowerCase()] ?? TITLES['/'];
-  }, [pathname]);
+  useEffect(() => { syncHead(pathname); }, [pathname]);
 
   // Preloader driven by real loading progress: at least 1.2 s so it never flickers, at most ~3 s so
   // nobody waits on a slow 3D download, and at most once every PRELOADER_EVERY_MINUTES.
@@ -132,6 +142,8 @@ function InnerApp () {
           <Route path='/Projects' element={<Projects />} />
           <Route path='/Contact' element={<Contact />} />
           <Route path='/About' element={<About />} />
+          <Route path='/Privacy' element={<Privacy />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
         </main>
         <Footer />

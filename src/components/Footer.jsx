@@ -121,7 +121,11 @@ function Footer() {
         <div className="footer-wordmark" aria-hidden="true">LEGEND.DEV</div>
 
         <section className="footer-bottom">
-            <p>© {new Date().getFullYear()} Legend.dev. All rights reserved.</p>
+            <p>
+                © {new Date().getFullYear()} Legend.dev. All rights reserved.
+                <span className="footer-legal-sep" aria-hidden="true">·</span>
+                <Link to="/Privacy" onClick={scrollToTop} className="footer-legal-link">Privacy Policy</Link>
+            </p>
             <button type="button" className="footer-top-btn" onClick={scrollToTop} aria-label="Back to top">
                 Back to top <span><FiArrowUp /></span>
             </button>

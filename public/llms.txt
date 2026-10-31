@@ -1,0 +1,48 @@
+# Emonefe Ovie (Legend.dev)
+
+> Emonefe Ovie Ezekiel, known as Legend (Legend.dev), is an AI Engineer and Software Developer based in Lagos, Nigeria (roots in Delta State). He builds fast, intelligent web and mobile apps with React, React Native, Next.js, TypeScript, Python and modern AI tooling, and is the frontend lead at Scrybe. Open to full-time roles and client work.
+
+Also written as: Emonefe Ovie, Ovie Emonefe, Legend, Legend Dev, Legend.dev. Website: https://legenddev-phi.vercel.app
+
+## Pages
+
+- [Home](https://legenddev-phi.vercel.app/): what he builds (web apps, mobile apps, AI features, interfaces and motion) and selected work
+- [About](https://legenddev-phi.vercel.app/About): his story, from a Lagos cyber café to software and AI; education, skills and the Scrybe journey
+- [Projects](https://legenddev-phi.vercel.app/Projects): client, personal, bootcamp and fun projects with live links
+- [Contact](https://legenddev-phi.vercel.app/Contact): contact form and email (ovieemonefe012@gmail.com)
+- [CV (PDF)](https://legenddev-phi.vercel.app/resume.pdf)
+
+## Experience
+
+- Scrybe, school management platform (scrybehub.ng), Sep 2024 – now: joined as an intern, grew into the main frontend developer behind the administrative side and leads the frontend team
+- Silvermanns (silvermanns.com): headless Shopify e-commerce platform for a Nigerian luxury menswear brand, React + TypeScript + Shopify Storefront API (products, cart, customer accounts, checkout)
+- OMÖBA Fashion (omobafashion.com): landing page for a Nigerian fashion brand with interactive galleries and contact form
+- TRYBE Vybe (trybevybe.org): premium lead-generation landing page with carousels and contact form
+- Swift Dispatch, Apr – Jul 2024: dispatch app UI in React with a team; weekly code reviews with UI/UX designers
+
+## Selected projects
+
+- [Agri Command](https://agri-command.vercel.app/): agriculture operations platform with farm management, environmental monitoring, digital twin simulation and business analytics
+- [Estate IQ](https://estate-iq-ten.vercel.app/): real estate intelligence platform with advanced search, map discovery, analytics and property management
+- [Tenant Hub](https://tenant-hub-topaz.vercel.app/): multi-tenant SaaS admin panel with organisation switching, role-based access control and subscription feature gating
+- [Prompt Architect](https://prompt-architect-kappa.vercel.app/): frontend AI content studio with streaming responses, token tracking, markdown rendering and prompt history
+- [Swift Cart](https://legend-swift-cart-project.vercel.app/): mini e-commerce with cart persistence, auth UI and route protection (Zustand, Framer Motion)
+
+## Skills
+
+Languages: HTML, CSS, JavaScript, TypeScript, Python. Frameworks: React, Next.js, React Native. UI: Tailwind CSS, Styled Components, Framer Motion, Bootstrap, Three.js. State: Redux, Zustand. Tools: Git, GitHub, Figma, VS Code. Focus: AI engineering, frontend architecture, responsive design, UI/UX.
+
+## Education
+
+- University of Lagos: B.Sc & B.Ed in Mathematics Education (2018 – 2024); final-year research on how OpenAI technologies can improve mathematics learning outcomes for secondary school students
+- Codecademy: Front-End Engineer track (2023); React Native mobile development track (2025)
+- Microsoft Learn Student Ambassadors, University of Lagos: React track (2024)
+- Udemy: AI Engineering (in progress)
+
+## Profiles
+
+- LinkedIn: https://www.linkedin.com/in/ovieemonefe/
+- GitHub: https://github.com/ovie012
+- X: https://x.com/legend_devv
+- Instagram: https://www.instagram.com/legendd.devv
+- TikTok: https://www.tiktok.com/@legenddev_softwaredev
