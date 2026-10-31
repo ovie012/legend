@@ -13,6 +13,35 @@
   width: 100%;
 }
 
+/* THEME SWITCH: the whole page crossfades in one piece (View Transitions, Header.jsx switchTheme). During it the
+   per-element colour fades are off, so the new page is shown in its final colours at once. The 3D scenes are lifted
+   out of the crossfade and stay live (a fading still of the old frame over the moving avatar read as a ghost copy);
+   their own lights and colours fade in step (HomeScene / NotFoundScene). */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.4s;
+  animation-timing-function: ease-in-out;
+}
+
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition: none !important;
+}
+
+html.theme-switching .hm-scene { view-transition-name: hm-scene; }
+html.theme-switching .nf-scene { view-transition-name: nf-scene; }
+
+::view-transition-old(hm-scene),
+::view-transition-old(nf-scene) {
+  display: none;
+}
+
+::view-transition-new(hm-scene),
+::view-transition-new(nf-scene) {
+  animation: none;
+}
+
 /* keyboard focus is always visible, in the current accent */
 .container :focus-visible {
   outline: 2px solid var(--dm-accent);

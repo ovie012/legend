@@ -41,7 +41,7 @@ const MULTI_WAIT = 0.4;
 
 /* ---------- theme colours: the 3D stage fades with the page (0.3 s ease-in-out, as the CSS), never jumps ---------- */
 
-const THEME_FADE = 0.32;
+const THEME_FADE = 0.4;                 // = the page crossfade (App.css THEME SWITCH)
 // everything on the stage that depends on the theme, from the page's CSS tokens
 function lookOf(c) {
   const col = (v) => new THREE.Color(v);

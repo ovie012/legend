@@ -73,8 +73,9 @@ function roundSprite() {
   return new THREE.CanvasTexture(c);
 }
 
-function Dust({ accent, scroll }) {
+function Dust({ look, scroll }) {
   const points = useRef();
+  const mat = useRef();
   const count = 650;
   const { positions, sprite } = useMemo(() => {
     const p = new Float32Array(count * 3);
@@ -90,6 +91,7 @@ function Dust({ accent, scroll }) {
     const pts = points.current;
     pts.rotation.y += dt * 0.012;
     pts.position.y = (pts.position.y + dt * 0.04 - scroll.current.velocity * 0.00004) % 3;
+    mat.current.color.copy(look.cur.accent);
   });
 
   return (
@@ -98,8 +100,8 @@ function Dust({ accent, scroll }) {
         <bufferAttribute attach="attributes-position" count={count} array={positions} itemSize={3} />
       </bufferGeometry>
       <pointsMaterial
+        ref={mat}
         map={sprite}
-        color={accent}
         size={0.05}
         sizeAttenuation
         transparent
@@ -139,9 +141,9 @@ function Orbit({ accent }) {
   );
 }
 
-function Halo({ accent }) {
-  const uniforms = useMemo(() => ({ uColor: { value: new THREE.Color(accent) } }), []);
-  useEffect(() => { uniforms.uColor.value.set(accent); }, [accent, uniforms]);
+function Halo({ look }) {
+  const uniforms = useMemo(() => ({ uColor: { value: new THREE.Color() } }), []);
+  useFrame(() => { uniforms.uColor.value.copy(look.cur.halo); });
   return (
     <mesh position={[0, 0.25, -0.9]} scale={[4.2, 4.2, 1]}>
       <planeGeometry />
@@ -157,12 +159,36 @@ function Halo({ accent }) {
   );
 }
 
+// Theme colours of the scene (lights, dust, halo), faded over THEME_FADE whenever the theme changes, in step with the
+// page's crossfade (App.css THEME SWITCH): the 3D layer stays live during it, so instant colours would jump ahead.
+const THEME_FADE = 0.4;
+function lookOf(colors, lightMode) {
+  const col = (v) => new THREE.Color(v);
+  return { accent: col(colors.accent), halo: col(colors.halo), rim: col(colors.rim), fill: col(colors.fill),
+    hemiGround: col(lightMode ? '#e3d3c3' : '#141a26'), hemiI: lightMode ? 1.5 : 1.15, keyI: lightMode ? 1.5 : 1.7, fillI: lightMode ? 2 : 1.4 };
+}
+const cloneLook = (l) => Object.fromEntries(Object.entries(l).map(([k, v]) => [k, v?.isColor ? v.clone() : v]));
+function useLook(colors, lightMode) {
+  const look = useMemo(() => { const l = lookOf(colors, lightMode); return { cur: l, from: cloneLook(l), to: cloneLook(l), t: 1 }; }, []);
+  useEffect(() => { look.from = cloneLook(look.cur); look.to = lookOf(colors, lightMode); look.t = 0; }, [colors, lightMode, look]);
+  useFrame((state, dt) => {
+    if (look.t >= 1) return;
+    look.t = Math.min(1, look.t + Math.min(dt, 0.05) / THEME_FADE);
+    const k = look.t * look.t * (3 - 2 * look.t);
+    for (const key of Object.keys(look.from)) {
+      if (look.from[key].isColor) look.cur[key].copy(look.from[key]).lerp(look.to[key], k);
+      else look.cur[key] = look.from[key] + (look.to[key] - look.from[key]) * k;
+    }
+  });
+  return look;
+}
+
 function Rig({ colors, lightMode, pointer, scroll, onReady }) {
-  const { accent } = colors;
   const group = useRef();
   const orbit = useRef();
   const avatar = useRef();
-  const keyLight = useRef();
+  const keyLight = useRef(); const hemi = useRef(); const rim = useRef(); const fill = useRef();
+  const look = useLook(colors, lightMode);
   const { viewport, camera, size } = useThree();
   const state = useRef({ x: 0, y: 0, s: 1, ry: 0, init: false, held: null });
   const director = useAvatarDirector({ meshRef: avatar, lightMode, scroll });
@@ -220,22 +246,28 @@ function Rig({ colors, lightMode, pointer, scroll, onReady }) {
     camera.position.x = THREE.MathUtils.damp(camera.position.x, pointer.current.x * 0.25, 2, dt);
     camera.position.y = THREE.MathUtils.damp(camera.position.y, pointer.current.y * 0.15, 2, dt);
     camera.lookAt(0, 0, 0);
+
+    const l = look.cur;
+    hemi.current.groundColor.copy(l.hemiGround); hemi.current.intensity = l.hemiI;
+    keyLight.current.intensity = l.keyI;
+    rim.current.color.copy(l.rim);
+    fill.current.color.copy(l.fill); fill.current.intensity = l.fillI;
   });
 
   return (
     <>
-      <hemisphereLight args={['#ffffff', lightMode ? '#e3d3c3' : '#141a26', lightMode ? 1.5 : 1.15]} />
-      <directionalLight ref={keyLight} position={[-2, 3, 5]} intensity={lightMode ? 1.5 : 1.7} color="#fff6ec" />
-      <directionalLight position={[3.5, 1.8, -3]} intensity={2.6} color={colors.rim} />
-      <directionalLight position={[-3.5, 0.8, -2.5]} intensity={lightMode ? 2 : 1.4} color={colors.fill} />
-      <Dust accent={accent} scroll={scroll} />
+      <hemisphereLight ref={hemi} args={['#ffffff', '#141a26', 1.15]} />
+      <directionalLight ref={keyLight} position={[-2, 3, 5]} color="#fff6ec" />
+      <directionalLight ref={rim} position={[3.5, 1.8, -3]} intensity={2.6} />
+      <directionalLight ref={fill} position={[-3.5, 0.8, -2.5]} />
+      <Dust look={look} scroll={scroll} />
       <group ref={group}>
-        <Halo accent={colors.halo} />
+        <Halo look={look} />
         <HomeAvatar lightMode={lightMode} pointer={pointer} scroll={scroll} reaction={director.pose} playing={director.playing} glasses={director.glasses} meshRef={avatar} onReady={onReady} />
       </group>
       {/* {size.width >= 800 && (
         <group ref={orbit}>
-          <Orbit accent={accent} />
+          <Orbit accent={colors.accent} />
         </group>
       )} */}
     </>

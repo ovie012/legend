@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState, useContext } from 'react';
+import { flushSync } from 'react-dom';
 import { AppContext } from '../AppProvider';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
@@ -23,12 +24,26 @@ const sheetItem = {
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
 };
 
+// The whole page crossfades from the old theme to the new one in one piece (View Transitions: the browser fades a
+// snapshot of the old page into the new one), so every element changes at the same moment. Per-element CSS fades are
+// switched off meanwhile (html.theme-switching, App.css "THEME SWITCH"). Without support, or with reduced motion,
+// the theme simply changes at once.
+function switchTheme(next, setLightMode) {
+    const apply = () => flushSync(() => setLightMode(next));
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!document.startViewTransition || reduce) { apply(); return; }
+    const root = document.documentElement;
+    root.classList.add('theme-switching');
+    const transition = document.startViewTransition(apply);
+    transition.finished.finally(() => root.classList.remove('theme-switching'));
+}
+
 function ThemeToggle({ lightMode, setLightMode, className = '' }) {
     return (
         <button
             type="button"
             className={`hd-theme light-dark-mode ${className}`}
-            onClick={() => setLightMode(!lightMode)}
+            onClick={() => switchTheme(!lightMode, setLightMode)}
             aria-label={lightMode ? 'Switch to dark mode' : 'Switch to light mode'}
             title={lightMode ? 'Dark mode' : 'Light mode'}
         >
