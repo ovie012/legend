@@ -211,6 +211,114 @@ function Dust({ colors }) {
   );
 }
 
+/* ---------- climbing: hands on the top of the "0" ---------- */
+
+// The Mixamo climb's hands grip a hold higher than the block and ~25 cm in front of it, and his arms are short
+// (0.48 m from the shoulder), so on their own they never touch the 404. While he grabs and pulls he leans his chest in
+// toward the wall (spine) and both hands are placed palm-down on the top edge (two-bone IK), held there as his body
+// rises; then, as he steps up, they move onto his front (left) knee and push on it until he stands, and the lean eases
+// out. Times are seconds into the clip.
+const CLIMB = {
+  edgeAhead: 0.55,           // wall distance in front of his hips at the start (SPOTS.climbFrontZ / climbBackZ)
+  onTop: 0.08,               // hands this far in from the edge
+  spread: 0.24,              // each hand this far from his centre line
+  wrist: 0.05,               // wrist joint above the surface (palm thickness)
+  hands: [0.3, 0.55, 2.35, 2.85],  // hands placed: ease in, held, ease back to the clip
+  toKnee: [1.4, 1.85],       // from the edge to the knee
+  knee: { up: 0.09, spread: 0.07, ahead: 0.02 },   // hands on top of the left knee
+  lean: [0.3, 0.65, 1.6, 2.2],     // chest lean toward the wall: ease in, full, ease out
+  leanMax: 0.6,              // radians at full (spread Spine 40 % / Spine1 35 % / Spine2 25 %)
+};
+const _ik = { a: new THREE.Vector3(), b: new THREE.Vector3(), c: new THREE.Vector3(), d: new THREE.Vector3(), e: new THREE.Vector3(),
+  f: new THREE.Vector3(), g: new THREE.Vector3(), q: new THREE.Quaternion(), qw: new THREE.Quaternion(), qp: new THREE.Quaternion(),
+  m1: new THREE.Matrix4(), m2: new THREE.Matrix4() };
+const window4 = (t, [a, b, c, d]) => THREE.MathUtils.smoothstep(t, a, b) * (1 - THREE.MathUtils.smoothstep(t, c, d));
+
+// turn a bone by a world-space rotation (its children follow)
+function rotateWorld(bone, delta) {
+  bone.getWorldQuaternion(_ik.qw);
+  bone.parent.getWorldQuaternion(_ik.qp);
+  bone.quaternion.copy(_ik.qp.invert().multiply(_ik.qw.premultiply(delta)));
+  bone.updateMatrixWorld(true);
+}
+
+// two-bone IK: upper/lower/end bones, end moved toward `target` by weight w; the elbow bends toward `pole` (direction)
+function reach(upper, lower, end, target, w, pole) {
+  const A = upper.getWorldPosition(_ik.a); const B = lower.getWorldPosition(_ik.b); const C = end.getWorldPosition(_ik.c);
+  const T = _ik.d.copy(C).lerp(target, w);
+  const la = A.distanceTo(B); const lb = B.distanceTo(C);
+  const u = _ik.e.subVectors(T, A); const dist = THREE.MathUtils.clamp(u.length(), Math.abs(la - lb) + 1e-3, la + lb - 1e-3); u.normalize();
+  const p = _ik.f.copy(pole).addScaledVector(u, -pole.dot(u)).normalize();
+  const cosA = THREE.MathUtils.clamp((la * la + dist * dist - lb * lb) / (2 * la * dist), -1, 1);
+  const elbow = _ik.g.copy(A).addScaledVector(u, la * cosA).addScaledVector(p, la * Math.sqrt(1 - cosA * cosA));
+  rotateWorld(upper, _ik.q.setFromUnitVectors(B.sub(A).normalize(), elbow.sub(A).normalize()));
+  const B2 = lower.getWorldPosition(_ik.b); const C2 = end.getWorldPosition(_ik.c);
+  const T2 = _ik.g.copy(A).addScaledVector(u, dist);
+  rotateWorld(lower, _ik.q.setFromUnitVectors(C2.sub(B2).normalize(), T2.sub(B2).normalize()));
+}
+
+// the hand palm-down, fingers pointing `fwd`, thumb side toward his centre (`inward`), by weight w
+function palmDown(c, side, fwd, inward, w) {
+  const hand = c.bone(`${side}Hand`); const mid = c.bone(`${side}HandMiddle1`); const idx = c.bone(`${side}HandIndex1`); const pky = c.bone(`${side}HandPinky1`);
+  if (!mid || !idx || !pky) return;
+  const H = hand.getWorldPosition(_ik.a);
+  const f = mid.getWorldPosition(_ik.b).sub(H).normalize();
+  const s = idx.getWorldPosition(_ik.c).sub(pky.getWorldPosition(_ik.d)); s.addScaledVector(f, -s.dot(f)).normalize();
+  const f2 = _ik.e.copy(fwd).normalize(); const s2 = _ik.f.copy(inward); s2.addScaledVector(f2, -s2.dot(f2)).normalize();
+  _ik.m1.makeBasis(f, s, _ik.g.crossVectors(f, s));
+  const z2 = new THREE.Vector3().crossVectors(f2, s2);
+  _ik.m2.makeBasis(f2, s2, z2);
+  _ik.m2.multiply(_ik.m1.transpose());                          // current basis -> wanted basis
+  _ik.q.setFromRotationMatrix(_ik.m2);
+  rotateWorld(hand, _ik.qw.identity().slerp(_ik.q, w));
+}
+
+function climbContact(c, motion) {
+  const st = motion.step; const pair = motion.pairs[motion.pairs.length - 1];
+  if (st?.clip !== 'climbingToTop' || !st.align || !pair) return;
+  const t = pair.lower.time;
+  const yaw = st.align.yaw ?? 0;
+  const fwd = new THREE.Vector3(Math.sin(yaw), 0, Math.cos(yaw));
+  const right = new THREE.Vector3(-Math.cos(yaw), 0, Math.sin(yaw));      // his right
+  const up = new THREE.Vector3(0, 1, 0);
+
+  // lean the chest in toward the wall
+  const lean = CLIMB.leanMax * window4(t, CLIMB.lean);
+  if (lean > 1e-3) {
+    const axis = new THREE.Vector3().crossVectors(up, fwd).normalize();
+    [['Spine', 0.4], ['Spine1', 0.35], ['Spine2', 0.25]].forEach(([n, k]) => rotateWorld(c.bone(n), _ik.q.setFromAxisAngle(axis, lean * k)));
+  }
+
+  // both hands onto the top edge, then onto his left knee as he steps up
+  const w = window4(t, CLIMB.hands);
+  if (w < 1e-3) return;
+  const edge = new THREE.Vector3(st.align.x ?? 0, BLOCK.height + CLIMB.wrist, st.align.z ?? 0).addScaledVector(fwd, CLIMB.edgeAhead + CLIMB.onTop);
+  const toKnee = THREE.MathUtils.smoothstep(t, ...CLIMB.toKnee);
+  const knee = c.bone('LeftLeg').getWorldPosition(new THREE.Vector3()).addScaledVector(up, CLIMB.knee.up).addScaledVector(fwd, CLIMB.knee.ahead);
+  for (const [side, s] of [['Left', -1], ['Right', 1]]) {
+    const onEdge = edge.clone().addScaledVector(right, s * CLIMB.spread);
+    const onKnee = knee.clone().addScaledVector(right, s * CLIMB.knee.spread);
+    const target = onEdge.lerp(onKnee, toKnee);
+    const pole = new THREE.Vector3().addScaledVector(right, s * 0.6).addScaledVector(fwd, -0.5).addScaledVector(up, -0.4);
+    reach(c.bone(`${side}Arm`), c.bone(`${side}ForeArm`), c.bone(`${side}Hand`), target, w, pole);
+    palmDown(c, side, fwd, right.clone().multiplyScalar(-s), w);
+  }
+}
+
+// Seated feet: the chair-style sitting clips tucked the feet back under the seat (inside the "0"). That is fixed in the
+// clips themselves (designs/avatar-work/scripts/clips404_ledge.py: only the knee opens, so the ankle stays 8 cm in front
+// of the face; thighs untouched, so hands on the knees stay as animated). The idle leg swing only ever kicks forward.
+// Which way a knee turns to open (move the ankle forward), measured on the model once.
+function kneeOpenSign(c, side) {
+  const knee = c.bone(`${side}Leg`); const foot = c.bone(`${side}Foot`);
+  const q = knee.quaternion.clone();
+  const before = foot.getWorldPosition(new THREE.Vector3()).z;
+  knee.quaternion.multiply(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), 0.1)); knee.updateMatrixWorld(true);
+  const after = foot.getWorldPosition(new THREE.Vector3()).z;
+  knee.quaternion.copy(q); knee.updateMatrixWorld(true);
+  return after > before ? 1 : -1;
+}
+
 /* ---------- the avatar: motion engine + director (notFoundMotion.js / notFoundDirector.js) ---------- */
 
 // on the top of the "0" (or on the ground): where his shadow falls
@@ -261,7 +369,8 @@ function Avatar({ url, visible, pointer, brain, onReady }) {
 
     // bones we turn on top of the animation (knees, chest, neck, head): back to the pure animated pose first. three.js
     // only rewrites a bone when its animated value changes, so on a still clip (sitting) the turns would pile up.
-    const layered = l.layered ??= [c.bone('LeftLeg'), c.bone('RightLeg'), c.turn.chest[0], c.turn.neck[0], c.turn.head[0]]
+    const layered = l.layered ??= [c.bone('LeftLeg'), c.bone('RightLeg'), c.turn.chest[0], c.turn.neck[0], c.turn.head[0],
+      ...['Spine', 'Spine1', 'LeftArm', 'LeftForeArm', 'LeftHand', 'RightArm', 'RightForeArm', 'RightHand', 'LeftUpLeg', 'RightUpLeg'].map((n) => c.bone(n))]
       .map((bone) => ({ bone, base: bone.quaternion.clone() }));
     for (const x of layered) x.bone.quaternion.copy(x.base);
     dir.tick(motion, t);
@@ -274,13 +383,15 @@ function Avatar({ url, visible, pointer, brain, onReady }) {
     brain.shadow.x = G.x; brain.shadow.z = G.z; brain.shadow.y = onBlock(G) ? BLOCK.height : 0;
     c.hips.getWorldPosition(tmp.v); brain.shadow.lift = Math.max(0, tmp.v.y - brain.shadow.y - 0.9);
 
-    // ---- seated: his legs swing gently over the edge (knees, alternating)
+    // ---- seated: his legs swing gently over the edge (knees, alternating), forward only so the feet never go back
+    // into the "0" (sitting on the edge facing the camera: forward = +z)
     l.legs = damp(l.legs, st.legs ? 1 : 0, 2.5, dt);
-    const amp = import.meta.env.DEV && window.__nfLegs !== undefined ? window.__nfLegs : 0.2;
+    const amp = import.meta.env.DEV && window.__nfLegs !== undefined ? window.__nfLegs : 0.22;
     if (l.legs > 0.01 && amp) {
+      l.kneeSign ??= { Left: kneeOpenSign(c, 'Left'), Right: kneeOpenSign(c, 'Right') };
       for (const [side, phase] of [['Left', 0], ['Right', Math.PI]]) {
-        const knee = c.bone(`${side}Leg`);
-        knee.quaternion.multiply(tmp.q.setFromAxisAngle(X, Math.sin(t * 2.1 + phase) * amp * l.legs));
+        const kick = 0.5 - 0.5 * Math.cos(t * 2.1 + phase);           // 0 .. 1 .. 0
+        c.bone(`${side}Leg`).quaternion.multiply(tmp.q.setFromAxisAngle(X, l.kneeSign[side] * kick * amp * l.legs));
       }
     }
 
@@ -317,6 +428,9 @@ function Avatar({ url, visible, pointer, brain, onReady }) {
     bend(c.turn.chest, 0, l.chestY, 0);
     bend(c.turn.neck, (l.headX + ch('headX')) * 0.35, (l.headY + ch('headY')) * 0.35, 0);
     bend(c.turn.head, (l.headX + ch('headX')) * 0.65, (l.headY + ch('headY')) * 0.65, -(l.headY * -0.08 + ch('headZ')));
+    // climbing: chest leans in, hands on the top of the "0"
+    climbContact(c, motion);
+
     const gx = clamp(l.gazeX + ch('gazeX'), -0.95, 0.95); const gy = clamp(l.gazeY + ch('gazeY'), -0.6, 0.95);
     for (const e of c.eyeRest) e.obj.quaternion.copy(e.rest).multiply(tmp.q.setFromAxisAngle(e.up, gx * 0.35)).multiply(tmp.q.setFromAxisAngle(e.side, gy * 0.25));
 

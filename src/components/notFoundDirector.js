@@ -42,14 +42,17 @@ export function createMotion(c, anims404) {
   const ctx = motionContext(c, c.clips[CLIPS.baseIdle.clip]);
   const m = new Motion(c, ctx);
   const seatY = hipsHeight(NF.sittingIdle, ctx);
-  const seated = (name) => { const d = hipsHeight(NF[name], ctx) - seatY; return { floor: [d, d] }; };
+  // seated clips: hips at the seat height, and planted (move:false): the chair clips slide the hips a few cm as he
+  // leans, which on the ledge moved his whole body along the top of the "0"
+  const seated = (name) => { const d = hipsHeight(NF[name], ctx) - seatY; return { floor: [d, d], move: false }; };
   const CFG = {
     climbingToTop: { floor: [0, 1.464], to: H, ramp: [0.15, 0.62] },
     jumpingDown: { yaw: true, floor: [1.3, 0], to: -H, ramp: [0.37, 0.53] },
     standToSit: { move: false, to: -SEAT_DROP, ramp: [0.42, 0.95] },
     sitToStand: { move: false, to: SEAT_DROP, ramp: [0.05, 0.5] },
     leftTurn90: { yaw: true }, rightTurn90: { yaw: true },
-    sittingIdle2: { floor: [-SEAT_DROP, -SEAT_DROP] },
+    sittingIdle: { move: false },
+    sittingIdle2: { floor: [-SEAT_DROP, -SEAT_DROP], move: false },
   };
   for (const name of ['sittingLaughing', 'sittingClap', 'sittingThumbsUp', 'cheeringWhileSitting', 'sittingDisbelief', 'sittingRubbingArm']) CFG[name] = seated(name);
   for (const [name, clip] of Object.entries(NF)) m.add(name, clip, CFG[name]);
