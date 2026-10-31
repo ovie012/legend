@@ -62,11 +62,14 @@ function patchMaterial(m, uniforms, insideDark = false) {
   if (m.depthWrite === false) m.userData.keepNoDepth = true; else m.depthWrite = true;
   m.onBeforeCompile = (shader) => {
     Object.assign(shader.uniforms, uniforms);
-    shader.vertexShader = 'varying float vWorldY;\n' + shader.vertexShader.replace('#include <project_vertex>', `
+    // _skin (model attribute, 0..1): the neck and the underside of the jaw are painted skin like the face, so they get
+    // the head's glow wherever they are (the height blend gave the neck the body's: it read darker and more orange)
+    shader.vertexShader = 'attribute float _skin;\nvarying float vWorldY;\nvarying float vSkin;\n' + shader.vertexShader.replace('#include <project_vertex>', `
       #include <project_vertex>
       vWorldY = (modelMatrix * vec4(transformed, 1.0)).y;
+      vSkin = _skin;
     `);
-    shader.fragmentShader = 'uniform vec2 uFade;\nuniform vec2 uGlow;\nuniform vec2 uNeck;\nuniform vec3 uShimmer;\nvarying float vWorldY;\n' + shader.fragmentShader
+    shader.fragmentShader = 'uniform vec2 uFade;\nuniform vec2 uGlow;\nuniform vec2 uNeck;\nuniform vec3 uShimmer;\nvarying float vWorldY;\nvarying float vSkin;\n' + shader.fragmentShader
       .replace('#include <map_fragment>', `
         #include <map_fragment>
         diffuseColor.a *= smoothstep(uFade.x, uFade.y, vWorldY);
@@ -74,7 +77,7 @@ function patchMaterial(m, uniforms, insideDark = false) {
       .replace('#include <emissivemap_fragment>', `
         #include <emissivemap_fragment>
         // soft glow: full on the head (the painted face carries its own shading), less on the clothes below the neck
-        totalEmissiveRadiance += diffuseColor.rgb * mix(uGlow.x, uGlow.y, smoothstep(uNeck.x - uNeck.y, uNeck.x + uNeck.y, vWorldY));
+        totalEmissiveRadiance += diffuseColor.rgb * mix(uGlow.x, uGlow.y, max(smoothstep(uNeck.x - uNeck.y, uNeck.x + uNeck.y, vWorldY), vSkin));
         totalEmissiveRadiance += vec3(1.0, 0.86, 0.6) * uShimmer.z * (1.0 - smoothstep(0.0, uShimmer.y, abs(vWorldY - uShimmer.x)));
       `);
     if (insideDark) shader.fragmentShader = shader.fragmentShader.replace('#include <dithering_fragment>', `
