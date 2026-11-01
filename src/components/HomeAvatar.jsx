@@ -6,15 +6,15 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import { AVATAR_RIG as RIG } from './avatarRig';
 import { BASE_IDLE, CLIPS, DANCES } from './avatarClips';
-import { MODELS, onThemeIntent } from './avatarModels';
+import { ANIMS, MODELS, onThemeIntent } from './avatarModels';
+import { CLIP_OF, addClips, clipStore, loadLaterWhenIdle } from './avatarClipStore';
 
 // a hot update would rebuild the character from the already posed, placed model (wrong size, eyes, moves): reload instead
 if (import.meta.hot) import.meta.hot.decline();
 
 // The rigged character (Blender + Mixamo, designs/avatar-work): brown senator in light mode, white in dark mode.
-// Both share one skeleton and one animation file. Body = animation clips (avatarClips.js), face = shape keys + eye
+// Both share one skeleton and one set of moves (in two files: avatarClipStore.js). Body = animation clips (avatarClips.js), face = shape keys + eye
 // nodes driven by the reaction keyframes (avatarActions.js), cursor-follow on the head/chest bones on top.
-const ANIMS = '/3d/legend_anims.glb';
 const withMeshopt = (loader) => loader.setMeshoptDecoder(MeshoptDecoder);
 
 const { damp, clamp, lerp } = THREE.MathUtils;
@@ -42,7 +42,7 @@ const HAND_POSES = {
   thumbsUp: [-0.35, 1.25, 1.3, 1.35, 1.35],
 };
 // reactions that borrow another one's clip (the mini companion's thumbs-up = the cheer's arm pump, thumbs out)
-export const CLIP_OF = (name) => CLIPS[name] ?? { thumbsUp: CLIPS.cheer }[name];
+export { CLIP_OF };
 const HAND_POSE_OF = {
   tiltWave: 'open', winkBye: 'open', lookBackBye: 'open', shyBye: 'open', saluteBye: 'open', greet: 'open', clap: 'open',
   shy: 'open', dust: 'open', stretch: 'open', surprised: 'open', doubleTake: 'open', shrug: 'open', bow: 'relaxed',
@@ -132,7 +132,7 @@ function addHitProxies(root, bone) {
 // also used by the 404 scene (NotFoundScene.jsx): same cached model, mixer and face rig
 export function useCharacter(url) {
   const gltf = useLoader(GLTFLoader, url, withMeshopt);
-  const anims = useLoader(GLTFLoader, ANIMS, withMeshopt);
+  const anims = useLoader(GLTFLoader, ANIMS.start, withMeshopt);
   return useMemo(() => {
     if (gltf.userData.legend) return gltf.userData.legend;
     const root = gltf.scene;
@@ -174,7 +174,8 @@ export function useCharacter(url) {
     const turn = { head: [head, localAxes(head)], neck: [neck, localAxes(neck)], chest: [chest, localAxes(chest)] };
     const hit = addHitProxies(root, bone);
     const mixer = new THREE.AnimationMixer(root);
-    const clips = Object.fromEntries(anims.animations.map((c) => [c.name, c]));
+    addClips(anims);
+    const clips = clipStore;           // the later moves join it when they arrive
     const glasses = root.getObjectByName('glasses');
     const hand = bone('RightHand');
     // where the glasses sit in his right hand: pose the glassesOn clip at the moment they touch his face (measured
@@ -208,8 +209,9 @@ export function useCharacter(url) {
 }
 
 // frame: the element the canvas fills (the mini companion's small window); the cursor and the looked-at card are
-// measured against it (default: the whole window, as on the homepage)
-export function Character({ url, visible, pointer, scroll, reaction, playing, glassesState, attention, meshRef, shared, onReady, frame }) {
+// measured against it (default: the whole window, as on the homepage). dock: 0..1, how far he is into the phone's
+// corner badge (HomeScene): touches turn his head less there, so his face stays inside the circle
+export function Character({ url, visible, pointer, scroll, reaction, playing, glassesState, attention, meshRef, shared, onReady, frame, dock }) {
   const c = useCharacter(url);
   const inner = useRef();
   const st = useRef({ lastId: -1, active: null, weights: new Map(), cache: {}, zoom: 0, hipsX: 0,
@@ -230,6 +232,7 @@ export function Character({ url, visible, pointer, scroll, reaction, playing, gl
     const cache = st.current.cache;
     if (!cache[key]) {
       let clip = c.clips[info.clip];
+      if (!clip) return null;          // still on its way (the directors play a stand-in meanwhile)
       if (info.window) clip = THREE.AnimationUtils.subclip(clip, key, Math.round(info.window[0] * 30), Math.round(info.window[1] * 30), 30);
       cache[key] = c.mixer.clipAction(clip);
     }
@@ -252,8 +255,8 @@ export function Character({ url, visible, pointer, scroll, reaction, playing, gl
     if (pl.id !== s.lastId) {
       s.lastId = pl.id;
       const info = CLIP_OF(pl.name);
-      if (info) {
-        const a = actionFor(info);
+      const a = info && actionFor(info);
+      if (a) {
         a.reset();
         a.setLoop(info.repeat > 1 ? THREE.LoopRepeat : THREE.LoopOnce, info.repeat ?? 1);
         a.clampWhenFinished = true;
@@ -312,8 +315,9 @@ export function Character({ url, visible, pointer, scroll, reaction, playing, gl
       l.idleTarget.set((Math.random() - 0.5) * 0.9, (Math.random() - 0.5) * 0.5);
       l.nextSaccade = t + 1.2 + Math.random() * 2.2;
     }
-    const tx = idleEyes ? l.idleTarget.x : clamp(look.x - tmp.v.x, -1.5, 1.5);
-    const ty = idleEyes ? l.idleTarget.y : clamp(look.y - tmp.v.y, -1.5, 1.5);
+    const lookK = 1 - 0.85 * (dock?.current ?? 0);
+    const tx = idleEyes ? l.idleTarget.x : clamp(look.x - tmp.v.x, -1.5, 1.5) * lookK;
+    const ty = idleEyes ? l.idleTarget.y : clamp(look.y - tmp.v.y, -1.5, 1.5) * lookK;
     const turnMax = card ? 0.55 : 0.36;
     const lean = clamp(scroll.current.velocity * 0.00035, -0.14, 0.14);
     const follow = (1 - r.follow) * (1 - smooth(s.zoom));
@@ -402,7 +406,7 @@ export function Character({ url, visible, pointer, scroll, reaction, playing, gl
 // the outfit while he faces away, with a shimmer up the body; if the outfit is still loading then, it changes inside a
 // shimmer of its own as soon as it is ready.
 const LATE_SWAP = 0.35;     // seconds into that late shimmer when the outfit changes
-function HomeAvatar({ lightMode, pointer, scroll, reaction, playing, glasses, attention, meshRef, onReady }) {
+function HomeAvatar({ lightMode, pointer, scroll, reaction, playing, glasses, attention, meshRef, onReady, dock }) {
   const want = lightMode ? 'light' : 'dark';
   const [shown, setShown] = useState(want);
   const [mounted, setMounted] = useState({ [want]: true });
@@ -412,6 +416,9 @@ function HomeAvatar({ lightMode, pointer, scroll, reaction, playing, glasses, at
   const first = useRef(true);
 
   useEffect(() => onThemeIntent(() => setMounted({ light: true, dark: true })), []);
+  // the later moves: once he is on screen and the page is quiet, or on the first click / key / scroll
+  const shownReady = !!ready[shown];
+  useEffect(() => (shownReady ? loadLaterWhenIdle(4) : undefined), [shownReady]);
   useEffect(() => {
     if (first.current) { first.current = false; return undefined; }
     setMounted((m) => ({ ...m, [want]: true }));
@@ -432,7 +439,7 @@ function HomeAvatar({ lightMode, pointer, scroll, reaction, playing, glasses, at
     <Suspense key={k} fallback={null}>
       <Character
         url={MODELS[k]} visible={shown === k} pointer={pointer} scroll={scroll} reaction={reaction} playing={playing}
-        glassesState={glasses} attention={attention} meshRef={meshRef} shared={shared}
+        glassesState={glasses} attention={attention} meshRef={meshRef} shared={shared} dock={dock}
         onReady={() => { readyNow.current[k] = true; setReady((r) => ({ ...r, [k]: true })); if (k === shown) onReady?.(); }}
       />
     </Suspense>

@@ -2,7 +2,8 @@ import { useEffect, useMemo, useRef } from 'react';
 import { useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { ACTIONS, STAGE_MOMENTS, createPicker, emptyPose, sampleAction } from './avatarActions';
-import { CLIPS } from './avatarClips';
+import { CLIPS, DANCES } from './avatarClips';
+import { clipReady, loadLaterClips, standIn } from './avatarClipStore';
 import { AVATAR_RIG as RIG } from './avatarRig';
 import { EGGS, avatarStage, findEgg } from './avatarStage';
 
@@ -15,6 +16,10 @@ const PRIORITY = { idle: 0, moment: 1, hover: 1, read: 1, surprise: 1, click: 2,
 const IGNORE = 'a, button, input, textarea, select, label, [role="button"], header, .footer, .hm-work-card, .hm-skill, .light-dark-mode, .av-eggs, .av-hint';
 
 const IDLE_AFTER = 15;
+// phone Home: docked in the corner badge he just looks around now and then (no section moments, no dances)
+const DOCKED_LOOK = [5, 9];
+// a click whose move was still loading: the stand-in plays, then the move itself if it arrives within this many seconds
+const LATE_OK = 4;
 // After this many bored idle moments in a row (picked at random each time), he does one dance.
 const DANCE_AFTER = [2, 3];
 // Grab-and-flick: drag turns him directly; letting go faster than FLICK_SPEED (px/s) sends him spinning.
@@ -68,15 +73,32 @@ export function useAvatarDirector({ meshRef, lightMode, scroll }) {
   });
   const newDanceAt = () => DANCE_AFTER[0] + Math.floor(Math.random() * (DANCE_AFTER[1] - DANCE_AFTER[0] + 1));
 
+  const waiting = useRef(null);
   const play = (name, kind) => {
     const st = s.current;
+    let want = null;
+    if (!clipReady(name)) {
+      want = { name, kind, at: now() };
+      if (kind === 'click') {
+        waiting.current = want;
+        loadLaterClips().then(() => {
+          const cur = st.current;
+          if (waiting.current !== want || now() - want.at > LATE_OK || !clipReady(want.name)) return;
+          waiting.current = null;
+          if (cur?.standIn === want) st.current = null;      // replace the stand-in at once
+          else if (cur && now() < cur.start + cur.duration) return;
+          play(want.name, kind);
+        });
+      } else loadLaterClips();
+      name = standIn(kind);
+    }
     const cur = st.current;
     const priority = PRIORITY[kind];
     if (cur && now() < cur.start + cur.duration) {
       if (priority < cur.priority) return false;
       if (priority === cur.priority && now() - cur.start < 0.35) return false;
     }
-    st.current = { name, action: ACTIONS[name], start: now(), duration: durationOf(name), priority };
+    st.current = { name, action: ACTIONS[name], start: now(), duration: durationOf(name), priority, standIn: want };
     playing.current = { id: playing.current.id + 1, name, start: st.current.start, duration: st.current.duration };
     return true;
   };
@@ -283,10 +305,21 @@ export function useAvatarDirector({ meshRef, lightMode, scroll }) {
     play('themeSwap', 'theme');
   }, [lightMode]);
 
-  // stageName: section he is in; exitness: 0 on the page .. 1 gone below the footer
-  const update = (stageName, exitness) => {
+  // stageName: section he is in; exitness: 0 on the page .. 1 gone below the footer; docked: in the phone's corner badge
+  const update = (stageName, exitness, docked = false) => {
     const st = s.current;
     const t = now();
+    if (docked !== st.docked) {
+      st.docked = docked;
+      st.nextIdle = t + DOCKED_LOOK[0];
+      // out of the badge: the section's moment waits until he has landed from the hop
+      if (!docked) { st.stageSince = t + 0.8; st.momentDone = false; }
+      // a dance zooms out to his whole body: not inside the badge
+      if (docked && st.current && DANCES.includes(st.current.name) && t < st.current.start + st.current.duration) {
+        st.current = null;
+        playing.current = { id: playing.current.id + 1, name: null, start: t, duration: 0 };
+      }
+    }
 
     // spin physics: friction, then settle back to facing forward and pull a funny face
     const sp = spin.current;
@@ -329,7 +362,7 @@ export function useAvatarDirector({ meshRef, lightMode, scroll }) {
         st.stageSince = t;
         st.momentDone = false;
       }
-      const moment = STAGE_MOMENTS[stageName];
+      const moment = !docked && STAGE_MOMENTS[stageName];
       if (moment && !st.momentDone && t - st.stageSince > 0.6) {
         st.momentDone = true;
         if ((stageName !== 'hero' || !st.greeted) && cooled(`moment:${stageName}`, 8)) play(moment, 'moment');
@@ -345,7 +378,12 @@ export function useAvatarDirector({ meshRef, lightMode, scroll }) {
       else if (!want && g.worn && doing !== 'glassesOff') play('glassesOff', 'read');
 
       const busy = st.current && t < st.current.start + st.current.duration;
-      if (!busy && t - st.lastInput > IDLE_AFTER && t > st.nextIdle) {
+      if (docked) {
+        if (!busy && t > st.nextIdle) {
+          play('lookAround', 'idle');
+          st.nextIdle = t + DOCKED_LOOK[0] + Math.random() * (DOCKED_LOOK[1] - DOCKED_LOOK[0]);
+        }
+      } else if (!busy && t - st.lastInput > IDLE_AFTER && t > st.nextIdle) {
         // 3–5 bored moments, then one random dance, then the count starts again.
         // The shuffle bag in pick() means no dance repeats until all 10 have played.
         const dancing = st.idleStreak >= st.danceAt;
@@ -370,5 +408,7 @@ export function useAvatarDirector({ meshRef, lightMode, scroll }) {
     return { hold: st.farewell === 'leaving' && t < st.holdUntil };
   };
 
-  return { pose, spin, playing, glasses, attention, update };
+  // the phone badge (HomeScene): its taps play gestures here; busyFor = seconds left of what he is doing
+  const busyFor = () => { const cur = s.current.current; return cur ? Math.max(0, cur.start + cur.duration - now()) : 0; };
+  return { pose, spin, playing, glasses, attention, update, play, busyFor };
 }

@@ -1752,6 +1752,20 @@ svg.down-svg {
   background: linear-gradient(90deg, transparent, var(--f-border) 20%, var(--f-border) 80%, transparent);
 }
 
+/* SLIM (About, Contact, Privacy: they end with their own call to action): the link grid only */
+.footer.footer-slim {
+  padding-top: 72px;
+}
+
+.container .footer-available {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  color: var(--f-muted);
+  font-size: var(--fs-small);
+}
+
 /* LINK GRID */
 .footer-grid {
   display: grid;
@@ -1967,6 +1981,10 @@ svg.down-svg {
   .footer {
     padding: 80px 6% 24px;
     border-radius: 28px 28px 0 0;
+  }
+
+  .footer.footer-slim {
+    padding-top: 56px;
   }
 
   .footer-divider {
@@ -3227,6 +3245,21 @@ svg.down-svg {
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
+}
+
+/* "I reply within 24 hours" above the privacy note */
+.container .ct-page .ct-reply-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: -10px;
+  font-size: var(--fs-small);
+  font-weight: 600;
+}
+
+.ct-page .ct-reply-note svg {
+  flex-shrink: 0;
+  color: var(--ct-accent-text, var(--ct-accent));
 }
 
 .container .ct-page .ct-privacy-note {
@@ -5099,19 +5132,17 @@ svg.down-svg {
   }
 }
 
-/* HOW I BUILD: scroll-driven process orbit */
+/* HOW I BUILD: the process orbit (desktop: plays by itself when in view, no pinned scroll; owner 2026-11-01) */
 .hm-process {
   display: grid;
   grid-template-columns: 1fr 1.1fr;
-  align-items: start;   /* lets the content stick while the section scrolls */
+  align-items: center;
   gap: 40px;
-  min-height: 240vh;
+  min-height: 100vh;
   padding: 60px 0;
 }
 
 .hm-orb-content {
-  position: sticky;
-  top: 11vh;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -5353,10 +5384,9 @@ svg.down-svg {
   }
 }
 
-/* short laptop windows: tighter spacing so the sticky block (heading + all five steps) stays on screen */
+/* short laptop windows: tighter spacing so the block (heading + all five steps) fits on one screen */
 @media only screen and (min-width: 801px) and (max-height: 760px) {
   .hm-orb-content {
-    top: 5vh;
     gap: 16px;
   }
 
@@ -7200,4 +7230,56 @@ svg.down-svg {
     right: 12px;
     bottom: 12px;
   }
+}
+
+/* PHONE HOME BADGE: HomeScene.jsx. On phones he shrinks into this corner badge where text would pass him and grows
+   back where there is room (owner 2026-11-01). Its place, size, scale (it opens like a portal before he hops in) and
+   background opacity are set every frame by the scene (the 3D layer is clipped to the same box); it looks like the
+   companion's docked badge (.mc.is-docked). */
+.container .hm-badge {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 50;
+  width: 0;
+  height: 0;
+  padding: 0;
+  border: 1px solid var(--hd-border);
+  background: var(--hd-surface-solid);
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  cursor: pointer;
+}
+
+.container .hm-badge.is-on {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* a ring ripples out once when he lands in the badge, and as he springs out of it */
+.container .hm-badge::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border: 2px solid var(--hd-accent);
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.container .hm-badge.is-ripple::after {
+  animation: hm-badge-ripple 0.8s ease-out;
+}
+
+@keyframes hm-badge-ripple {
+  from { opacity: 0.7; transform: scale(1); }
+  to { opacity: 0; transform: scale(1.7); }
+}
+
+/* docked: the 3D layer sits above the page but lets taps through to the badge (the 3D library sets
+   pointer-events inline on its own wrapper, hence !important) */
+.hm-scene.is-badge * {
+  pointer-events: none !important;
 }

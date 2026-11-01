@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import emailjs from "emailjs-com";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiSend, FiCheck, FiRotateCcw } from "react-icons/fi";
+import { FiSend, FiCheck, FiRotateCcw, FiClock } from "react-icons/fi";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -318,6 +318,9 @@ function ContactForm() {
           )}
           <p className="ct-kbd-hint">Watch the editor write your message as code →</p>
         </div>
+
+        {/* owner 2026-11-01: the reply time he commits to */}
+        <p className="ct-reply-note"><FiClock aria-hidden="true" /> I reply within 24 hours.</p>
 
         <p className="ct-privacy-note">
           By sending this, you agree I’ll use your details only to reply to you. See the{" "}

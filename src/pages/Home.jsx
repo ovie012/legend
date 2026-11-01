@@ -4,6 +4,7 @@ import {
   MotionConfig,
   motion,
   useAnimationFrame,
+  useInView,
   useMotionValue,
   useMotionValueEvent,
   useReducedMotion,
@@ -17,6 +18,8 @@ import { HiSparkles } from 'react-icons/hi2';
 import { AppContext } from '../AppProvider';
 import { expectTask } from '../loadProgress';
 import AvatarEggs from '../components/AvatarEggs';
+import stillLight from '../assets/3d/still/legend-still-light.webp';
+import stillDark from '../assets/3d/still/legend-still-dark.webp';
 
 const HomeScene = lazy(() => import('../components/HomeScene'));
 
@@ -30,7 +33,7 @@ const fadeUp = {
 };
 
 // No 3D (Step A item 8): reduced motion, no WebGL2, the browser's data saver, a 2G connection or a phone with
-// <= 2 GB of memory get a still of him rendered from the 3D model (public/3d/still, designs/avatar-work/shot/still.mjs).
+// <= 2 GB of memory get a still of him rendered from the 3D model (src/assets/3d/still, designs/avatar-work/shot/still.mjs).
 const lowEnd = typeof navigator !== 'undefined'
   && (!!navigator.connection?.saveData || /2g$/.test(navigator.connection?.effectiveType ?? '') || (navigator.deviceMemory ?? 8) <= 2);
 const supports3D = typeof window !== 'undefined'
@@ -238,8 +241,10 @@ const SERVICES = [
   { icon: <FiLayers />, title: 'Interfaces & motion', detail: 'Polished UI, 3D and animation that make a product feel premium.' },
 ];
 
-// How I build: five stages around the brand orbit. Scrolling through the section moves the star
-// around the tilted ring and lights up the stage it reaches.
+// How I build: five stages around the brand orbit; the star travels the tilted ring and lights up each stage in turn.
+// Desktop (owner 2026-11-01, a visitor's complaint: the whole block is on screen at once, yet it only counted 1 to 5 as
+// you scrolled through extra space): it plays by itself once it is in view, STEP_TIME per stage, no scrolling needed.
+// Phones keep the scroll-driven count (the section isn't pinned there and every step is shown in full anyway).
 const PROCESS = [
   { title: 'Understand', detail: 'I start with the people and the problem: goals, constraints and what success looks like.' },
   { title: 'Design', detail: 'Flows, interfaces and motion that feel obvious, in light and in dark.' },
@@ -248,17 +253,35 @@ const PROCESS = [
   { title: 'Ship & refine', detail: 'Fast, accessible releases, measured and improved after launch.' },
 ];
 
+const STEP_TIME = 0.9;   // seconds per stage when it plays by itself
+
 function HowIBuild({ desktop }) {
   const ref = useRef(null);
+  const body = useRef(null);
+  const reduced = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start 0.1', 'end 0.95'] });
   const [p, setP] = useState(0);
-  useMotionValueEvent(scrollYProgress, 'change', (v) => setP(Math.min(Math.max(v, 0), 1)));
+  useMotionValueEvent(scrollYProgress, 'change', (v) => { if (!desktop) setP(Math.min(Math.max(v, 0), 1)); });
+  const seen = useInView(body, { once: true, amount: 0.5 });
+  useEffect(() => {
+    if (!desktop || !seen) return undefined;
+    if (reduced) { setP(1); return undefined; }
+    const start = performance.now();
+    let raf = 0;
+    const tick = (t) => {
+      const v = Math.min(1, (t - start) / 1000 / (STEP_TIME * PROCESS.length));
+      setP(v);
+      if (v < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [desktop, seen, reduced]);
   const active = Math.min(Math.floor(p * PROCESS.length), PROCESS.length - 1);
 
   return (
     <section ref={ref} className="hm-process">
       <div className="hm-about-spacer" aria-hidden="true"></div>
-      {/* the pinned block carries the avatar anchor, so he holds his pose while it is pinned */}
+      {/* the block carries the avatar anchor (stage 'journey') */}
       <div className="hm-orb-content" data-stage="journey" data-stage-mobile="none">
         <motion.div className="hm-orb-head" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.4 }}>
           <motion.span className="hm-eyebrow" variants={fadeUp} custom={0}><HiSparkles /> How I build</motion.span>
@@ -268,7 +291,7 @@ function HowIBuild({ desktop }) {
             place, and keep refining after launch.
           </motion.p>
         </motion.div>
-        <div className="hm-orb-body">
+        <div className="hm-orb-body" ref={body}>
           <div className="hm-orb" style={{ '--p': p * 100 }} aria-hidden="true">
             <div className="hm-orb-tilt">
               <div className="hm-orb-ring"></div>
@@ -408,7 +431,7 @@ function Home() {
           {!supports3D && typeof window !== 'undefined' && (
             <figure className="hm-hero-fallback">
               <img
-                src={lightMode ? '/3d/still/legend-still-light.webp' : '/3d/still/legend-still-dark.webp'}
+                src={lightMode ? stillLight : stillDark}
                 alt="Emonefe Ovie as his 3D avatar"
                 width="1120"
                 height="1610"

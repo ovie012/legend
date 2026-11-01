@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiArrowUpRight, FiArrowUp, FiCopy, FiCheck } from 'react-icons/fi';
 import { AppContext } from '../AppProvider';
@@ -14,6 +14,10 @@ const navLinks = [
     { label: 'Contact', to: '/Contact' },
 ];
 
+// Pages that already end with their own call to action get a slim footer: no big "Let's create something" block
+// (owner 2026-11-01, from the audit: one goodbye, not two). Home, Projects and the 404 keep it.
+const SLIM = new Set(['/about', '/contact', '/privacy']);
+
 const reveal = {
     hidden: { opacity: 0, y: 40 },
     visible: (i = 0) => ({
@@ -25,6 +29,8 @@ const reveal = {
 
 function Footer() {
     const { socials, scrollToTop } = useContext(AppContext);
+    const { pathname } = useLocation();
+    const slim = SLIM.has(pathname.toLowerCase().replace(/\/$/, ''));
     const [copied, setCopied] = useState(false);
 
     const copyEmail = async () => {
@@ -38,9 +44,10 @@ function Footer() {
     };
 
   return (
-    <footer className="footer">
+    <footer className={`footer ${slim ? 'footer-slim' : ''}`}>
         <div className="footer-glow" aria-hidden="true"></div>
 
+        {!slim && <>
         <motion.section
             className="footer-cta"
             initial="hidden"
@@ -65,6 +72,7 @@ function Footer() {
         </motion.section>
 
         <div className="footer-divider"></div>
+        </>}
 
         <motion.section
             className="footer-grid"
@@ -115,6 +123,12 @@ function Footer() {
                 <a href={`mailto:${EMAIL}`} className="footer-link footer-email">
                     {EMAIL} <FiArrowUpRight />
                 </a>
+                {slim && (
+                    <p className="footer-available">
+                        <span className="footer-status-dot"></span>
+                        Available for new projects
+                    </p>
+                )}
             </motion.div>
         </motion.section>
 

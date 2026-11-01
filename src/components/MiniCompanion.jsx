@@ -2,7 +2,8 @@
 import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { Character, CLIP_OF } from './HomeAvatar';
+import { Character } from './HomeAvatar';
+import { CLIP_OF, clipReady, loadLaterClips, standIn } from './avatarClipStore';
 import { ACTIONS, emptyPose, sampleAction } from './avatarActions';
 import { SMALL_MODELS, onThemeIntent } from './avatarModels';
 import { AVATAR_RIG as RIG } from './avatarRig';
@@ -30,7 +31,17 @@ function useMiniDirector() {
       glasses: { current: { reading: false, pinned: false, worn: false } },
       attention: { current: { el: null } },
       busyUntil: 0,
+      // a move still on its way (avatarClipStore.js): a nod now, the move itself as soon as it arrives (within 4 s)
       play(name) {
+        if (!clipReady(name)) {
+          const want = { name, at: now() };
+          d.waiting = want;
+          loadLaterClips().then(() => {
+            if (d.waiting !== want || now() - want.at > 4 || !clipReady(want.name)) return;
+            d.waiting = null; d.play(want.name); d.onLate?.();
+          });
+          name = standIn();
+        } else d.waiting = null;
         const duration = durationOf(name);
         d.playing.current = { id: d.playing.current.id + 1, name, start: now(), duration };
         d.busyUntil = now() + duration;
@@ -113,6 +124,7 @@ export default function MiniCompanion({ page, lightMode }) {
       setUp(false);
     }, wait * 1000);
   };
+  director.onLate = () => dockLater();
   const perform = (name, delay = 0) => {
     setUp(true);
     setTimeout(() => { director.play(name); dockLater(); }, delay * 1000);
@@ -152,12 +164,15 @@ export default function MiniCompanion({ page, lightMode }) {
       const card = e.target.closest?.(CARD);
       if (card && card === director.attention.current.el && !card.contains(e.relatedTarget)) { director.attention.current.el = null; dockLater(); }
     };
+    const onFormFocus = (e) => { if (e.target.closest?.('form')) loadLaterClips(); };
     window.addEventListener('pointermove', onMove, { passive: true });
+    document.addEventListener('focusin', onFormFocus);
     window.addEventListener('legend:contact-sent', onSent);
     document.addEventListener('pointerover', onCardOver);
     document.addEventListener('pointerout', onCardOut);
     return () => {
       window.removeEventListener('pointermove', onMove);
+      document.removeEventListener('focusin', onFormFocus);
       window.removeEventListener('legend:contact-sent', onSent);
       document.removeEventListener('pointerover', onCardOver);
       document.removeEventListener('pointerout', onCardOut);
@@ -178,7 +193,7 @@ export default function MiniCompanion({ page, lightMode }) {
       className={`mc ${ready ? 'is-ready' : ''} ${up ? 'is-up' : 'is-docked'}`}
       aria-label="Say hi to Legend's 3D avatar"
       onClick={onClick}
-      onPointerEnter={() => { hovered.current = true; }}
+      onPointerEnter={() => { hovered.current = true; loadLaterClips(); }}
       onPointerLeave={() => { hovered.current = false; }}
     >
       <span ref={frame} className="mc-stage" aria-hidden="true">

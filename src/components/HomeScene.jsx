@@ -33,15 +33,35 @@ const STAGES = {
     aibuilds: { x: 0.78, y: 0.5, s: 0.27, ry: -0.3 },
     exit:   { x: 0, y: -1.7, s: 0.6, ry: 0 },
   },
+  // dock: where text would pass him he shrinks into the corner badge, like the companion on the other pages
+  // (owner 2026-11-01), and grows back where there is room for him (hero, the empty Skills stage)
   mobile: {
     hero:   { x: 0, y: 0.3, s: 0.5, ry: 0, follow: true },
-    about:  { x: 0.5, y: 1.9, s: 0.3, ry: -0.3 },
-    works:  { x: 0.5, y: 1.9, s: 0.3, ry: -0.3 },
+    // arrive 1.35: he sets off for the badge while the hero is still in view, before the About text reaches him
+    about:  { dock: true, arrive: 1.35 },
+    works:  { dock: true },
     skills: { x: 0, y: 0.14, s: 0.46, ry: 0 },
-    // after Skills he has already left upward; leaving downward from there slid him across 'How I build'
-    exit:   { x: 0.5, y: 1.9, s: 0.3, ry: 0 },
+    exit:   { dock: true },
   },
 };
+
+// The phone badge: same sizes and corner as the companion (App.css .mc): docked = a circle showing his face, up (after
+// a tap) = a small window with his bust. px; 'small' up to 600 px wide.
+const BADGE = { small: { edge: 12, dock: 56, w: 128, h: 160 }, large: { edge: 16, dock: 64, w: 168, h: 210 } };
+const BADGE_RADIUS = 28;      // corners of the 'up' window
+const DOCK_FACE = 1.25;       // docked: px per group unit, per px of badge size (his head fills most of the circle)
+const STAY_UP = 3.5;          // seconds he stays up after his last gesture
+// The hop between his spot and the badge (owner 2026-11-01: following the scroll it looked sharp). The page only
+// decides WHEN he goes; the move itself is timed: a quick dip as he glances where he is going (the jump clip, director
+// hopDown / hopUp), then one curved leap (sideways leads, a small lift early on), shrinking early into the badge or
+// growing out of it, with a soft bounce as he lands. If the visitor turns back mid-air he turns back from where he is.
+// crouch / flight in s; lift in stage units; bounce = size overshoot at the landing; turn = body turn in the air (rad);
+// above = how far into the hop (0 = his spot, 1 = the badge) he moves above the page's text (small by then)
+const HOP = { crouch: 0.1, flight: 0.8, lift: 0.05, bounce: 0.07, turn: 0.45, above: 0.4 };
+const easeOutBack = (x) => 1 + 2.70158 * (x - 1) ** 3 + 1.70158 * (x - 1) ** 2;
+// the leap's timing, like a jump: quick off the ground, slowing into a soft landing
+const leap = (u) => 1 - (1 - u) ** 2;
+const TAP_GESTURES = ['tiltWave', 'laugh', 'wink', 'headTilt', 'nodYes', 'smile', 'shrug'];   // as MiniCompanion
 
 // while crossing the page he rises and shrinks a little, so his body clears the text coming up from below
 const ARC = { up: 0.4, shrink: 0.2 };
@@ -58,21 +78,23 @@ const smoothstep = (e0, e1, x) => {
   return t * t * (3 - 2 * t);
 };
 
-// a stage's numbers for this frame (fit / follow read the page)
+// his bust inside a box (px): s from the box height and width (whichever is tighter), standing on its bottom edge
+function fitBox(r, vw, vh) {
+  const s = Math.min(r.height / ((BUST.top + BUST.bottom) / 2 * vh), r.width / ((BUST.top + BUST.bottom) / 2 * BUST.aspect * vh));
+  return { x: ((r.left + r.right) / 2 - vw / 2) / (vw / 2), y: (vh / 2 - (r.bottom - BUST.bottom * s * vh / 2)) / (vh / 2), s };
+}
+
+// a stage's numbers for this frame (fit / follow read the page; dock is placed by the Rig)
 function resolve(stage, rect) {
+  if (stage.dock) return { x: 0, y: 0, s: 0, ry: 0, dock: 1 };
   const vw = window.innerWidth; const vh = window.innerHeight;
   let { x, y, s } = stage;
   if (stage.fit) {
     const r = document.querySelector(stage.fit)?.getBoundingClientRect();
-    if (r && r.width > 40 && r.height > 40) {
-      // s from the box height and width (whichever is tighter), standing on the box's bottom edge
-      s = Math.min(r.height / ((BUST.top + BUST.bottom) / 2 * vh), r.width / ((BUST.top + BUST.bottom) / 2 * BUST.aspect * vh));
-      x = ((r.left + r.right) / 2 - vw / 2) / (vw / 2);
-      y = (vh / 2 - (r.bottom - BUST.bottom * s * vh / 2)) / (vh / 2);
-    }
+    if (r && r.width > 40 && r.height > 40) ({ x, y, s } = fitBox(r, vw, vh));
   }
   if (stage.follow && rect) y += Math.max(0, -rect.top) / (vh / 2);
-  return { x, y, s, ry: stage.ry };
+  return { x, y, s, ry: stage.ry, dock: 0 };
 }
 
 // Blend between the two stages around the middle of the viewport, holding each pose inside its section.
@@ -110,7 +132,7 @@ function roundSprite() {
   return new THREE.CanvasTexture(c);
 }
 
-function Dust({ look, scroll }) {
+function Dust({ look, scroll, dock }) {
   const points = useRef();
   const mat = useRef();
   const count = 650;
@@ -126,7 +148,8 @@ function Dust({ look, scroll }) {
 
   useFrame((state, dt) => {
     const pts = points.current;
-    pts.visible = !DEV.bare;
+    pts.visible = !DEV.bare && dock.fx > 0.01;          // fades out while he hops into the phone badge
+    mat.current.opacity = 0.55 * dock.fx;
     pts.rotation.y += dt * 0.012;
     pts.position.y = (pts.position.y + dt * 0.04 - scroll.current.velocity * 0.00004) % 3;
     mat.current.color.copy(look.cur.accent);
@@ -179,10 +202,10 @@ function Orbit({ accent }) {
   );
 }
 
-function Halo({ look }) {
-  const uniforms = useMemo(() => ({ uColor: { value: new THREE.Color() } }), []);
+function Halo({ look, dock }) {
+  const uniforms = useMemo(() => ({ uColor: { value: new THREE.Color() }, uAlpha: { value: 1 } }), []);
   const mesh = useRef();
-  useFrame(() => { uniforms.uColor.value.copy(look.cur.halo); mesh.current.visible = !DEV.bare; });
+  useFrame(() => { uniforms.uColor.value.copy(look.cur.halo); uniforms.uAlpha.value = dock.fx; mesh.current.visible = !DEV.bare && dock.fx > 0.01; });
   return (
     <mesh ref={mesh} position={[0, 0.25, -0.9]} scale={[4.2, 4.2, 1]}>
       <planeGeometry />
@@ -192,7 +215,7 @@ function Halo({ look }) {
         blending={THREE.AdditiveBlending}
         uniforms={uniforms}
         vertexShader="varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }"
-        fragmentShader="uniform vec3 uColor; varying vec2 vUv; void main() { float d = length(vUv - 0.5) * 2.0; gl_FragColor = vec4(uColor, pow(1.0 - clamp(d, 0.0, 1.0), 2.6) * 0.18); }"
+        fragmentShader="uniform vec3 uColor; uniform float uAlpha; varying vec2 vUv; void main() { float d = length(vUv - 0.5) * 2.0; gl_FragColor = vec4(uColor, pow(1.0 - clamp(d, 0.0, 1.0), 2.6) * 0.18 * uAlpha); }"
       />
     </mesh>
   );
@@ -222,17 +245,39 @@ function useLook(colors, lightMode) {
   return look;
 }
 
-function Rig({ colors, lightMode, pointer, scroll, onReady }) {
+function Rig({ colors, lightMode, pointer, scroll, onReady, badge }) {
   const group = useRef();
   const orbit = useRef();
   const avatar = useRef();
   const keyLight = useRef(); const hemi = useRef(); const rim = useRef(); const fill = useRef();
   const look = useLook(colors, lightMode);
   const { viewport, camera, size } = useThree();
-  const state = useRef({ x: 0, y: 0, s: 1, ry: 0, init: false, held: null });
+  const state = useRef({ x: 0, y: 0, s: 1, ry: 0, init: false, held: null, up: 0, head: { x: 0, y: 0.65 },
+    hop: { want: false, phase: 'rest', dir: 1, t: 0, u: 0, p: 0 } });
+  // current: 0..1 how far he is into the phone badge (the character's look); fx: dust + halo strength
+  const dock = useRef({ current: 0, fx: 1 }).current;
+  const view = useRef({});              // last styles written to the page (only changes are written)
   const headPos = useMemo(() => new THREE.Vector3(), []);
   useEffect(() => () => { avatarStage.present = false; avatarStage.head.on = false; }, []);
   const director = useAvatarDirector({ meshRef: avatar, lightMode, scroll });
+
+  // a tap on the phone badge: up from the corner with a wave (or another gesture when he is already up), then back
+  // into the corner a while after the gesture, as the companion does on the other pages
+  useEffect(() => {
+    const ui = badge.current;
+    const dockLater = () => {
+      clearTimeout(ui.timer);
+      ui.timer = setTimeout(() => { ui.up = false; }, (director.busyFor() + STAY_UP) * 1000);
+    };
+    ui.tap = () => {
+      const wasUp = ui.up;
+      ui.up = true;
+      clearTimeout(ui.timer);
+      const name = wasUp ? TAP_GESTURES[Math.floor(Math.random() * TAP_GESTURES.length)] : 'tiltWave';
+      ui.timer = setTimeout(() => { director.play(name, 'click'); dockLater(); }, wasUp ? 0 : 400);
+    };
+    return () => { clearTimeout(ui.timer); ui.tap = null; };
+  }, []);
 
   // dev only: window.__avatarBox() = his on-screen box in px (the visible bust: cut at the fade line), for safe-zone checks
   useEffect(() => {
@@ -266,40 +311,112 @@ function Rig({ colors, lightMode, pointer, scroll, onReady }) {
     const mobile = size.width < 800;
     const blend = readStage(mobile ? STAGES.mobile : STAGES.desktop, mobile);
     if (!blend) return;
-    const lerp = (k) => blend.from[k] + (blend.to[k] - blend.from[k]) * blend.t;
-    const travel = Math.sin(Math.PI * blend.t);
-    // the arc only when he crosses sideways (not when he just leaves up or down)
-    const arc = travel * THREE.MathUtils.clamp(Math.abs(blend.to.x - blend.from.x), 0, 1);
-    let target = {
-      x: lerp('x') * viewport.width / 2,
-      y: (lerp('y') + arc * ARC.up) * viewport.height / 2,
-      s: lerp('s') * (1 - arc * ARC.shrink) * viewport.height / 2,
-      // a small turn while it travels between sections
-      ry: lerp('ry') + travel * 0.22 * Math.sign(blend.to.x - blend.from.x || 1),
-    };
+    const st = state.current;
+    const ui = badge.current;
+    const k = 4;
+
+    // ---- the phone badge: docked = his face (the head capsule) on the circle's centre; up = his bust in the window
+    const vw = size.width; const vh = size.height;
+    const b = vw <= 600 ? BADGE.small : BADGE.large;
+    const hp = st.hop;
+    const want = (blend.from.dock + (blend.to.dock - blend.from.dock) * blend.t) > (hp.want ? 0.45 : 0.55);
+    if (!st.init) { hp.want = want; hp.p = want ? 1 : 0; }
+    else if (want !== hp.want) {
+      hp.want = want;
+      // turn back mid-air: a fresh leap from where he is towards the other end, timed to the distance left
+      if (hp.phase === 'flight') { hp.dir = want ? 1 : -1; hp.u = 0; hp.p0 = hp.p; }
+      else if (hp.phase === 'crouch') hp.phase = 'rest';                           // changed his mind: stays
+      else {
+        hp.phase = 'crouch'; hp.t = 0; hp.dir = want ? 1 : -1;
+        // he takes off from where he is (after a fast flick his spot may already have scrolled away)
+        hp.from = { x: st.x / (viewport.width / 2), y: st.y / (viewport.height / 2), s: st.s / (viewport.height / 2), ry: st.ry };
+        director.play(want ? 'hopDown' : 'hopUp', 'click');
+        if (!want) { ui.ripple = performance.now(); ui.up = false; clearTimeout(ui.timer); }   // the badge glows, he springs out
+      }
+    }
+    if (hp.phase === 'crouch' && (hp.t += dt) >= HOP.crouch) { hp.phase = 'flight'; hp.u = 0; hp.p0 = null; }
+    if (hp.phase === 'flight') {
+      const from = hp.p0 ?? (hp.dir > 0 ? 0 : 1);
+      const to = hp.dir > 0 ? 1 : 0;
+      hp.u = Math.min(1, hp.u + dt / (HOP.flight * Math.max(0.4, Math.abs(to - from))));
+      hp.p = from + (to - from) * leap(hp.u);
+      if (hp.u >= 1) { hp.phase = 'rest'; if (hp.dir > 0) ui.ripple = performance.now(); }
+    }
+    const p = hp.p;
+    const resting = hp.phase === 'rest';
+    if (import.meta.env.DEV) window.__hop = hp;          // dev: the hop's state, for designs/avatar-work/shot/hopfilm.mjs
+    dock.current = p;
+    dock.fx = THREE.MathUtils.damp(dock.fx, resting && p < 0.5 ? 1 : 0, 7, dt);
+    if (p < 0.5 && ui.up) { ui.up = false; clearTimeout(ui.timer); }
+    st.up = THREE.MathUtils.damp(st.up, ui.up ? 1 : 0, 5, dt);
+    const up = smoothstep(0, 1, st.up);
+    const unit = b.dock * DOCK_FACE;
+    const cx = vw - b.edge - b.dock / 2; const cy = vh - b.edge - b.dock / 2;
+    const docked = { x: (cx - st.head.x * unit - vw / 2) / (vw / 2), y: (vh / 2 - (cy + st.head.y * unit)) / (vh / 2), s: 2 * unit / vh, ry: 0 };
+    const upPose = { ...fitBox({ left: vw - b.edge - b.w, right: vw - b.edge, top: vh - b.edge - b.h, bottom: vh - b.edge, width: b.w, height: b.h }, vw, vh), ry: -0.15 };
+    const badgePose = Object.fromEntries(['x', 'y', 's', 'ry'].map((key) => [key, docked[key] + (upPose[key] - docked[key]) * up]));
+
+    // where the page puts him: between two sections (desktop: with the arc and a small turn when he crosses sideways),
+    // or the section's spot when the other side of the blend is the badge
+    let stagePose;
+    if (blend.from.dock && blend.to.dock) stagePose = badgePose;
+    else if (blend.from.dock || blend.to.dock) stagePose = blend.from.dock ? blend.to : blend.from;
+    else {
+      const lerp = (key) => blend.from[key] + (blend.to[key] - blend.from[key]) * blend.t;
+      const travel = Math.sin(Math.PI * blend.t);
+      const arc = travel * THREE.MathUtils.clamp(Math.abs(blend.to.x - blend.from.x), 0, 1);
+      stagePose = { x: lerp('x'), y: lerp('y') + arc * ARC.up, s: lerp('s') * (1 - arc * ARC.shrink),
+        ry: lerp('ry') + travel * 0.22 * Math.sign(blend.to.x - blend.from.x || 1) };
+    }
+    let pose = stagePose;
+    if (p > 0 || !resting) {
+      // the hop between his spot (where he took off from, when going down) and the badge
+      const spot = hp.dir > 0 && !resting && hp.from ? hp.from : stagePose;
+      const ex = smoothstep(0, 0.7, p); const ey = smoothstep(0.15, 1, p); const es = smoothstep(0, 0.35, p);
+      pose = {
+        x: spot.x + (badgePose.x - spot.x) * ex,
+        y: spot.y + (badgePose.y - spot.y) * ey + HOP.lift * Math.sin(Math.PI * smoothstep(0, 0.6, p)),
+        s: spot.s * (badgePose.s / spot.s) ** es * (1 + HOP.bounce * Math.sin(Math.PI * smoothstep(0.8, 1, p))),
+        ry: spot.ry + (badgePose.ry - spot.ry) * p + HOP.turn * Math.sin(Math.PI * p),
+      };
+    }
+    let target = { x: pose.x * viewport.width / 2, y: pose.y * viewport.height / 2, s: pose.s * viewport.height / 2, ry: pose.ry };
 
     if (import.meta.env.DEV && window.__stageOverride) {
       const o = window.__stageOverride;
       target = { x: o.x * viewport.width / 2, y: o.y * viewport.height / 2, s: o.s * viewport.height / 2, ry: o.ry };
     }
 
-    const exitness = blend.toName === 'exit' ? blend.t : blend.fromName === 'exit' ? 1 : 0;
+    // phones: no goodbye at the bottom of the page (he waits in the badge instead)
+    const exitness = mobile ? 0 : blend.toName === 'exit' ? blend.t : blend.fromName === 'exit' ? 1 : 0;
     const stageName = blend.t < 0.5 ? blend.fromName : blend.toName;
-    const { hold } = director.update(stageName, exitness);
-    const st = state.current;
+    const { hold } = director.update(stageName, exitness, p > 0.5);
     // while he says goodbye he stays put; the exit continues once it's done
     if (hold) target = st.held ?? (st.held = { x: st.x, y: st.y, s: st.s, ry: st.ry });
     else st.held = null;
 
-    const k = st.init ? 4 : 1000;
+    // the hop is already smooth: only a light damping then, so its curve keeps its shape
+    const kk = !st.init ? 1000 : resting ? k : 14;
     st.init = true;
-    for (const key of ['x', 'y', 's', 'ry']) st[key] = THREE.MathUtils.damp(st[key], target[key], k, dt);
+    for (const key of ['x', 'y', 's', 'ry']) st[key] = THREE.MathUtils.damp(st[key], target[key], kk, dt);
 
     const r = director.pose.current;
     const g = group.current;
     g.position.set(st.x + r.x * st.s, st.y + (Math.sin(frame.clock.elapsedTime * 0.9) * 0.02 + r.y) * st.s, 0);
     g.scale.setScalar(st.s * (1 + r.s));
     g.rotation.y = st.ry + r.ry + director.spin.current.angle;
+    // docked: his face exactly on the circle's centre every frame, as he moves (the companion does the same)
+    const pin = smoothstep(0.85, 1, p) * (1 - smoothstep(0, 1, st.up));
+    const headNow = avatar.current?.children.find((m) => m.name === 'head');
+    if (pin > 0 && headNow) {
+      g.updateMatrixWorld(true);
+      headNow.getWorldPosition(headPos).project(camera);
+      const bx = size.width <= 600 ? BADGE.small : BADGE.large;
+      const ex = (size.width - bx.edge - bx.dock / 2) - (headPos.x + 1) / 2 * size.width;
+      const ey = (size.height - bx.edge - bx.dock / 2) - (1 - headPos.y) / 2 * size.height;
+      g.position.x += ex * pin * viewport.width / size.width;
+      g.position.y -= ey * pin * viewport.height / size.height;
+    }
 
     // the orbit stays where the hero pose puts it and scrolls away with the page
     if (orbit.current) {
@@ -313,17 +430,53 @@ function Rig({ colors, lightMode, pointer, scroll, onReady }) {
       orbit.current.scale.setScalar(hs);
     }
 
-    // his head on screen, for the page's hint bubble (avatarStage)
+    // his head on screen, for the page's hint bubble (avatarStage), and where it sits in his group (for the badge)
     const headProxy = avatar.current?.children.find((m) => m.name === 'head');
     if (headProxy) {
-      headProxy.getWorldPosition(headPos).project(camera);
+      headProxy.getWorldPosition(headPos);
+      st.head.x = THREE.MathUtils.damp(st.head.x, (headPos.x - g.position.x) / g.scale.x, 3, dt);
+      st.head.y = THREE.MathUtils.damp(st.head.y, (headPos.y - g.position.y) / g.scale.y, 3, dt);
+      headPos.project(camera);
       const hs = avatarStage.head;
       hs.x = (headPos.x + 1) / 2 * size.width; hs.y = (1 - headPos.y) / 2 * size.height;
-      hs.on = Math.abs(headPos.x) < 0.95 && headPos.y < 0.95 && headPos.y > -0.6;
+      hs.on = p < 0.1 && Math.abs(headPos.x) < 0.95 && headPos.y < 0.95 && headPos.y > -0.6;
     }
 
-    camera.position.x = THREE.MathUtils.damp(camera.position.x, pointer.current.x * 0.25, 2, dt);
-    camera.position.y = THREE.MathUtils.damp(camera.position.y, pointer.current.y * 0.15, 2, dt);
+    // the badge opens at the corner like a portal before he lands in it (a ripple when he does) and the scene closes
+    // onto it as he arrives; it opens again as he springs out. While he hops he is above the page (the dust and halo
+    // have faded by then), so he never slips behind text mid-air.
+    const e = smoothstep(0.7, 1, p);
+    const open = smoothstep(0.3, 0.75, p);
+    const R = { l: vw - b.edge - (b.dock + (b.w - b.dock) * up), t: vh - b.edge - (b.dock + (b.h - b.dock) * up),
+      r: b.dock / 2 + (BADGE_RADIUS - b.dock / 2) * up };
+    R.w = vw - b.edge - R.l; R.h = vh - b.edge - R.t;
+    const C = { l: R.l * e, t: R.t * e, w: vw + (R.w - vw) * e, h: vh + (R.h - vh) * e, r: R.r * e };
+    const px = (n) => `${n.toFixed(1)}px`;
+    const css = {
+      clip: e > 0.001 ? `inset(${px(C.t)} ${px(vw - C.l - C.w)} ${px(vh - C.t - C.h)} ${px(C.l)} round ${px(C.r)})` : '',
+      z: mobile && p > HOP.above ? '51' : '',
+      box: `${px(R.l)} ${px(R.t)} ${px(R.w)} ${px(R.h)} ${px(R.r)}`,
+      bg: (open * (1 - up)).toFixed(3),
+      scale: (0.3 + 0.7 * easeOutBack(open)).toFixed(3),
+      on: p > 0.95,
+      ripple: performance.now() - (ui.ripple ?? -1e4) < 800,
+    };
+    const v = view.current;
+    if (ui.scene && css.clip !== v.clip) ui.scene.style.clipPath = v.clip = css.clip;
+    if (ui.scene && css.z !== v.z) { ui.scene.style.zIndex = v.z = css.z; ui.scene.classList.toggle('is-badge', !!css.z); }
+    if (ui.el) {
+      const bs = ui.el.style;
+      if (css.box !== v.box) { v.box = css.box; Object.assign(bs, { left: px(R.l), top: px(R.t), width: px(R.w), height: px(R.h), borderRadius: px(R.r) }); }
+      if (css.bg !== v.bg) bs.opacity = v.bg = css.bg;
+      if (css.scale !== v.scale) bs.scale = v.scale = css.scale;
+      if (css.ripple !== v.ripple) { v.ripple = css.ripple; ui.el.classList.toggle('is-ripple', css.ripple); }
+      if (css.on !== v.on) { v.on = css.on; ui.el.classList.toggle('is-on', css.on); ui.el.tabIndex = css.on ? 0 : -1; }
+    }
+
+    // the camera's small sway with the pointer: none inside the badge (it would push his face off the circle)
+    const sway = 1 - p;
+    camera.position.x = THREE.MathUtils.damp(camera.position.x, pointer.current.x * 0.25 * sway, 2, dt);
+    camera.position.y = THREE.MathUtils.damp(camera.position.y, pointer.current.y * 0.15 * sway, 2, dt);
     camera.lookAt(0, 0, 0);
 
     const l = look.cur;
@@ -339,10 +492,10 @@ function Rig({ colors, lightMode, pointer, scroll, onReady }) {
       <directionalLight ref={keyLight} position={[-2, 3, 5]} color="#fff6ec" />
       <directionalLight ref={rim} position={[3.5, 1.8, -3]} intensity={2.6} />
       <directionalLight ref={fill} position={[-3.5, 0.8, -2.5]} />
-      <Dust look={look} scroll={scroll} />
+      <Dust look={look} scroll={scroll} dock={dock} />
       <group ref={group}>
-        <Halo look={look} />
-        <HomeAvatar lightMode={lightMode} pointer={pointer} scroll={scroll} reaction={director.pose} playing={director.playing} glasses={director.glasses} attention={director.attention} meshRef={avatar} onReady={onReady} />
+        <Halo look={look} dock={dock} />
+        <HomeAvatar lightMode={lightMode} pointer={pointer} scroll={scroll} reaction={director.pose} playing={director.playing} glasses={director.glasses} attention={director.attention} meshRef={avatar} onReady={onReady} dock={dock} />
       </group>
       {/* {size.width >= 800 && (
         <group ref={orbit}>
@@ -357,6 +510,8 @@ function HomeScene({ colors, lightMode }) {
   const pointer = useRef({ x: 0, y: 0, time: -10 });
   const scroll = useRef({ y: 0, velocity: 0 });
   const [ready, setReady] = useState(false);
+  // the phone badge (Rig sets tap and moves el; scene = the canvas layer it clips)
+  const badge = useRef({ el: null, scene: null, up: false, timer: 0, tap: null });
 
   useEffect(() => {
     scroll.current.y = window.scrollY;
@@ -372,17 +527,27 @@ function HomeScene({ colors, lightMode }) {
   }, []);
 
   return (
-    <div className={`hm-scene ${ready ? 'ready' : ''}`} aria-hidden="true">
-      <Canvas
-        camera={{ fov: 30, position: [0, 0, 6.5] }}
-        dpr={[1, 1.75]}
-        gl={{ alpha: true, antialias: true, powerPreference: 'high-performance' }}
-      >
-        <Suspense fallback={null}>
-          <Rig colors={colors} lightMode={lightMode} pointer={pointer} scroll={scroll} onReady={() => { setReady(true); reportTask('3d', 1); }} />
-        </Suspense>
-      </Canvas>
-    </div>
+    <>
+      <div className={`hm-scene ${ready ? 'ready' : ''}`} aria-hidden="true" ref={(el) => { badge.current.scene = el; }}>
+        <Canvas
+          camera={{ fov: 30, position: [0, 0, 6.5] }}
+          dpr={[1, 1.75]}
+          gl={{ alpha: true, antialias: true, powerPreference: 'high-performance' }}
+        >
+          <Suspense fallback={null}>
+            <Rig colors={colors} lightMode={lightMode} pointer={pointer} scroll={scroll} badge={badge} onReady={() => { setReady(true); reportTask('3d', 1); }} />
+          </Suspense>
+        </Canvas>
+      </div>
+      <button
+        type="button"
+        className="hm-badge"
+        tabIndex={-1}
+        aria-label="Say hi to Legend's 3D avatar"
+        ref={(el) => { badge.current.el = el; }}
+        onClick={() => badge.current.tap?.()}
+      ></button>
+    </>
   );
 }
 

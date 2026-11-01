@@ -5,7 +5,8 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import { useCharacter } from './HomeAvatar';
-import { MODELS, onThemeIntent } from './avatarModels';
+import { ANIMS, MODELS, onThemeIntent } from './avatarModels';
+import { useLaterClips } from './avatarClipStore';
 import { emptyPose, sampleAction } from './avatarActions';
 import { BLOCK, SPOTS } from './notFoundStage';
 import { Director, EPISODE_NAMES, createMotion, faceOf } from './notFoundDirector';
@@ -16,7 +17,6 @@ if (import.meta.hot) import.meta.hot.decline();   // the 3D scene reloads the pa
 reportTask('3d', 0.15);
 THREE.DefaultLoadingManager.onProgress = (url, loaded, total) => reportTask('3d', 0.15 + 0.8 * (loaded / total));
 
-const ANIMS_404 = '/3d/legend_anims_404.glb';     // the 404's own clips (sit, climb, jump down, fall, walk, 2 dances)
 const withMeshopt = (loader) => loader.setMeshoptDecoder(MeshoptDecoder);
 const { damp, clamp } = THREE.MathUtils;
 const now = () => performance.now() / 1000;
@@ -400,7 +400,8 @@ const onBlock = (G) => Math.abs(G.x) < BLOCK.width / 2 + 0.05 && G.z < BLOCK.fro
 
 function Avatar({ url, visible, pointer, brain, onReady }) {
   const c = useCharacter(url);
-  const anims = useLoader(GLTFLoader, ANIMS_404, withMeshopt);
+  useLaterClips();                     // the 404 uses most of the homepage's moves: wait for both files
+  const anims = useLoader(GLTFLoader, ANIMS.notFound, withMeshopt);   // its own (sit, climb, jump down, fall, walk, 2 dances)
   const { camera } = useThree();
   const group = useRef();
   const tmp = useMemo(() => ({ q: new THREE.Quaternion(), v: new THREE.Vector3(), v2: new THREE.Vector3(), m: new THREE.Matrix4() }), []);

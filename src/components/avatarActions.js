@@ -97,6 +97,9 @@ export const ACTIONS = {
   cardNod: { duration: 1.1, keys: [k(0), k(0.3, { headX: 0.15, squint: 0.5 }), k(0.55, { headX: -0.02, squint: 0.5 }), k(0.75, { headX: 0.07, squint: 0.35 }), k(1)] },
   // the mini companion when the contact form is sent: cheer arm pump with thumbs out (clip in HomeAvatar CLIP_OF)
   thumbsUp: { duration: 1.15, keys: [k(0), k(0.2, { squint: 0.6, eyeOpen: 0.1 }), k(0.8, { squint: 0.6 }), k(1)] },
+  // the phone badge hop (HomeScene): a crouch while he glances where he is going, then the leap (clip in CLIP_OF)
+  hopDown: { duration: 0.85, keys: [k(0), k(0.2, { gazeX: 0.7, gazeY: 0.5, headY: 0.12, eyeOpen: 0.15, follow: 0.6 }), k(0.55, { gazeX: 0.5, gazeY: 0.6, squint: 0.4, follow: 0.6 }), k(1)] },
+  hopUp: { duration: 0.85, keys: [k(0), k(0.2, { gazeX: -0.4, gazeY: -0.6, headX: -0.1, eyeOpen: 0.2, follow: 0.6 }), k(0.6, { gazeY: -0.3, squint: 0.4, follow: 0.4 }), k(1)] },
   smile: { duration: 1.8, keys: [k(0), k(0.25, { squint: 0.55, headZ: 0.08, headX: -0.03, follow: 0.2 }), k(0.75, { squint: 0.55, headZ: 0.08, follow: 0.2 }), k(1)] },
   surprised: { duration: 1.6, keys: [k(0), k(0.12, hold({ eyeOpen: 0.4, headX: -0.18, y: 0.05, s: -0.02 })), k(0.55, hold({ eyeOpen: 0.3, headX: -0.12 })), k(1)] },
   lookAround: { duration: 3.6, keys: [k(0), k(0.2, hold({ headY: -0.32, gazeX: -0.8 })), k(0.45, hold({ headY: -0.32, gazeX: -0.8 })), k(0.65, hold({ headY: 0.32, gazeX: 0.8 })), k(0.85, hold({ headY: 0.32, gazeX: 0.8 })), k(1)] },
@@ -197,6 +200,7 @@ const MOUTH = {
   shrug: holdMouth({ frown: 0.5, press: 0.3, worry: 0.4 }, 0.3, 0.65), shakeNo: holdMouth({ press: 0.5 }, 0.2, 0.8),
   eyeRoll: holdMouth({ press: 0.4, frown: 0.25 }, 0.3, 0.8), eyeRollAlt: holdMouth({ press: 0.4, frown: 0.25 }, 0.25, 0.8),
   suspicious: holdMouth({ scowl: 0.6, pucker: 0.25 }, 0.2, 0.8), juggle: holdMouth({ pucker: 0.3, scowl: 0.3 }),
+  hopDown: holdMouth({ grin: 0.6, jaw: 0.1 }, 0.25, 0.85), hopUp: holdMouth({ grin: 0.7, jaw: 0.15 }, 0.3, 0.85),
   leanIn: holdMouth({ grin: 0.4 }, 0.3, 0.75), smile: holdMouth({ grin: 0.8 }, 0.25, 0.75), wink: holdMouth({ grin: 0.6 }, 0.25, 0.55),
   smug: holdMouth({ grin: 0.5, press: 0.25 }, 0.2, 0.75), pirate: holdMouth({ jaw: 0.35, scowl: 0.4, frown: 0.2 }, 0.15, 0.7),
   goofy: [k(0), k(0.12, { jaw: 0.6, pucker: 0.1 }), k(0.35, { pucker: 0.7, jaw: 0.2 }), k(0.58, { jaw: 0.6 }), k(0.8, { grin: 0.6 }), k(1)],

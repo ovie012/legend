@@ -2,14 +2,25 @@
 // one loads when the visitor reaches for the theme button (hover, keyboard focus, touch) or switches theme.
 // Phones get versions with the normal map and the shirt pattern at 1K (the face and skin texture is unchanged):
 // built from the live files by designs/avatar-work/scripts/phone_textures.mjs.
+// The files live in src/assets/3d: the build names each one after its content (/assets/legend_brown-<hash>.glb), so
+// browsers may keep them for a year (vercel.json) and a changed model always arrives under a new name.
+import brown from '../assets/3d/legend_brown.glb?url';
+import white from '../assets/3d/legend_white.glb?url';
+import brownSmall from '../assets/3d/legend_brown_m.glb?url';
+import whiteSmall from '../assets/3d/legend_white_m.glb?url';
+import animsStart from '../assets/3d/legend_anims_start.glb?url';
+import animsLater from '../assets/3d/legend_anims_later.glb?url';
+import anims404 from '../assets/3d/legend_anims_404.glb?url';
+
 const PHONE = typeof window !== 'undefined' && window.matchMedia('(max-width: 800px)').matches;
 
-export const MODELS = PHONE
-  ? { light: '/3d/legend_brown_m.glb', dark: '/3d/legend_white_m.glb' }
-  : { light: '/3d/legend_brown.glb', dark: '/3d/legend_white.glb' };
+export const MODELS = PHONE ? { light: brownSmall, dark: whiteSmall } : { light: brown, dark: white };
 
 // the small versions, for the mini companion on the other pages (always small on screen)
-export const SMALL_MODELS = { light: '/3d/legend_brown_m.glb', dark: '/3d/legend_white_m.glb' };
+export const SMALL_MODELS = { light: brownSmall, dark: whiteSmall };
+
+// his moves in two parts (avatarClipStore.js) + the 404 page's own
+export const ANIMS = { start: animsStart, later: animsLater, notFound: anims404 };
 
 const THEME_BUTTON = '.light-dark-mode';
 
