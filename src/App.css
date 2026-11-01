@@ -56,6 +56,58 @@ main:focus {
   outline: none;
 }
 
+/* TAP TARGETS: on phones, tablets and touch screens every control is at least 44 px tall
+   (desktop mouse layouts keep their compact spacing). */
+@media (max-width: 900px), (pointer: coarse) {
+  .footer .footer-col ul {
+    gap: 0;
+  }
+
+  .footer .footer-link,
+  .footer .footer-top-btn,
+  .pj-page .pj-filter,
+  .ct-page .ct-chip,
+  .pv-page .pv-toc a,
+  .ab-page .ab-faq-link {
+    min-height: 44px;
+  }
+
+  .pv-page .pv-toc a {
+    align-items: center;
+  }
+
+  .ab-page .ab-faq-link {
+    margin-top: 0;
+  }
+
+  .pj-page .pj-search {
+    min-height: 44px;
+    padding-block: 0;
+  }
+
+  .container .pj-page .pj-search input {
+    align-self: stretch;
+  }
+
+  .pv-page .pv-provider .pv-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  /* the whole "Privacy questions" pill opens the email link */
+  .pv-page .pv-contact-line {
+    position: relative;
+  }
+
+  .pv-page .pv-contact-line .pv-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -141,6 +193,7 @@ a.active {
   --lm-border: rgba(42, 26, 18, 0.1);
   --lm-accent: #C2562B;
   --lm-accent-strong: #A3431D;
+  --lm-accent-text: #AD4D26;     /* accent for small text: 4.5:1 on the sand backgrounds and tinted pills */
   --lm-accent-ink: #FFFFFF;
   --lm-accent-2: #E0A458;
   --lm-glow: rgba(194, 86, 43, 0.16);
@@ -184,12 +237,25 @@ a.active {
 
 /* HEADER STYLING */
 
-/* TYPE SCALE: one set of heading sizes for every page */
+/* TYPE SCALE: the only text sizes on every page (use these, never a new rem/clamp value).
+   Reading text: label 13 · small 15 · body 16–17 · lead 18–20 px. Headings: h3 24–32 · h2 · display.
+   Decorative numbers/wordmarks (clock, 404 digits, footer wordmark) keep their own size. */
 .container {
+  --fs-label: 0.8125rem;                                      /* eyebrows, tags, badges, numbers (uppercase) */
+  --fs-small: 0.9375rem;                                      /* buttons, chips, nav, captions, form labels */
+  --fs-body: clamp(1rem, 0.95rem + 0.25vw, 1.0625rem);        /* paragraphs and form inputs */
+  --fs-lead: clamp(1.125rem, 1.05rem + 0.3vw, 1.25rem);       /* intro paragraphs, card and item titles */
+  --fs-h3: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);               /* sub-section titles, big stats */
+  --fs-h2: clamp(1.9rem, 3.2vw, 2.9rem);        /* section titles */
   --fs-display: clamp(2.4rem, 4.6vw, 4rem);     /* page titles */
   --fs-hero: clamp(2.6rem, 5vw, 4.4rem);        /* homepage hero line */
-  --fs-h2: clamp(1.9rem, 3.2vw, 2.9rem);        /* section titles */
   --fs-cta: clamp(2rem, 4.4vw, 3.6rem);         /* closing call-to-action */
+  --measure: 50ch;                              /* longest comfortable paragraph line: ~70 characters */
+}
+
+/* text without its own size is body text */
+.container {
+  font-size: var(--fs-body);
 }
 
 /* 3D LOGO (sprite of 24 Blender renders; frame 23 is the resting three-quarter view) */
@@ -374,7 +440,7 @@ header.scrolled nav.desktop-nav ul {
   padding: 9px 18px;
   border-radius: 999px;
   color: var(--hd-muted);
-  font-size: 0.92rem;
+  font-size: var(--fs-small);
   font-weight: 600;
   text-transform: capitalize;
   transition: color 0.25s ease;
@@ -420,8 +486,8 @@ header.scrolled nav.desktop-nav ul {
 .hd-theme {
   display: grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: 1px solid var(--hd-border);
   background: var(--hd-pill);
@@ -449,7 +515,7 @@ header.scrolled nav.desktop-nav ul {
   border-radius: 999px;
   background: var(--hd-accent);
   color: var(--hd-accent-ink);
-  font-size: 0.9rem;
+  font-size: var(--fs-small);
   font-weight: 700;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
@@ -500,8 +566,8 @@ header.scrolled .hd-progress {
 .hd-burger {
   display: none;
   position: relative;
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: 1px solid var(--hd-border);
   background: var(--hd-pill);
@@ -510,18 +576,18 @@ header.scrolled .hd-progress {
 
 .hd-burger span {
   position: absolute;
-  left: 12px;
-  right: 12px;
+  left: 13px;
+  right: 13px;
   height: 2px;
   border-radius: 2px;
   background: var(--hd-text);
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), top 0.35s ease;
 }
 
-.hd-burger span:first-child { top: 16px; }
-.hd-burger span:last-child { top: 23px; }
-.hd-burger.open span:first-child { top: 19.5px; transform: rotate(45deg); }
-.hd-burger.open span:last-child { top: 19.5px; transform: rotate(-45deg); }
+.hd-burger span:first-child { top: 17px; }
+.hd-burger span:last-child { top: 24px; }
+.hd-burger.open span:first-child { top: 20.5px; transform: rotate(45deg); }
+.hd-burger.open span:last-child { top: 20.5px; transform: rotate(-45deg); }
 
 .hd-theme:focus-visible,
 .hd-burger:focus-visible,
@@ -568,7 +634,7 @@ header.scrolled .hd-progress {
 }
 
 .hd-sheet-index {
-  font-size: 0.8rem;
+  font-size: var(--fs-label);
   font-weight: 700;
   letter-spacing: 0.1em;
   color: var(--hd-muted);
@@ -603,7 +669,7 @@ header.scrolled .hd-progress {
   background: var(--hd-pill);
   color: var(--hd-text);
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: var(--fs-small);
   font-weight: 600;
   cursor: pointer;
 }
@@ -1586,7 +1652,7 @@ svg.down-svg {
   border: 1px solid var(--f-border);
   background: var(--f-surface);
   color: var(--f-muted);
-  font-size: 0.85rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: 0.02em;
 }
@@ -1643,7 +1709,7 @@ svg.down-svg {
   gap: 10px;
   padding: 14px 26px;
   border-radius: 999px;
-  font-size: 0.95rem;
+  font-size: var(--fs-small);
   font-weight: 600;
   cursor: pointer;
   border: 1px solid transparent;
@@ -1708,7 +1774,7 @@ svg.down-svg {
 .container.light-mode .footer-brand p {
   max-width: 300px;
   color: var(--f-muted);
-  font-size: 0.95rem;
+  font-size: var(--fs-body);
   line-height: 1.6;
 }
 
@@ -1716,7 +1782,7 @@ svg.down-svg {
 .container.light-mode .footer-col h6 {
   margin-bottom: 20px;
   color: var(--f-muted);
-  font-size: 0.75rem;
+  font-size: var(--fs-label);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -1735,7 +1801,7 @@ svg.down-svg {
   gap: 6px;
   width: fit-content;
   color: var(--f-text);
-  font-size: 1rem;
+  font-size: var(--fs-body);
   font-weight: 500;
   transition: color 0.3s ease;
 }
@@ -1821,7 +1887,7 @@ svg.down-svg {
 .container .footer-bottom p,
 .container.light-mode .footer-bottom p {
   color: var(--f-muted);
-  font-size: 0.85rem;
+  font-size: var(--fs-small);
 }
 
 .footer-legal-sep {
@@ -1855,7 +1921,7 @@ svg.down-svg {
   background: none;
   border: none;
   color: var(--f-muted);
-  font-size: 0.85rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   cursor: pointer;
   transition: color 0.3s ease;
@@ -1938,10 +2004,6 @@ svg.down-svg {
     justify-content: center;
   }
 
-  .footer-btn-ghost {
-    font-size: 0.85rem;
-  }
-
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 36px;
@@ -1982,6 +2044,7 @@ svg.down-svg {
   --pj-surface-strong: var(--lm-surface-strong);
   --pj-border: var(--lm-border);
   --pj-accent: var(--lm-accent);
+  --pj-accent-text: var(--lm-accent-text);
   --pj-accent-ink: var(--lm-accent-ink);
   --pj-glow: var(--lm-glow);
   --pj-shadow: var(--lm-shadow);
@@ -2027,8 +2090,8 @@ svg.down-svg {
   border-radius: 999px;
   border: 1px solid var(--pj-border);
   background: var(--pj-surface);
-  color: var(--pj-accent);
-  font-size: 0.8rem;
+  color: var(--pj-accent-text, var(--pj-accent));
+  font-size: var(--fs-label);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -2044,7 +2107,7 @@ svg.down-svg {
   padding: 14px 26px;
   border-radius: 999px;
   border: 1px solid transparent;
-  font-size: 0.95rem;
+  font-size: var(--fs-small);
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease;
@@ -2094,7 +2157,7 @@ svg.down-svg {
 
 .container .pj-hero p {
   max-width: 520px;
-  font-size: 1.08rem;
+  font-size: var(--fs-lead);
   line-height: 1.75;
 }
 
@@ -2112,14 +2175,14 @@ svg.down-svg {
 
 .pj-hero-stats strong {
   color: var(--pj-text);
-  font-size: 2rem;
+  font-size: var(--fs-h3);
   font-weight: 800;
   line-height: 1;
 }
 
 .pj-hero-stats span {
   color: var(--pj-muted);
-  font-size: 0.85rem;
+  font-size: var(--fs-small);
 }
 
 /* 3D ORBIT */
@@ -2216,7 +2279,7 @@ svg.down-svg {
   background: none;
   color: var(--pj-muted);
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: var(--fs-small);
   font-weight: 700;
   cursor: pointer;
 }
@@ -2241,8 +2304,7 @@ svg.down-svg {
 
 .pj-track-label em {
   font-style: normal;
-  font-size: 0.75rem;
-  opacity: 0.7;
+  font-size: var(--fs-label);
 }
 
 @media only screen and (max-width: 500px) {
@@ -2253,7 +2315,6 @@ svg.down-svg {
   .pj-track {
     flex: 1;
     padding: 11px 10px;
-    font-size: 0.82rem;
   }
 }
 
@@ -2294,7 +2355,7 @@ svg.down-svg {
   border-radius: 999px;
   background: none;
   color: var(--pj-muted);
-  font-size: 0.9rem;
+  font-size: var(--fs-small);
   font-weight: 600;
   cursor: pointer;
   transition: color 0.25s ease;
@@ -2324,8 +2385,7 @@ svg.down-svg {
 
 .pj-filter-label em {
   font-style: normal;
-  font-size: 0.75rem;
-  opacity: 0.7;
+  font-size: var(--fs-label);
 }
 
 .pj-search {
@@ -2351,7 +2411,7 @@ svg.down-svg {
   outline: none;
   background: none;
   color: var(--pj-text);
-  font-size: 0.9rem;
+  font-size: var(--fs-body);
   -webkit-user-select: text;
   user-select: text;
 }
@@ -2452,7 +2512,7 @@ svg.down-svg {
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   color: #fff;
-  font-size: 0.75rem;
+  font-size: var(--fs-label);
   font-weight: 600;
 }
 
@@ -2478,8 +2538,8 @@ svg.down-svg {
   padding: 4px 10px;
   border-radius: 999px;
   background: var(--pj-glow);
-  color: var(--pj-accent);
-  font-size: 0.7rem;
+  color: var(--pj-accent-text, var(--pj-accent));
+  font-size: var(--fs-label);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -2490,7 +2550,7 @@ svg.down-svg {
 }
 
 .container .pj-card-body h3 {
-  font-size: 1.25rem;
+  font-size: var(--fs-lead);
   font-weight: 700;
 }
 
@@ -2499,7 +2559,7 @@ svg.down-svg {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  font-size: 0.93rem;
+  font-size: var(--fs-body);
   line-height: 1.65;
 }
 
@@ -2510,7 +2570,7 @@ svg.down-svg {
   margin-top: auto;
   padding-top: 8px;
   color: var(--pj-text);
-  font-size: 0.9rem;
+  font-size: var(--fs-small);
   font-weight: 600;
 }
 
@@ -2519,7 +2579,7 @@ svg.down-svg {
 }
 
 .pj-card-inner:hover .pj-card-cta {
-  color: var(--pj-accent);
+  color: var(--pj-accent-text, var(--pj-accent));
 }
 
 .pj-card-inner:hover .pj-card-cta svg {
@@ -2574,6 +2634,7 @@ svg.down-svg {
   --pj-muted: var(--lm-muted);
   --pj-border: var(--lm-border);
   --pj-accent: var(--lm-accent);
+  --pj-accent-text: var(--lm-accent-text);
   --pj-accent-ink: var(--lm-accent-ink);
   --pj-glow: var(--lm-glow);
   background: var(--lm-surface-strong);
@@ -2630,7 +2691,7 @@ svg.down-svg {
 
 .container .pj-modal-body h2 {
   color: var(--pj-text);
-  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-size: var(--fs-h3);
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.02em;
@@ -2638,7 +2699,7 @@ svg.down-svg {
 
 .container .pj-modal-body p {
   color: var(--pj-muted);
-  font-size: 1rem;
+  font-size: var(--fs-body);
   line-height: 1.75;
   -webkit-user-select: text;
   user-select: text;
@@ -2698,10 +2759,6 @@ svg.down-svg {
     gap: 24px;
   }
 
-  .pj-hero-stats strong {
-    font-size: 1.6rem;
-  }
-
   .pj-orbit {
     --card-w: 140px;
     --card-h: 79px;
@@ -2753,6 +2810,7 @@ svg.down-svg {
   --ct-surface-strong: var(--dm-surface-strong);
   --ct-border: var(--dm-border);
   --ct-accent: var(--dm-accent);
+  --ct-editor-accent: var(--dm-accent);   /* the code editor stays dark in both themes */
   --ct-accent-ink: var(--dm-accent-ink);
   --ct-glow: var(--dm-glow);
   --ct-error: #FF6B6B;
@@ -2770,6 +2828,8 @@ svg.down-svg {
   --ct-surface-strong: var(--lm-surface-strong);
   --ct-border: var(--lm-border);
   --ct-accent: var(--lm-accent);
+  --ct-accent-text: var(--lm-accent-text);
+  --ct-editor-accent: var(--lm-accent-on-dark);
   --ct-accent-ink: var(--lm-accent-ink);
   --ct-glow: var(--lm-glow);
   --ct-error: #E03E3E;
@@ -2828,8 +2888,8 @@ svg.down-svg {
   border-radius: 999px;
   border: 1px solid var(--ct-border);
   background: var(--ct-surface);
-  color: var(--ct-accent);
-  font-size: 0.8rem;
+  color: var(--ct-accent-text, var(--ct-accent));
+  font-size: var(--fs-label);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -2843,7 +2903,7 @@ svg.down-svg {
   padding: 14px 26px;
   border-radius: 999px;
   border: 1px solid transparent;
-  font-size: 0.95rem;
+  font-size: var(--fs-small);
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease;
@@ -2892,7 +2952,7 @@ svg.down-svg {
 
 .container .ct-hero p {
   max-width: 520px;
-  font-size: 1.08rem;
+  font-size: var(--fs-lead);
   line-height: 1.75;
 }
 
@@ -2917,7 +2977,7 @@ svg.down-svg {
   align-items: center;
   gap: 10px;
   color: var(--ct-muted);
-  font-size: 0.8rem;
+  font-size: var(--fs-label);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -2955,7 +3015,7 @@ svg.down-svg {
 }
 
 .container .ct-page .ct-clock-mood {
-  font-size: 0.95rem;
+  font-size: var(--fs-small);
   line-height: 1.6;
 }
 
@@ -3015,7 +3075,7 @@ svg.down-svg {
   display: block;
   margin-bottom: 12px;
   color: var(--ct-text);
-  font-size: 0.85rem;
+  font-size: var(--fs-small);
   font-weight: 600;
 }
 
@@ -3031,7 +3091,7 @@ svg.down-svg {
   border: 1px solid var(--ct-border);
   background: transparent;
   color: var(--ct-muted);
-  font-size: 0.85rem;
+  font-size: var(--fs-small);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.25s ease;
@@ -3076,7 +3136,7 @@ svg.down-svg {
   border: 1px solid var(--ct-border);
   background: var(--ct-surface-strong);
   color: var(--ct-text);
-  font-size: 0.95rem;
+  font-size: var(--fs-body);
   outline: none;
   resize: vertical;
   -webkit-user-select: text;
@@ -3105,7 +3165,7 @@ svg.down-svg {
   overflow: hidden;
   padding-top: 8px;
   color: var(--ct-error);
-  font-size: 0.8rem;
+  font-size: var(--fs-small);
 }
 
 .ct-submit-row {
@@ -3125,7 +3185,7 @@ svg.down-svg {
   border-radius: 999px;
   background: var(--ct-accent);
   color: var(--ct-accent-ink);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 700;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
@@ -3142,7 +3202,7 @@ svg.down-svg {
 }
 
 .container .ct-page .ct-kbd-hint {
-  font-size: 0.82rem;
+  font-size: var(--fs-small);
 }
 
 .ct-optional {
@@ -3151,7 +3211,7 @@ svg.down-svg {
   border-radius: 999px;
   border: 1px solid var(--ct-border);
   color: var(--ct-muted);
-  font-size: 0.68rem;
+  font-size: var(--fs-label);
   font-weight: 500;
   letter-spacing: 0.02em;
   vertical-align: 1px;
@@ -3171,13 +3231,13 @@ svg.down-svg {
 
 .container .ct-page .ct-privacy-note {
   margin-top: -10px;
-  font-size: 0.8rem;
+  font-size: var(--fs-small);
   line-height: 1.6;
 }
 
 .ct-page .ct-privacy-note a {
   display: inline;
-  color: var(--ct-accent);
+  color: var(--ct-accent-text, var(--ct-accent));
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -3200,7 +3260,7 @@ svg.down-svg {
   background: #070B14;
   box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(0, 0, 0, 0.2);
   font-family: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
-  font-size: 0.85rem;
+  font-size: var(--fs-small);
   line-height: 1.75;
   color: #D6DEEB;
 }
@@ -3238,7 +3298,7 @@ svg.down-svg {
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.06);
   color: #fff;
-  font-size: 0.78rem;
+  font-size: var(--fs-label);
 }
 
 .ct-live {
@@ -3246,8 +3306,8 @@ svg.down-svg {
   align-items: center;
   gap: 8px;
   margin-left: auto;
-  color: var(--ct-accent);
-  font-size: 0.72rem;
+  color: var(--ct-editor-accent);
+  font-size: var(--fs-label);
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
@@ -3288,7 +3348,7 @@ svg.down-svg {
 }
 
 .ct-code li.is-active::before {
-  color: var(--ct-accent);
+  color: var(--ct-editor-accent);
 }
 
 .ct-code code {
@@ -3304,7 +3364,7 @@ svg.down-svg {
 .tk-str { color: #C3E88D; }
 .tk-fn { color: #89DDFF; }
 .tk-pun { color: #89DDFF; }
-.tk-com { color: #5C6A82; font-style: italic; }
+.tk-com { color: #7A87A0; font-style: italic; }
 
 .ct-caret {
   display: inline-block;
@@ -3320,8 +3380,8 @@ svg.down-svg {
   border-top: 1px solid rgba(255, 255, 255, 0.07);
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   background: #0B1120;
-  color: #5C6A82;
-  font-size: 0.7rem;
+  color: #7A87A0;
+  font-size: var(--fs-label);
   letter-spacing: 0.15em;
 }
 
@@ -3333,14 +3393,14 @@ svg.down-svg {
 .container .ct-terminal p {
   margin: 0;
   color: #D6DEEB;
-  font-size: 0.82rem;
+  font-size: var(--fs-small);
   line-height: 1.8;
   white-space: pre-wrap;
   word-break: break-word;
 }
 
 .container .ct-terminal .tk-com {
-  color: #5C6A82;
+  color: #7A87A0;
 }
 
 .ct-term-cmd {
@@ -3349,7 +3409,7 @@ svg.down-svg {
 
 .container .ct-terminal .ct-term-ok,
 .ct-term-ok {
-  color: var(--ct-accent);
+  color: var(--ct-editor-accent);
 }
 
 .container .ct-terminal .ct-term-err,
@@ -3437,13 +3497,13 @@ svg.down-svg {
 }
 
 .ct-channel-text strong {
-  font-size: 0.95rem;
+  font-size: var(--fs-body);
 }
 
 .ct-channel-text span {
   overflow: hidden;
   color: var(--ct-muted);
-  font-size: 0.8rem;
+  font-size: var(--fs-small);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -3511,7 +3571,6 @@ svg.down-svg {
 
   .ct-editor {
     border-radius: 18px;
-    font-size: 0.75rem;
   }
 
   .ct-code li::before {
@@ -3550,6 +3609,7 @@ svg.down-svg {
   --ab-surface-hover: var(--lm-surface-strong);
   --ab-border: var(--lm-border);
   --ab-accent: var(--lm-accent);
+  --ab-accent-text: var(--lm-accent-text);
   --ab-accent-ink: var(--lm-accent-ink);
   --ab-glow: var(--lm-glow);
 }
@@ -3593,8 +3653,8 @@ svg.down-svg {
   border-radius: 999px;
   border: 1px solid var(--ab-border);
   background: var(--ab-surface);
-  color: var(--ab-accent);
-  font-size: 0.8rem;
+  color: var(--ab-accent-text, var(--ab-accent));
+  font-size: var(--fs-label);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -3615,7 +3675,7 @@ svg.down-svg {
   padding: 14px 26px;
   border-radius: 999px;
   border: 1px solid transparent;
-  font-size: 0.95rem;
+  font-size: var(--fs-small);
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease;
@@ -3669,7 +3729,7 @@ svg.down-svg {
 
 .container .ab-hero p {
   max-width: 560px;
-  font-size: 1.1rem;
+  font-size: var(--fs-lead);
   line-height: 1.75;
 }
 
@@ -3712,7 +3772,7 @@ svg.down-svg {
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   color: #fff;
-  font-size: 0.85rem;
+  font-size: var(--fs-small);
   font-weight: 600;
   white-space: nowrap;
 }
@@ -3765,14 +3825,14 @@ svg.down-svg {
 }
 
 .container .ab-stat h3 {
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-size: var(--fs-h2);
   font-weight: 800;
   line-height: 1;
   margin-bottom: 10px;
 }
 
 .container .ab-stat p {
-  font-size: 0.95rem;
+  font-size: var(--fs-small);
 }
 
 /* SECTIONS */
@@ -3875,12 +3935,12 @@ svg.down-svg {
 .ab-chapter.is-right .ab-chapter-card { grid-column: 3; }
 
 .container .ab-chapter-card h3 {
-  font-size: 1.25rem;
+  font-size: var(--fs-lead);
   font-weight: 700;
 }
 
 .container .ab-chapter-card p {
-  font-size: 0.95rem;
+  font-size: var(--fs-body);
   line-height: 1.7;
 }
 
@@ -3888,7 +3948,7 @@ svg.down-svg {
   padding-left: 12px;
   border-left: 2px solid var(--ab-accent);
   color: var(--ab-text);
-  font-size: 0.9rem;
+  font-size: var(--fs-small);
   font-weight: 600;
   line-height: 1.55;
 }
@@ -3899,8 +3959,8 @@ svg.down-svg {
 }
 
 .ab-step {
-  color: var(--ab-accent);
-  font-size: 0.72rem;
+  color: var(--ab-accent-text, var(--ab-accent));
+  font-size: var(--fs-label);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -3972,7 +4032,7 @@ svg.down-svg {
 
 .container .ab-skill p {
   color: var(--ab-text);
-  font-size: 0.95rem;
+  font-size: var(--fs-small);
   font-weight: 600;
 }
 
@@ -4014,13 +4074,14 @@ svg.down-svg {
 }
 
 .container .ab-funfact-body h3 {
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-size: var(--fs-h3);
   font-weight: 700;
   margin-bottom: 18px;
 }
 
 .container .ab-funfact-body p {
-  font-size: 1.08rem;
+  max-width: var(--measure);
+  font-size: var(--fs-lead);
   line-height: 1.8;
 }
 
@@ -4081,12 +4142,12 @@ svg.down-svg {
   }
 
   .container .ab-stat h3 {
-    font-size: 1.7rem;
+    font-size: var(--fs-h3);
     margin-bottom: 6px;
   }
 
   .container .ab-stat p {
-    font-size: 0.72rem;
+    font-size: var(--fs-label);
     line-height: 1.35;
   }
 
@@ -4113,7 +4174,6 @@ svg.down-svg {
   .container .ab-skill p {
     min-width: 0;
     overflow-wrap: break-word;
-    font-size: 0.85rem;
     line-height: 1.3;
   }
 
@@ -4160,6 +4220,7 @@ svg.down-svg {
   --pl-text: var(--lm-text);
   --pl-muted: var(--lm-muted);
   --pl-accent: var(--lm-accent);
+  --pl-accent-text: var(--lm-accent-text);
   --pl-track: rgba(42, 26, 18, 0.12);
   --pl-glow: rgba(194, 86, 43, 0.14);
 }
@@ -4232,7 +4293,7 @@ svg.down-svg {
 }
 
 .preloader-role {
-  font-size: 0.75rem;
+  font-size: var(--fs-label);
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -4242,10 +4303,10 @@ svg.down-svg {
 
 .preloader-count {
   margin-top: 14px;
-  font-size: 0.85rem;
+  font-size: var(--fs-small);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
-  color: var(--pl-accent);
+  color: var(--pl-accent-text, var(--pl-accent));
 }
 
 /* on exit the orbit opens up while the page fades in underneath */
@@ -4337,6 +4398,7 @@ svg.down-svg {
   --hm-surface-strong: var(--lm-surface-strong);
   --hm-border: var(--lm-border);
   --hm-accent: var(--lm-accent);
+  --hm-accent-text: var(--lm-accent-text);
   --hm-accent-ink: var(--lm-accent-ink);
   --hm-rim: var(--lm-accent);
   --hm-fill: var(--lm-accent-2);
@@ -4396,8 +4458,8 @@ svg.down-svg {
   border: 1px solid var(--hm-border);
   background: var(--hm-surface);
   backdrop-filter: blur(10px);
-  color: var(--hm-accent);
-  font-size: 0.78rem;
+  color: var(--hm-accent-text, var(--hm-accent));
+  font-size: var(--fs-label);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -4413,7 +4475,7 @@ svg.down-svg {
   border-radius: 999px;
   border: 1px solid transparent;
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: var(--fs-small);
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease;
@@ -4500,7 +4562,7 @@ svg.down-svg {
 
 .container .hm-hero p {
   max-width: 520px;
-  font-size: 1.08rem;
+  font-size: var(--fs-lead);
 }
 
 .hm-stats {
@@ -4519,14 +4581,14 @@ svg.down-svg {
 
 .hm-stats strong {
   color: var(--hm-text);
-  font-size: 2rem;
+  font-size: var(--fs-h3);
   font-weight: 800;
   line-height: 1;
 }
 
 .hm-stats span {
   color: var(--hm-muted);
-  font-size: 0.85rem;
+  font-size: var(--fs-small);
 }
 
 .hm-hero-pointer {
@@ -4553,6 +4615,7 @@ svg.down-svg {
 .hm-hero-fallback img {
   display: block;
   width: 100%;
+  height: auto;
 }
 
 .hm-scroll-cue {
@@ -4563,7 +4626,7 @@ svg.down-svg {
   align-items: center;
   gap: 10px;
   color: var(--hm-muted);
-  font-size: 0.75rem;
+  font-size: var(--fs-label);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.2em;
@@ -4676,7 +4739,7 @@ svg.down-svg {
 }
 
 .container .hm-about p {
-  font-size: 1.05rem;
+  font-size: var(--fs-body);
 }
 
 /* SELECTED WORKS */
@@ -4726,6 +4789,42 @@ svg.down-svg {
   gap: 28px;
   width: max-content;
   padding-right: 40px;
+}
+
+/* desktop: the cards slide inside a window; the end of the row (.hm-works-stand) is the avatar's spot, where he
+   presents them (HomeScene STAGES.works 'fit'); cards fade out as they reach him */
+@media only screen and (min-width: 801px) {
+  .hm-works-sticky {
+    --works-stand: clamp(280px, 26vw, 400px);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--works-stand);
+    align-content: center;
+    row-gap: 46px;
+  }
+
+  .hm-works-head,
+  .hm-works-window,
+  .hm-works-progress {
+    grid-column: 1;
+  }
+
+  .hm-works-stand {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+  }
+
+  .hm-works-window {
+    /* room for the cards' hover lift and shadow inside the clip */
+    margin: -30px 0;
+    padding: 30px 0;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 70px), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 70px), transparent);
+  }
+
+  .hm-works-track {
+    padding-right: 70px;
+  }
 }
 
 .hm-work-card {
@@ -4789,7 +4888,7 @@ svg.down-svg {
   border-radius: 999px;
   background: rgba(0, 5, 15, 0.7);
   color: #ffffff;
-  font-size: 0.75rem;
+  font-size: var(--fs-label);
   font-weight: 700;
   letter-spacing: 0.1em;
 }
@@ -4802,12 +4901,12 @@ svg.down-svg {
 }
 
 .container .hm-work-body h6 {
-  font-size: 1.2rem;
+  font-size: var(--fs-lead);
   font-weight: 700;
 }
 
 .container .hm-work-body p {
-  font-size: 0.9rem;
+  font-size: var(--fs-body);
   line-height: 1.6;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -4836,12 +4935,12 @@ svg.down-svg {
 }
 
 .container .hm-work-hover h4 {
-  font-size: 1.1rem;
+  font-size: var(--fs-lead);
   line-height: 1.3;
 }
 
 .container .hm-work-hover p {
-  font-size: 0.85rem;
+  font-size: var(--fs-body);
   line-height: 1.6;
   display: -webkit-box;
   -webkit-line-clamp: 5;
@@ -4854,8 +4953,8 @@ svg.down-svg {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: var(--hm-accent);
-  font-size: 0.85rem;
+  color: var(--hm-accent-text, var(--hm-accent));
+  font-size: var(--fs-small);
   font-weight: 700;
 }
 
@@ -4929,13 +5028,13 @@ svg.down-svg {
 }
 
 .container .hm-services h6 {
-  font-size: 0.98rem;
+  font-size: var(--fs-lead);
   font-weight: 700;
 }
 
 .container .hm-services p {
   margin-top: 4px;
-  font-size: 0.85rem;
+  font-size: var(--fs-body);
   line-height: 1.5;
 }
 
@@ -4976,7 +5075,7 @@ svg.down-svg {
   border: 1px solid var(--hm-border);
   background: var(--hm-surface-strong);
   color: var(--hm-text);
-  font-size: 0.82rem;
+  font-size: var(--fs-small);
   font-weight: 600;
   white-space: nowrap;
   transform: translate(-50%, -50%) rotateY(var(--angle)) translateZ(clamp(220px, 21vw, 320px));
@@ -5152,8 +5251,8 @@ svg.down-svg {
 
 .hm-orb-core small {
   margin-top: 8px;
-  color: var(--hm-accent);
-  font-size: 0.72rem;
+  color: var(--hm-accent-text, var(--hm-accent));
+  font-size: var(--fs-label);
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -5174,12 +5273,13 @@ svg.down-svg {
   padding: 9px 14px;
   border-radius: 18px;
   border: 1px solid transparent;
-  opacity: 0.5;
+  /* upcoming steps dim only slightly: their text keeps 4.5:1 contrast in both themes */
+  opacity: 0.88;
   transition: opacity 0.4s ease, background 0.4s ease, border-color 0.4s ease;
 }
 
 .hm-orb-step.is-done {
-  opacity: 0.75;
+  opacity: 1;
 }
 
 .hm-orb-step.is-active {
@@ -5196,14 +5296,14 @@ svg.down-svg {
   border-radius: 50%;
   border: 1.5px solid var(--hm-border);
   color: var(--hm-muted);
-  font-size: 0.75rem;
+  font-size: var(--fs-label);
   font-weight: 800;
 }
 
 .hm-orb-step.is-done .hm-orb-mark,
 .hm-orb-step.is-active .hm-orb-mark {
   border-color: var(--hm-accent);
-  color: var(--hm-accent);
+  color: var(--hm-accent-text, var(--hm-accent));
 }
 
 .hm-orb-step.is-active .hm-orb-mark {
@@ -5212,13 +5312,14 @@ svg.down-svg {
 }
 
 .container .hm-orb-step h6 {
-  font-size: 1rem;
+  font-size: var(--fs-body);
   font-weight: 700;
 }
 
+/* short captions in a narrow sticky column: small, so all five steps fit a 768 px laptop screen */
 .container .hm-orb-step p {
   margin-top: 3px;
-  font-size: 0.86rem;
+  font-size: var(--fs-small);
   line-height: 1.5;
 }
 
@@ -5249,6 +5350,22 @@ svg.down-svg {
   /* no scroll story on phones: show every step fully */
   .hm-orb-step {
     opacity: 1;
+  }
+}
+
+/* short laptop windows: tighter spacing so the sticky block (heading + all five steps) stays on screen */
+@media only screen and (min-width: 801px) and (max-height: 760px) {
+  .hm-orb-content {
+    top: 5vh;
+    gap: 16px;
+  }
+
+  .hm-orb-head {
+    gap: 12px;
+  }
+
+  .hm-orb-step {
+    padding-block: 6px;
   }
 }
 
@@ -5366,7 +5483,7 @@ svg.down-svg {
     border: 1px solid var(--hm-border);
     background: var(--hm-surface);
     color: var(--hm-text);
-    font-size: 0.85rem;
+    font-size: var(--fs-small);
     font-weight: 600;
   }
 
@@ -5402,6 +5519,7 @@ svg.down-svg {
   --pv-surface-strong: var(--lm-surface-strong);
   --pv-border: var(--lm-border);
   --pv-accent: var(--lm-accent);
+  --pv-accent-text: var(--lm-accent-text);
   --pv-accent-ink: var(--lm-accent-ink);
   --pv-accent-soft: rgba(194, 86, 43, 0.1);
   --pv-glow: var(--lm-glow);
@@ -5467,7 +5585,7 @@ svg.down-svg {
 
 .pv-page .pv-link {
   display: inline;
-  color: var(--pv-accent);
+  color: var(--pv-accent-text, var(--pv-accent));
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -5494,8 +5612,8 @@ svg.down-svg {
   border-radius: 999px;
   border: 1px solid var(--pv-border);
   background: var(--pv-surface);
-  color: var(--pv-accent);
-  font-size: 0.8rem;
+  color: var(--pv-accent-text, var(--pv-accent));
+  font-size: var(--fs-label);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -5523,7 +5641,7 @@ svg.down-svg {
 
 .container .pv-hero p {
   max-width: 540px;
-  font-size: 1.08rem;
+  font-size: var(--fs-lead);
   line-height: 1.75;
 }
 
@@ -5543,7 +5661,7 @@ svg.down-svg {
   border: 1px solid var(--pv-border);
   background: var(--pv-surface);
   color: var(--pv-muted);
-  font-size: 0.82rem;
+  font-size: var(--fs-small);
   font-weight: 600;
 }
 
@@ -5565,8 +5683,8 @@ svg.down-svg {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--pv-accent);
-  font-size: 0.78rem;
+  color: var(--pv-accent-text, var(--pv-accent));
+  font-size: var(--fs-label);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -5644,19 +5762,19 @@ svg.down-svg {
 }
 
 .container .pv-page .pv-flow-text strong {
-  font-size: 0.98rem;
+  font-size: var(--fs-body);
 }
 
 .pv-flow-text span {
   color: var(--pv-muted);
-  font-size: 0.86rem;
+  font-size: var(--fs-small);
 }
 
 .container .pv-page .pv-flow-foot {
   padding-top: 18px;
   border-top: 1px solid var(--pv-border);
   color: var(--pv-muted);
-  font-size: 0.82rem;
+  font-size: var(--fs-small);
   font-weight: 600;
   letter-spacing: 0.02em;
 }
@@ -5708,12 +5826,12 @@ svg.down-svg {
 }
 
 .container .pv-summary-card h3 {
-  font-size: 1.1rem;
+  font-size: var(--fs-lead);
   font-weight: 700;
 }
 
 .container .pv-summary-card p {
-  font-size: 0.93rem;
+  font-size: var(--fs-body);
   line-height: 1.6;
 }
 
@@ -5742,7 +5860,7 @@ svg.down-svg {
   grid-column: 1 / -1;
   margin-bottom: 16px;
   color: var(--pv-muted);
-  font-size: 0.75rem;
+  font-size: var(--fs-label);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -5776,7 +5894,7 @@ svg.down-svg {
   gap: 10px;
   padding: 7px 0;
   color: var(--pv-muted);
-  font-size: 0.88rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   line-height: 1.35;
   transition: color 0.25s ease;
@@ -5787,15 +5905,14 @@ svg.down-svg {
 }
 
 .pv-page .pv-toc a.is-active {
-  color: var(--pv-accent);
+  color: var(--pv-accent-text, var(--pv-accent));
   font-weight: 700;
 }
 
 .pv-toc-num {
   flex-shrink: 0;
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  font-size: 0.72rem;
-  opacity: 0.7;
+  font-size: var(--fs-label);
 }
 
 .pv-body {
@@ -5824,14 +5941,14 @@ svg.down-svg {
 }
 
 .pv-section-num {
-  color: var(--pv-accent);
+  color: var(--pv-accent-text, var(--pv-accent));
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  font-size: 0.9rem;
+  font-size: var(--fs-small);
   font-weight: 700;
 }
 
 .container .pv-section-head h2 {
-  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-size: var(--fs-h3);
   font-weight: 800;
 }
 
@@ -5842,8 +5959,8 @@ svg.down-svg {
 }
 
 .container .pv-section-body p {
-  max-width: 72ch;
-  font-size: 1rem;
+  max-width: var(--measure);
+  font-size: var(--fs-body);
   line-height: 1.8;
 }
 
@@ -5858,7 +5975,7 @@ svg.down-svg {
   border: 1px solid var(--pv-border);
   background: var(--pv-surface);
   color: var(--pv-body);
-  font-size: 0.95rem;
+  font-size: var(--fs-body);
 }
 
 .pv-contact-line svg {
@@ -5888,20 +6005,20 @@ svg.down-svg {
   padding: 4px 10px;
   border-radius: 999px;
   background: var(--pv-accent-soft);
-  color: var(--pv-accent);
-  font-size: 0.7rem;
+  color: var(--pv-accent-text, var(--pv-accent));
+  font-size: var(--fs-label);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
 
 .container .pv-card h3 {
-  font-size: 1.05rem;
+  font-size: var(--fs-lead);
   font-weight: 700;
 }
 
 .container .pv-section-body .pv-card p {
-  font-size: 0.92rem;
+  font-size: var(--fs-body);
   line-height: 1.65;
 }
 
@@ -5920,7 +6037,7 @@ svg.down-svg {
   border-radius: 999px;
   border: 1px solid var(--pv-border);
   color: var(--pv-body);
-  font-size: 0.78rem;
+  font-size: var(--fs-label);
   font-weight: 600;
 }
 
@@ -5931,7 +6048,7 @@ svg.down-svg {
 
 .pv-chip em {
   color: var(--pv-muted);
-  font-size: 0.7rem;
+  font-size: var(--fs-label);
   font-style: normal;
   font-weight: 500;
 }
@@ -5960,13 +6077,14 @@ svg.down-svg {
 }
 
 .container .pv-section-body .pv-callout p {
-  font-size: 0.94rem;
+  max-width: var(--measure);
+  font-size: var(--fs-body);
   line-height: 1.7;
 }
 
 .container .pv-section-body .pv-note {
   color: var(--pv-muted);
-  font-size: 0.9rem;
+  font-size: var(--fs-small);
 }
 
 /* purposes and legal bases */
@@ -5983,7 +6101,7 @@ svg.down-svg {
   padding: 16px 22px;
   border-top: 1px solid var(--pv-border);
   color: var(--pv-body);
-  font-size: 0.93rem;
+  font-size: var(--fs-small);
   line-height: 1.6;
 }
 
@@ -5999,7 +6117,7 @@ svg.down-svg {
 
 .pv-row.pv-row-head span {
   color: var(--pv-muted);
-  font-size: 0.72rem;
+  font-size: var(--fs-label);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -6023,12 +6141,12 @@ svg.down-svg {
 }
 
 .container .pv-provider h3 {
-  font-size: 1.05rem;
+  font-size: var(--fs-lead);
   font-weight: 700;
 }
 
 .container .pv-section-body .pv-provider p {
-  font-size: 0.88rem;
+  font-size: var(--fs-body);
   line-height: 1.6;
 }
 
@@ -6039,8 +6157,8 @@ svg.down-svg {
 .pv-provider-label {
   display: block;
   margin-bottom: 2px;
-  color: var(--pv-accent);
-  font-size: 0.7rem;
+  color: var(--pv-accent-text, var(--pv-accent));
+  font-size: var(--fs-label);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -6048,7 +6166,7 @@ svg.down-svg {
 
 .pv-provider .pv-link {
   margin-top: auto;
-  font-size: 0.86rem;
+  font-size: var(--fs-small);
 }
 
 /* how long I keep it */
@@ -6065,7 +6183,7 @@ svg.down-svg {
   gap: 24px;
   padding: 16px 0 16px 28px;
   border-bottom: 1px dashed var(--pv-border);
-  font-size: 0.95rem;
+  font-size: var(--fs-body);
   line-height: 1.6;
 }
 
@@ -6123,12 +6241,12 @@ svg.down-svg {
 }
 
 .container .pv-right h3 {
-  font-size: 1rem;
+  font-size: var(--fs-lead);
   font-weight: 700;
 }
 
 .container .pv-section-body .pv-right p {
-  font-size: 0.88rem;
+  font-size: var(--fs-body);
   line-height: 1.6;
 }
 
@@ -6167,7 +6285,7 @@ svg.down-svg {
 
 .container .pv-cta p {
   max-width: 480px;
-  font-size: 1.02rem;
+  font-size: var(--fs-lead);
   line-height: 1.7;
 }
 
@@ -6187,7 +6305,7 @@ svg.down-svg {
   padding: 14px 26px;
   border-radius: 999px;
   border: 1px solid transparent;
-  font-size: 0.95rem;
+  font-size: var(--fs-small);
   font-weight: 600;
   cursor: pointer;
   -webkit-user-select: none;
@@ -6339,6 +6457,7 @@ svg.down-svg {
   --nf-surface: var(--lm-surface);
   --nf-border: var(--lm-border);
   --nf-accent: var(--lm-accent);
+  --nf-accent-text: var(--lm-accent-text);
   --nf-accent-ink: var(--lm-accent-ink);
   --nf-glow: rgba(194, 86, 43, 0.16);
   --nf-digit-front: var(--lm-accent);
@@ -6408,8 +6527,8 @@ svg.down-svg {
   border-radius: 999px;
   border: 1px solid var(--nf-border);
   background: var(--nf-surface);
-  color: var(--nf-accent);
-  font-size: 0.8rem;
+  color: var(--nf-accent-text, var(--nf-accent));
+  font-size: var(--fs-label);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -6441,7 +6560,7 @@ svg.down-svg {
 .container .nf-copy p {
   max-width: 440px;
   color: var(--nf-muted);
-  font-size: 1.06rem;
+  font-size: var(--fs-lead);
   line-height: 1.75;
   text-wrap: pretty;
 }
@@ -6451,7 +6570,7 @@ svg.down-svg {
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
-  font-size: 0.86rem;
+  font-size: var(--fs-small);
 }
 
 .nf-path code {
@@ -6462,7 +6581,7 @@ svg.down-svg {
   background: var(--nf-surface);
   color: var(--nf-text);
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  font-size: 0.8rem;
+  font-size: var(--fs-label);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -6483,7 +6602,7 @@ svg.down-svg {
   padding: 13px 21px;
   border-radius: 999px;
   border: 1px solid transparent;
-  font-size: 0.93rem;
+  font-size: var(--fs-small);
   font-weight: 600;
   cursor: pointer;
   /* background too: on a theme switch it changed at once while the text faded (white-on-white for a moment) */
@@ -6633,7 +6752,7 @@ svg.down-svg {
 
 .container .ab-faq-intro > p {
   max-width: 380px;
-  font-size: 1.05rem;
+  font-size: var(--fs-lead);
   line-height: 1.7;
 }
 
@@ -6666,11 +6785,11 @@ svg.down-svg {
 .container .ab-faq-card strong {
   display: block;
   color: var(--ab-text);
-  font-size: 1rem;
+  font-size: var(--fs-body);
 }
 
 .container .ab-faq-card p {
-  font-size: 0.9rem;
+  font-size: var(--fs-small);
 }
 
 .ab-page .ab-faq-card .ab-btn {
@@ -6716,7 +6835,7 @@ svg.down-svg {
   border: none;
   background: none;
   color: var(--ab-text);
-  font-size: 1.05rem;
+  font-size: var(--fs-lead);
   font-weight: 600;
   line-height: 1.4;
   text-align: left;
@@ -6731,9 +6850,9 @@ svg.down-svg {
 
 .ab-faq-num {
   min-width: 22px;
-  color: var(--ab-accent);
+  color: var(--ab-accent-text, var(--ab-accent));
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  font-size: 0.78rem;
+  font-size: var(--fs-label);
   font-weight: 700;
 }
 
@@ -6783,7 +6902,7 @@ svg.down-svg {
 
 .container .ab-faq-a-inner p {
   padding-bottom: 4px;
-  font-size: 0.98rem;
+  font-size: var(--fs-body);
   line-height: 1.75;
 }
 
@@ -6792,8 +6911,8 @@ svg.down-svg {
   align-items: center;
   gap: 6px;
   margin-top: 12px;
-  color: var(--ab-accent);
-  font-size: 0.92rem;
+  color: var(--ab-accent-text, var(--ab-accent));
+  font-size: var(--fs-small);
   font-weight: 600;
 }
 
@@ -6821,7 +6940,6 @@ svg.down-svg {
   .ab-faq-q button {
     gap: 12px;
     padding: 18px 16px;
-    font-size: 0.98rem;
   }
 
   .ab-faq-icon {
@@ -6831,5 +6949,255 @@ svg.down-svg {
 
   .ab-faq-a-inner {
     padding: 0 16px 0 50px;
+  }
+}
+
+/* AVATAR HINT + EASTER EGGS (Step A item 5): AvatarEggs.jsx, homepage only, --hm-* tokens */
+.av-hint {
+  --tail: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  max-width: 220px;
+  padding: 10px 14px;
+  border-radius: 16px;
+  border: 1px solid var(--hm-border);
+  background: var(--hm-surface-strong);
+  box-shadow: var(--hm-shadow);
+  color: var(--hm-text);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  pointer-events: none;
+  animation: av-hint-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* the tail points down at his head */
+.av-hint::after {
+  content: "";
+  position: absolute;
+  left: var(--tail);
+  bottom: -7px;
+  width: 12px;
+  height: 12px;
+  border-right: 1px solid var(--hm-border);
+  border-bottom: 1px solid var(--hm-border);
+  background: var(--hm-surface-strong);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+@keyframes av-hint-in {
+  from { opacity: 0; scale: 0.85; }
+  to { opacity: 1; scale: 1; }
+}
+
+.av-eggs {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  opacity: 0;
+  visibility: hidden;
+  translate: 0 12px;
+  transition: opacity 0.3s ease, translate 0.3s ease, visibility 0.3s;
+}
+
+.av-eggs.is-on {
+  opacity: 1;
+  visibility: visible;
+  translate: 0 0;
+}
+
+.container .av-eggs-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid var(--hm-border);
+  background: var(--hm-surface-strong);
+  box-shadow: var(--hm-shadow);
+  color: var(--hm-text);
+  font: inherit;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.av-eggs-pill svg {
+  color: var(--hm-accent);
+}
+
+.av-eggs-pill b {
+  color: var(--hm-accent-text, var(--hm-accent));
+}
+
+.av-eggs.has-toast .av-eggs-pill {
+  border-color: var(--hm-accent);
+  animation: av-eggs-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes av-eggs-pop {
+  40% { scale: 1.08; }
+}
+
+.av-eggs-panel {
+  width: min(300px, calc(100vw - 32px));
+  padding: 16px;
+  border-radius: 20px;
+  border: 1px solid var(--hm-border);
+  background: var(--hm-surface-strong);
+  box-shadow: var(--hm-shadow);
+}
+
+.container .av-eggs-title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: var(--hm-text);
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.av-eggs-title span {
+  color: var(--hm-accent-text, var(--hm-accent));
+}
+
+.av-eggs-panel ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+}
+
+.av-eggs-panel li {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 10px;
+  align-items: start;
+}
+
+.av-eggs-mark {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid var(--hm-border);
+  color: var(--hm-muted);
+  font-size: var(--fs-label);
+  font-weight: 700;
+}
+
+.av-eggs-panel li.is-found .av-eggs-mark {
+  border-color: var(--hm-accent);
+  background: var(--hm-accent);
+  color: var(--hm-accent-ink);
+}
+
+.av-eggs-panel strong {
+  display: block;
+  color: var(--hm-text);
+  font-size: var(--fs-small);
+}
+
+.av-eggs-panel small {
+  display: block;
+  color: var(--hm-muted);
+  font-size: var(--fs-label);
+  line-height: 1.4;
+}
+
+/* phones: a compact badge (icon + count) so it covers less of the text; the full words come back in a toast */
+@media only screen and (max-width: 600px) {
+  .av-eggs {
+    left: 12px;
+    bottom: 12px;
+  }
+
+  .container .av-eggs-pill {
+    padding: 0 14px;
+  }
+
+  .av-eggs-word {
+    display: none;
+  }
+}
+
+/* MINI COMPANION (Step A item 6): MiniCompanion.jsx on About, Projects, Contact, Privacy. Up = a small window with
+   him in it; docked = a round badge showing his live face (the canvas keeps its size and slides inside the circle). */
+.container .mc {
+  --mc-w: 168px;
+  --mc-h: 210px;
+  --mc-dock: 64px;
+  --mc-face-x: 84px;      /* his face's centre in the canvas: set every frame by MiniCompanion (these are fallbacks) */
+  --mc-face-y: 50px;
+  --mc-zoom: 1.1;         /* face size in the round badge */
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 50;
+  width: var(--mc-w);
+  height: var(--mc-h);
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 28px;
+  background: transparent;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  translate: 0 24px;
+  transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1), height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    border-radius 0.45s ease, background-color 0.3s ease, border-color 0.3s ease, opacity 0.4s ease, translate 0.4s ease, visibility 0.4s;
+}
+
+.container .mc.is-ready {
+  opacity: 1;
+  visibility: visible;
+  translate: 0 0;
+}
+
+.container .mc.is-docked {
+  width: var(--mc-dock);
+  height: var(--mc-dock);
+  border-radius: 50%;
+  border-color: var(--hd-border);
+  background: var(--hd-surface-solid);
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.5);
+}
+
+.mc-stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--mc-w);
+  height: var(--mc-h);
+  transform-origin: var(--mc-face-x) var(--mc-face-y);
+  transition: translate 0.45s cubic-bezier(0.22, 1, 0.36, 1), scale 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* docked: his face centred in the circle and a little closer */
+.mc.is-docked .mc-stage {
+  translate: calc(var(--mc-dock) / 2 - var(--mc-face-x)) calc(var(--mc-dock) / 2 - var(--mc-face-y));
+  scale: var(--mc-zoom);
+}
+
+@media only screen and (max-width: 600px) {
+  .container .mc {
+    --mc-w: 128px;
+    --mc-h: 160px;
+    --mc-dock: 56px;
+    --mc-zoom: 1.15;
+    right: 12px;
+    bottom: 12px;
   }
 }

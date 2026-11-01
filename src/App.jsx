@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { Suspense, lazy, useContext, useEffect, useState } from 'react';
 import './App.css';
 import { AppProvider, AppContext } from './AppProvider';
 import { Routes, Route, useLocation } from 'react-router-dom';
@@ -12,6 +12,32 @@ import About from './pages/About';
 import Privacy from './pages/Privacy';
 import NotFound from './pages/NotFound';
 import Preloader from './components/Preloader';
+
+// Step A item 6: the avatar's small companion on these pages (lazy: three.js + the models load only here, after the
+// page has settled; none with reduced motion, no WebGL2, or the browser's data saver)
+const MiniCompanion = lazy(() => import('./components/MiniCompanion'));
+const COMPANION_PAGES = { '/about': 'about', '/projects': 'projects', '/contact': 'contact', '/privacy': 'privacy' };
+const companionAllowed = () => typeof window !== 'undefined'
+  && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  && !navigator.connection?.saveData
+  && !!document.createElement('canvas').getContext('webgl2');
+
+function Companion({ pathname, lightMode, preloader }) {
+  const page = COMPANION_PAGES[pathname.toLowerCase().replace(/\/$/, '')];
+  const [settled, setSettled] = useState(false);
+  useEffect(() => {
+    if (settled || !page || preloader) return undefined;
+    const go = () => setSettled(companionAllowed());
+    const id = setTimeout(() => (window.requestIdleCallback ? window.requestIdleCallback(go, { timeout: 2000 }) : go()), 1200);
+    return () => clearTimeout(id);
+  }, [page, preloader, settled]);
+  if (!page || !settled) return null;
+  return (
+    <Suspense fallback={null}>
+      <MiniCompanion key={page} page={page} lightMode={lightMode} />
+    </Suspense>
+  );
+}
 import { onProgress } from './loadProgress';
 import { NOT_FOUND, PAGES, pageKey, urlOf } from './seo';
 
@@ -147,6 +173,7 @@ function InnerApp () {
         </Routes>
         </main>
         <Footer />
+        <Companion pathname={pathname} lightMode={lightMode} preloader={preloader} />
       </div>
     </MotionConfig>
   );

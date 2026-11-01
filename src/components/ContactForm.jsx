@@ -217,6 +217,7 @@ function ContactForm() {
       .then(() => {
         setSentName(form.name.trim().split(" ")[0]);
         setPhase("sent");
+        window.dispatchEvent(new Event("legend:contact-sent")); // the mini companion gives a thumbs-up
         setForm(emptyForm);
         setType("");
       })

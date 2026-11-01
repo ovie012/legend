@@ -6,6 +6,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import { AVATAR_RIG as RIG } from './avatarRig';
 import { BASE_IDLE, CLIPS, DANCES } from './avatarClips';
+import { MODELS, onThemeIntent } from './avatarModels';
 
 // a hot update would rebuild the character from the already posed, placed model (wrong size, eyes, moves): reload instead
 if (import.meta.hot) import.meta.hot.decline();
@@ -13,7 +14,6 @@ if (import.meta.hot) import.meta.hot.decline();
 // The rigged character (Blender + Mixamo, designs/avatar-work): brown senator in light mode, white in dark mode.
 // Both share one skeleton and one animation file. Body = animation clips (avatarClips.js), face = shape keys + eye
 // nodes driven by the reaction keyframes (avatarActions.js), cursor-follow on the head/chest bones on top.
-const MODELS = { light: '/3d/legend_brown.glb', dark: '/3d/legend_white.glb' };
 const ANIMS = '/3d/legend_anims.glb';
 const withMeshopt = (loader) => loader.setMeshoptDecoder(MeshoptDecoder);
 
@@ -39,11 +39,14 @@ const HAND_POSES = {
   fist: [0.55, 1.25, 1.3, 1.35, 1.35],
   point: [0.5, -0.1, 1.3, 1.35, 1.35],
   grip: [0.3, 0.55, 0.65, 0.75, 0.8],
+  thumbsUp: [-0.35, 1.25, 1.3, 1.35, 1.35],
 };
+// reactions that borrow another one's clip (the mini companion's thumbs-up = the cheer's arm pump, thumbs out)
+export const CLIP_OF = (name) => CLIPS[name] ?? { thumbsUp: CLIPS.cheer }[name];
 const HAND_POSE_OF = {
   tiltWave: 'open', winkBye: 'open', lookBackBye: 'open', shyBye: 'open', saluteBye: 'open', greet: 'open', clap: 'open',
   shy: 'open', dust: 'open', stretch: 'open', surprised: 'open', doubleTake: 'open', shrug: 'open', bow: 'relaxed',
-  presentText: 'point', cheer: 'fist', happyBounce: 'fist', bounceBye: 'fist', glassesOn: 'grip', glassesOff: 'grip',
+  presentText: 'point', thumbsUp: 'thumbsUp', cheer: 'fist', happyBounce: 'fist', bounceBye: 'fist', glassesOn: 'grip', glassesOff: 'grip',
 };
 const JOINT_SHARE = [1, 1.1, 0.8];
 const X = new THREE.Vector3(1, 0, 0);
@@ -204,7 +207,9 @@ export function useCharacter(url) {
   }, [gltf, anims]);
 }
 
-function Character({ url, visible, pointer, scroll, reaction, playing, glassesState, meshRef, shared, onReady }) {
+// frame: the element the canvas fills (the mini companion's small window); the cursor and the looked-at card are
+// measured against it (default: the whole window, as on the homepage)
+export function Character({ url, visible, pointer, scroll, reaction, playing, glassesState, attention, meshRef, shared, onReady, frame }) {
   const c = useCharacter(url);
   const inner = useRef();
   const st = useRef({ lastId: -1, active: null, weights: new Map(), cache: {}, zoom: 0, hipsX: 0,
@@ -246,7 +251,7 @@ function Character({ url, visible, pointer, scroll, reaction, playing, glassesSt
     // ---- body: start / end the reaction's clip, blend weights
     if (pl.id !== s.lastId) {
       s.lastId = pl.id;
-      const info = CLIPS[pl.name];
+      const info = CLIP_OF(pl.name);
       if (info) {
         const a = actionFor(info);
         a.reset();
@@ -296,20 +301,27 @@ function Character({ url, visible, pointer, scroll, reaction, playing, glassesSt
     // ---- cursor-follow (eyes lead, head follows, chest lags), as the photo avatar did
     const p = s.pose; const l = s.life;
     c.bone('Head').getWorldPosition(tmp.v).project(state.camera);
-    const idleEyes = !glassesState.current.reading && now() - pointer.current.time > 3;
+    // a hovered project card (director: attention) takes the place of the cursor: he turns to its centre and keeps
+    // looking while the mouse rests on it, with a bigger turn of head and chest
+    const card = attention?.current.el?.isConnected ? attention.current.el.getBoundingClientRect() : null;
+    const vp = frame?.current?.getBoundingClientRect() ?? { left: 0, top: 0, width: window.innerWidth, height: window.innerHeight };
+    const look = card ? tmp.v2.set((card.left + card.right) / 2 - vp.left, (card.top + card.bottom) / 2 - vp.top, 0)
+      .set((tmp.v2.x / vp.width) * 2 - 1, 1 - (tmp.v2.y / vp.height) * 2, 0) : pointer.current;
+    const idleEyes = !card && !glassesState.current.reading && now() - pointer.current.time > 3;
     if (idleEyes && t > l.nextSaccade) {
       l.idleTarget.set((Math.random() - 0.5) * 0.9, (Math.random() - 0.5) * 0.5);
       l.nextSaccade = t + 1.2 + Math.random() * 2.2;
     }
-    const tx = idleEyes ? l.idleTarget.x : clamp(pointer.current.x - tmp.v.x, -1.5, 1.5);
-    const ty = idleEyes ? l.idleTarget.y : clamp(pointer.current.y - tmp.v.y, -1.5, 1.5);
+    const tx = idleEyes ? l.idleTarget.x : clamp(look.x - tmp.v.x, -1.5, 1.5);
+    const ty = idleEyes ? l.idleTarget.y : clamp(look.y - tmp.v.y, -1.5, 1.5);
+    const turnMax = card ? 0.55 : 0.36;
     const lean = clamp(scroll.current.velocity * 0.00035, -0.14, 0.14);
     const follow = (1 - r.follow) * (1 - smooth(s.zoom));
     p.gazeX = damp(p.gazeX, clamp(tx * 0.9, -0.85, 0.85) * (1 - r.follow), 18, dt);
     p.gazeY = damp(p.gazeY, clamp(-ty * 1.1, -0.45, 0.8) * (1 - r.follow), 18, dt);
-    p.headY = damp(p.headY, clamp(tx * 0.4, -0.36, 0.36) * follow, 5, dt);
+    p.headY = damp(p.headY, clamp(tx * 0.4, -turnMax, turnMax) * follow, 5, dt);
     p.headX = damp(p.headX, (clamp(-ty * 0.35, -0.14, 0.3) - lean * 0.6) * follow, 5, dt);
-    p.chestY = damp(p.chestY, p.headY * 0.25, 2.2, dt);
+    p.chestY = damp(p.chestY, p.headY * (card ? 0.5 : 0.25), 2.2, dt);
     p.chestX = damp(p.chestX, lean, 2.2, dt);
     const bendBone = ([b, ax], x, y, z) => {
       if (x) b.quaternion.multiply(tmp.q.setFromAxisAngle(ax.x, x));
@@ -334,7 +346,7 @@ function Character({ url, visible, pointer, scroll, reaction, playing, glassesSt
         .multiply(tmp.q.setFromAxisAngle(e.up, gx * 0.35))
         .multiply(tmp.q.setFromAxisAngle(e.side, gy * 0.25));
     }
-    if (t > l.nextBlink && l.blinkStart < 0) l.blinkStart = t;
+    if (t > l.nextBlink && l.blinkStart < 0 && !(import.meta.env.DEV && window.__avatarNoBlink)) l.blinkStart = t;
     if (l.blinkStart >= 0) {
       const kb = (t - l.blinkStart) / 0.16;
       l.blink = kb < 1 ? Math.sin(Math.PI * kb) : 0;
@@ -385,38 +397,43 @@ function Character({ url, visible, pointer, scroll, reaction, playing, glassesSt
   );
 }
 
-// Holds both outfits: the one for the current theme loads first, the other just after he appears. A theme toggle
-// plays the twirl (director: themeSwap) and swaps the outfit while he faces away, with a shimmer up the body.
-function HomeAvatar({ lightMode, pointer, scroll, reaction, playing, glasses, meshRef, onReady }) {
+// Holds the outfits: only the current theme's loads with the page; the other loads when the visitor reaches for the
+// theme button (avatarModels.onThemeIntent) or switches. A theme toggle plays the twirl (director: themeSwap) and swaps
+// the outfit while he faces away, with a shimmer up the body; if the outfit is still loading then, it changes inside a
+// shimmer of its own as soon as it is ready.
+const LATE_SWAP = 0.35;     // seconds into that late shimmer when the outfit changes
+function HomeAvatar({ lightMode, pointer, scroll, reaction, playing, glasses, attention, meshRef, onReady }) {
   const want = lightMode ? 'light' : 'dark';
   const [shown, setShown] = useState(want);
   const [mounted, setMounted] = useState({ [want]: true });
   const [ready, setReady] = useState({});
-  const shared = useRef({ shimmerAt: -10 });
+  const readyNow = useRef({});          // read by timers (state in their closures would be stale)
+  const shared = useRef({ shimmerAt: -10, swapDue: 0 });
   const first = useRef(true);
 
+  useEffect(() => onThemeIntent(() => setMounted({ light: true, dark: true })), []);
   useEffect(() => {
     if (first.current) { first.current = false; return undefined; }
     setMounted((m) => ({ ...m, [want]: true }));
-    shared.current.shimmerAt = now() + SWAP_AT - 0.35;
-    const id = setTimeout(() => setShown((cur) => (ready[want] ? want : cur)), SWAP_AT * 1000);
+    if (readyNow.current[want]) shared.current.shimmerAt = now() + SWAP_AT - 0.35;
+    shared.current.swapDue = now() + SWAP_AT;
+    const id = setTimeout(() => setShown((cur) => (readyNow.current[want] ? want : cur)), SWAP_AT * 1000);
     return () => clearTimeout(id);
   }, [want]);
-  // if the other outfit was still loading at the swap moment, change as soon as it is ready
-  useEffect(() => { if (ready[want] && shown !== want && now() - shared.current.shimmerAt > SWAP_AT) setShown(want); }, [ready, want, shown]);
-  // load the other outfit a moment after the first one is on screen
+  // the outfit was still loading at the swap moment: its own shimmer, the change inside it
   useEffect(() => {
-    if (!ready[shown]) return undefined;
-    const id = setTimeout(() => setMounted({ light: true, dark: true }), 2500);
+    if (!ready[want] || shown === want || now() < shared.current.swapDue) return undefined;
+    shared.current.shimmerAt = now();
+    const id = setTimeout(() => setShown(want), LATE_SWAP * 1000);
     return () => clearTimeout(id);
-  }, [ready, shown]);
+  }, [ready, want, shown]);
 
   return ['light', 'dark'].map((k) => mounted[k] && (
     <Suspense key={k} fallback={null}>
       <Character
         url={MODELS[k]} visible={shown === k} pointer={pointer} scroll={scroll} reaction={reaction} playing={playing}
-        glassesState={glasses} meshRef={meshRef} shared={shared}
-        onReady={() => { setReady((r) => ({ ...r, [k]: true })); if (k === shown) onReady?.(); }}
+        glassesState={glasses} attention={attention} meshRef={meshRef} shared={shared}
+        onReady={() => { readyNow.current[k] = true; setReady((r) => ({ ...r, [k]: true })); if (k === shown) onReady?.(); }}
       />
     </Suspense>
   ));

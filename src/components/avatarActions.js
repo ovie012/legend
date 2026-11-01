@@ -93,6 +93,10 @@ export const ACTIONS = {
   clap: { duration: 3.5, keys: [k(0), k(0.15, hold({ squint: 0.65 })), k(0.85, hold({ squint: 0.6 })), k(1)] },
 
   // small reactions
+  // a project card is hovered (he already looks at it): a small nod for a favourite, eyes stay on the card
+  cardNod: { duration: 1.1, keys: [k(0), k(0.3, { headX: 0.15, squint: 0.5 }), k(0.55, { headX: -0.02, squint: 0.5 }), k(0.75, { headX: 0.07, squint: 0.35 }), k(1)] },
+  // the mini companion when the contact form is sent: cheer arm pump with thumbs out (clip in HomeAvatar CLIP_OF)
+  thumbsUp: { duration: 1.15, keys: [k(0), k(0.2, { squint: 0.6, eyeOpen: 0.1 }), k(0.8, { squint: 0.6 }), k(1)] },
   smile: { duration: 1.8, keys: [k(0), k(0.25, { squint: 0.55, headZ: 0.08, headX: -0.03, follow: 0.2 }), k(0.75, { squint: 0.55, headZ: 0.08, follow: 0.2 }), k(1)] },
   surprised: { duration: 1.6, keys: [k(0), k(0.12, hold({ eyeOpen: 0.4, headX: -0.18, y: 0.05, s: -0.02 })), k(0.55, hold({ eyeOpen: 0.3, headX: -0.12 })), k(1)] },
   lookAround: { duration: 3.6, keys: [k(0), k(0.2, hold({ headY: -0.32, gazeX: -0.8 })), k(0.45, hold({ headY: -0.32, gazeX: -0.8 })), k(0.65, hold({ headY: 0.32, gazeX: 0.8 })), k(0.85, hold({ headY: 0.32, gazeX: 0.8 })), k(1)] },
@@ -170,7 +174,7 @@ export const GROUPS = {
   funnyFace: ['dizzy', 'bugEyes', 'pirate', 'sleepyHead', 'sideEye', 'shocked', 'smug', 'goofy', 'stargazer', 'headShakeOff', 'slump'],
 };
 
-export const STAGE_MOMENTS = { hero: 'greet', about: 'presentText', works: 'watchCards', skills: 'juggle', journey: 'presentText', aibuilds: 'watchCards' };
+export const STAGE_MOMENTS = { hero: 'greet', about: 'presentText', works: 'presentText', skills: 'juggle', journey: 'presentText', aibuilds: 'watchCards' };
 
 // Mouth + brows for the rigged character, keyed like the rest (progress 0..1 of the reaction). Reactions not listed
 // keep a still mouth (the face already smiles).
@@ -198,7 +202,7 @@ const MOUTH = {
   goofy: [k(0), k(0.12, { jaw: 0.6, pucker: 0.1 }), k(0.35, { pucker: 0.7, jaw: 0.2 }), k(0.58, { jaw: 0.6 }), k(0.8, { grin: 0.6 }), k(1)],
   stargazer: holdMouth({ jaw: 0.3, pucker: 0.3 }, 0.2, 0.7), headShakeOff: [k(0), k(0.1, { press: 0.5 }), k(0.45, { press: 0.4 }), k(0.55, { jaw: 0.3 }), k(0.8, { grin: 0.4 }), k(1)],
   headTilt: holdMouth({ grin: 0.4, worry: 0.3 }, 0.25, 0.75), nodYes: holdMouth({ grin: 0.6 }), doubleNod: holdMouth({ grin: 0.6 }),
-  warmNod: holdMouth({ grin: 0.8 }), nodSmileBye: holdMouth({ grin: 0.8 }), thankBow: holdMouth({ grin: 0.7 }),
+  warmNod: holdMouth({ grin: 0.8 }), thumbsUp: holdMouth({ grin: 0.9, jaw: 0.15 }, 0.15, 0.85), cardNod: holdMouth({ grin: 0.7 }, 0.2, 0.8), nodSmileBye: holdMouth({ grin: 0.8 }), thankBow: holdMouth({ grin: 0.7 }),
   saluteBye: holdMouth({ grin: 0.6 }), tiltWave: holdMouth({ grin: 0.7, jaw: 0.15 }), winkBye: holdMouth({ grin: 0.7 }),
   shyBye: holdMouth({ grin: 0.6, worry: 0.3 }), lookBackBye: holdMouth({ grin: 0.7, jaw: 0.15 }), spinBye: holdMouth({ grin: 0.8, jaw: 0.25 }),
   sideStepBye: holdMouth({ grin: 0.7, jaw: 0.15 }), bow: holdMouth({ grin: 0.5 }, 0.3, 0.6),

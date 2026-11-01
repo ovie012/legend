@@ -5,6 +5,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import { useCharacter } from './HomeAvatar';
+import { MODELS, onThemeIntent } from './avatarModels';
 import { emptyPose, sampleAction } from './avatarActions';
 import { BLOCK, SPOTS } from './notFoundStage';
 import { Director, EPISODE_NAMES, createMotion, faceOf } from './notFoundDirector';
@@ -15,7 +16,6 @@ if (import.meta.hot) import.meta.hot.decline();   // the 3D scene reloads the pa
 reportTask('3d', 0.15);
 THREE.DefaultLoadingManager.onProgress = (url, loaded, total) => reportTask('3d', 0.15 + 0.8 * (loaded / total));
 
-const MODELS = { light: '/3d/legend_brown.glb', dark: '/3d/legend_white.glb' };
 const ANIMS_404 = '/3d/legend_anims_404.glb';     // the 404's own clips (sit, climb, jump down, fall, walk, 2 dances)
 const withMeshopt = (loader) => loader.setMeshoptDecoder(MeshoptDecoder);
 const { damp, clamp } = THREE.MathUtils;
@@ -574,7 +574,8 @@ function Avatar({ url, visible, pointer, brain, onReady }) {
   );
 }
 
-// The theme's outfit loads first and the other one quietly 2.5 s after he appears, so it is ready before any click.
+// Only the theme's outfit loads with the page; the other one when the visitor reaches for the theme button
+// (avatarModels.onThemeIntent) or switches.
 // A theme switch runs a warm shimmer up his body and changes the outfit halfway through it (as the homepage does,
 // without the twirl: here he is often sitting or climbing). Clicked before the other outfit is ready: the shimmer waits.
 const SHIMMER = { duration: 0.8, swapAt: 0.38, from: -0.15, to: 2.1, width: 0.28 };
@@ -585,11 +586,7 @@ function Avatars({ lightMode, pointer, brain, onReady }) {
   const [ready, setReady] = useState({});
   const [shown, setShown] = useState(want);
   useEffect(() => { setMounted((m) => ({ ...m, [want]: true })); }, [want]);
-  useEffect(() => {
-    if (!ready[shown]) return undefined;
-    const id = setTimeout(() => setMounted({ light: true, dark: true }), 2500);
-    return () => clearTimeout(id);
-  }, [ready, shown]);
+  useEffect(() => onThemeIntent(() => setMounted({ light: true, dark: true })), []);
   useEffect(() => {
     if (shown === want || !ready[want]) return undefined;
     brain.shimmerAt = now();

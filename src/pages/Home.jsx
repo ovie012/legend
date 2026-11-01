@@ -16,6 +16,7 @@ import { FiArrowUpRight, FiArrowDown, FiDownload, FiEye, FiCheck, FiMonitor, FiS
 import { HiSparkles } from 'react-icons/hi2';
 import { AppContext } from '../AppProvider';
 import { expectTask } from '../loadProgress';
+import AvatarEggs from '../components/AvatarEggs';
 
 const HomeScene = lazy(() => import('../components/HomeScene'));
 
@@ -28,7 +29,12 @@ const fadeUp = {
   }),
 };
 
+// No 3D (Step A item 8): reduced motion, no WebGL2, the browser's data saver, a 2G connection or a phone with
+// <= 2 GB of memory get a still of him rendered from the 3D model (public/3d/still, designs/avatar-work/shot/still.mjs).
+const lowEnd = typeof navigator !== 'undefined'
+  && (!!navigator.connection?.saveData || /2g$/.test(navigator.connection?.effectiveType ?? '') || (navigator.deviceMemory ?? 8) <= 2);
 const supports3D = typeof window !== 'undefined'
+  && !lowEnd
   && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
   && !!document.createElement('canvas').getContext('webgl2');
 
@@ -156,9 +162,12 @@ function VelocityBand({ items, baseVelocity }) {
   );
 }
 
+// On desktop the end of the row is kept free (.hm-works-stand): the avatar stands there and presents the cards as they
+// slide past (owner 2026-11-01: he used to sit small behind the cards). The cards move inside .hm-works-window.
 function HorizontalWorks({ projects, desktop, children }) {
   const section = useRef(null);
   const track = useRef(null);
+  const view = useRef(null);
   const [distance, setDistance] = useState(0);
   const { scrollYProgress } = useScroll({ target: section, offset: ['start start', 'end end'] });
   const x = useTransform(scrollYProgress, [0, 1], [0, -distance]);
@@ -166,10 +175,11 @@ function HorizontalWorks({ projects, desktop, children }) {
 
   useLayoutEffect(() => {
     if (!desktop) return setDistance(0);
-    const measure = () => setDistance(Math.max(track.current.scrollWidth - window.innerWidth + 80, 0));
+    const measure = () => setDistance(Math.max(track.current.scrollWidth - view.current.clientWidth, 0));
     measure();
     const ro = new ResizeObserver(measure);
     ro.observe(track.current);
+    ro.observe(view.current);
     return () => ro.disconnect();
   }, [desktop, projects.length]);
 
@@ -181,31 +191,35 @@ function HorizontalWorks({ projects, desktop, children }) {
     >
       <div className="hm-works-sticky">
         {children}
-        <motion.div ref={track} className="hm-works-track" style={desktop ? { x } : undefined}>
-          {projects.map((item, index) => (
-            <article
-              key={item.link}
-              className="hm-work-card"
-              onClick={() => window.open(item.link, '_blank')}
-              onPointerMove={handleTilt}
-              onPointerLeave={resetTilt}
-            >
-              <div className="hm-work-media">
-                <img src={item.src.desktop} alt={item.alt} loading="lazy" />
-                <span className="hm-work-index">{String(index + 1).padStart(2, '0')}</span>
-              </div>
-              <div className="hm-work-body">
-                <h6>{item.title}</h6>
-                <p>{item.description}</p>
-              </div>
-              <div className="hm-work-hover">
-                <h4>{item.titleLong}</h4>
-                <p>{item.descriptionLong}</p>
-                <span className="hm-work-open">Open project <FiArrowUpRight /></span>
-              </div>
-            </article>
-          ))}
-        </motion.div>
+        {desktop && <div className="hm-works-stand" data-avatar-stand aria-hidden="true"></div>}
+        <div ref={view} className="hm-works-window">
+          <motion.div ref={track} className="hm-works-track" style={desktop ? { x } : undefined}>
+            {projects.map((item, index) => (
+              <article
+                key={item.link}
+                className="hm-work-card"
+                data-favorite={item.link}
+                onClick={() => window.open(item.link, '_blank')}
+                onPointerMove={handleTilt}
+                onPointerLeave={resetTilt}
+              >
+                <div className="hm-work-media">
+                  <img src={item.src.desktop} alt={item.alt} loading="lazy" />
+                  <span className="hm-work-index">{String(index + 1).padStart(2, '0')}</span>
+                </div>
+                <div className="hm-work-body">
+                  <h6>{item.title}</h6>
+                  <p>{item.description}</p>
+                </div>
+                <div className="hm-work-hover">
+                  <h4>{item.titleLong}</h4>
+                  <p>{item.descriptionLong}</p>
+                  <span className="hm-work-open">Open project <FiArrowUpRight /></span>
+                </div>
+              </article>
+            ))}
+          </motion.div>
+        </div>
         {desktop && (
           <div className="hm-works-progress">
             <motion.span style={{ width: bar }} />
@@ -356,6 +370,7 @@ function Home() {
             <HomeScene colors={colors} lightMode={lightMode} />
           </Suspense>
         )}
+        {supports3D && <AvatarEggs />}
 
         {/* HERO */}
         <section className="hm-hero" data-stage="hero">
@@ -389,9 +404,15 @@ function Home() {
               <div><strong>{skills.length}</strong><span>Technologies</span></div>
             </motion.div>
           </motion.div>
-          {!supports3D && (
+          {/* browser only: in the pre-rendered HTML (no window) it made every visitor download the still */}
+          {!supports3D && typeof window !== 'undefined' && (
             <figure className="hm-hero-fallback">
-              <img src="/Legend-himself.webp" alt="Emonefe Ovie" />
+              <img
+                src={lightMode ? '/3d/still/legend-still-light.webp' : '/3d/still/legend-still-dark.webp'}
+                alt="Emonefe Ovie as his 3D avatar"
+                width="1120"
+                height="1610"
+              />
             </figure>
           )}
           {/* <span className="hm-hero-pointer" aria-hidden="true"></span> */}

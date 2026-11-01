@@ -246,6 +246,7 @@ function Projects() {
           <motion.article
             key={project.link}
             className="pj-card"
+            data-favorite={project.favorite ? project.link : undefined}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.15 }}
