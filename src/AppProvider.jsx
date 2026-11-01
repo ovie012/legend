@@ -103,10 +103,14 @@ export function AppProvider({ children }) {
     };
 
     const scrollToTop = () => {
-      window.scrollTo({
-        top : 0,
-        behavior : 'smooth',
-      })
+      // a page transition (PageTransitions.jsx) puts the new page at its top itself; a smooth scroll here would move
+      // the old page just before its snapshot is taken
+      if (!document.documentElement.classList.contains('page-switching')) {
+        window.scrollTo({
+          top : 0,
+          behavior : 'smooth',
+        })
+      }
       setHover(false);
     };
     

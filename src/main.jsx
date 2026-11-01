@@ -2,6 +2,7 @@ import React, { useLayoutEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop.jsx';
+import PageTransitions from './components/PageTransitions.jsx';
 import App from './App.jsx';
 // Plus Jakarta Sans served from this site (not Google Fonts), so visitors' IPs never go to Google
 import '@fontsource-variable/plus-jakarta-sans';
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Router>
       <Reveal />
       <ScrollToTop />
+      <PageTransitions />
       <App />
     </Router>
   </React.StrictMode>,
