@@ -6,9 +6,9 @@
 
 ## Overview
 
-This project is a modern, responsive developer portfolio built to showcase my skills, projects, and professional identity through clean design and thoughtful interaction. It focuses on performance, simplicity, and user experience while maintaining a strong visual personality.
+This is my personal portfolio, the place where I show who I am as an AI Engineer and Software Developer, the web and mobile apps I've built, and how I like to work. I wanted it to feel fast, simple and easy to read, but still have a personality of its own.
 
-The application highlights my technical strengths, design sensitivity, and attention to detail through animated transitions, theme switching, and structured content presentation.
+The biggest part of that personality is a 3D version of me. He lives on the homepage, follows your cursor, reacts when you click him, and changes outfits when you switch themes. Around him, the site tries to keep things calm: clear text, smooth transitions and content that's easy to scan.
 
 ## Live Demo
 
@@ -18,74 +18,97 @@ Live link: https://legenddev-phi.vercel.app/
 
 ## Tech Stack
 
-- React (JavaScript)
-- Styled Components
+- React (JavaScript) with Vite
+- React Router
 - Vanilla CSS
 - Framer Motion
+- Three.js and React Three Fiber
 - React Icons
+- EmailJS (for the contact form)
+- Blender and Mixamo (to build and animate the 3D avatar)
 
 ## Features
 
 ### Theme System
 
-The portfolio includes a fully implemented dark and light mode system. Each mode features:
+The portfolio has a full dark and light mode. Each mode has:
 
-- A distinct visual theme
-- Custom color palettes
-- Unique background styling
-- Different profile images depending on the active theme
+- Its own visual theme
+- Its own color palette
+- Its own background styling
+- A different outfit for the 3D avatar (a brown senator in light mode, white in dark mode)
 
-The theme switcher ensures a seamless transition between modes while maintaining accessibility and visual clarity.
+When you switch, the whole page fades from one theme to the other in one smooth step, and the avatar does a little twirl while he changes clothes. It starts in whatever your device is set to, and once you pick a theme, it remembers it for next time.
 
 ### Smooth Animations
 
-Framer Motion powers subtle and intentional animations across the application, including:
+Framer Motion and the browser's own View Transitions power small, deliberate animations across the site, including:
 
-- Page transitions
-- Component reveals
+- Page transitions (the header stays still while the page glides in)
+- Component reveals as you scroll
 - Hover interactions
 - Navigation feedback
+- A "How I build" section that plays through my process on its own
 
-Animations enhance the user experience without sacrificing performance.
+Animations are there to help, not to slow you down. If you've turned on reduced motion on your device, the site respects it.
+
+### The 3D Avatar
+
+This is the part I had the most fun building. On the homepage he:
+
+- Follows your cursor with his eyes and head
+- Reacts to clicks, and hides a few Easter eggs (there's a small counter if you want to find them all)
+- Turns to look at a project card when you hover over it
+- Waves goodbye when you reach the bottom of the page, and welcomes you back when you scroll up
+
+On phones he moves into a small round badge in the corner whenever the text needs the space, and hops back out when there's room. A smaller version of him keeps you company on the other pages. On slow connections or with reduced motion, you get a still picture of him instead.
 
 ### Responsive Design
 
-The layout is optimized for:
+The layout works well on:
 
 - Mobile devices
 - Tablets
 - Desktop screens
 
-All pages are designed with flexible layouts and scalable components to ensure consistent presentation across screen sizes.
+Every page uses flexible layouts and scalable components, so it looks right whatever screen you're on.
 
 ## Pages
 
 ### Home
 
-A strong introduction section featuring a personal headline, visual identity, and clear navigation into the rest of the portfolio.
+A strong first impression: a short intro, the 3D avatar, a bit about me, my selected work, the skills and services I offer, and how I take a project from idea to launch.
 
 ### About
 
-A detailed overview of my background, technical skills, development philosophy, and professional focus.
+My story, from a cyber café in Lagos to building intelligent products: my background, technical skills, how I like to work, and answers to the questions people usually ask me.
 
 ### Projects
 
-A curated collection of selected work demonstrating:
+A collection of my work that shows:
 
-- Problem-solving ability
+- How I solve problems
 - Frontend architecture decisions
 - UI implementation
 - Real-world use cases
 
-Each project highlights key technologies and the thinking behind the build.
+You can filter projects by type, search them, and open each one to see the technologies and the thinking behind it.
 
 ### Contact
 
-A clean and accessible contact page that allows visitors to easily reach out for collaboration, freelance work, or professional opportunities.
+A simple contact page where you can reach me for collaboration, freelance work or full-time opportunities. As you fill in the form, a little code editor next to it writes your message out as code, and I reply within 24 hours.
+
+### Privacy
+
+A plain-language privacy page that explains what the contact form collects and what happens to it.
+
+### 404
+
+If you land on a page that doesn't exist, the 3D avatar is there to keep you company and point you back home.
 
 ## Architecture and Structure
 
-The project is structured with reusable components and clear separation of concerns. Styling is managed through a combination of Styled Components and modular CSS for flexibility and maintainability.
+The project is built from reusable components with a clear separation of concerns. All styling lives in vanilla CSS, using shared tokens for colors and text sizes so every page stays consistent.
 
 Core principles followed:
 
@@ -95,14 +118,16 @@ Core principles followed:
 - Maintainable state management
 - Performance-conscious rendering
 
+On the performance side, the 3D models only load what's needed (the current outfit first, and the avatar's moves in two parts), browsers keep the files cached for return visits, and every page is pre-rendered so search engines can read it.
+
 ## Design Philosophy
 
-This portfolio balances minimalism with personality. The interface is intentional, readable, and focused on clarity. Every animation and design decision supports usability rather than distracting from it.
+This portfolio balances minimalism with personality. I wanted it to be clean and easy to read, with every animation and design decision there to help, not distract.
 
-The dual-theme implementation reflects adaptability and attention to user preference, while the overall structure reflects modern frontend best practices.
+The two themes are about letting people use the site the way they like it, and the overall structure follows modern frontend practices I believe in.
 
 ## Purpose
 
-This project serves as a professional representation of my frontend engineering skills, combining technical execution with thoughtful user experience design.
+This project is how I show my skills as a developer, both the technical side and the care I put into the experience.
 
-It is both a showcase and a demonstration of how I approach building real-world applications.
+It's a showcase, but it's also an honest example of how I approach building real-world applications.
