@@ -58,6 +58,12 @@ const STAY_UP = 3.5;          // seconds he stays up after his last gesture
 // crouch / flight in s; lift in stage units; bounce = size overshoot at the landing; turn = body turn in the air (rad);
 // above = how far into the hop (0 = his spot, 1 = the badge) he moves above the page's text (small by then)
 const HOP = { crouch: 0.1, flight: 0.8, lift: 0.05, bounce: 0.07, turn: 0.45, above: 0.4 };
+// Desktop: leaving below the page is timed too (owner 2026-11-03: a fast scroll to the bottom froze him mid-screen
+// while he waved, or left him half-gone with his head at the bottom edge). Past the switch point he waves goodbye from
+// his section's spot, then drops straight out in EXIT.time s; scrolling back brings him all the way back up.
+// on / off = how far into the blend towards 'exit' he decides to go / to come back (two values: no flicker between)
+// drop: where his spot's y goes (stage units; −1 = bottom edge): far enough that not even his hair shows
+const EXIT = { time: 0.8, on: 0.7, off: 0.5, drop: 2.6, shrink: 0.85 };
 const easeOutBack = (x) => 1 + 2.70158 * (x - 1) ** 3 + 1.70158 * (x - 1) ** 2;
 // the leap's timing, like a jump: quick off the ground, slowing into a soft landing
 const leap = (u) => 1 - (1 - u) ** 2;
@@ -253,7 +259,7 @@ function Rig({ colors, lightMode, pointer, scroll, onReady, badge }) {
   const look = useLook(colors, lightMode);
   const { viewport, camera, size } = useThree();
   const state = useRef({ x: 0, y: 0, s: 1, ry: 0, init: false, held: null, up: 0, head: { x: 0, y: 0.65 },
-    hop: { want: false, phase: 'rest', dir: 1, t: 0, u: 0, p: 0 } });
+    hop: { want: false, phase: 'rest', dir: 1, t: 0, u: 0, p: 0 }, exit: { want: false, e: 0 }, spot: null });
   // current: 0..1 how far he is into the phone badge (the character's look); fx: dust + halo strength
   const dock = useRef({ current: 0, fx: 1 }).current;
   const view = useRef({});              // last styles written to the page (only changes are written)
@@ -368,6 +374,17 @@ function Rig({ colors, lightMode, pointer, scroll, onReady, badge }) {
       stagePose = { x: lerp('x'), y: lerp('y') + arc * ARC.up, s: lerp('s') * (1 - arc * ARC.shrink),
         ry: lerp('ry') + travel * 0.22 * Math.sign(blend.to.x - blend.from.x || 1) };
     }
+    // desktop: towards 'exit' the page doesn't move him; his spot stays the section's, and the exit below is timed
+    const ex = st.exit;
+    // (past the exit marker both sides are 'exit': fully out. The old order read that as 0 = back on the page.)
+    const exitAmt = mobile ? 0 : blend.fromName === 'exit' ? 1 : blend.toName === 'exit' ? blend.t : 0;
+    const exitBlend = !mobile && (blend.toName === 'exit' || blend.fromName === 'exit');
+    if (exitBlend) stagePose = blend.fromName !== 'exit' ? blend.from : st.spot ?? blend.from;
+    else if (!mobile) st.spot = stagePose;
+    const wantGone = exitAmt > (ex.want ? EXIT.off : EXIT.on);
+    if (!st.init) { ex.want = wantGone; ex.e = wantGone ? 1 : 0; }
+    ex.want = wantGone;
+
     let pose = stagePose;
     if (p > 0 || !resting) {
       // the hop between his spot (where he took off from, when going down) and the badge
@@ -380,6 +397,11 @@ function Rig({ colors, lightMode, pointer, scroll, onReady, badge }) {
         ry: spot.ry + (badgePose.ry - spot.ry) * p + HOP.turn * Math.sin(Math.PI * p),
       };
     }
+    // the drop below the page: straight down from his spot (no sideways trip across the text), a little smaller
+    if (ex.e > 0) {
+      const d = smoothstep(0, 1, ex.e);
+      pose = { ...pose, y: pose.y + (-EXIT.drop - pose.y) * d, s: pose.s * (1 + (EXIT.shrink - 1) * d) };
+    }
     let target = { x: pose.x * viewport.width / 2, y: pose.y * viewport.height / 2, s: pose.s * viewport.height / 2, ry: pose.ry };
 
     if (import.meta.env.DEV && window.__stageOverride) {
@@ -387,18 +409,19 @@ function Rig({ colors, lightMode, pointer, scroll, onReady, badge }) {
       target = { x: o.x * viewport.width / 2, y: o.y * viewport.height / 2, s: o.s * viewport.height / 2, ry: o.ry };
     }
 
-    // phones: no goodbye at the bottom of the page (he waits in the badge instead)
-    const exitness = mobile ? 0 : blend.toName === 'exit' ? blend.t : blend.fromName === 'exit' ? 1 : 0;
-    const stageName = blend.t < 0.5 ? blend.fromName : blend.toName;
-    const { hold } = director.update(stageName, exitness, p > 0.5);
-    // while he says goodbye he stays put; the exit continues once it's done
-    if (hold) target = st.held ?? (st.held = { x: st.x, y: st.y, s: st.s, ry: st.ry });
-    else st.held = null;
+    // the director waves goodbye when he decides to go (hold = still waving); phones: no goodbye (he waits in the badge)
+    const stageName = exitBlend ? blend.fromName !== 'exit' ? blend.fromName : 'exit' : blend.t < 0.5 ? blend.fromName : blend.toName;
+    const { hold } = director.update(stageName, ex.want ? 1 : 0, p > 0.5);
+    // he leaves once the wave is done, and comes back as soon as the visitor scrolls back
+    ex.e = THREE.MathUtils.clamp(ex.e + (dt / EXIT.time) * (ex.want ? (hold ? 0 : 1) : -1), 0, 1);
+    if (import.meta.env.DEV) window.__exit = { want: ex.want, e: +ex.e.toFixed(2), amt: +exitAmt.toFixed(2), hold, from: blend.fromName, to: blend.toName, t: +blend.t.toFixed(2) };
 
     // the hop is already smooth: only a light damping then, so its curve keeps its shape
-    const kk = !st.init ? 1000 : resting ? k : 14;
+    const kk = !st.init ? 1000 : !resting || (ex.e > 0 && ex.e < 1) ? 14 : k;
     st.init = true;
     for (const key of ['x', 'y', 's', 'ry']) st[key] = THREE.MathUtils.damp(st[key], target[key], kk, dt);
+    // fully out of sight below the page: move him under his current spot, so he always comes back straight up
+    if (ex.e >= 1) { st.x = target.x; st.s = target.s; st.ry = target.ry; }
 
     const r = director.pose.current;
     const g = group.current;
