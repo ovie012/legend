@@ -3407,6 +3407,7 @@ img.pointer {
   align-items: center;
   justify-content: center;
   gap: 6px;
+  text-align: center;   /* the role line wraps on phones: keep both lines centred */
   background: var(--pl-bg);
   color: var(--pl-text);
   transition: opacity 0.5s ease, visibility 0.5s ease;
